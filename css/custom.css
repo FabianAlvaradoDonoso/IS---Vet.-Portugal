@@ -1,1 +1,79 @@
-/* your styles go here */
+.cardCustom {
+    margin-bottom: 30px;
+    -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px rgba(0, 0, 0, 0.05);
+    width: 1000px;
+}
+
+.card-headerCustom {
+    padding: 1rem 1.25rem;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.card-headerCustom h1,
+.card-headerCustom h2,
+.card-headerCustom h3,
+.card-headerCustom h4,
+.card-headerCustom h5,
+.card-headerCustom h6 {
+    margin-bottom: 0;
+}
+
+.card-closeCustom {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.card-closeCustom .dropdown-toggle {
+    color: #999;
+    background: none;
+    border: none;
+}
+
+.card-closeCustom .dropdown-toggle:after {
+    display: none;
+}
+
+.card-closeCustom .dropdown-menu {
+    border: none;
+    min-width: auto;
+    font-size: 0.9em;
+    border-radius: 0;
+    -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1), -2px -2px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1), -2px -2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card-closeCustom .dropdown-menu a {
+    color: #999 !important;
+}
+
+.card-closeCustom .dropdown-menu a:hover {
+    background: #796AEE;
+    color: #fff !important;
+}
+
+.card-closeCustom .dropdown-menu a i {
+    margin-right: 10px;
+    -webkit-transition: none;
+    transition: none;
+}
+
+.overdue .card-bodyCustom {
+    padding: 20px;
+}
+
+.overdue .card-bodyCustom small {
+    font-weight: 300;
+    color: #aaa;
+}
+
+.overdue .card-bodyCustom h3 {
+    margin-bottom: 5px;
+}
+
+.card-bodyCustom {
+    padding: 1.25rem;
+    width: 1000px;
+}
