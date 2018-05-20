@@ -4,10 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Bootstrap Material Admin by Bootstrapious.com</title>
+    <title>Pruebas - VetPortugal</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
@@ -22,6 +23,9 @@
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha256-m/h/cUDAhf6/iBRixTbuc8+Rg2cIETQtPcH9D3p2Kg0=" crossorigin="anonymous" />
+    <!-- open-iconic-bootstrap (icon set for bootstrap) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -37,7 +41,7 @@
                 <div class="search-box">
                     <button class="dismiss"><i class="icon-close"></i></button>
                     <form id="searchForm" action="#" role="search">
-                        <input type="search" placeholder="What are you looking for..." class="form-control">
+                        <input type="search" placeholder="Qué estás buscando..." class="form-control">
                     </form>
                 </div>
                 <div class="container-fluid">
@@ -46,7 +50,7 @@
                         <div class="navbar-header">
                             <!-- Navbar Brand -->
                             <a href="index.html" class="navbar-brand d-none d-sm-inline-block">
-                                <div class="brand-text d-none d-lg-inline-block"><span>Bootstrap </span><strong>Dashboard</strong></div>
+                                <div class="brand-text d-none d-lg-inline-block"><span>Vet</span><strong>Portugal</strong></div>
                                 <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
                             </a>
                             <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
@@ -56,92 +60,51 @@
                             <!-- Search-->
                             <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>
                             <!-- Notifications-->
-                            <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i><span class="badge bg-red badge-corner">12</span></a>
+                            <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i><span class="badge bg-red badge-corner">0</span></a>
                                 <ul aria-labelledby="notifications" class="dropdown-menu">
                                     <li>
                                         <a rel="nofollow" href="#" class="dropdown-item">
                                             <div class="notification">
-                                                <div class="notification-content"><i class="fa fa-envelope bg-green"></i>You have 6 new messages </div>
-                                                <div class="notification-time"><small>4 minutes ago</small></div>
+                                                <div class="notification-content"><i class="fa fa-envelope bg-green"></i>Sin notificaciones</div>
+                                                <div class="notification-time"><small>--</small></div>
                                             </div>
                                         </a>
                                     </li>
+
                                     <li>
-                                        <a rel="nofollow" href="#" class="dropdown-item">
-                                            <div class="notification">
-                                                <div class="notification-content"><i class="fa fa-twitter bg-blue"></i>You have 2 followers</div>
-                                                <div class="notification-time"><small>4 minutes ago</small></div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a rel="nofollow" href="#" class="dropdown-item">
-                                            <div class="notification">
-                                                <div class="notification-content"><i class="fa fa-upload bg-orange"></i>Server Rebooted</div>
-                                                <div class="notification-time"><small>4 minutes ago</small></div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a rel="nofollow" href="#" class="dropdown-item">
-                                            <div class="notification">
-                                                <div class="notification-content"><i class="fa fa-twitter bg-blue"></i>You have 2 followers</div>
-                                                <div class="notification-time"><small>10 minutes ago</small></div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view all notifications                                            </strong></a>
+                                        <a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Ver todas las notificaciones                                            </strong></a>
                                     </li>
                                 </ul>
                             </li>
                             <!-- Messages                        -->
-                            <li class="nav-item dropdown"> <a id="messages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-envelope-o"></i><span class="badge bg-orange badge-corner">10</span></a>
+                            <li class="nav-item dropdown"> <a id="messages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-envelope-o"></i><span class="badge bg-orange badge-corner">1</span></a>
                                 <ul aria-labelledby="notifications" class="dropdown-menu">
                                     <li>
                                         <a rel="nofollow" href="#" class="dropdown-item d-flex">
-                                            <div class="msg-profile"> <img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                                            <div class="msg-profile"> <img src="img/avatar1.jpg" alt="..." class="img-fluid rounded-circle"></div>
                                             <div class="msg-body">
-                                                <h3 class="h5">Jason Doe</h3><span>Sent You Message</span>
+                                                <h3 class="h5">Ivan Galdames</h3><span>Te envió un mensaje</span>
                                             </div>
                                         </a>
                                     </li>
+
                                     <li>
-                                        <a rel="nofollow" href="#" class="dropdown-item d-flex">
-                                            <div class="msg-profile"> <img src="img/avatar-2.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                                            <div class="msg-body">
-                                                <h3 class="h5">Frank Williams</h3><span>Sent You Message</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a rel="nofollow" href="#" class="dropdown-item d-flex">
-                                            <div class="msg-profile"> <img src="img/avatar-3.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                                            <div class="msg-body">
-                                                <h3 class="h5">Ashley Wood</h3><span>Sent You Message</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read all messages   </strong></a>
+                                        <a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Leer todos los mensajes   </strong></a>
                                     </li>
                                 </ul>
                             </li>
                             <!-- Languages dropdown    -->
                             <li class="nav-item dropdown">
-                                <a id="languages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle"><img src="img/flags/16/GB.png" alt="English"><span class="d-none d-sm-inline-block">English</span></a>
+                                <a id="languages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle"><img src="img/flags/16/CL.png" alt="Español"><span class="d-none d-sm-inline-block">Español</span></a>
                                 <ul aria-labelledby="languages" class="dropdown-menu">
                                     <li>
-                                        <a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/DE.png" alt="English" class="mr-2">German</a>
-                                    </li>
-                                    <li>
-                                        <a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/FR.png" alt="English" class="mr-2">French </a>
+                                        <a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/US.png" alt="English" class="mr-2">English</a>
                                     </li>
                                 </ul>
                             </li>
                             <!-- Logout    -->
                             <li class="nav-item">
-                                <a href="login.html" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a>
+                                <a href="login.html" class="nav-link logout"> <span class="d-none d-sm-inline">Salir</span><i class="fa fa-sign-out"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -153,50 +116,46 @@
             <nav class="side-navbar">
                 <!-- Sidebar Header-->
                 <div class="sidebar-header d-flex align-items-center">
-                    <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                    <div class="avatar"><img src="img/avatar-4.jpg" alt="..." class="img-fluid rounded-circle"></div>
                     <div class="title">
-                        <h1 class="h4">Mark Stephen</h1>
+                        <h1 class="h4">Fabian Alvarado</h1>
                         <p>Web Designer</p>
                     </div>
                 </div>
-                <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+                <!-- Sidebar Navidation Menus--><span class="heading">Menú</span>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="index.html"> <i class="icon-home"></i>Home </a>
+                        <a href="index.html"> <i class="icon-home"></i>Inicio </a>
                     </li>
                     <li class="active">
-                        <a href="tables.html"> <i class="icon-grid"></i>Tables </a>
+                        <a href="Pruebas.php"> <i class="icon-home"></i>Pruebas </a>
                     </li>
                     <li>
-                        <a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts </a>
+                        <a href="tables.html"> <i class="icon-grid"></i>Tablas </a>
                     </li>
                     <li>
-                        <a href="forms.html"> <i class="icon-padnote"></i>Forms </a>
+                        <a href="charts.html"> <i class="fa fa-bar-chart"></i>Gráficos </a>
                     </li>
                     <li>
-                        <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Example dropdown </a>
+                        <a href="forms.html"> <i class="icon-padnote"></i>Formularios </a>
+                    </li>
+                    <li>
+                        <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Ejemplo de Dropdown </a>
                         <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                            <li><a href="#">Page</a></li>
-                            <li><a href="#">Page</a></li>
-                            <li><a href="#">Page</a></li>
+                            <li><a href="#">Pagina 1</a></li>
+                            <li><a href="#">Pagina 2</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="login.html"> <i class="icon-interface-windows"></i>Login page </a>
+                        <a href="login.html"> <i class="icon-interface-windows"></i>Pagina Inicio Sesion </a>
                     </li>
                 </ul><span class="heading">Extras</span>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="#"> <i class="icon-flask"></i>Demo </a>
+                        <a href="#"> <i class="icon-flask"></i>Demo 1</a>
                     </li>
                     <li>
-                        <a href="#"> <i class="icon-screen"></i>Demo </a>
-                    </li>
-                    <li>
-                        <a href="#"> <i class="icon-mail"></i>Demo </a>
-                    </li>
-                    <li>
-                        <a href="#"> <i class="icon-picture"></i>Demo </a>
+                        <a href="#"> <i class="icon-screen"></i>Demo 2</a>
                     </li>
                 </ul>
             </nav>
@@ -215,61 +174,154 @@
                     </ul>
                 </div>
                 <section class="tables">
-                    <div class="container-fluid">
+                    <div id="tabla" class="container-fluid">
                         <div class="row">
                             <div class="col-lg-6">
                             <div class="card" style="width: 1000px">
-                                
+                                <!--<script src="http://code.jquery.com/jquery-lastest.js"></script>
+                                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
                                 <div class="card-header">
-                                    <strong>Productos</strong>
-                                    
+                                    <strong id="#top">Productos</strong>
+                                                                        
 
                                 </div>
                                 
                                 <div class="card-body">
                                     <div class="table-responsive">
                                             
-                                        <table class="table table-striped table-sm ">
+                                        <table class="table table-striped table-hover table-sm table-bordered">
+                                            <?php
 
-                                        <?php
+                                                try{
+                                                    $base = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
+                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                    $base->exec("SET CHARACTER SET utf8");
 
-                                            $conexion = new mysqli("localhost", "root", "", "pruebavet");
+                                                    $tamanoPaginas=10;
+                                                    $pagina = isset($_GET['pagina'])?$_GET['pagina']:1;;
 
-                                            if($conexion->errno) echo "Fallo la conexión " . $conexion->connect_errno;
+                                                    
+                                                    $empezarDesde = ($pagina - 1) * $tamanoPaginas;
 
-                                            $conexion->set_charset("utf8");
+                                                    $sql_total="SELECT * FROM productos";
+                                                    $resultado = $base->prepare($sql_total);
 
-                                            $sql = "SELECT * FROM productos";
+                                                    $resultado->execute(array());
 
-                                            $resultado = $conexion->query($sql);
+                                                    $numFilas=$resultado->rowCount();
+                                                    $totalPaginas = ceil($numFilas/$tamanoPaginas);
 
-                                            if($conexion->errno){
-                                                die($conexion->error);
-                                            }
+                                                
 
-                                            echo "<thead><tr><th>#</th><th>CODIGO</th><th>CATEGORIA</th><th>PROVEEDOR</th><th>NOMBRE</th><th>PRECIO VENTA</th><th>PRECIO NETO</th></tr></thead><tbody>";
+                                                    $resultado->closeCursor();
+
+                                                    $sqlLimit="SELECT * FROM productos LIMIT $empezarDesde,$tamanoPaginas";
+                                                    
+                                                    $resultado = $base->prepare($sqlLimit);
+
+                                                    $resultado->execute(array());
+
+                                                    echo "<thead><tr><th>CODIGO</th><th>CATEGORIA</th><th>PROVEEDOR</th><th>NOMBRE</th><th>PRECIO VENTA</th><th>PRECIO NETO</th><th align='center'>ACCIONES</th></tr></thead><tbody>";
+                                                
+                                                
                                             
-                                            
-                                        
-                                            while($fila=$resultado->fetch_assoc()){
-                                                echo "<tr>";
-                                                echo "<th scope= 'row' >" . $fila["ID"] . "</th>";
-                                                echo "<td>" . $fila["CODIGO"] . "</td>";
-                                                echo "<td>" . $fila["CATEGORIA"] . "</td>";
-                                                echo "<td>" . $fila["PROVEEDOR"] . "</td>";
-                                                echo "<td>" . $fila["NOMBRE"] . "</td>";
-                                                echo "<td align='right'>$ " . $fila["PRECIO_VENTA"] . "</td>";
-                                                echo "<td align='right'>$ " . $fila["PRECIO_NETO"] . "</td>";
-                                                echo "</tr>";
-                                            }
-                                            echo "</tbody>";
+                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
+                                                        echo "<tr>";
+                                                        echo "<td>" . $fila["CODIGO"] . "</td>";
+                                                        echo "<td>" . $fila["CATEGORIA"] . "</td>";
+                                                        echo "<td>" . $fila["PROVEEDOR"] . "</td>";
+                                                        echo "<td>" . $fila["NOMBRE"] . "</td>";
+                                                        echo "<td align='right'>$ " . $fila["PRECIO_VENTA"] . "</td>";
+                                                        echo "<td align='right'>$ " . $fila["PRECIO_NETO"] . "</td>";
+                                                        echo "<td align='right'><a href='' id=" . $fila["ID"] ." type='' value='' class='btn btn-outline-success btn-sm'>"; echo "<span class='oi oi-pencil'></span>"; echo "</a>";
+                                                        echo "      <a href='' id=" . $fila["ID"] ." type='' value='' class='btn btn-outline-danger btn-sm'>  "; echo "<span class='oi oi-trash'></span>"; echo "</a></td>";
+                                                        echo "</tr>";
+                                                    }
+                                                    echo "</tbody>";
 
-                                            $conexion->close();
+                                                    $resultado->closeCursor();
+
+                                                }
+                                                catch(Exception $e){
+
+                                                }
+                                            
+
 
                                             ?>
                                             
                                         </table>
-                                     </div>
+                                        <?php 
+                                            $anterior=($pagina-1);
+                                            $siguiente=($pagina+1);
+                                            
+                                            if(isset($_GET['Busqueda'])){
+                                                $pagAnterior= "?pagina=$anterior&Busqueda={$_GET['Busqueda']}";
+                                                $pagSiguiente= "?pagina=$siguiente&Busqueda={$_GET['Busqueda']}";
+                                            }
+                                            else{
+                                                $pagAnterior= "?pagina=$anterior";
+                                                $pagSiguiente= "?pagina=$siguiente";
+                                            }
+                                            ?>
+                                            
+                                            <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                            <?php if(($pagina==1)){ ?>
+                                                <li class="page-item disabled">
+                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">Anterior</span>
+                                                </a>
+                                                </li>
+                                            <?php }else{?>
+                                                <li class="page-item">
+                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">Anterior</span>
+                                                </a>
+                                                </li>
+                                            <?php }?>
+
+                                                
+                                                <?php
+                                                if(isset($_GET['Busqueda'])){
+                                                    if($totalPaginas>=1){
+                                                        for($x=1;$x<=$totalPaginas;$x++){
+                                                            echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>":
+                                                            "<li class='page-item'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>";
+                                                        }
+                                                    }	
+                                                }
+                                                else{
+                                                    if($totalPaginas>=1){
+                                                    for($x=1;$x<=$totalPaginas;$x++){
+                                                        echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>":
+                                                        "<li class='page-item'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>";
+                                                    }
+                                                }	
+                                                }	  
+                                                
+                                                
+                                                ?>
+                                                <?php if(($pagina>=$totalPaginas)){?>
+                                                <li class="page-item disabled">
+                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Siguiente</span>
+                                                </a>
+                                                </li>
+                                                <?php }else{?>
+                                                    <li class="page-item">
+                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Siguiente</span>
+                                                </a>
+                                                </li>
+                                                <?php }?>
+                                            </ul>
+                                            </nav>
+                                    </div>
                                 </div>
                                 </div>
                             </div>

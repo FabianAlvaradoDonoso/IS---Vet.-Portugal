@@ -1931,7 +1931,7 @@ select option {
     height: 100%;
     display: block;
     z-index: -1;
-    background: url(../img/bg.jpg);
+    background: url(../img/imagen.jpg);
     background-size: cover;
     -webkit-filter: blur(10px);
     filter: blur(10px);
@@ -1967,7 +1967,7 @@ select option {
 }
 
 .login-page .form-holder .info {
-    background: rgba(121, 106, 238, 0.9);
+    background: rgb(9, 181, 255);
     color: #fff;
 }
 
@@ -2003,7 +2003,7 @@ select option {
 .login-page .form-holder .form a.forgot-pass,
 .login-page .form-holder .form a.signup {
     font-size: 0.9em;
-    color: #85b4f2;
+    color: rgb(9, 181, 255);
 }
 
 .login-page .form-holder .form small {

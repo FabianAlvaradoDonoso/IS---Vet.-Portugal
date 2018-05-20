@@ -1,22 +1,59 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
     'use strict';
 
     // ------------------------------------------------------- //
     // Search Box
     // ------------------------------------------------------ //
-    $('#search').on('click', function (e) {
+    $('#search').on('click', function(e) {
         e.preventDefault();
         $('.search-box').fadeIn();
     });
-    $('.dismiss').on('click', function () {
+    $('.dismiss').on('click', function() {
         $('.search-box').fadeOut();
     });
 
     // ------------------------------------------------------- //
+    // Desplazamiento
+    // ------------------------------------------------------ //
+    $('a[href*="#"]')
+        // Remove links that don't actually link to anything
+        .not('[href="#"]')
+        .not('[href="#0"]')
+        .click(function(event) {
+            // On-page links
+            if (
+                location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') &&
+                location.hostname == this.hostname
+            ) {
+                // Figure out element to scroll to
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                // Does a scroll target exist?
+                if (target.length) {
+                    // Only prevent default if animation is actually gonna happen
+                    event.preventDefault();
+                    $('html, body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000, function() {
+                        // Callback after animation
+                        // Must change focus!
+                        var $target = $(target);
+                        $target.focus();
+                        if ($target.is(":focus")) { // Checking if the target was focused
+                            return false;
+                        } else {
+                            $target.attr('tabindex', '-1'); // Adding tabindex for elements not focusable
+                            $target.focus(); // Set focus again
+                        };
+                    });
+                }
+            }
+        });
+    // ------------------------------------------------------- //
     // Card Close
     // ------------------------------------------------------ //
-    $('.card-close a.remove').on('click', function (e) {
+    $('.card-close a.remove').on('click', function(e) {
         e.preventDefault();
         $(this).parents('.card').fadeOut();
     });
@@ -25,10 +62,10 @@ $(document).ready(function () {
     // ------------------------------------------------------- //
     // Adding fade effect to dropdowns
     // ------------------------------------------------------ //
-    $('.dropdown').on('show.bs.dropdown', function () {
+    $('.dropdown').on('show.bs.dropdown', function() {
         $(this).find('.dropdown-menu').first().stop(true, true).fadeIn();
     });
-    $('.dropdown').on('hide.bs.dropdown', function () {
+    $('.dropdown').on('hide.bs.dropdown', function() {
         $(this).find('.dropdown-menu').first().stop(true, true).fadeOut();
     });
 
@@ -36,7 +73,7 @@ $(document).ready(function () {
     // ------------------------------------------------------- //
     // Sidebar Functionality
     // ------------------------------------------------------ //
-    $('#toggle-btn').on('click', function (e) {
+    $('#toggle-btn').on('click', function(e) {
         e.preventDefault();
         $(this).toggleClass('active');
 
@@ -63,26 +100,25 @@ $(document).ready(function () {
     // Universal Form Validation
     // ------------------------------------------------------ //
 
-    $('.form-validate').each(function() {  
+    $('.form-validate').each(function() {
         $(this).validate({
             errorElement: "div",
             errorClass: 'is-invalid',
             validClass: 'is-valid',
             ignore: ':hidden:not(.summernote, .checkbox-template, .form-control-custom),.note-editable.card-block',
-            errorPlacement: function (error, element) {
+            errorPlacement: function(error, element) {
                 // Add the `invalid-feedback` class to the error element
                 error.addClass("invalid-feedback");
                 console.log(element);
                 if (element.prop("type") === "checkbox") {
                     error.insertAfter(element.siblings("label"));
-                } 
-                else {
+                } else {
                     error.insertAfter(element);
                 }
             }
         });
 
-    });    
+    });
 
     // ------------------------------------------------------- //
     // Material Inputs
@@ -94,12 +130,12 @@ $(document).ready(function () {
     materialInputs.filter(function() { return $(this).val() !== ""; }).siblings('.label-material').addClass('active');
 
     // move label on focus
-    materialInputs.on('focus', function () {
+    materialInputs.on('focus', function() {
         $(this).siblings('.label-material').addClass('active');
     });
 
     // remove/keep label on blur
-    materialInputs.on('blur', function () {
+    materialInputs.on('blur', function() {
         $(this).siblings('.label-material').removeClass('active');
 
         if ($(this).val() !== '') {
@@ -115,11 +151,11 @@ $(document).ready(function () {
 
     var contentInner = $('.content-inner');
 
-    $(document).on('sidebarChanged', function () {
+    $(document).on('sidebarChanged', function() {
         adjustFooter();
     });
 
-    $(window).on('resize', function () {
+    $(window).on('resize', function() {
         adjustFooter();
     })
 
@@ -131,7 +167,7 @@ $(document).ready(function () {
     // ------------------------------------------------------- //
     // External links to new window
     // ------------------------------------------------------ //
-    $('.external').on('click', function (e) {
+    $('.external').on('click', function(e) {
 
         e.preventDefault();
         window.open($(this).attr("href"));
@@ -149,7 +185,7 @@ $(document).ready(function () {
         alternateColour.attr("href", $.cookie("theme_csspath"));
     }
 
-    $("#colour").change(function () {
+    $("#colour").change(function() {
 
         if ($(this).val() !== '') {
 
