@@ -175,7 +175,7 @@
                         <a href="index.html"> <i class="icon-home"></i>Inicio </a>
                     </li>
                     <li>
-                        <a href="Pruebas.php"> <i class="icon-home"></i>Pruebas </a>
+                        <a href="Productos.php"> <i class="icon-home"></i>Productos </a>
                     </li>
                     <li>
                         <a href="tables.html"> <i class="icon-grid"></i>Tablas </a>
@@ -217,7 +217,8 @@
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Forms </li>
+                        <li class="breadcrumb-item"><a href="Productos.php">Productos</a> </li>
+                        <li class="breadcrumb-item active">Modificar </li>
                     </ul>
                 </div>
                 <!-- Forms Section-->
@@ -309,7 +310,7 @@
 </html>
 
 <script type="text/javascript">
-    alert("Producto Modificado Exitosamente");
-    window.location = 'Pruebas.php';
+    alert("Producto MODIFICADO Exitosamente!");
+    window.location = 'Productos.php';
 
 </script>

@@ -3,32 +3,26 @@
     
 
 
-    function ConsultarProducto($codigo)
+    function AgregarProducto($Codigo, $Categoria, $Proveedor, $Nombre, $Precio_Venta, $Precio_Neto)
     {
         $base = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
         $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $base->exec("SET CHARACTER SET utf8");    
-        $sql_total="SELECT * FROM productos WHERE CODIGO='".$codigo."'";
+        $sql_total="INSERT INTO productos (CODIGO, CATEGORIA, PROVEEDOR, NOMBRE, PRECIO_VENTA, PRECIO_NETO) VALUES ('".$Codigo."', '".$Categoria."', '".$Proveedor."', '".$Nombre."', '".$Precio_Venta."', '".$Precio_Neto."')";
         $resultado = $base->prepare($sql_total);
         $resultado->execute(array());
-        $fila=$resultado->fetch(PDO::FETCH_ASSOC);
-        return[
-            $fila["CODIGO"],
-            $fila['CATEGORIA'],
-            $fila['PROVEEDOR'],
-            $fila['NOMBRE'],
-            $fila['PRECIO_VENTA'],
-            $fila['PRECIO_NETO']
-        ];
+        
 
     }
 
 
-    $consulta=ConsultarProducto($_GET['codigo']);
+    $consulta=AgregarProducto($_POST["Codigo"], $_POST["Categoria"], $_POST["Proveedor"], $_POST["Nombre"], $_POST["Precio_Venta"], $_POST["Precio_Neto"]);
 
     
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -195,15 +189,15 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Modificar</h2>
+                        <h2 class="no-margin-bottom">Forms</h2>
                     </div>
                 </header>
                 <!-- Breadcrumb-->
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="Productos.php">Productos</a></li>
-                        <li class="breadcrumb-item active">Modificar </li>
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active"><a href="Productos.php">Productos</a> </li>
+                        <li class="breadcrumb-item active">Agregar </li>
                     </ul>
                 </div>
                 <!-- Forms Section-->
@@ -211,81 +205,53 @@
                     <div class="container-fluid">
                         <div class="row">
                             <!-- Basic Form-->
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="card">
-                                    
+                                    <div class="card-close">
+                                        <div class="dropdown">
+                                            <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                                            <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow">
+                                                <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a>
+                                                <a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="card-header d-flex align-items-center">
                                         <h3 class="h4">Modificar Producto</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form class="needs-validation" novalidate action="Modificar_Producto2.php" method="POST">
-                                            <div class="form-row">
-                                                <div class="col-md-4 mb-3">
-                                                    <label for="validationCustom01">Codigo</label>
-                                                    <input readonly type="text" class="form-control" id="validationCustom01" name="Codigo" placeholder="Codigo" value="<?php echo $consulta[0] ?>" required>
-                                                    <div class="valid-feedback">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <label for="validationCustom02">Categoria</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="Categoria" placeholder="Categoria" value="<?php echo $consulta[1] ?>" required>
-                                                    <div class="valid-feedback">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <label for="validationCustom02">Proveedor</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="Proveedor" placeholder="Proveedor" value="<?php echo $consulta[2] ?>" required>
-                                                    <div class="valid-feedback">
-                                                    </div>
-                                                </div>
+                                        <p>Al terminar sus cambios haga click en GUARDAR</p>
+                                        <form>
+                                            <div class="form-group">
+                                                <label class="form-control-label">Codigo</label>
+                                                <input type="text" disabled="" placeholder="Codigo" class="form-control" value="">
                                             </div>
-                                            <div class="form-row">
-                                                <div class="col-md-6 mb-3">
-                                                    <label for="validationCustom03">Nombre</label>
-                                                    <input type="text" class="form-control" id="validationCustom03" name="Nombre" placeholder="Nombre" value="<?php echo $consulta[3] ?>" required>
-                                                    <div class="invalid-feedback">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 mb-3">
-                                                    <label for="validationCustom04">Precio Venta</label>
-                                                    <input type="number" class="form-control" id="validationCustom04" name="Precio_Venta" placeholder="Precio Venta" value="<?php echo $consulta[4] ?>" required>
-                                                    <div class="invalid-feedback">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 mb-3">
-                                                    <label for="validationCustom05">Precio Neto</label>
-                                                    <input type="number" class="form-control" id="validationCustom05" name="Precio_Neto" placeholder="Precio Neto" value="<?php echo $consulta[5] ?>" required>
-                                                    <div class="invalid-feedback">
-                                                    </div>
-                                                </div>
+                                            <div class="form-group">
+                                                <label class="form-control-label">Categoria</label>
+                                                <input type="text" placeholder="Categoria" class="form-control" value="">
                                             </div>
-                                            <div class="d-flex justify-content-between">
-                                                <button class="btn btn-success" type="submit">Modificar</button>
+                                            <div class="form-group">
+                                                <label class="form-control-label">Proveedor</label>
+                                                <input type="text" placeholder="Proveedor" class="form-control" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-control-label">Nombre</label>
+                                                <input type="text" placeholder="Nombre" class="form-control" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-control-label">Precio Venta</label>
+                                                <input type="text" placeholder="Precio Venta" class="form-control" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-control-label">Precio Neto</label>
+                                                <input type="text" placeholder="Precio Neto" class="form-control" value="">
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <input type="submit" id="btnModificar" value="Agregar" class="btn btn-success">
                                                 
-                                                <a href='Productos.php' id=''type='' value='' class='btn btn-danger'>Cancelar</a>
                                             </div>
                                         </form>
-
-                                        <script>
-                                        // Example starter JavaScript for disabling form submissions if there are invalid fields
-                                        (function() {
-                                        'use strict';
-                                        window.addEventListener('load', function() {
-                                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                                            var forms = document.getElementsByClassName('needs-validation');
-                                            // Loop over them and prevent submission
-                                            var validation = Array.prototype.filter.call(forms, function(form) {
-                                            form.addEventListener('submit', function(event) {
-                                                if (form.checkValidity() === false) {
-                                                event.preventDefault();
-                                                event.stopPropagation();
-                                                }
-                                                form.classList.add('was-validated');
-                                            }, false);
-                                            });
-                                        }, false);
-                                        })();
-                                        </script>
                                     </div>
                                 </div>
                             </div>
@@ -321,3 +287,9 @@
 </body>
 
 </html>
+
+<script type="text/javascript">
+    alert("Producto AGREGADO Exitosamente!");
+    window.location = 'Productos.php';
+
+</script>

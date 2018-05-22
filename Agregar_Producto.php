@@ -1,10 +1,16 @@
+<?php
+
+    
+
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Pruebas - VetPortugal</title>
+    <title>Inicio - VetPortugal</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
@@ -127,8 +133,8 @@
                     <li>
                         <a href="index.html"> <i class="icon-home"></i>Inicio </a>
                     </li>
-                    <li class="active">
-                        <a href="Pruebas.php"> <i class="icon-home"></i>Pruebas </a>
+                    <li>
+                        <a href="Productos.php"> <i class="icon-home"></i>Productos </a>
                     </li>
                     <li>
                         <a href="tables.html"> <i class="icon-grid"></i>Tablas </a>
@@ -163,159 +169,100 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Pruebas</h2>
+                        <h2 class="no-margin-bottom">Agregar Nuevo Producto</h2>
                     </div>
                 </header>
                 <!-- Breadcrumb-->
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                        <li class="breadcrumb-item active">Pruebas </li>
+                        <li class="breadcrumb-item"><a href="Productos.php">Productos</a></li>
+                        <li class="breadcrumb-item active">Agregar </li>
                     </ul>
                 </div>
-                <section class="tables">
-                    <div id="tabla" class="container-fluid">
+                <!-- Forms Section-->
+                <section class="forms">
+                    <div class="container-fluid">
                         <div class="row">
+                            <!-- Basic Form-->
                             <div class="col-lg-12">
-                            <div class="card" >
-                            <div class="card-close">
-                                        <div class="dropdown">
-                                            <button type="button" id="closeCard5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                                            <div aria-labelledby="closeCard5" class="dropdown-menu dropdown-menu-right has-shadow">
-                                                <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a>
-                                                <a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
+                                <div class="card">
+                                    
+                                    <div class="card-header d-flex align-items-center">
+                                        <h3 class="h4">Agregar Producto</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <form class="needs-validation" novalidate action="Agregar_Producto2.php" method="POST">
+                                            <div class="form-row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationCustom01">Codigo</label>
+                                                    <input type="text" class="form-control" id="validationCustom01" name="Codigo" placeholder="Codigo" value="" required>
+                                                    <div class="valid-feedback">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationCustom02">Categoria</label>
+                                                    <input type="text" class="form-control" id="validationCustom02" name="Categoria" placeholder="Categoria" value="" required>
+                                                    <div class="valid-feedback">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationCustom02">Proveedor</label>
+                                                    <input type="text" class="form-control" id="validationCustom02" name="Proveedor" placeholder="Proveedor" value="" required>
+                                                    <div class="valid-feedback">
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                <div class="card-header">
-                                    <strong>Productos</strong>
-                                </div>
-                                
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                            
-                                        <table class="table table-striped table-hover table-sm table-bordered">
-                                            <?php
-                                                try{
-                                                    $base = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
-                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                                    $base->exec("SET CHARACTER SET utf8");
-                                                    $tamanoPaginas=10;
-                                                    $pagina = isset($_GET['pagina'])?$_GET['pagina']:1;;
-                                                    
-                                                    $empezarDesde = ($pagina - 1) * $tamanoPaginas;
-                                                    $sql_total="SELECT * FROM productos";
-                                                    $resultado = $base->prepare($sql_total);
-                                                    $resultado->execute(array());
-                                                    $numFilas=$resultado->rowCount();
-                                                    $totalPaginas = ceil($numFilas/$tamanoPaginas);
+                                            <div class="form-row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="validationCustom03">Nombre</label>
+                                                    <input type="text" class="form-control" id="validationCustom03" name="Nombre" placeholder="Nombre" value="" required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="validationCustom04">Precio Venta</label>
+                                                    <input type="number" class="form-control" id="validationCustom04" name="Precio_Venta" placeholder="Precio Venta" value="" required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="validationCustom05">Precio Neto</label>
+                                                    <input type="number" class="form-control" id="validationCustom05" name="Precio_Neto" placeholder="Precio Neto" value="" required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <button class="btn btn-success" type="submit">Agregar</button>
                                                 
-                                                    $resultado->closeCursor();
-                                                    $sqlLimit="SELECT * FROM productos LIMIT $empezarDesde,$tamanoPaginas";
-                                                    
-                                                    $resultado = $base->prepare($sqlLimit);
-                                                    $resultado->execute(array());
-                                                    echo "<thead><tr><th>CODIGO</th><th>CATEGORIA</th><th>PROVEEDOR</th><th>NOMBRE</th><th>PRECIO VENTA</th><th>PRECIO NETO</th><th align='center'>ACCIONES</th></tr></thead><tbody>";
-                                                
-                                                
-                                            
-                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
-                                                        echo "<tr>";
-                                                        echo "<td>" . $fila["CODIGO"] . "</td>";
-                                                        echo "<td>" . $fila["CATEGORIA"] . "</td>";
-                                                        echo "<td>" . $fila["PROVEEDOR"] . "</td>";
-                                                        echo "<td>" . $fila["NOMBRE"] . "</td>";
-                                                        echo "<td align='right'>$ " . $fila["PRECIO_VENTA"] . "</td>";
-                                                        echo "<td align='right'>$ " . $fila["PRECIO_NETO"] . "</td>";
-                                                        echo "<td align='right'><a href='Modificar_Producto.php?codigo=".$fila["CODIGO"]."' id=" . $fila["ID"] ." type='' value='' class='btn btn-outline-success btn-sm'>"; echo "<span class='oi oi-pencil'></span>"; echo "</a>";
-                                                        echo "      <a href='' id=" . $fila["ID"] ." type='' value='' class='btn btn-outline-danger btn-sm'>  "; echo "<span class='oi oi-trash'></span>"; echo "</a></td>";
-                                                        echo "</tr>";
-                                                    }
-                                                    echo "</tbody>";
-                                                    $resultado->closeCursor();
-                                                }
-                                                catch(Exception $e){
-                                                }
-                                            
-                                            ?>
-                                            
-                                        </table>
-                                        <?php 
-                                            $anterior=($pagina-1);
-                                            $siguiente=($pagina+1);
-                                            
-                                            if(isset($_GET['Busqueda'])){
-                                                $pagAnterior= "?pagina=$anterior&Busqueda={$_GET['Busqueda']}";
-                                                $pagSiguiente= "?pagina=$siguiente&Busqueda={$_GET['Busqueda']}";
-                                            }
-                                            else{
-                                                $pagAnterior= "?pagina=$anterior";
-                                                $pagSiguiente= "?pagina=$siguiente";
-                                            }
-                                            ?>
-                                            
-                                            <nav class="nav justify-content-center" aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                            <?php if(($pagina==1)){ ?>
-                                                <li class="page-item disabled">
-                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Anterior</span>
-                                                </a>
-                                                </li>
-                                            <?php }else{?>
-                                                <li class="page-item">
-                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Anterior</span>
-                                                </a>
-                                                </li>
-                                            <?php }?>
+                                                <a href='Productos.php' id=''type='' value='' class='btn btn-danger'>Cancelar</a>
+                                            </div>
+                                        </form>
 
-                                                
-                                                <?php
-                                                if(isset($_GET['Busqueda'])){
-                                                    if($totalPaginas>=1){
-                                                        for($x=1;$x<=$totalPaginas;$x++){
-                                                            echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>":
-                                                            "<li class='page-item'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>";
-                                                        }
-                                                    }	
+                                        <script>
+                                        // Example starter JavaScript for disabling form submissions if there are invalid fields
+                                        (function() {
+                                        'use strict';
+                                        window.addEventListener('load', function() {
+                                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                            var forms = document.getElementsByClassName('needs-validation');
+                                            // Loop over them and prevent submission
+                                            var validation = Array.prototype.filter.call(forms, function(form) {
+                                            form.addEventListener('submit', function(event) {
+                                                if (form.checkValidity() === false) {
+                                                event.preventDefault();
+                                                event.stopPropagation();
                                                 }
-                                                else{
-                                                    if($totalPaginas>=1){
-                                                    for($x=1;$x<=$totalPaginas;$x++){
-                                                        echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>":
-                                                        "<li class='page-item'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>";
-                                                    }
-                                                }	
-                                                }	  
-                                                
-                                                
-                                                ?>
-                                                <?php if(($pagina>=$totalPaginas)){?>
-                                                <li class="page-item disabled">
-                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Siguiente</span>
-                                                </a>
-                                                </li>
-                                                <?php }else{?>
-                                                    <li class="page-item">
-                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Siguiente</span>
-                                                </a>
-                                                </li>
-                                                <?php }?>
-                                            </ul>
-                                            </nav>
+                                                form.classList.add('was-validated');
+                                            }, false);
+                                            });
+                                        }, false);
+                                        })();
+                                        </script>
                                     </div>
-                                </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
                 </section>
                 <!-- Page Footer-->
                 <footer class="main-footer">

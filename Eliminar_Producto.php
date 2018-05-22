@@ -1,32 +1,29 @@
 <?php
 
-    
+function ConsultarProducto($codigo)
+{
+    $base = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
+    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $base->exec("SET CHARACTER SET utf8");    
+    $sql_total="SELECT * FROM productos WHERE CODIGO='".$codigo."'";
+    $resultado = $base->prepare($sql_total);
+    $resultado->execute(array());
+    $fila=$resultado->fetch(PDO::FETCH_ASSOC);
+    return[
+        $fila["CODIGO"],
+        $fila['CATEGORIA'],
+        $fila['PROVEEDOR'],
+        $fila['NOMBRE'],
+        $fila['PRECIO_VENTA'],
+        $fila['PRECIO_NETO']
+    ];
+
+}
 
 
-    function ConsultarProducto($codigo)
-    {
-        $base = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
-        $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $base->exec("SET CHARACTER SET utf8");    
-        $sql_total="SELECT * FROM productos WHERE CODIGO='".$codigo."'";
-        $resultado = $base->prepare($sql_total);
-        $resultado->execute(array());
-        $fila=$resultado->fetch(PDO::FETCH_ASSOC);
-        return[
-            $fila["CODIGO"],
-            $fila['CATEGORIA'],
-            $fila['PROVEEDOR'],
-            $fila['NOMBRE'],
-            $fila['PRECIO_VENTA'],
-            $fila['PRECIO_NETO']
-        ];
-
-    }
+$consulta=ConsultarProducto($_GET['codigo']);
 
 
-    $consulta=ConsultarProducto($_GET['codigo']);
-
-    
 
 ?>
 
@@ -195,7 +192,7 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Modificar</h2>
+                        <h2 class="no-margin-bottom">Eliminar Producto</h2>
                     </div>
                 </header>
                 <!-- Breadcrumb-->
@@ -203,7 +200,7 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
                         <li class="breadcrumb-item"><a href="Productos.php">Productos</a></li>
-                        <li class="breadcrumb-item active">Modificar </li>
+                        <li class="breadcrumb-item active">Eliminar </li>
                     </ul>
                 </div>
                 <!-- Forms Section-->
@@ -215,10 +212,10 @@
                                 <div class="card">
                                     
                                     <div class="card-header d-flex align-items-center">
-                                        <h3 class="h4">Modificar Producto</h3>
+                                        <h3 class="h4">Eliminar Producto</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form class="needs-validation" novalidate action="Modificar_Producto2.php" method="POST">
+                                        <form class="needs-validation" novalidate action="Eliminar_Producto2.php" method="POST">
                                             <div class="form-row">
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom01">Codigo</label>
@@ -228,13 +225,13 @@
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom02">Categoria</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="Categoria" placeholder="Categoria" value="<?php echo $consulta[1] ?>" required>
+                                                    <input readonly type="text" class="form-control" id="validationCustom02" name="Categoria" placeholder="Categoria" value="<?php echo $consulta[1] ?>" required>
                                                     <div class="valid-feedback">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom02">Proveedor</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="Proveedor" placeholder="Proveedor" value="<?php echo $consulta[2] ?>" required>
+                                                    <input readonly type="text" class="form-control" id="validationCustom02" name="Proveedor" placeholder="Proveedor" value="<?php echo $consulta[2] ?>" required>
                                                     <div class="valid-feedback">
                                                     </div>
                                                 </div>
@@ -242,25 +239,25 @@
                                             <div class="form-row">
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Nombre</label>
-                                                    <input type="text" class="form-control" id="validationCustom03" name="Nombre" placeholder="Nombre" value="<?php echo $consulta[3] ?>" required>
+                                                    <input readonly type="text" class="form-control" id="validationCustom03" name="Nombre" placeholder="Nombre" value="<?php echo $consulta[3] ?>" required>
                                                     <div class="invalid-feedback">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 mb-3">
                                                     <label for="validationCustom04">Precio Venta</label>
-                                                    <input type="number" class="form-control" id="validationCustom04" name="Precio_Venta" placeholder="Precio Venta" value="<?php echo $consulta[4] ?>" required>
+                                                    <input readonly type="number" class="form-control" id="validationCustom04" name="Precio_Venta" placeholder="Precio Venta" value="<?php echo $consulta[4] ?>" required>
                                                     <div class="invalid-feedback">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 mb-3">
                                                     <label for="validationCustom05">Precio Neto</label>
-                                                    <input type="number" class="form-control" id="validationCustom05" name="Precio_Neto" placeholder="Precio Neto" value="<?php echo $consulta[5] ?>" required>
+                                                    <input readonly type="number" class="form-control" id="validationCustom05" name="Precio_Neto" placeholder="Precio Neto" value="<?php echo $consulta[5] ?>" required>
                                                     <div class="invalid-feedback">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-between">
-                                                <button class="btn btn-success" type="submit">Modificar</button>
+                                                <button class="btn btn-success" type="submit">Eliminar</button>
                                                 
                                                 <a href='Productos.php' id=''type='' value='' class='btn btn-danger'>Cancelar</a>
                                             </div>
