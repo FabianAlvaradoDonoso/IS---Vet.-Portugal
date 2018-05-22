@@ -1,10 +1,42 @@
+<?php
+
+    
+
+
+    function ConsultarProducto($codigo)
+    {
+        $base = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
+        $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $base->exec("SET CHARACTER SET utf8");    
+        $sql_total="SELECT * FROM productos WHERE CODIGO='".$codigo."'";
+        $resultado = $base->prepare($sql_total);
+        $resultado->execute(array());
+        $fila=$resultado->fetch(PDO::FETCH_ASSOC);
+        return[
+            $fila["CODIGO"],
+            $fila['CATEGORIA'],
+            $fila['PROVEEDOR'],
+            $fila['NOMBRE'],
+            $fila['PRECIO_VENTA'],
+            $fila['PRECIO_NETO']
+        ];
+
+    }
+
+
+    $consulta=ConsultarProducto($_GET['codigo']);
+
+    
+
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Pruebas - VetPortugal</title>
+    <title>Inicio - VetPortugal</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
@@ -127,7 +159,7 @@
                     <li>
                         <a href="index.html"> <i class="icon-home"></i>Inicio </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="Pruebas.php"> <i class="icon-home"></i>Pruebas </a>
                     </li>
                     <li>
@@ -163,159 +195,71 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Pruebas</h2>
+                        <h2 class="no-margin-bottom">Forms</h2>
                     </div>
                 </header>
                 <!-- Breadcrumb-->
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                        <li class="breadcrumb-item active">Pruebas </li>
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active">Forms </li>
                     </ul>
                 </div>
-                <section class="tables">
-                    <div id="tabla" class="container-fluid">
+                <!-- Forms Section-->
+                <section class="forms">
+                    <div class="container-fluid">
                         <div class="row">
-                            <div class="col-lg-12">
-                            <div class="card" >
-                            <div class="card-close">
+                            <!-- Basic Form-->
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-close">
                                         <div class="dropdown">
-                                            <button type="button" id="closeCard5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                                            <div aria-labelledby="closeCard5" class="dropdown-menu dropdown-menu-right has-shadow">
+                                            <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                                            <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow">
                                                 <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a>
                                                 <a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
                                             </div>
                                         </div>
                                     </div>
-                                <div class="card-header">
-                                    <strong>Productos</strong>
-                                </div>
-                                
-                                <div class="card-body">
-                                    <div class="table-responsive">
+                                    <div class="card-header d-flex align-items-center">
+                                        <h3 class="h4">Modificar Producto</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>Al terminar sus cambios haga click en GUARDAR</p>
+                                        <form action="Modificar_Producto2.php" method="POST">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Codigo</label>
+                                                <input type="text" placeholder="Codigo" name="Codigo" class="form-control" value="<?php echo $consulta[0] ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-control-label">Categoria</label>
+                                                <input type="text" placeholder="Categoria" name="Categoria" class="form-control" value="<?php echo $consulta[1] ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-control-label">Proveedor</label>
+                                                <input type="text" placeholder="Proveedor" name="Proveedor" class="form-control" value="<?php echo $consulta[2] ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-control-label">Nombre</label>
+                                                <input type="text" placeholder="Nombre" name="Nombre" class="form-control" value="<?php echo $consulta[3] ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-control-label">Precio Venta</label>
+                                                <input type="text" placeholder="Precio Venta" name="Precio_Venta" class="form-control" value="<?php echo $consulta[4] ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-control-label">Precio Neto</label>
+                                                <input type="text" placeholder="Precio Neto" name="Precio_Neto" class="form-control" value="<?php echo $consulta[5] ?>">
+                                            </div>
                                             
-                                        <table class="table table-striped table-hover table-sm table-bordered">
-                                            <?php
-                                                try{
-                                                    $base = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
-                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                                    $base->exec("SET CHARACTER SET utf8");
-                                                    $tamanoPaginas=10;
-                                                    $pagina = isset($_GET['pagina'])?$_GET['pagina']:1;;
-                                                    
-                                                    $empezarDesde = ($pagina - 1) * $tamanoPaginas;
-                                                    $sql_total="SELECT * FROM productos";
-                                                    $resultado = $base->prepare($sql_total);
-                                                    $resultado->execute(array());
-                                                    $numFilas=$resultado->rowCount();
-                                                    $totalPaginas = ceil($numFilas/$tamanoPaginas);
+                                            <div class="form-group">
+                                                <input type="submit" id="btnModificar" value="Modificar" class="btn btn-success">
                                                 
-                                                    $resultado->closeCursor();
-                                                    $sqlLimit="SELECT * FROM productos LIMIT $empezarDesde,$tamanoPaginas";
-                                                    
-                                                    $resultado = $base->prepare($sqlLimit);
-                                                    $resultado->execute(array());
-                                                    echo "<thead><tr><th>CODIGO</th><th>CATEGORIA</th><th>PROVEEDOR</th><th>NOMBRE</th><th>PRECIO VENTA</th><th>PRECIO NETO</th><th align='center'>ACCIONES</th></tr></thead><tbody>";
-                                                
-                                                
-                                            
-                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
-                                                        echo "<tr>";
-                                                        echo "<td>" . $fila["CODIGO"] . "</td>";
-                                                        echo "<td>" . $fila["CATEGORIA"] . "</td>";
-                                                        echo "<td>" . $fila["PROVEEDOR"] . "</td>";
-                                                        echo "<td>" . $fila["NOMBRE"] . "</td>";
-                                                        echo "<td align='right'>$ " . $fila["PRECIO_VENTA"] . "</td>";
-                                                        echo "<td align='right'>$ " . $fila["PRECIO_NETO"] . "</td>";
-                                                        echo "<td align='right'><a href='Modificar_Producto.php?codigo=".$fila["CODIGO"]."' id=" . $fila["ID"] ." type='' value='' class='btn btn-outline-success btn-sm'>"; echo "<span class='oi oi-pencil'></span>"; echo "</a>";
-                                                        echo "      <a href='' id=" . $fila["ID"] ." type='' value='' class='btn btn-outline-danger btn-sm'>  "; echo "<span class='oi oi-trash'></span>"; echo "</a></td>";
-                                                        echo "</tr>";
-                                                    }
-                                                    echo "</tbody>";
-                                                    $resultado->closeCursor();
-                                                }
-                                                catch(Exception $e){
-                                                }
-                                            
-                                            ?>
-                                            
-                                        </table>
-                                        <?php 
-                                            $anterior=($pagina-1);
-                                            $siguiente=($pagina+1);
-                                            
-                                            if(isset($_GET['Busqueda'])){
-                                                $pagAnterior= "?pagina=$anterior&Busqueda={$_GET['Busqueda']}";
-                                                $pagSiguiente= "?pagina=$siguiente&Busqueda={$_GET['Busqueda']}";
-                                            }
-                                            else{
-                                                $pagAnterior= "?pagina=$anterior";
-                                                $pagSiguiente= "?pagina=$siguiente";
-                                            }
-                                            ?>
-                                            
-                                            <nav class="nav justify-content-center" aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                            <?php if(($pagina==1)){ ?>
-                                                <li class="page-item disabled">
-                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Anterior</span>
-                                                </a>
-                                                </li>
-                                            <?php }else{?>
-                                                <li class="page-item">
-                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Anterior</span>
-                                                </a>
-                                                </li>
-                                            <?php }?>
-
-                                                
-                                                <?php
-                                                if(isset($_GET['Busqueda'])){
-                                                    if($totalPaginas>=1){
-                                                        for($x=1;$x<=$totalPaginas;$x++){
-                                                            echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>":
-                                                            "<li class='page-item'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>";
-                                                        }
-                                                    }	
-                                                }
-                                                else{
-                                                    if($totalPaginas>=1){
-                                                    for($x=1;$x<=$totalPaginas;$x++){
-                                                        echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>":
-                                                        "<li class='page-item'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>";
-                                                    }
-                                                }	
-                                                }	  
-                                                
-                                                
-                                                ?>
-                                                <?php if(($pagina>=$totalPaginas)){?>
-                                                <li class="page-item disabled">
-                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Siguiente</span>
-                                                </a>
-                                                </li>
-                                                <?php }else{?>
-                                                    <li class="page-item">
-                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Siguiente</span>
-                                                </a>
-                                                </li>
-                                                <?php }?>
-                                            </ul>
-                                            </nav>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                                </div>
                             </div>
-                        </div>
-                    </div>
                 </section>
                 <!-- Page Footer-->
                 <footer class="main-footer">
