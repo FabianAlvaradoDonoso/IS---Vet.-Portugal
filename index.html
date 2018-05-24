@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Main</title>
+
+    <!--Googlefonts-->
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <!--CUSTOM CSS-->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Scroll reveal-->
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+  <div class="page form-page">
+  <!--MAIN NavBar-->
+   <header class="header">
+    <nav class="navbar">
+      <!-- Search Box-->
+    
+      <div class="container-fluid">
+        <div class="navbar-holder d-flex align-items-center justify-content-between">
+          <!-- Navbar Header-->
+          <div class="navbar-header">
+            <!-- Navbar Brand -->
+            <a href="#" class="navbar-brand">
+              <img id="vet-logo" class="mk-sticky-logo" title="aqui va el vet logo?" alt="aqui va el vet logo alt"
+                src="/img/capturevet_icon.png">
+              <!-- Toggle Button-->
+              <a id="toggle-btn" href="#" class="menu-btn active">
+                <span></span>
+                <span></span>
+                <span></span>
+              </a>
+          </div>
+          <!-- Navbar Menu -->
+          <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+            
+            <!-- Notifications-->
+            <!-- Messages                        -->
+            <!-- Logout    -->
+            <li class="nav-item VetLogout">
+              <a class="nav-link logout">Salir
+                <i class="fa fa-sign-out"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+<div class="page-content d-flex align-items-stretch">
+    <!-- Side Navbar -->
+    <nav class="side-navbar">
+      <!-- Sidebar Header-->
+      <div class="sidebar-header d-flex align-items-center">
+        <div class="avatar">
+          <img src="/img/Fab.PNG" alt="..." class="img-fluid rounded-circle">
+        </div>
+        <div class="title">
+          <h1 class="h4">Profile
+            <!--%= data.profile.nick%-->
+          </h1>
+          <p> 
+            <!--%= data.profile.type%-->
+          </p>
+        </div>
+      </div>
+      <!-- Sidebar Navidation Menus-->
+      <span class="heading">Menú</span>
+      <ul class="list-unstyled">
+        <li>
+          <a href="#Games" aria-expanded="false" data-toggle="collapse">
+            <i class="fa fa-gamepad"></i>Juegos </a>
+          <ul id="Games" class="collapse list-unstyled raqnSidebar">
+
+            <li raqnType="DixProfile">
+              <a class="raqnLoad" raqnTarget="games DixProfile">
+                <i class="fa fa-cube"></i>DIXProfile</a>
+            </li>
+            <li raqnType="Dix">
+              <a class="raqnLoad" raqnTarget="games Dix">
+                <i class="fa fa-cubes"></i>DIX</a>
+            </li>
+            <li raqnType="PlayDataModel">
+              <a class="raqnLoad" raqnTarget="games PlayDataModel">
+                <i class="icon-interface-windows"></i>PlayDataModel</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#newGame" aria-expanded="false" data-toggle="collapse">
+            <i class="fa fa-plus"></i>Nuevo </a>
+          <ul id="newGame" class="collapse list-unstyled raqnSidebar">
+            <li raqnType="DixProfile">
+              <a class="raqnLoad" raqnTarget="new DixProfile">
+                <i class="fa fa-cube"></i>DIXProfile</a>
+            </li>
+            <li raqnType="Dix">
+              <a class="raqnLoad" raqnTarget="new Dix">
+                <i class="fa fa-cubes"></i>DIX</a>
+            </li>
+            <li raqnType="PlayDataModel">
+              <a class="raqnLoad" raqnTarget="new PlayDataModel">
+                <i class="icon-interface-windows"></i>PlayDataModel</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <!-- Page Header-->
+    <div class="content-inner">
+      <!-- Page Header-->
+      <header class="page-header">
+        <div class="container-fluid">
+          <div class="row">
+            <div id="headerBackButton"class="col-xs-1 p-2">
+                <a class="btn btn-primary raqnLoad" raqnTarget="games DixProfile">
+                <i class="fa fa-arrow-circle-left " aria-hidden="true" style="color:white"></i></a>
+            </div>
+            <div class="col-xs-11 p-2 text-xs-center">
+                <h2 id="pageTitle" class="raqnTitle no-margin-bottom text-center"></h2>
+
+              
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Breadcrumb-->
+      <br>
+      <!-- Forms Section-->
+      <div id="raqnLoading" class="text-center">
+          <i class="fa fa-spinner fa-spin" style="font-size:60px;color:#330066"></i>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>  
+      
+</body>
+</html>
