@@ -1,10 +1,12 @@
+
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Registro - VetPortugal</title>
+    <title>Inicio - VetPortugal</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
@@ -16,11 +18,10 @@
     <link rel="stylesheet" href="css/fontastic.css">
     <!-- Google fonts - Poppins -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/custom.css" id="theme-stylesheet">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="css/style.default.css">
-
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/favicon.ico">
     <!-- Tweaks for older IEs-->
@@ -166,28 +167,17 @@
                     <div class="col-lg-6 bg-white">
                         <div class="form d-flex align-items-center">
                             <div class="content">
-                                <form class="form-validate">
+                                <form method="post" action="logueame.php" class="form-validate">
                                     <div class="form-group">
-                                        <input id="register-username" type="text" name="registerUsername" required data-msg="Por favor, ingresa tu Nombre de Usuario" class="input-material">
-                                        <label for="register-username" class="label-material">Nombre Usuario</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <input id="register-email" type="email" name="registerEmail" required data-msg="Por favor, ingresa un Correo Electrónico valido" class="input-material">
-                                        <label for="register-email" class="label-material">Correo Electrónico      </label>
+                                        <input readonly value="<?php $_POST['user']?>" id="user" type="text" name="user" required data-msg="Por favor, ingrese su Nombre de Usuario" class="input-material">
+                                        <label for="user" class="label-material">Nombre Usuario</label>
                                     </div>
                                     <div class="form-group">
-                                        <input id="register-password" type="password" name="registerPassword" required data-msg="Por favor, ingresa tu Contraseña" class="input-material">
-                                        <label for="register-password" class="label-material">Contraseña        </label>
-                                    </div>
-                                    <div class="form-group terms-conditions">
-                                        <input id="register-agree" name="registerAgree" type="checkbox" required value="1" data-msg="Su acuerdo es requerido" class="checkbox-template check">
-                                        <label for="register-agree">
-                                          Acepta nuestros términos de uso y política.</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <button id="regidter" type="submit" name="registerSubmit" class="btn btn-success">Registrar</button>
-                                    </div>
-                                </form><small>¿Ya tiene una cuenta? </small><a href="login.php" class="signup">Ingresar</a>
+                                        <input readonly value="<?php $_POST['pass']?>" id="pass" type="password" name="pass" required data-msg="Por favor, ingrese su contraseña" class="input-material">
+                                        <label for="pass" class="label-material">Contraseña</label>
+                                    </div><input type="submit" name="login" id="login" value="Login" class="btn btn-success">
+                                    <!-- This should be submit button but I replaced it with <a> for demo purposes-->
+                                </form><a href="#" class="forgot-pass">¿Olvido su contraseña?</a><br><small>¿No tiene una cuenta? </small><a href="register.html" class="signup">Crear Cuenta</a>
                             </div>
                         </div>
                     </div>
@@ -201,6 +191,7 @@
         </div>
     </div>
     <!-- JavaScript files-->
+    <script src="vendor/jquery/jquery.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js">
     </script>
@@ -212,5 +203,38 @@
     <!-- Main File-->
     <script src="js/front.js"></script>
 </body>
+
+  <?php
+
+  session_start();
+
+
+  function LoginSession($user, $pass)
+  {
+      $base = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
+      $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $base->exec("SET CHARACTER SET utf8");    
+      $sql_total="SELECT * FROM USUARIOS WHERE USUARIO = '". $user ."' AND CONTRASENA = '" . $pass ."' ";
+      $resultado = $base->prepare($sql_total);
+      $resultado->execute(array());
+      $numResultados=$resultado->rowCount();
+      if($numResultados == 1){
+        echo '<script language="javascript">alert("Bienvenido!!"); window.location="index.html";</script>'; 
+      }
+      else{
+        echo '<script language="javascript">alert("No se encontro usuario o la contraseña es incorrecta, intente nuevamente!!"); window.location="login.php";</script>';
+      }
+
+  }
+
+
+  $consulta=LoginSession($_POST["user"], $_POST["pass"]);
+
+
+  //if(isset($_POST["user"]) && isset($_POST["pass"])){}
+    
+
+  ?>
+
 
 </html>

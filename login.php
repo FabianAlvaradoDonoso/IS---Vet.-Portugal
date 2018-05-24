@@ -1,3 +1,13 @@
+<?php
+    session_start();
+if(isset($_SESSION["user"])){
+    header("Location:index.php");
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -143,6 +153,16 @@
             padding-bottom: 100px !important;
         }
     }
+
+    input.input-material~label.active {
+    font-size: 0.8rem;
+    top: -10px;
+    color: #007bff;
+    }
+    input.input-material:focus {
+    border-color: #007bff;
+    }
+}
 </style>
 
 <body>
@@ -165,17 +185,17 @@
                     <div class="col-lg-6 bg-white">
                         <div class="form d-flex align-items-center">
                             <div class="content">
-                                <form method="post" class="form-validate">
+                                <form method="post" action="logueame.php" class="form-validate">
                                     <div class="form-group">
-                                        <input id="login-username" type="text" name="loginUsername" required data-msg="Por favor, ingrese su Nombre de Usuario" class="input-material">
-                                        <label for="login-username" class="label-material">Nombre Usuario</label>
+                                        <input id="user" type="text" name="user" required data-msg="Por favor, ingrese su Nombre de Usuario" class="input-material">
+                                        <label for="user" class="label-material">Nombre Usuario</label>
                                     </div>
                                     <div class="form-group">
-                                        <input id="login-password" type="password" name="loginPassword" required data-msg="Por favor, ingrese su contraseña" class="input-material">
-                                        <label for="login-password" class="label-material">Contraseña</label>
-                                    </div><a id="login" href="index.html" class="btn btn-success">Entrar</a>
+                                        <input id="pass" type="password" name="pass" required data-msg="Por favor, ingrese su contraseña" class="input-material">
+                                        <label for="pass" class="label-material">Contraseña</label>
+                                    </div><input type="submit" name="login" id="login" value="Login" class="btn btn-success" onclick="Saltar(this.form.pass.value)">
                                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
-                                </form><a href="#" class="forgot-pass">¿Olvido su contraseña?</a><br><small>¿No tiene una cuenta? </small><a href="register.html" class="signup">Crear Cuenta</a>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -189,6 +209,7 @@
         </div>
     </div>
     <!-- JavaScript files-->
+    <script src="vendor/jquery/jquery.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js">
     </script>
