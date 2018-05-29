@@ -1,3 +1,25 @@
+<?php
+    function ConsultarProducto($text, $opcion)
+    {
+        $base2 = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
+        $base2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $base2->exec("SET CHARACTER SET utf8");    
+        $sql_total2="SELECT * FROM productos LIKE ".$opcion."='%".$text."%'";
+        $resultado2 = $base2->prepare($sql_total2);
+        $resultado2->execute(array());
+        $fila2=$resultado2->fetch(PDO::FETCH_ASSOC);
+        return[
+            $fila2["CODIGO"],
+            $fila2['CATEGORIA'],
+            $fila2['PROVEEDOR'],
+            $fila2['NOMBRE'],
+            $fila2['PRECIO_VENTA'],
+            $fila2['PRECIO_NETO']
+        ];
+
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -214,15 +236,6 @@
     nav.side-navbar.shrinked .sidebar-header .title {
         display: none;
     }
-    .invalid-feedback {
-    display: none;
-    width: 100%;
-    margin-top: 1.25rem;
-    font-size: 0%;
-    color: #dc3545;
-    }
-
-}
 </style>
 <body>
     <div class="page">
@@ -371,30 +384,30 @@
                             <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header" style="border">
-                                    <div class=" container ">
-                                        <div class="row justify-content-between">
-                                        <div class="col-3"><h4><strong>Productos</strong></h4></div>
-                                        <form class="form-inline  was-validated col-auto" action="ProductosBusqueda.php" method="get">
-                                            <label class="sr-only" for="txtBusqueda">Busqueda</label>
-                                            <input type="text"  class="form-control mr-1 " id="txtBusqueda" name="txtBusqueda" placeholder="Busqueda" required>
+                                        <div class=" container ">
+                                            <div class="row justify-content-between">
+                                            <div class="col-3"><h4><strong>Productos</strong></h4></div>
+                                            <form class="form-inline  was-validated col-auto" action="ProductosBusqueda.php" method="get">
+                                                <label class="sr-only" for="txtBusqueda">Busqueda</label>
+                                                <input type="text"  class="form-control mr-1 " value="<?php echo $_GET['txtBusqueda']?>" id="txtBusqueda" name="txtBusqueda" placeholder="Busqueda" required>
 
-                                            <label class="sr-only" for="opciones">Opcion</label>
-                                            <select class="custom-select mr-1" name="cbOpciones" id="opciones" required>
-                                                <option value="">Opción...</option>
-                                                <option value="CODIGO">Codigo</option>
-                                                <option value="CATEGORIA">Categoria</option>
-                                                <option value="PROVEEDOR">Proveedor</option>
-                                                <option value="NOMBRE">Nombre</option>
-                                                <option value="PRECIO_VENTA">Precio Venta</option>
-                                                <option value="PRECIO_NETO">Precio Neto</option>
-                                            </select>
-                                            <button type="submit" class="btn btn-btn-outline-success ">Buscar</button>
+                                                <label class="sr-only" for="opciones">Opcion</label>
+                                                <select class="custom-select mr-1" name="cbOpciones" id="opciones" required>
+                                                    <?php if($_GET["cbOpciones"]=="CODIGO"){?><option selected value="CODIGO">Codigo</option><?php } else {?><option value="CODIGO">Codigo</option><?php }?>
+                                                    <?php if($_GET["cbOpciones"]=="CATEGORIA"){?><option selected value="CATEGORIA">Categoria</option><?php } else {?><option value="CATEGORIA">Categoria</option><?php }?>
+                                                    <?php if($_GET["cbOpciones"]=="PROVEEDOR"){?><option selected value="PROVEEDOR">Proveedor</option><?php } else {?><option value="PROVEEDOR">Proveedor</option><?php }?>
+                                                    <?php if($_GET["cbOpciones"]=="NOMBRE"){?><option selected value="NOMBRE">Nombre</option><?php } else {?><option value="NOMBRE">Nombre</option><?php }?>
+                                                    <?php if($_GET["cbOpciones"]=="PRECIO_VENTA"){?><option selected value="PRECIO_VENTA">Precio Venta</option><?php } else {?><option value="PRECIO_VENTA">Precio Venta</option><?php }?>
+                                                    <?php if($_GET["cbOpciones"]=="PRECIO_NETO"){?><option selected value="PRECIO_NETO">Precio Neto</option><?php } else {?><option value="PRECIO_NETO">Precio Neto</option><?php }?>
+                                                                                            
+                                                </select>
+                                                <button type="submit" class="btn btn-outline-success ">Buscar</button>
 
-                                        </form>
-                                        <div class=" col-1 "><a href='Agregar_Producto.php' id=''type='' value='' class='btn btn-primary '>Nuevo</a></div>
+                                            </form>
+                                            <div class=" col-1 "><a href='Agregar_Producto.php' id=''type='' value='' class='btn btn-primary '>Nuevo</a></div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -402,25 +415,28 @@
                                         <table class="table table-striped table-hover table-sm table-bordered">
                                             <?php
                                                 try{
+                                                    $opcion = $_GET["cbOpciones"];
+                                                    $text = $_GET["txtBusqueda"];
+
                                                     $base = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                                    $base->exec("SET CHARACTER SET utf8");
+                                                    $base->exec("SET CHARACTER SET utf8");    
                                                     $tamanoPaginas=10;
                                                     $pagina = isset($_GET['pagina'])?$_GET['pagina']:1;;
                                                     
                                                     $empezarDesde = ($pagina - 1) * $tamanoPaginas;
-                                                    $sql_total="SELECT * FROM productos";
+                                                    $sql_total="SELECT * FROM productos WHERE ".$opcion." LIKE '%".$text."%'";
                                                     $resultado = $base->prepare($sql_total);
                                                     $resultado->execute(array());
                                                     $numFilas=$resultado->rowCount();
                                                     $totalPaginas = ceil($numFilas/$tamanoPaginas);
                                                 
                                                     $resultado->closeCursor();
-                                                    $sqlLimit="SELECT * FROM productos LIMIT $empezarDesde,$tamanoPaginas";
+                                                    $sqlLimit="SELECT * FROM productos WHERE ".$opcion." LIKE '%".$text."%' LIMIT $empezarDesde,$tamanoPaginas";
                                                     
                                                     $resultado = $base->prepare($sqlLimit);
                                                     $resultado->execute(array());
-                                                    echo "<thead><tr><th>CODIGO</th><th>CATEGORIA</th><th>PROVEEDOR</th><th>NOMBRE</th><th>PRECIO VENTA</th><th>PRECIO NETO</th><th align='center'>ACCIONES</th></tr></thead><tbody>";
+                                                     echo "<thead><tr><th>CODIGO</th><th>CATEGORIA</th><th>PROVEEDOR</th><th>NOMBRE</th><th>PRECIO VENTA</th><th>PRECIO NETO</th><th align='center'>ACCIONES</th></tr></thead><tbody>";
                                                 
                                                 
                                             
@@ -450,12 +466,12 @@
                                             $siguiente=($pagina+1);
                                             
                                             if(isset($_GET['Busqueda'])){
-                                                $pagAnterior= "?pagina=$anterior&Busqueda={$_GET['Busqueda']}";
-                                                $pagSiguiente= "?pagina=$siguiente&Busqueda={$_GET['Busqueda']}";
+                                                $pagAnterior= "?pagina=$anterior&Busqueda={$_GET['Busqueda']}&txtBusqueda={$_GET['txtBusqueda']}&cbOpciones={$_GET['cbOpciones']}";
+                                                $pagSiguiente= "?pagina=$siguiente&Busqueda={$_GET['Busqueda']}&txtBusqueda={$_GET['txtBusqueda']}&cbOpciones={$_GET['cbOpciones']}";
                                             }
                                             else{
-                                                $pagAnterior= "?pagina=$anterior";
-                                                $pagSiguiente= "?pagina=$siguiente";
+                                                $pagAnterior= "?pagina=$anterior&txtBusqueda={$_GET['txtBusqueda']}&cbOpciones={$_GET['cbOpciones']}";
+                                                $pagSiguiente= "?pagina=$siguiente&txtBusqueda={$_GET['txtBusqueda']}&cbOpciones={$_GET['cbOpciones']}";
                                             }
                                             ?>
                                             
@@ -482,16 +498,16 @@
                                                 if(isset($_GET['Busqueda'])){
                                                     if($totalPaginas>=1){
                                                         for($x=1;$x<=$totalPaginas;$x++){
-                                                            echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>":
-                                                            "<li class='page-item'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>";
+                                                            echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}&txtBusqueda={$_GET['txtBusqueda']}&cbOpciones={$_GET['cbOpciones']}#tabla'>$x</a></li>":
+                                                            "<li class='page-item'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}&txtBusqueda={$_GET['txtBusqueda']}&cbOpciones={$_GET['cbOpciones']}#tabla'>$x</a></li>";
                                                         }
                                                     }	
                                                 }
                                                 else{
                                                     if($totalPaginas>=1){
                                                     for($x=1;$x<=$totalPaginas;$x++){
-                                                        echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>":
-                                                        "<li class='page-item'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>";
+                                                        echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x&txtBusqueda={$_GET['txtBusqueda']}&cbOpciones={$_GET['cbOpciones']}#tabla'>$x</a></li>":
+                                                        "<li class='page-item'><a class='page-link' href='?pagina=$x&txtBusqueda={$_GET['txtBusqueda']}&cbOpciones={$_GET['cbOpciones']}#tabla'>$x</a></li>";
                                                     }
                                                 }	
                                                 }	  
@@ -515,6 +531,7 @@
                                                 <?php }?>
                                             </ul>
                                             </nav>
+                                        
                                     </div>
                                 </div>
                                 </div>
