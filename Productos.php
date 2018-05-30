@@ -531,54 +531,7 @@
                         </div>
                     </div>
 
-                    <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
-                        <div role="document" class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 id="exampleModalLabel" class="modal-title">Signin Modal</h4>
-                                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                                    <form>
-                                        <div class="form-group">
-                                            <label>Codigo</label>
-                                            <input type="text" placeholder="Codigo" name="Codigo" class="form-control" value="<?php echo $consulta[0] ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Categoria</label>
-                                            <input type="text" placeholder="Categoria" name="Categoria" class="form-control" value="<?php echo $consulta[1] ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Proveedor</label>
-                                            <input type="text" placeholder="Proveedor" name="Proveedor" class="form-control" value="<?php echo $consulta[2] ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Nombre</label>
-                                            <input type="text" placeholder="Nombre" name="Nombre" class="form-control" value="<?php echo $consulta[3] ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Precio Venta</label>
-                                            <input type="text" placeholder="Precio Venta" name="Precio_Venta" class="form-control" value="<?php echo $consulta[4] ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Precio Neto</label>
-                                            <input type="text" placeholder="Precio Neto" name="Precio_Neto" class="form-control" value="<?php echo $consulta[5] ?>">
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <input type="submit" id="btnModificar" value="Modificar" class="btn btn-success">
-                                            
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </section>
                 <!-- Page Footer-->
                 <footer class="main-footer">

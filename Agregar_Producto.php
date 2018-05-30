@@ -314,10 +314,10 @@
                 <!-- Sidebar Navidation Menus--><span class="heading">Menú</span>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="index.html"> <i class="io io-home"></i>Inicio </a>
+                        <a href="index.html"> <i class="oi oi-home"></i>Inicio </a>
                     </li>
                     <li>
-                        <a href="Productos.php"> <i class="io io-list"></i>Productos </a>
+                        <a href="Productos.php"> <i class="oi oi-list"></i>Productos </a>
                     </li>
                     <li>
                         <a href="Consultas.php"> <i class="oi oi-calculator"></i>Consultas </a>
@@ -414,7 +414,7 @@
                                                 </div>
                                                 <div class="col-md-3 mb-3">
                                                     <label for="validationCustom04">Precio Venta</label>
-                                                    <input type="number" class="form-control" id="validationCustom04" name="Precio_Venta" placeholder="Precio Venta" value="" required>
+                                                    <input type="number" class="form-control" id="validationCustom04" name="Precio_Venta" placeholder="Precio Venta" value="1" required>
                                                     <div class="invalid-feedback">
                                                     </div>
                                                 </div>

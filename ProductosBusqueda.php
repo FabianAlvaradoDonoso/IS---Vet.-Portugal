@@ -330,10 +330,10 @@
                 <!-- Sidebar Navidation Menus--><span class="heading">Menú</span>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="index.html"> <i class="io io-home"></i>Inicio </a>
+                        <a href="index.html"> <i class="oi oi-home"></i>Inicio </a>
                     </li>
                     <li class="active">
-                        <a href="Productos.php"> <i class="io io-list"></i>Productos </a>
+                        <a href="Productos.php"> <i class="oi oi-list"></i>Productos </a>
                     </li>
                     <li>
                         <a href="Consultas.php"> <i class="oi oi-calculator"></i>Consultas </a>

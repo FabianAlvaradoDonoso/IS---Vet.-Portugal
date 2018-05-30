@@ -367,8 +367,172 @@
                     </ul>
                 </div> -->
                 <!-- Forms Section-->
-                <section class="forms">
-                   
+                <section class="tables">
+                    <div id="tabla" class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header" style="border">
+                                    <div class=" container ">
+                                        <div class="row justify-content-between">
+                                        <div class="col-3"><h4><strong>Productos</strong></h4></div>
+                                        <form class="form-inline  was-validated col-auto" action="ProductosBusqueda.php" method="get">
+                                            <label class="sr-only" for="txtBusqueda">Busqueda</label>
+                                            <input type="text"  class="form-control mr-1 " id="txtBusqueda" name="txtBusqueda" placeholder="Busqueda" required>
+
+                                            <label class="sr-only" for="opciones">Opcion</label>
+                                            <select class="custom-select mr-1" name="cbOpciones" id="opciones" required>
+                                                <option value="">Opción...</option>
+                                                <option value="CODIGO">Codigo</option>
+                                                <option value="CATEGORIA">Categoria</option>
+                                                <option value="PROVEEDOR">Proveedor</option>
+                                                <option value="NOMBRE">Nombre</option>
+                                                <option value="PRECIO_VENTA">Precio Venta</option>
+                                                <option value="PRECIO_NETO">Precio Neto</option>
+                                            </select>
+                                            <button type="submit" class="btn btn-btn-outline-success ">Buscar</button>
+
+                                        </form>
+                                        <div class=" col-1 "><a href='Agregar_Producto.php' id=''type='' value='' class='btn btn-primary '>Nuevo</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                            
+                                        <table class="table table-striped table-hover table-sm table-bordered">
+                                            <?php
+                                                try{
+                                                    $base = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
+                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                    $base->exec("SET CHARACTER SET utf8");
+                                                    $tamanoPaginas=40;
+                                                    $pagina = isset($_GET['pagina'])?$_GET['pagina']:1;;
+                                                    
+                                                    $empezarDesde = ($pagina - 1) * $tamanoPaginas;
+                                                    $sql_total="SELECT `CODIGO`, `CATEGORIA`, `PROVEEDOR`, `NOMBRE`, `PRECIO_VENTA`, `PRECIO_NETO`, `FECHA_VENC`, `FECHA_ADQ`, `STOCK_MIN`, `STOCK_ACT`, `BODEGA` FROM `productos2`";
+                                                    $resultado = $base->prepare($sql_total);
+                                                    $resultado->execute(array());
+                                                    $numFilas=$resultado->rowCount();
+                                                    $totalPaginas = ceil($numFilas/$tamanoPaginas);
+                                                
+                                                    $resultado->closeCursor();
+                                                    $sqlLimit="SELECT `CODIGO`, `CATEGORIA`, `PROVEEDOR`, `NOMBRE`, `PRECIO_VENTA`, `PRECIO_NETO`, `FECHA_VENC`, `FECHA_ADQ`, `STOCK_MIN`, `STOCK_ACT`, `BODEGA` FROM `productos2` LIMIT $empezarDesde,$tamanoPaginas";
+                                                    
+                                                    $resultado = $base->prepare($sqlLimit);
+                                                    $resultado->execute(array());
+                                                    echo "<thead><tr><th>CODIGO</th><th>CATEGORIA</th><th>PROVEEDOR</th><th>NOMBRE</th><th>PRECIO VENTA</th><th>PRECIO NETO</th><th>FECHA VENC</th><th>FECHA ADQ</th><th>STOCK M</th><th>STOCK A</th><th>Bodega</th><th align='center'>ACCIONES</th></tr></thead><tbody>";
+                                                
+                                                
+                                                    
+
+                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
+                                                        $date1 = date_create($fila["FECHA_VENC"]);
+                                                        $date2 = date_create($fila["FECHA_ADQ"]);
+                                                        echo "<tr>";
+                                                        echo "<td>" . $fila["CODIGO"] . "</td>";
+                                                        echo "<td>" . $fila["CATEGORIA"] . "</td>";
+                                                        echo "<td>" . $fila["PROVEEDOR"] . "</td>";
+                                                        echo "<td>" . $fila["NOMBRE"] . "</td>";
+                                                        echo "<td align='right'>$ " . $fila["PRECIO_VENTA"] . "</td>";
+                                                        echo "<td align='right'>$ " . $fila["PRECIO_NETO"] . "</td>";
+                                                        echo "<td>" . date_format($date1, 'd-m-Y') . "</td>";
+                                                        echo "<td>" . date_format($date2, 'd-m-Y') . "</td>";
+                                                        echo "<td>" . $fila["STOCK_MIN"] . "</td>";
+                                                        echo "<td>" . $fila["STOCK_ACT"] . "</td>";
+                                                        echo "<td>" . $fila["BODEGA"] . "</td>";
+                                                        echo "<td align='center'><a href='Modificar_Producto.php?codigo=".$fila["CODIGO"]."' type='' value='' class='btn btn-outline-success btn-sm'>"; echo "<span class='oi oi-pencil'></span>"; echo "</a>";
+                                                        echo "      <a href='Eliminar_Producto.php?codigo=".$fila["CODIGO"]."' type='' value='' class='btn btn-outline-danger btn-sm'>  "; echo "<span class='oi oi-trash'></span>"; echo "</a></td>";
+                                                        echo "</tr>";
+                                                    }
+                                                    echo "</tbody>";
+                                                    $resultado->closeCursor();
+                                                }
+                                                catch(Exception $e){
+                                                }
+                                            
+                                            ?>
+                                            
+                                        </table>
+                                        <?php 
+                                            $anterior=($pagina-1);
+                                            $siguiente=($pagina+1);
+                                            
+                                            if(isset($_GET['Busqueda'])){
+                                                $pagAnterior= "?pagina=$anterior&Busqueda={$_GET['Busqueda']}";
+                                                $pagSiguiente= "?pagina=$siguiente&Busqueda={$_GET['Busqueda']}";
+                                            }
+                                            else{
+                                                $pagAnterior= "?pagina=$anterior";
+                                                $pagSiguiente= "?pagina=$siguiente";
+                                            }
+                                            ?>
+                                            
+                                            <nav class="nav justify-content-center" aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                            <?php if(($pagina==1)){ ?>
+                                                <li class="page-item disabled">
+                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">Anterior</span>
+                                                </a>
+                                                </li>
+                                            <?php }else{?>
+                                                <li class="page-item">
+                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">Anterior</span>
+                                                </a>
+                                                </li>
+                                            <?php }?>
+
+                                                
+                                                <?php
+                                                if(isset($_GET['Busqueda'])){
+                                                    if($totalPaginas>=1){
+                                                        for($x=1;$x<=$totalPaginas;$x++){
+                                                            echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>":
+                                                            "<li class='page-item'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>";
+                                                        }
+                                                    }	
+                                                }
+                                                else{
+                                                    if($totalPaginas>=1){
+                                                    for($x=1;$x<=$totalPaginas;$x++){
+                                                        echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>":
+                                                        "<li class='page-item'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>";
+                                                    }
+                                                }	
+                                                }	  
+                                                
+                                                
+                                                ?>
+                                                <?php if(($pagina>=$totalPaginas)){?>
+                                                <li class="page-item disabled">
+                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Siguiente</span>
+                                                </a>
+                                                </li>
+                                                <?php }else{?>
+                                                    <li class="page-item">
+                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Siguiente</span>
+                                                </a>
+                                                </li>
+                                                <?php }?>
+                                            </ul>
+                                            </nav>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
                 </section>
                 <!-- Page Footer-->
                 <footer class="main-footer">
