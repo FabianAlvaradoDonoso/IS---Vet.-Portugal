@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ISV": {
+    "Vet101APP": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ISV",
+            "outputPath": "dist/Vet101APP",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -50,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ISV:build"
+            "browserTarget": "Vet101APP:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ISV:build:production"
+              "browserTarget": "Vet101APP:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ISV:build"
+            "browserTarget": "Vet101APP:build"
           }
         },
         "test": {
@@ -95,7 +95,7 @@
         }
       }
     },
-    "ISV-e2e": {
+    "Vet101APP-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -103,11 +103,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ISV:serve"
+            "devServerTarget": "Vet101APP:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ISV:serve:production"
+              "devServerTarget": "Vet101APP:serve:production"
             }
           }
         },
@@ -123,5 +123,5 @@
       }
     }
   },
-  "defaultProject": "ISV"
+  "defaultProject": "Vet101APP"
 }
