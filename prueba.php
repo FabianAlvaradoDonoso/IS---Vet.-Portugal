@@ -411,38 +411,23 @@
                                         <table class="table table-striped table-hover table-sm table-bordered">
                                             <?php
                                                 try{
-                                                    $base = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
+                                                    $base = new PDO("mysql:host=localhost; dbname=accesonor", "root", "");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
-                                                    $tamanoPaginas=10;
-                                                    $pagina = isset($_GET['pagina'])?$_GET['pagina']:1;;
                                                     
-                                                    $empezarDesde = ($pagina - 1) * $tamanoPaginas;
-                                                    $sql_total="SELECT * FROM productos";
+                                                    $sql_total="SELECT MIN(replace(time(`fechaHora`), ':',',')) as entrada, MAX(replace(time(`fechaHora`), ':',',')) as salida, `rut_trabajador` FROM `ingresosalida` GROUP BY `rut_trabajador`, DATE_FORMAT(`fechaHora`, '%Y-%m-%d')";
                                                     $resultado = $base->prepare($sql_total);
                                                     $resultado->execute(array());
-                                                    $numFilas=$resultado->rowCount();
-                                                    $totalPaginas = ceil($numFilas/$tamanoPaginas);
-                                                
-                                                    $resultado->closeCursor();
-                                                    $sqlLimit="SELECT * FROM productos LIMIT $empezarDesde,$tamanoPaginas";
                                                     
-                                                    $resultado = $base->prepare($sqlLimit);
-                                                    $resultado->execute(array());
-                                                    echo "<thead><tr><th>CODIGO</th><th>CATEGORIA</th><th>PROVEEDOR</th><th>NOMBRE</th><th>PRECIO VENTA</th><th>PRECIO NETO</th><th align='center'>ACCIONES</th></tr></thead><tbody>";
+                                                    echo "<thead><tr><th>entrada</th><th>salida</th><th>rut</th></tr></thead><tbody>";
                                                 
                                                 
                                             
                                                     while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
                                                         echo "<tr>";
-                                                        echo "<td>" . $fila["CODIGO"] . "</td>";
-                                                        echo "<td>" . $fila["CATEGORIA"] . "</td>";
-                                                        echo "<td>" . $fila["PROVEEDOR"] . "</td>";
-                                                        echo "<td>" . $fila["NOMBRE"] . "</td>";
-                                                        echo "<td align='right'>$ " . $fila["PRECIO_VENTA"] . "</td>";
-                                                        echo "<td align='right'>$ " . $fila["PRECIO_NETO"] . "</td>";
-                                                        echo "<td align='center'><a href='Modificar_Producto.php?codigo=".$fila["CODIGO"]."' id=" . $fila["ID"] ." type='' value='' class='btn btn-outline-success btn-sm'>"; echo "<span class='oi oi-pencil'></span>"; echo "</a>";
-                                                        echo "      <a href='Eliminar_Producto.php?codigo=".$fila["CODIGO"]."' id=" . $fila["ID"] ." type='' value='' class='btn btn-outline-danger btn-sm'>  "; echo "<span class='oi oi-trash'></span>"; echo "</a></td>";
+                                                        echo "<td>" . $fila["entrada"] . "</td>";
+                                                        echo "<td>" . $fila["salida"] . "</td>";
+                                                        echo "<td>" . $fila["rut_trabajador"] . "</td>";
                                                         echo "</tr>";
                                                     }
                                                     echo "</tbody>";
@@ -454,76 +439,7 @@
                                             ?>
                                             
                                         </table>
-                                        <?php 
-                                            $anterior=($pagina-1);
-                                            $siguiente=($pagina+1);
-                                            
-                                            if(isset($_GET['Busqueda'])){
-                                                $pagAnterior= "?pagina=$anterior&Busqueda={$_GET['Busqueda']}";
-                                                $pagSiguiente= "?pagina=$siguiente&Busqueda={$_GET['Busqueda']}";
-                                            }
-                                            else{
-                                                $pagAnterior= "?pagina=$anterior";
-                                                $pagSiguiente= "?pagina=$siguiente";
-                                            }
-                                            ?>
-                                            
-                                            <nav class="nav justify-content-center" aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                            <?php if(($pagina==1)){ ?>
-                                                <li class="page-item disabled">
-                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Anterior</span>
-                                                </a>
-                                                </li>
-                                            <?php }else{?>
-                                                <li class="page-item">
-                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Anterior</span>
-                                                </a>
-                                                </li>
-                                            <?php }?>
-
-                                                
-                                                <?php
-                                                if(isset($_GET['Busqueda'])){
-                                                    if($totalPaginas>=1){
-                                                        for($x=1;$x<=$totalPaginas;$x++){
-                                                            echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>":
-                                                            "<li class='page-item'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>";
-                                                        }
-                                                    }	
-                                                }
-                                                else{
-                                                    if($totalPaginas>=1){
-                                                    for($x=1;$x<=$totalPaginas;$x++){
-                                                        echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>":
-                                                        "<li class='page-item'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>";
-                                                    }
-                                                }	
-                                                }	  
-                                                
-                                                
-                                                ?>
-                                                <?php if(($pagina>=$totalPaginas)){?>
-                                                <li class="page-item disabled">
-                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Siguiente</span>
-                                                </a>
-                                                </li>
-                                                <?php }else{?>
-                                                    <li class="page-item">
-                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Siguiente</span>
-                                                </a>
-                                                </li>
-                                                <?php }?>
-                                            </ul>
-                                            </nav>
+                                        
                                     </div>
                                 </div>
                                 </div>

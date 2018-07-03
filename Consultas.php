@@ -8,6 +8,26 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper.js/umd/popper.min.js">
+    </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js">
+    </script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script>
+        $('.fad-Date').datepicker({
+            format: "dd/mm/yyyy",
+            weekStart: 1,
+            todayBtn: "linked",
+            language: "es",
+            todayHighlight: true
+            autoclose: true
+        });
+    </script>
+    <!-- Main File-->
+    <script src="js/front.js"></script>
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -30,6 +50,13 @@
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+    <script src="bootstrap-datepicker/js/bootstrap-datepicker.min" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap-datepicker/css/bootstrap-datepicker.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="js/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
 </head>
 <style>
     nav.side-navbar {
@@ -305,7 +332,8 @@
                         <p>Web Designer</p>
                     </div>
                 </div>
-                <!-- Sidebar Navidation Menus--><span class="heading">Menú</span>
+                <!-- Sidebar Navidation Menus-->
+                <span class="heading">Menú</span>
                 <ul class="list-unstyled">
                     <li>
                         <a href="index.html"> <i class="oi oi-home"></i>Inicio </a>
@@ -322,34 +350,7 @@
                     <li>
                         <a href="Operacion.php"> <i class="oi oi-heart"></i>Operación </a>
                     </li>
-                    <!-- <li>
-                        <a href="tables.html"> <i class="icon-grid"></i>Tablas </a>
-                    </li>
-                    <li>
-                        <a href="charts.html"> <i class="fa fa-bar-chart"></i>Gráficos </a>
-                    </li>
-                    <li>
-                        <a href="forms.html"> <i class="icon-padnote"></i>Formularios </a>
-                    </li>
-                    <li>
-                        <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Ejemplo de Dropdown </a>
-                        <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                            <li><a href="#">Pagina 1</a></li>
-                            <li><a href="#">Pagina 2</a></li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="login.php"> <i class="icon-interface-windows"></i>Pagina Inicio Sesion </a>
-                    </li>
-                </ul><span class="heading">Extras</span>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="#"> <i class="icon-flask"></i>Demo 1</a>
-                    </li>
-                    <li>
-                        <a href="#"> <i class="icon-screen"></i>Demo 2</a>
-                    </li> -->
-                </ul>
             </nav>
             <div class="content-inner">
                 <!-- Page Header-->
@@ -359,176 +360,205 @@
                     </div>
                 </header>
                 <!-- Breadcrumb-->
-                <!-- <div class="breadcrumb-holder container-fluid">   para linkear direcciones o carpetas
+                <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href=""></a></li>
-                        <li class="breadcrumb-item"><a href=""></a></li>
-                        <li class="breadcrumb-item active"> </li>
+                        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                        <li class="breadcrumb-item active">Consultas </li>
                     </ul>
-                </div> -->
+                </div>
                 <!-- Forms Section-->
+
+                
                 <section class="tables">
+
+                
+
                     <div id="tabla" class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-header" style="border">
-                                    <div class=" container ">
-                                        <div class="row justify-content-between">
-                                        <div class="col-3"><h4><strong>Productos</strong></h4></div>
-                                        <form class="form-inline  was-validated col-auto" action="ProductosBusqueda.php" method="get">
-                                            <label class="sr-only" for="txtBusqueda">Busqueda</label>
-                                            <input type="text"  class="form-control mr-1 " id="txtBusqueda" name="txtBusqueda" placeholder="Busqueda" required>
+                            <div id="accordion">
 
-                                            <label class="sr-only" for="opciones">Opcion</label>
-                                            <select class="custom-select mr-1" name="cbOpciones" id="opciones" required>
-                                                <option value="">Opción...</option>
-                                                <option value="CODIGO">Codigo</option>
-                                                <option value="CATEGORIA">Categoria</option>
-                                                <option value="PROVEEDOR">Proveedor</option>
-                                                <option value="NOMBRE">Nombre</option>
-                                                <option value="PRECIO_VENTA">Precio Venta</option>
-                                                <option value="PRECIO_NETO">Precio Neto</option>
-                                            </select>
-                                            <button type="submit" class="btn btn-btn-outline-success ">Buscar</button>
+                                <div class="card text-center">
+                                    <div class="card-header">
+                                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="home-tab" onclick="limpiarFormulario()"data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Código</a>
+                                            </li>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Fecha</a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" id="fechaVenc-tab" data-toggle="tab" href="#fechavenc" role="tab" aria-controls="fecha" aria-selected="false">Vencimiento</a>
+                                                    <a class="dropdown-item" id="fechaAdq-tab" data-toggle="tab" href="#fechaadq" role="tab" aria-controls="fecha" aria-selected="false ">Adquisición</a>
+                                                </div>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="stock-tab" data-toggle="tab" href="#stock" role="tab" aria-controls="stock" aria-selected="false">Stock</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="almacenamiento-tab" data-toggle="tab" href="#almacenamiento" role="tab" aria-controls="almacenamiento" aria-selected="false">Almacenamiento</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab">                                                
+                                                <form class="form-inline" id="form1">
+                                                    <label class="mr-3 mb-2" for="codigo">Ingrese Código: </label>
+                                                    <input type="text" class="form-control mb-2 mr-sm-2" id="codigo" placeholder="Codigo" onkeyup="busqueda();">
 
-                                        </form>
-                                        <div class=" col-1 "><a href='Agregar_Producto.php' id=''type='' value='' class='btn btn-primary '>Nuevo</a></div>
+                                                    <button type="buttom" class="btn btn-primary mb-2" onclick="limpiarFormulario();">Limpiar busqueda</button>
+                                                    <div id="datos"></div>
+                                                    
+                                                    </form>
+                                                <script type="text/javascript">
+                                                        document.getElementById("codigo").focus();
+                                                </script>
+
+                                                <script type="text/javascript" src="JavaScript/Funcion.js"></script>
+
+                                                <script type="text/javascript">
+                                                    function limpiarFormulario() {
+                                                        document.getElementById("codigo").value = "";
+                                                        busqueda();
+                                                        document.getElementById("codigo").focus();
+                                                    }
+                                                </script>
+                                                
+
+                                            </div>
+                                                
+                                            <div class="tab-pane fade" id="fechavenc" role="tabpanel" aria-labelledby="fechaVenc-tab">Vencidas</div>
+
+                                            <div class="tab-pane fade show active" id="fechaadq" role="tabpanel" aria-labelledby="fechaAdq-tab">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <div class="list-group" id="list-tab" role="tablist">
+                                                                <a class="list-group-item list-group-item-action active" id="list-especifico-list" data-toggle="list" href="#list-especifico" role="tab" aria-controls="especifico">Fecha Específica</a>
+                                                                <a class="list-group-item list-group-item-action" id="list-rango-list" data-toggle="list" href="#list-rango" role="tab" aria-controls="rango">Por rango</a>
+                                                                <a class="list-group-item list-group-item-action" id="list-hacia-list" data-toggle="list" href="#list-hacia" role="tab" aria-controls="hacia">Desde una fecha hacia adelante / atras</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-content" id="nav-tabContent">
+
+                                                            <div class="tab-pane fade show active" id="list-especifico" role="tabpanel" aria-labelledby="list-especifico-list">
+                                                                <div class="container d-inline">
+                                                                    <div class="form-group form-inline">
+                                                                        <div class='input-group date fad-Date' id='datetimepicker6' >
+                                                                            <label class="mr-2" for="">Ingrese Fecha </label>
+                                                                            <input type='text' class="form-control" id="fechaEsp" placeholder="Fecha" onchange="busqueda2();    ">
+                                                                            <span class="input-group-addon">
+                                                                                <span class="oi oi-calendar"></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row justify-content-center">
+                                                                        <button type="buttom" class="btn btn-primary mb-2 mr-3" onclick="limpiarFormulario()">Buscar elementos</button>
+                                                                        <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormulario()">Limpiar busqueda</button>
+                                                                    </div>
+                                                                        
+                                                                </div>
+
+                                                                <script type="text/javascript" src="JavaScript/Funcion 2.js"></script>
+
+                                                                
+                                                            </div>
+
+                                                            <div class="tab-pane fade" id="list-rango" role="tabpanel" aria-labelledby="list-rango-list">                                                            
+                                                            
+                                                                <div class="container d-inline">
+                                                                    <div class="form-group form-inline">
+                                                                        <div class='input-group date fad-Date' id='datetimepicker6'>
+                                                                            <label class="mr-2" for="">Desde </label>
+                                                                            <input type='text' class="form-control" placeholder="Desde"/>
+                                                                            <span class="input-group-addon">
+                                                                                <span class="oi oi-chevron-left"></span>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class='input-group date fad-Date' id='datetimepicker7'>
+                                                                            <label class="ml-2 mr-2" for="">Hasta </label>
+                                                                            <input type='text' class="form-control" placeholder="Hasta"/>
+                                                                            <span class="input-group-addon">
+                                                                                <span class="oi oi-chevron-right"></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row justify-content-center">
+                                                                        <button type="buttom" class="btn btn-primary mb-2 mr-3" onclick="limpiarFormulario()">Buscar por rango</button>
+                                                                        <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormulario()">Limpiar busqueda</button>
+                                                                            <div id="datos"></div>
+                                                                    </div>
+                                                                        
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="tab-pane fade" id="list-hacia" role="tabpanel" aria-labelledby="list-hacia-list">
+                                                                <div class="container d-inline">
+                                                                    <div class="form-group form-inline was-validated">
+                                                                        <div class='input-group date fad-Date' id='datetimepicker6'>
+                                                                            <label class="mr-2" for="">Ingrese Fecha </label>
+                                                                            <input type='text' class="form-control" placeholder="Desde" value="" require/>
+                                                                            <span class="input-group-addon">
+                                                                                <span class="oi oi-calendar"></span>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class='row ml-4' id='datetimepicker7'>
+                                                                            <label class="mr-sm-2" for="inlineFormCustomSelect">Hacia </label>
+                                                                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" require>
+                                                                                <option selected>Opcion...</option>
+                                                                                <option value="0">Atrás</option>
+                                                                                <option value="1">Adelante</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row justify-content-center">
+                                                                        <button type="submit" class="btn btn-primary mb-2 mr-3" onclick="limpiarFormulario()">Buscar elementos</button>
+                                                                        <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormulario()">Limpiar busqueda</button>
+                                                                            <div id="datos"></div>
+                                                                    </div>
+                                                                        
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="datos1"></div>
+                                               
+                                            </div>
+
+                                            
+                                            <div class="tab-pane fade" id="stock" role="tabpanel" aria-labelledby="stock-tab">
+                                                <form class="form-inline" id="form1">
+                                                    <div class="input-group date fad-Date">
+                                                        <label class="mr-3 mb-2" for="Fecha">Ingrese Fecha: </label>
+                                                        <input type="text" class="form-control mb-2 mr-sm-2" id="Fecha" placeholder="Fecha" onkeyup="">
+
+                                                        <button type="buttom" class="btn btn-primary mb-2" onclick="limpiarFormulario();">Limpiar busqueda</button>
+                                                        <div id="datos"></div>
+                                                    </div>
+                                                </form>
+
+                                                <script>
+                                                    $('.fad-Date').datepicker({
+                                                        format: "dd/mm/yyyy",
+                                                        weekStart: 1,
+                                                        todayBtn: "linked",
+                                                        language: "es",
+                                                        todayHighlight: true
+                                                    });
+                                                </script>
+                                                
+                                            
+                                            </div>
+
+                                            
+                                            <div class="tab-pane fade" id="almacenamiento" role="tabpanel" aria-labelledby="almacenamiento-tab">Almacenamiento</div>
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                            
-                                        <table class="table table-striped table-hover table-sm table-bordered">
-                                            <?php
-                                                try{
-                                                    $base = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
-                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                                    $base->exec("SET CHARACTER SET utf8");
-                                                    $tamanoPaginas=40;
-                                                    $pagina = isset($_GET['pagina'])?$_GET['pagina']:1;;
-                                                    
-                                                    $empezarDesde = ($pagina - 1) * $tamanoPaginas;
-                                                    $sql_total="SELECT `CODIGO`, `CATEGORIA`, `PROVEEDOR`, `NOMBRE`, `PRECIO_VENTA`, `PRECIO_NETO`, `FECHA_VENC`, `FECHA_ADQ`, `STOCK_MIN`, `STOCK_ACT`, `BODEGA` FROM `productos2`";
-                                                    $resultado = $base->prepare($sql_total);
-                                                    $resultado->execute(array());
-                                                    $numFilas=$resultado->rowCount();
-                                                    $totalPaginas = ceil($numFilas/$tamanoPaginas);
-                                                
-                                                    $resultado->closeCursor();
-                                                    $sqlLimit="SELECT `CODIGO`, `CATEGORIA`, `PROVEEDOR`, `NOMBRE`, `PRECIO_VENTA`, `PRECIO_NETO`, `FECHA_VENC`, `FECHA_ADQ`, `STOCK_MIN`, `STOCK_ACT`, `BODEGA` FROM `productos2` LIMIT $empezarDesde,$tamanoPaginas";
-                                                    
-                                                    $resultado = $base->prepare($sqlLimit);
-                                                    $resultado->execute(array());
-                                                    echo "<thead><tr><th>CODIGO</th><th>CATEGORIA</th><th>PROVEEDOR</th><th>NOMBRE</th><th>PRECIO VENTA</th><th>PRECIO NETO</th><th>FECHA VENC</th><th>FECHA ADQ</th><th>STOCK M</th><th>STOCK A</th><th>Bodega</th><th align='center'>ACCIONES</th></tr></thead><tbody>";
-                                                
-                                                
-                                                    
 
-                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
-                                                        $date1 = date_create($fila["FECHA_VENC"]);
-                                                        $date2 = date_create($fila["FECHA_ADQ"]);
-                                                        echo "<tr>";
-                                                        echo "<td>" . $fila["CODIGO"] . "</td>";
-                                                        echo "<td>" . $fila["CATEGORIA"] . "</td>";
-                                                        echo "<td>" . $fila["PROVEEDOR"] . "</td>";
-                                                        echo "<td>" . $fila["NOMBRE"] . "</td>";
-                                                        echo "<td align='right'>$ " . $fila["PRECIO_VENTA"] . "</td>";
-                                                        echo "<td align='right'>$ " . $fila["PRECIO_NETO"] . "</td>";
-                                                        echo "<td>" . date_format($date1, 'd-m-Y') . "</td>";
-                                                        echo "<td>" . date_format($date2, 'd-m-Y') . "</td>";
-                                                        echo "<td>" . $fila["STOCK_MIN"] . "</td>";
-                                                        echo "<td>" . $fila["STOCK_ACT"] . "</td>";
-                                                        echo "<td>" . $fila["BODEGA"] . "</td>";
-                                                        echo "<td align='center'><a href='Modificar_Producto.php?codigo=".$fila["CODIGO"]."' type='' value='' class='btn btn-outline-success btn-sm'>"; echo "<span class='oi oi-pencil'></span>"; echo "</a>";
-                                                        echo "      <a href='Eliminar_Producto.php?codigo=".$fila["CODIGO"]."' type='' value='' class='btn btn-outline-danger btn-sm'>  "; echo "<span class='oi oi-trash'></span>"; echo "</a></td>";
-                                                        echo "</tr>";
-                                                    }
-                                                    echo "</tbody>";
-                                                    $resultado->closeCursor();
-                                                }
-                                                catch(Exception $e){
-                                                }
-                                            
-                                            ?>
-                                            
-                                        </table>
-                                        <?php 
-                                            $anterior=($pagina-1);
-                                            $siguiente=($pagina+1);
-                                            
-                                            if(isset($_GET['Busqueda'])){
-                                                $pagAnterior= "?pagina=$anterior&Busqueda={$_GET['Busqueda']}";
-                                                $pagSiguiente= "?pagina=$siguiente&Busqueda={$_GET['Busqueda']}";
-                                            }
-                                            else{
-                                                $pagAnterior= "?pagina=$anterior";
-                                                $pagSiguiente= "?pagina=$siguiente";
-                                            }
-                                            ?>
-                                            
-                                            <nav class="nav justify-content-center" aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                            <?php if(($pagina==1)){ ?>
-                                                <li class="page-item disabled">
-                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Anterior</span>
-                                                </a>
-                                                </li>
-                                            <?php }else{?>
-                                                <li class="page-item">
-                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Anterior</span>
-                                                </a>
-                                                </li>
-                                            <?php }?>
-
-                                                
-                                                <?php
-                                                if(isset($_GET['Busqueda'])){
-                                                    if($totalPaginas>=1){
-                                                        for($x=1;$x<=$totalPaginas;$x++){
-                                                            echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>":
-                                                            "<li class='page-item'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>";
-                                                        }
-                                                    }	
-                                                }
-                                                else{
-                                                    if($totalPaginas>=1){
-                                                    for($x=1;$x<=$totalPaginas;$x++){
-                                                        echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>":
-                                                        "<li class='page-item'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>";
-                                                    }
-                                                }	
-                                                }	  
-                                                
-                                                
-                                                ?>
-                                                <?php if(($pagina>=$totalPaginas)){?>
-                                                <li class="page-item disabled">
-                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Siguiente</span>
-                                                </a>
-                                                </li>
-                                                <?php }else{?>
-                                                    <li class="page-item">
-                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Siguiente</span>
-                                                </a>
-                                                </li>
-                                                <?php }?>
-                                            </ul>
-                                            </nav>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -539,10 +569,10 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-6">
-                                <p>Your company &copy; 2017-2019</p>
+                                <p>VetPortugal &copy; 2014-2018</p>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <p>Design by <a href="https://bootstrapious.com/admin-templates" class="external">Bootstrapious</a></p>
+                                <p>Diseñado por <a href="https://bootstrapious.com/admin-templates" class="external">G&B</a></p>
                                 <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
                             </div>
                         </div>
@@ -552,16 +582,7 @@
         </div>
     </div>
     <!-- JavaScript files-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper.js/umd/popper.min.js">
-    </script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js">
-    </script>
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
-    <!-- Main File-->
-    <script src="js/front.js"></script>
+    
 </body>
 
 </html>
