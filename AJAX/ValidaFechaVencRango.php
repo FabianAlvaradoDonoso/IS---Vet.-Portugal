@@ -4,15 +4,15 @@
 		echo "Error al conectar a la BBDD";
 		exit();
 	}
-
+    
 	mysqli_set_charset($conexion, "utf8");
 
     $tmp="";
     //$sql="SELECT * FROM `productos2`";
     
-    if($_POST["texto"] != ""){
-        $sql="SELECT * FROM `productos2` WHERE DATE_FORMAT(`FECHA_ADQ`, '%Y/%m/%d') = '".$_POST["texto"]."'";
-        $tmp="<div class='table-responsive'><table class='table table-striped table-hover table-sm table-bordered'>
+    if($_POST["fechaVRDesde"] != "" and $_POST["fechaVRHasta"] != ""){
+        $sql="SELECT * FROM `productos2` WHERE `FECHA_VENC` BETWEEN '".$_POST["fechaVRDesde"]."' and '".$_POST["fechaVRHasta"]."'";
+        $tmp="<br><div class='table-responsive'><table class='table table-striped table-hover table-sm table-bordered'>
             <thead><tr>
                 <th>CODIGO</th>
                 <th>CATEGORIA</th>

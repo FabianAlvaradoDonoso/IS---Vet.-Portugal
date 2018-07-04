@@ -26,6 +26,7 @@
             autoclose: true
         });
     </script>
+    
     <!-- Main File-->
     <script src="js/front.js"></script>
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -57,6 +58,7 @@
     <script type="text/javascript" src="js/daterangepicker.min.js"></script>
     <script type="text/javascript" src="js/moment.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
+    <script type="text/javascript" src="JavaScript/Funcion2.js"></script>
 </head>
 <style>
     nav.side-navbar {
@@ -382,61 +384,164 @@
                                     <div class="card-header">
                                         <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active" id="home-tab" onclick="limpiarFormulario()"data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Código</a>
+                                                <a class="nav-link active" id="home-tab" onclick="limpiarTodo()" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Código</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="nombre-tab" onclick="limpiarTodo()" data-toggle="tab" href="#nombre" role="tab" aria-controls="nombre" aria-selected="false">Nombre</a>
                                             </li>
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Fecha</a>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" id="fechaVenc-tab" data-toggle="tab" href="#fechavenc" role="tab" aria-controls="fecha" aria-selected="false">Vencimiento</a>
-                                                    <a class="dropdown-item" id="fechaAdq-tab" data-toggle="tab" href="#fechaadq" role="tab" aria-controls="fecha" aria-selected="false ">Adquisición</a>
+                                                    <a class="dropdown-item" id="fechaVenc-tab" onclick="limpiarTodo()" data-toggle="tab" href="#fechavenc" role="tab" aria-controls="fecha" aria-selected="false">Vencimiento</a>
+                                                    <a class="dropdown-item" id="fechaAdq-tab" onclick="limpiarTodo()" data-toggle="tab" href="#fechaadq" role="tab" aria-controls="fecha" aria-selected="false ">Adquisición</a>
                                                 </div>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="stock-tab" data-toggle="tab" href="#stock" role="tab" aria-controls="stock" aria-selected="false">Stock</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="almacenamiento-tab" data-toggle="tab" href="#almacenamiento" role="tab" aria-controls="almacenamiento" aria-selected="false">Almacenamiento</a>
+                                                <a class="nav-link" id="otro-tab" onclick="limpiarTodo()" data-toggle="tab" href="#otro" role="tab" aria-controls="otro" aria-selected="false">Otro</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="card-body">
                                         <div class="tab-content" id="myTabContent">
-                                            <div class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab">                                                
-                                                <form class="form-inline" id="form1">
-                                                    <label class="mr-3 mb-2" for="codigo">Ingrese Código: </label>
-                                                    <input type="text" class="form-control mb-2 mr-sm-2" id="codigo" placeholder="Codigo" onkeyup="busqueda();">
+                                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">         
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="container d-inline">
+                                                            <div class='form-inline' id='datetimepicker6' >
+                                                                <label class="mr-2" for="">Ingrese código </label>
+                                                                <input type='text' class="form-control mb-1 mr-sm-2" id="codigo" placeholder="Código" onkeyup="busqueda()">
+                                                                <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormulario()">Limpiar busqueda</button>
+                                                            </div>                                                           
+                                                        </div>
+                                                    </div>
 
-                                                    <button type="buttom" class="btn btn-primary mb-2" onclick="limpiarFormulario();">Limpiar busqueda</button>
                                                     <div id="datos"></div>
-                                                    
-                                                    </form>
-                                                <script type="text/javascript">
-                                                        document.getElementById("codigo").focus();
-                                                </script>
+                                                </div>  
+                                            </div>
 
-                                                <script type="text/javascript" src="JavaScript/Funcion.js"></script>
 
-                                                <script type="text/javascript">
-                                                    function limpiarFormulario() {
-                                                        document.getElementById("codigo").value = "";
-                                                        busqueda();
-                                                        document.getElementById("codigo").focus();
-                                                    }
-                                                </script>
-                                                
+                                            <div class="tab-pane fade " id="nombre" role="tabpanel" aria-labelledby="nombre-tab">         
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="container d-inline">
+                                                            <div class='form-inline' id='datetimepicker6' >
+                                                                <label class="mr-2" for="">Ingrese nombre </label>
+                                                                <input type='text' class="form-control mb-1 mr-sm-2" id="nombre1" placeholder="Nombre" onkeyup="busquedaNombre()">
+                                                                <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormularioNombre()">Limpiar busqueda</button>
+                                                            </div>                                                           
+                                                        </div>
+                                                    </div>
 
+                                                    <div id="datosNombre"></div>
+                                                </div>  
                                             </div>
                                                 
-                                            <div class="tab-pane fade" id="fechavenc" role="tabpanel" aria-labelledby="fechaVenc-tab">Vencidas</div>
 
-                                            <div class="tab-pane fade show active" id="fechaadq" role="tabpanel" aria-labelledby="fechaAdq-tab">
+
+                                            <div class="tab-pane fade" id="fechavenc" role="tabpanel" aria-labelledby="fechaVenc-tab">
+                                            <div class="container">
+                                            
+                                                <div>
+                                                    <label for=""><h5>Vencimiento</h5></label></div>
+                                                    <div class="row">
+                                                    
+                                                        <div class="col-4">
+                                                            <div class="list-group" id="list-tab" role="tablist">
+                                                                <a class="list-group-item list-group-item-action active" id="list-especificoV-list" data-toggle="list" href="#list-especificoV" role="tab" aria-controls="especificoV" onclick="limpiarFormularioFecha2()">Fecha Específica</a>
+                                                                <a class="list-group-item list-group-item-action" id="list-rangoV-list" data-toggle="list" href="#list-rangoV" role="tab" aria-controls="rangoV" onclick="limpiarFormularioFecha2()">Por rango</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-content" id="nav-tabContent">
+                                                            <div class="tab-pane fade show active" id="list-especificoV" role="tabpanel" aria-labelledby="list-especificoV-list">
+                                                                <div class="container d-inline">
+                                                                    <div class="form-group form-inline">
+                                                                        <div class='input-group date fad-Date' id='datetimepicker6' >
+                                                                            <label class="mr-2" for="">Ingrese Fecha </label>
+                                                                            <input type='text' class="form-control" id="fechaVEsp" placeholder="Fecha" readonly>
+                                                                            <span class="input-group-addon">
+                                                                                <span class="oi oi-calendar"></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row justify-content-center">
+                                                                        <button type="buttom" class="btn btn-primary mb-2 mr-3" onclick="enviarFechaVEsp()">Buscar elementos</button>
+                                                                        <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormularioFecha2()">Limpiar busqueda</button>
+                                                                    </div>
+                                                                        
+                                                                </div>
+
+                                                                
+
+                                                                
+                                                            </div>
+
+                                                            <div class="tab-pane fade" id="list-rangoV" role="tabpanel" aria-labelledby="list-rangoV-list">                                                            
+                                                            
+                                                                <div class="container d-inline">
+                                                                    <div class="form-group form-inline">
+                                                                        <div class='input-group date fad-Date2' id='datetimepicker6'>
+                                                                            <label class="mr-2" for="">Desde </label>
+                                                                            <input type='text' class="form-control" id="fechaVRDesde" placeholder="Desde" readonly>
+                                                                            <span class="input-group-addon">
+                                                                                <span class="oi oi-chevron-left"></span>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class='input-group date fad-Date2' id='datetimepicker7'>
+                                                                            <label class="ml-2 mr-2" for="">Hasta </label>
+                                                                            <input type='text' class="form-control" id="fechaVRHasta" placeholder="Hasta" readonly>
+                                                                            <span class="input-group-addon">
+                                                                                <span class="oi oi-chevron-right"></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row justify-content-center">
+                                                                        <button type="buttom" class="btn btn-primary mb-2 mr-3" onclick="enviarFechaVRango()">Buscar por rango</button>
+                                                                        <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormularioFecha2()">Limpiar busqueda</button>
+                                                                    </div>
+                                                                        
+                                                                </div>
+
+                                                            </div>
+
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="datos2"></div>
+                                                <div class="modal fade" id="myModal" role="dialog">
+                                                    <div class="modal-dialog">
+                                                    
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h4 class="modal-title">Error</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        
+                                                        </div>
+                                                        <div class="modal-body">
+                                                        <p>La primera fecha no pueda ser mayor que la segunda fecha.</p>
+                                                        <p>Intentelo nuevamente.</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="limpiarFormularioFecha2()">Close</button>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="tab-pane fade " id="fechaadq" role="tabpanel" aria-labelledby="fechaAdq-tab">
                                                 <div class="container">
+                                                <div><label for=""><h5>Adquisición</h5></label></div>
                                                     <div class="row">
                                                         <div class="col-4">
                                                             <div class="list-group" id="list-tab" role="tablist">
-                                                                <a class="list-group-item list-group-item-action active" id="list-especifico-list" data-toggle="list" href="#list-especifico" role="tab" aria-controls="especifico">Fecha Específica</a>
-                                                                <a class="list-group-item list-group-item-action" id="list-rango-list" data-toggle="list" href="#list-rango" role="tab" aria-controls="rango">Por rango</a>
-                                                                <a class="list-group-item list-group-item-action" id="list-hacia-list" data-toggle="list" href="#list-hacia" role="tab" aria-controls="hacia">Desde una fecha hacia adelante / atras</a>
+                                                                <a class="list-group-item list-group-item-action active" id="list-especifico-list" data-toggle="list" href="#list-especifico" role="tab" aria-controls="especifico" onclick="limpiarFormularioFecha1()">Fecha Específica</a>
+                                                                <a class="list-group-item list-group-item-action" id="list-rango-list" data-toggle="list" href="#list-rango" role="tab" aria-controls="rango" onclick="limpiarFormularioFecha1()">Por rango</a>
                                                             </div>
                                                         </div>
                                                         <div class="tab-content" id="nav-tabContent">
@@ -446,20 +551,20 @@
                                                                     <div class="form-group form-inline">
                                                                         <div class='input-group date fad-Date' id='datetimepicker6' >
                                                                             <label class="mr-2" for="">Ingrese Fecha </label>
-                                                                            <input type='text' class="form-control" id="fechaEsp" placeholder="Fecha" onchange="busqueda2();    ">
+                                                                            <input type='text' class="form-control" id="fechaEsp" placeholder="Fecha" readonly>
                                                                             <span class="input-group-addon">
                                                                                 <span class="oi oi-calendar"></span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row justify-content-center">
-                                                                        <button type="buttom" class="btn btn-primary mb-2 mr-3" onclick="limpiarFormulario()">Buscar elementos</button>
-                                                                        <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormulario()">Limpiar busqueda</button>
+                                                                        <button type="buttom" class="btn btn-primary mb-2 mr-3" onclick="enviarFechaEsp()">Buscar elementos</button>
+                                                                        <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormularioFecha1()">Limpiar busqueda</button>
                                                                     </div>
                                                                         
                                                                 </div>
 
-                                                                <script type="text/javascript" src="JavaScript/Funcion 2.js"></script>
+                                                                
 
                                                                 
                                                             </div>
@@ -468,97 +573,107 @@
                                                             
                                                                 <div class="container d-inline">
                                                                     <div class="form-group form-inline">
-                                                                        <div class='input-group date fad-Date' id='datetimepicker6'>
+                                                                        <div class='input-group date fad-Date2' id='datetimepicker6'>
                                                                             <label class="mr-2" for="">Desde </label>
-                                                                            <input type='text' class="form-control" placeholder="Desde"/>
+                                                                            <input type='text' class="form-control" id="fechaRDesde" placeholder="Desde" readonly>
                                                                             <span class="input-group-addon">
                                                                                 <span class="oi oi-chevron-left"></span>
                                                                             </span>
                                                                         </div>
-                                                                        <div class='input-group date fad-Date' id='datetimepicker7'>
+                                                                        <div class='input-group date fad-Date2' id='datetimepicker7'>
                                                                             <label class="ml-2 mr-2" for="">Hasta </label>
-                                                                            <input type='text' class="form-control" placeholder="Hasta"/>
+                                                                            <input type='text' class="form-control" id="fechaRHasta" placeholder="Hasta" readonly>
                                                                             <span class="input-group-addon">
                                                                                 <span class="oi oi-chevron-right"></span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row justify-content-center">
-                                                                        <button type="buttom" class="btn btn-primary mb-2 mr-3" onclick="limpiarFormulario()">Buscar por rango</button>
-                                                                        <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormulario()">Limpiar busqueda</button>
-                                                                            <div id="datos"></div>
+                                                                        <button type="buttom" class="btn btn-primary mb-2 mr-3" onclick="enviarFechaRango()">Buscar por rango</button>
+                                                                        <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormularioFecha1()">Limpiar busqueda</button>
                                                                     </div>
                                                                         
                                                                 </div>
+                                                                <script>
+                                                                    $('.fad-Date').datepicker({
+                                                                        format: "dd/mm/yyyy",
+                                                                        weekStart: 1,
+                                                                        todayBtn: "linked",
+                                                                        language: "es",
+                                                                        todayHighlight: true
+                                                                    });
+                                                                </script>   
+                                                                <script>
+                                                                    $('.fad-Date2').datepicker({
+                                                                        format: "yyyy/mm/dd",
+                                                                        weekStart: 1,
+                                                                        todayBtn: "linked",
+                                                                        language: "es",
+                                                                        todayHighlight: true
+                                                                    });
+                                                                </script> 
 
                                                             </div>
 
-                                                            <div class="tab-pane fade" id="list-hacia" role="tabpanel" aria-labelledby="list-hacia-list">
-                                                                <div class="container d-inline">
-                                                                    <div class="form-group form-inline was-validated">
-                                                                        <div class='input-group date fad-Date' id='datetimepicker6'>
-                                                                            <label class="mr-2" for="">Ingrese Fecha </label>
-                                                                            <input type='text' class="form-control" placeholder="Desde" value="" require/>
-                                                                            <span class="input-group-addon">
-                                                                                <span class="oi oi-calendar"></span>
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class='row ml-4' id='datetimepicker7'>
-                                                                            <label class="mr-sm-2" for="inlineFormCustomSelect">Hacia </label>
-                                                                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" require>
-                                                                                <option selected>Opcion...</option>
-                                                                                <option value="0">Atrás</option>
-                                                                                <option value="1">Adelante</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row justify-content-center">
-                                                                        <button type="submit" class="btn btn-primary mb-2 mr-3" onclick="limpiarFormulario()">Buscar elementos</button>
-                                                                        <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormulario()">Limpiar busqueda</button>
-                                                                            <div id="datos"></div>
-                                                                    </div>
-                                                                        
-                                                                </div>
-                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div id="datos1"></div>
+                                                <div class="modal fade" id="myModal2" role="dialog">
+                                                    <div class="modal-dialog">
+                                                    
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h4 class="modal-title">Error</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        
+                                                        </div>
+                                                        <div class="modal-body">
+                                                        <p>La primera fecha no pueda ser mayor que la segunda fecha.</p>
+                                                        <p>Intentelo nuevamente.</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="limpiarFormularioFecha1()">Close</button>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    </div>
+                                                </div>
                                                
                                             </div>
-
-                                            
-                                            <div class="tab-pane fade" id="stock" role="tabpanel" aria-labelledby="stock-tab">
-                                                <form class="form-inline" id="form1">
-                                                    <div class="input-group date fad-Date">
-                                                        <label class="mr-3 mb-2" for="Fecha">Ingrese Fecha: </label>
-                                                        <input type="text" class="form-control mb-2 mr-sm-2" id="Fecha" placeholder="Fecha" onkeyup="">
-
-                                                        <button type="buttom" class="btn btn-primary mb-2" onclick="limpiarFormulario();">Limpiar busqueda</button>
-                                                        <div id="datos"></div>
+                                           
+                                            <div class="tab-pane fade" id="otro" role="tabpanel" aria-labelledby="otro-tab">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            <label class="mr-3 mb-2" for="codigo">Seleccione Grupo </label>
+                                                            <select id="otroSelect" class="form-control mb-2 mr-sm-2" onchange="enviarOtro()">
+                                                                <option selected>Opción...</option>
+                                                                <option value="CATEGORIA">Categoría</option>
+                                                                <option value="PROVEEDOR">Proveedor</option>
+                                                                <option value="BODEGA">Almacenamiento</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <label class="mr-3 mb-2" for="codigo">Seleccione Opción </label>
+                                                            <select id='otro2Select' class='form-control mb-2 mr-sm-2' onchange='enviarOtro2()'></select>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <button type="buttom" class="btn btn-danger mb-2 mt-4" onclick="limpiarFormulario2();">Limpiar busqueda</button>
+                                                                
+                                                                
+                                                            </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </form>
-
-                                                <script>
-                                                    $('.fad-Date').datepicker({
-                                                        format: "dd/mm/yyyy",
-                                                        weekStart: 1,
-                                                        todayBtn: "linked",
-                                                        language: "es",
-                                                        todayHighlight: true
-                                                    });
-                                                </script>
-                                                
-                                            
+                                                </div>
+                                                <div id="datosOtro"></div>
                                             </div>
-
-                                            
-                                            <div class="tab-pane fade" id="almacenamiento" role="tabpanel" aria-labelledby="almacenamiento-tab">Almacenamiento</div>
                                         </div>
                                     </div>
-                                </div>
-
-                            
+                                </div>                            
                         </div>
                     </div>
 
