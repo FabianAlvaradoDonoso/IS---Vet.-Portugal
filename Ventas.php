@@ -8,6 +8,17 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
+     <!-- JavaScript files-->
+     <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper.js/umd/popper.min.js">
+    </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js">
+    </script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Main File-->
+    <script src="js/front.js"></script>
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -30,6 +41,7 @@
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <script type="text/javascript" src="JavaScript/Funcion1.js"></script>
 </head>
 <style>
     nav.side-navbar {
@@ -368,7 +380,80 @@
                 </div> -->
                 <!-- Forms Section-->
                 <section class="forms">
-                   
+                    <div id="tabla" class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Buscar</h5>    
+                                    </div>
+                                    <div class="card-body">
+                                        <nav>
+                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <a class="nav-item nav-link active" id="nav-codigo-tab" data-toggle="tab" href="#nav-codigo" role="tab" aria-controls="nav-codigo" aria-selected="true" onclick="limpiarBusquedas()">Código</a>
+                                                <a class="nav-item nav-link" id="nav-nombre-tab" data-toggle="tab" href="#nav-nombre" role="tab" aria-controls="nav-nombre" aria-selected="false" onclick="limpiarBusquedas()">Nombre</a>
+                                            </div>
+                                        </nav>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="nav-codigo" role="tabpanel" aria-labelledby="nav-codigo-tab">
+                                                <form>
+                                                    <div class="form-group"><br>
+                                                        <label for="txtCodigo">Ingrese código</label>
+                                                        <input type="text" class="form-control" id="txtCodigo" aria-describedby="codigo" placeholder="Código" onkeypress="pulsar(event)">
+                                                    </div>
+                                                    <div class = "row justify-content-around">
+                                                        <button type="button" class="btn btn-primary">Buscar</button>
+                                                        <button type="button" class="btn btn-danger" onclick="myCreateFunction()">Limpiar busqueda</button>
+                                                    </div>
+                                                    
+                                                </form>
+                                            </div>
+                                            <div class="tab-pane fade" id="nav-nombre" role="tabpanel" aria-labelledby="nav-nombre-tab">
+                                                <form>
+                                                    <div class="form-group"><br>
+                                                        <label for="txtNombre">Ingrese nombre</label>
+                                                        <input type="text" class="form-control" id="txtNombre" aria-describedby="nombre" placeholder="Nombre">
+                                                    </div>
+                                                    <div class = "row justify-content-around">
+                                                        <button type="button" class="btn btn-primary">Buscar</button>
+                                                        <button type="button" class="btn btn-danger" onclick="limpiarBusquedas()">Limpiar busqueda</button>
+                                                    </div>
+                                                    
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Venta</h5>    
+                                    </div>
+                                    <div class="card-body">
+                                        <div class='table-responsive'>
+                                            <table  id="myTable" class='table table-striped table-hover table-sm table-bordered'>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Nombre</th>
+                                                    <th>Precio</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Accion</th>    
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2</td>
+                                                    <td>3</td>
+                                                    <td>4</td>
+                                                    <td>5</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
                 <!-- Page Footer-->
                 <footer class="main-footer">
@@ -387,17 +472,6 @@
             </div>
         </div>
     </div>
-    <!-- JavaScript files-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper.js/umd/popper.min.js">
-    </script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js">
-    </script>
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
-    <!-- Main File-->
-    <script src="js/front.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,122 @@
-//---------------------------E N V I A R----------------------------------------------------
+//===========================M O D A L S====================================================
+
+function mostrarModal(codigo, categoria, proveedor, nombre, bodega){
+    $("#modalEliminar").modal();
+    document.getElementById("txtCodigoModalE").value=codigo;
+    buscarSelect(document.getElementById("cbCategoriaModalE"), categoria);
+    buscarSelect(document.getElementById("cbProveedorModalE"), proveedor);
+    document.getElementById("txtNombreModalE").value=nombre;
+    buscarSelect(document.getElementById("cbBodegaModalE"), bodega);
+}
+function mostrarModalModificar(codigo,categoria, proveedor, nombre, precioVenta, precioNeto, fechaVenc, fechaAdq, stockMin, stockAct, bodega){
+    $("#modalModificar").modal();
+    document.getElementById("txtCodigoModal").value=codigo;
+    buscarSelect(document.getElementById("cbCategoriaModal"), categoria);
+    buscarSelect(document.getElementById("cbProveedorModal"), proveedor);
+    document.getElementById("txtNombreModal").value=nombre;
+    document.getElementById("nudPrecioVentaModal").value=precioVenta;
+    document.getElementById("nudPrecioNetoModal").value=precioNeto;
+    document.getElementById("dtpFechaVencModal").value=fechaVenc;
+    document.getElementById("dtpFechaAdqModal").value=fechaAdq;
+    document.getElementById("nudStockMinModal").value=stockMin;
+    document.getElementById("nudStockActModal").value=stockAct;
+    buscarSelect(document.getElementById("cbBodegaModal"), bodega);
+    
+
+}
+
+function buscarSelect(select, buscar)
+{ 
+	for(var i=1;i<select.length;i++)
+	{
+		if(select.options[i].text==buscar)
+		{
+			// seleccionamos el valor que coincide
+			select.selectedIndex=i;
+		}
+	}
+}
+
+function modificar(){
+    var texto1 = document.getElementById("txtCodigoModal").value;
+    var texto2 = document.getElementById("cbCategoriaModal").value;
+    var texto3 = document.getElementById("cbProveedorModal").value;
+    var texto4 = document.getElementById("txtNombreModal").value;
+    var texto5 = document.getElementById("nudPrecioVentaModal").value;
+    var texto6 = document.getElementById("nudPrecioNetoModal").value;
+    var texto7 = document.getElementById("dtpFechaVencModal").value;
+    var texto8 = document.getElementById("dtpFechaAdqModal").value;
+    var texto9 = document.getElementById("nudStockMinModal").value;
+    var texto10 = document.getElementById("nudStockActModal").value;
+    var texto11 = document.getElementById("cbBodegaModal").value;
+
+
+    if(texto8 == '' || new Date(texto8).getTime() > new Date(texto7).getTime() ||texto5 < 0 || texto5 == '' || texto4 == '' || texto6 < 0 || texto6 == '' || texto9 <= 0 || texto9 == '' || texto10 < 0 || texto10 == '')
+    {
+        $("#modalError").modal();
+        document.getElementById("cerrarError").focus();
+    }
+    else
+    {
+
+        var parametros = {
+            "txtCodigoModal" : texto1,
+            "cbCategoriaModal" : texto2,
+            "cbProveedorModal" : texto3,
+            "txtNombreModal" : texto4,
+            "nudPrecioVentaModal" : texto5,
+            "nudPrecioNetoModal" : texto6,
+            "dtpFechaVencModal" : texto7,
+            "dtpFechaAdqModal" : texto8,
+            "nudStockMinModal" : texto9,
+            "nudStockActModal" : texto10,
+            "cbBodegaModal" : texto11
+        };
+        $.ajax({
+            data: parametros,
+            url: "AJAX/ModificaProductoAJAX.php",
+            type: "POST",
+            success: function(response){
+                $("#modalModificar").modal("hide");
+                $("#modalBien").modal();
+                document.getElementById("cerrarBien").focus();
+            }
+        });
+    }
+}
+
+function eliminar(){
+    var texto1 = document.getElementById("txtCodigoModalE").value;
+
+    if(texto1 == '')
+    {
+        $("#modalError").modal();
+        document.getElementById("cerrarError").focus();
+    }
+    else{
+
+        var parametros = {
+            "txtCodigoModalE" : texto1
+        };
+        $.ajax({
+            data: parametros,
+            url: "AJAX/EliminarProductoAJAX.php",
+            type: "POST",
+            success: function(response){
+                $("#modalEliminar").modal("hide");
+                $("#modalEliminarBien").modal();
+                document.getElementById("cerrarBienE").focus();
+            }
+        });
+    }
+}
+
+function mostrarModalEliminar(){
+
+}
+
+
+//===========================E N V I A R====================================================
 function enviarFechaEsp(){
     var texto = document.getElementById("fechaEsp").value;
 
@@ -144,13 +262,13 @@ function enviarOtro2(){
     });
 }
 
-//---------------------------L I M P I A R----------------------------------------------------
+//===========================L I M P I A R====================================================
 function removeOptions(selectbox)
 {
     var i;
-    for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
+    for(i = document.getElementById("otro2Select").options.length - 1 ; i >= 0 ; i--)
     {
-        selectbox.remove(i);
+        document.getElementById("otro2Select").remove(i);
     }
 }
 function limpiarFormularioFecha1() {
@@ -175,16 +293,18 @@ function limpiarFormulario() {
     //busqueda();
     document.getElementById("codigo").focus();
     document.getElementById("datos").innerHTML='';
-    limpiaTodo()
+    limpiaTodo();
 }
 function limpiarFormulario2() {
     $('#otroSelect option').prop('selected', function() {
         return this.defaultSelected;
     });
-    removeOptions(document.getElementById("otro2Select"));
-    
+    var i;
+    for(i = document.getElementById("otro2Select").options.length - 1 ; i >= 0 ; i--)
+    {
+        document.getElementById("otro2Select").remove(i);
+    }
     document.getElementById("datosOtro").innerHTML='';
-    limpiaTodo()
    
 }
 function limpiarFormularioNombre() {
@@ -203,11 +323,12 @@ function limpiaTodo(){
     document.getElementById("fechaEsp").value="";
     document.getElementById("fechaRDesde").value="";
     document.getElementById("fechaRHasta").value="";
-    limpiarFormulario2();
     document.getElementById("datos").innerHTML='';
     document.getElementById("datosNombre").innerHTML='';
     document.getElementById("datos2").innerHTML='';
     document.getElementById("datos1").innerHTML='';
-    document.getElementById("datosOtros").innerHTML='';
+    document.getElementById("datosOtro").innerHTML='';
+    document.getElementById("borrarOtro").onclick();
+    
     
 }

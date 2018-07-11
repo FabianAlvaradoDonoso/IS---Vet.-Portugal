@@ -411,26 +411,41 @@
                                         <table class="table table-striped table-hover table-sm table-bordered">
                                             <?php
                                                 try{
-                                                    $base = new PDO("mysql:host=localhost; dbname=pruebavet", "root", "");
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
-                                                    $tamanoPaginas=10;
+                                                    $tamanoPaginas=40;
                                                     $pagina = isset($_GET['pagina'])?$_GET['pagina']:1;;
                                                     
                                                     $empezarDesde = ($pagina - 1) * $tamanoPaginas;
-                                                    $sql_total="SELECT * FROM productos";
+                                                    $sql_total="SELECT p.CODIGO, c.NOMBRE_CATEGORIA AS CATEGORIA, r.NOMBRE_PROVEEDOR AS PROVEEDOR, p.NOMBRE, p.PRECIO_VENTA, p.PRECIO_NETO, p.FECHA_VENC, p.FECHA_ADQ, p.STOCK_MIN, p.STOCK_ACT, b.NOMBRE_BODEGA AS BODEGA FROM productos p INNER JOIN bodega b ON (p.ID_BODEGA = b.ID_BODEGA) INNER JOIN categoria c ON ( p.ID_CATEGORIA = c.ID_CATEGORIA ) INNER JOIN proveedor r ON ( p.ID_PROVEEDOR = r.ID_PROVEEDOR )";
                                                     $resultado = $base->prepare($sql_total);
                                                     $resultado->execute(array());
                                                     $numFilas=$resultado->rowCount();
                                                     $totalPaginas = ceil($numFilas/$tamanoPaginas);
                                                 
                                                     $resultado->closeCursor();
-                                                    $sqlLimit="SELECT * FROM productos LIMIT $empezarDesde,$tamanoPaginas";
+                                                    $sqlLimit="SELECT p.CODIGO, c.NOMBRE_CATEGORIA AS CATEGORIA, r.NOMBRE_PROVEEDOR AS PROVEEDOR, p.NOMBRE, p.PRECIO_VENTA, p.PRECIO_NETO, p.FECHA_VENC, p.FECHA_ADQ, p.STOCK_MIN, p.STOCK_ACT, b.NOMBRE_BODEGA AS BODEGA FROM productos p INNER JOIN bodega b ON (p.ID_BODEGA = b.ID_BODEGA) INNER JOIN categoria c ON ( p.ID_CATEGORIA = c.ID_CATEGORIA ) INNER JOIN proveedor r ON ( p.ID_PROVEEDOR = r.ID_PROVEEDOR ) LIMIT $empezarDesde,$tamanoPaginas";
                                                     
                                                     $resultado = $base->prepare($sqlLimit);
                                                     $resultado->execute(array());
-                                                    echo "<thead><tr><th>CODIGO</th><th>CATEGORIA</th><th>PROVEEDOR</th><th>NOMBRE</th><th>PRECIO VENTA</th><th>PRECIO NETO</th><th align='center'>ACCIONES</th></tr></thead><tbody>";
-                                                
+                                                    echo "<thead>
+                                                            <tr>
+                                                                <th>CODIGO</th>
+                                                                <th>CATEGORIA</th>
+                                                                <th>PROVEEDOR</th>
+                                                                <th>NOMBRE</th>
+                                                                <th>PRECIO VENTA</th>
+                                                                <th>PRECIO NETO</th>
+                                                                <th>FECHA VENC</th>
+                                                                <th>FECHA ADQ</th>
+                                                                <th>STOCK MIN</th>
+                                                                <th>STOCK ACT</th>
+                                                                <th>Bodega</th>
+                                                                <th align='center'>ACCIONES</th>
+                                                            <tr>
+                                                        </thead>
+                                                        <tbody>";
                                                 
                                             
                                                     while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
@@ -441,8 +456,12 @@
                                                         echo "<td>" . $fila["NOMBRE"] . "</td>";
                                                         echo "<td align='right'>$ " . $fila["PRECIO_VENTA"] . "</td>";
                                                         echo "<td align='right'>$ " . $fila["PRECIO_NETO"] . "</td>";
-                                                        echo "<td align='center'><a href='Modificar_Producto.php?codigo=".$fila["CODIGO"]."' id=" . $fila["ID"] ." type='' value='' class='btn btn-outline-success btn-sm'>"; echo "<span class='oi oi-pencil'></span>"; echo "</a>";
-                                                        echo "      <a href='Eliminar_Producto.php?codigo=".$fila["CODIGO"]."' id=" . $fila["ID"] ." type='' value='' class='btn btn-outline-danger btn-sm'>  "; echo "<span class='oi oi-trash'></span>"; echo "</a></td>";
+                                                        echo "<td>" . date_format(date_create($fila["FECHA_VENC"]), 'd-m-Y') . "</td>";
+                                                        echo "<td>" . date_format(date_create($fila["FECHA_ADQ"]), 'd-m-Y') . "</td>";
+                                                        echo "<td>" . $fila["STOCK_MIN"] . "</td>";
+                                                        echo "<td>" . $fila["STOCK_ACT"] . "</td>";
+                                                        echo "<td>" . $fila["BODEGA"] . "</td>";
+                                                        echo "<td align='center'><a href='Modificar_Producto.php?codigo=" . $fila["CODIGO"] . "' type='' value='' class='btn btn-outline-success btn-sm'><span class='oi oi-pencil'></span></a><a href='Eliminar_Producto.php?codigo=" . $fila["CODIGO"] . "' type='' value='' class='btn btn-outline-danger btn-sm'><span class='oi oi-trash'></span></a></td>";
                                                         echo "</tr>";
                                                     }
                                                     echo "</tbody>";
