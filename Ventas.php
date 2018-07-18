@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
 
 <head>
@@ -379,10 +379,11 @@
                     </ul>
                 </div> -->
                 <!-- Forms Section-->
+                
                 <section class="forms">
                     <div id="tabla" class="container-fluid">
                         <div class="row">
-                            <div class="col-sm-5">
+                            <div class="col-sm-4">
                                 <div class="card">
                                     <div class="card-header">
                                         <h5>Buscar</h5>    
@@ -399,14 +400,14 @@
                                                 <form>
                                                     <div class="form-group"><br>
                                                         <label for="txtCodigo">Ingrese código</label>
-                                                        <input type="text" class="form-control" id="txtCodigo" aria-describedby="codigo" placeholder="Código" onkeypress="pulsar(event)">
+                                                        <input type="text" class="form-control" id="txtCodigo" aria-describedby="codigo" placeholder="Código">
                                                     </div>
                                                     <div class = "row justify-content-around">
-                                                        <button type="button" class="btn btn-primary">Buscar</button>
-                                                        <button type="button" class="btn btn-danger" onclick="myCreateFunction()">Limpiar busqueda</button>
+                                                        <button type="button" class="btn btn-primary" id="btnBusqueda" onclick="buscar()">Buscar</button>
+                                                        <button type="button" class="btn btn-danger" onclick="limpiarBusquedas()">Limpiar busqueda</button>
                                                     </div>
                                                     
-                                                </form>
+                                                </form>                                                
                                             </div>
                                             <div class="tab-pane fade" id="nav-nombre" role="tabpanel" aria-labelledby="nav-nombre-tab">
                                                 <form>
@@ -425,30 +426,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-7">
+                            <div class="col-sm-8">
                                 <div class="card">
                                     <div class="card-header">
                                         <h5>Venta</h5>    
                                     </div>
-                                    <div class="card-body">
-                                        <div class='table-responsive'>
-                                            <table  id="myTable" class='table table-striped table-hover table-sm table-bordered'>
-                                                <tr>
-                                                    <th>Código</th>
-                                                    <th>Nombre</th>
-                                                    <th>Precio</th>
-                                                    <th>Cantidad</th>
-                                                    <th>Accion</th>    
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td>4</td>
-                                                    <td>5</td>
-                                                </tr>
-                                            </table>
+                                    <div class="card-body" id="divTab">
+                                        <table id="tablaVentas" class='table table-striped table-hover table-sm'>
+                                            <th>Codigo</th>
+                                            <th>Nombre</th>
+                                            <th>Precio</th>
+                                            <th>Cantidad</th>
+                                            <th>Opcion</th>
+                                        </table>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row justify-content-end">
+                                            <p><h5 class="mr-3 mt-2">Total: $</h5></p>
+                                            <button type="button" class="btn btn-success mr-3" data-dismiss="modal">Realizar Compra</button>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>

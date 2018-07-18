@@ -12,20 +12,20 @@
     
     if($_POST["fechaVRDesde"] != "" and $_POST["fechaVRHasta"] != ""){
         $sql="SELECT p.CODIGO, c.NOMBRE_CATEGORIA AS CATEGORIA, r.NOMBRE_PROVEEDOR AS PROVEEDOR, p.NOMBRE, p.PRECIO_VENTA, p.PRECIO_NETO, p.FECHA_VENC, p.FECHA_ADQ, p.STOCK_MIN, p.STOCK_ACT, b.NOMBRE_BODEGA AS BODEGA FROM productos p INNER JOIN bodega b ON (p.ID_BODEGA = b.ID_BODEGA) INNER JOIN categoria c ON ( p.ID_CATEGORIA = c.ID_CATEGORIA ) INNER JOIN proveedor r ON ( p.ID_PROVEEDOR = r.ID_PROVEEDOR ) WHERE p.FECHA_VENC BETWEEN '".$_POST["fechaVRDesde"]."' and '".$_POST["fechaVRHasta"]."'";
-        $tmp="<br><div class='table-responsive'><table class='table table-striped table-hover table-sm table-bordered'>
-            <thead><tr>
-                <th>CODIGO</th>
-                <th>CATEGORIA</th>
-                <th>PROVEEDOR</th>
-                <th>NOMBRE</th>
-                <th>PRECIO VENTA</th>
-                <th>PRECIO NETO</th>
-                <th>FECHA VENC</th>
-                <th>FECHA ADQ</th>
-                <th>STOCK MIN</th>
-                <th>STOCK ACT</th>
-                <th>Bodega</th>
-                <th align='center'>ACCIONES</th>
+        $tmp="<br><div class='table-responsive'><table class='table table-striped table-hover table-sm '>
+        <thead align='center' class='thead-light'><tr>
+        <th align='center'>CODIGO</th>
+        <th align='center'>CATEGORIA</th>
+        <th align='center'>PROVEEDOR</th>
+        <th align='center'>NOMBRE</th>
+        <th align='center'>PRECIO VENTA</th>
+        <th align='center'>PRECIO NETO</th>
+        <th align='center'>FECHA VENC</th>
+        <th align='center'>FECHA ADQ</th>
+        <th align='center'>STOCK MIN</th>
+        <th align='center'>STOCK ACT</th>
+        <th align='center'>Bodega</th>
+        <th align='center'>ACCIONES</th>
             <tr></thead><tbody>";
     
     $res=mysqli_query($conexion,$sql);
