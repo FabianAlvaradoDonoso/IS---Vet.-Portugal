@@ -12,15 +12,15 @@
     //$sql="SELECT * FROM `productos2`";
     
     $sql="SELECT CODIGO,NOMBRE, PRECIO_VENTA FROM productos WHERE CODIGO = '".$_POST["txtCodigo"]."'";
-            
+    setlocale(LC_MONETARY, 'en_US');
     $res=mysqli_query($conexion,$sql);
     while ($row=mysqli_fetch_array($res)){
         $tmp.= "<tr>
                     <td>" . $row["CODIGO"] . "</td>
                     <td>" . $row["NOMBRE"] . "</td>
-                    <td>$" . $row["PRECIO_VENTA"] . "</td>
-                    <td><input type='number' class='form-control form-control-sm'></td>
-                    <td><button type='button' class='btn btn-outline-danger btn-sm borrar'><span class='oi oi-trash'></span></button></td>
+                    <td>$" . number_format($row["PRECIO_VENTA"], 0, ',', '.') . "</td>
+                    <td><input type='number' class='form-control form-control-sm' value='1' onchange='calcular()'></td>
+                    <td><button type='button' class='btn btn-outline-danger btn-sm borrar' onclick=''><span class='oi oi-trash'></span></button></td>
                 </tr>";
     }
 

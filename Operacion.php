@@ -232,7 +232,7 @@
                         <!-- Navbar Header-->
                         <div class="navbar-header">
                             <!-- Navbar Brand -->
-                            <a href="index.html" class="navbar-brand d-none d-sm-inline-block">
+                            <a href="index.php" class="navbar-brand d-none d-sm-inline-block">
                                 <div class="brand-text d-none d-lg-inline-block"><span>Vet</span><strong>Portugal</strong></div>
                                 <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
                             </a>
@@ -308,7 +308,7 @@
                 <!-- Sidebar Navidation Menus--><span class="heading">Menú</span>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="index.html"> <i class="oi oi-home"></i>Inicio </a>
+                        <a href="index.php"> <i class="oi oi-home"></i>Inicio </a>
                     </li>
                     <li>
                         <a href="Productos.php"> <i class="oi oi-list"></i>Productos </a>

@@ -19,7 +19,6 @@
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
     <!-- Main File-->
     <script src="js/front.js"></script>
-    <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
@@ -244,7 +243,7 @@
                         <!-- Navbar Header-->
                         <div class="navbar-header">
                             <!-- Navbar Brand -->
-                            <a href="index.html" class="navbar-brand d-none d-sm-inline-block">
+                            <a href="index.php" class="navbar-brand d-none d-sm-inline-block">
                                 <div class="brand-text d-none d-lg-inline-block"><span>Vet</span><strong>Portugal</strong></div>
                                 <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
                             </a>
@@ -320,7 +319,7 @@
                 <!-- Sidebar Navidation Menus--><span class="heading">Menú</span>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="index.html"> <i class="oi oi-home"></i>Inicio </a>
+                        <a href="index.php"> <i class="oi oi-home"></i>Inicio </a>
                     </li>
                     <li>
                         <a href="Productos.php"> <i class="oi oi-list"></i>Productos </a>
@@ -389,69 +388,81 @@
                                         <h5>Buscar</h5>    
                                     </div>
                                     <div class="card-body">
-                                        <nav>
-                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                <a class="nav-item nav-link active" id="nav-codigo-tab" data-toggle="tab" href="#nav-codigo" role="tab" aria-controls="nav-codigo" aria-selected="true" onclick="limpiarBusquedas()">Código</a>
-                                                <a class="nav-item nav-link" id="nav-nombre-tab" data-toggle="tab" href="#nav-nombre" role="tab" aria-controls="nav-nombre" aria-selected="false" onclick="limpiarBusquedas()">Nombre</a>
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="txtCodigo">Ingrese código</label>
+                                                <input type="text" class="form-control" id="txtCodigo" aria-describedby="codigo" placeholder="Código"  onkeypress="pulsar(event)">
                                             </div>
-                                        </nav>
-                                        <div class="tab-content" id="nav-tabContent">
-                                            <div class="tab-pane fade show active" id="nav-codigo" role="tabpanel" aria-labelledby="nav-codigo-tab">
-                                                <form>
-                                                    <div class="form-group"><br>
-                                                        <label for="txtCodigo">Ingrese código</label>
-                                                        <input type="text" class="form-control" id="txtCodigo" aria-describedby="codigo" placeholder="Código">
-                                                    </div>
-                                                    <div class = "row justify-content-around">
-                                                        <button type="button" class="btn btn-primary" id="btnBusqueda" onclick="buscar()">Buscar</button>
-                                                        <button type="button" class="btn btn-danger" onclick="limpiarBusquedas()">Limpiar busqueda</button>
-                                                    </div>
-                                                    
-                                                </form>                                                
+                                            <div class = "row justify-content-around">
+                                                <button type="button" class="btn btn-primary" id="btnBusqueda" onclick="buscar()">Buscar</button>
+                                                <button type="button" class="btn btn-danger" onclick="limpiarBusquedas()">Limpiar busqueda</button>
                                             </div>
-                                            <div class="tab-pane fade" id="nav-nombre" role="tabpanel" aria-labelledby="nav-nombre-tab">
-                                                <form>
-                                                    <div class="form-group"><br>
-                                                        <label for="txtNombre">Ingrese nombre</label>
-                                                        <input type="text" class="form-control" id="txtNombre" aria-describedby="nombre" placeholder="Nombre">
-                                                    </div>
-                                                    <div class = "row justify-content-around">
-                                                        <button type="button" class="btn btn-primary">Buscar</button>
-                                                        <button type="button" class="btn btn-danger" onclick="limpiarBusquedas()">Limpiar busqueda</button>
-                                                    </div>
-                                                    
-                                                </form>
-                                            </div>
-                                        </div>
+                                            
+                                        </form>   
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-8">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5>Venta</h5>    
+                                        <div class=" container ">
+                                            <div class="row justify-content-between">
+                                                <h5>Venta</h5>
+                                                <div class=" col-2 "><button type="button" class="btn btn-outline-danger btn-sm borrarTodo" data-dismiss="modal" onclick="eliminarTrs()">Borrar Todo</button></div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="card-body" id="divTab">
                                         <table id="tablaVentas" class='table table-striped table-hover table-sm'>
-                                            <th>Codigo</th>
-                                            <th>Nombre</th>
-                                            <th>Precio</th>
-                                            <th>Cantidad</th>
-                                            <th>Opcion</th>
+                                            <thead>
+                                                <th align="center">Codigo</th>
+                                                <th align="center">Nombre</th>
+                                                <th>Precio</th>
+                                                <th>Cantidad</th>
+                                                <th>Opcion</th>
+                                            </thead>
+                                            <tbody id="tBody"></tbody>
                                         </table>
                                     </div>
                                     <div class="card-footer">
                                         <div class="row justify-content-end">
-                                            <p><h5 class="mr-3 mt-2">Total: $</h5></p>
-                                            <button type="button" class="btn btn-success mr-3" data-dismiss="modal">Realizar Compra</button>
+                                            <p><h5 class=" mt-2">Total: $</h5></p>
+                                            <h5 class="mr-3 mt-2"><div id="precioTotal"></div></h5>
+                                            <button type="button" class="btn btn-success mr-3" data-dismiss="modal" onclick="array()">Realizar Compra</button>
                                         </div>
                                         
                                     </div>
                                 </div>
+                                <div class='modal fade' id='modalError' role='dialog'>
+                                    <div class='modal-dialog'>
+                            
+                                        <!-- Modal content-->
+                                        <div class='modal-content'>
+                                            <div class='modal-header'>
+                                                <h4 class='modal-title'>Error</h4>
+                                                <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                                            </div>
+                                            <div class='modal-body'>
+                                                <p>No se puede continuar porque hay algunos productos que no tienen la cantidad suficiente de stock.</p>
+                                                <p>Son los siguientes productos en conflicto.</p>
+                                            </div>
+                                            <div class='modal-footer'>      
+                                                <button type='button' id='cerrarError' class='btn btn-danger' data-dismiss='modal'>Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+                            
+                            
                         </div>
+                        
                     </div>
+                    
                 </section>
+                <div id="modalResultado"></div>
+                    
                 <!-- Page Footer-->
                 <footer class="main-footer">
                     <div class="container-fluid">

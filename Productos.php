@@ -241,7 +241,7 @@
                         <!-- Navbar Header-->
                         <div class="navbar-header">
                             <!-- Navbar Brand -->
-                            <a href="index.html" class="navbar-brand d-none d-sm-inline-block">
+                            <a href="index.php" class="navbar-brand d-none d-sm-inline-block">
                                 <div class="brand-text d-none d-lg-inline-block"><span>Vet</span><strong>Portugal</strong></div>
                                 <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
                             </a>
@@ -317,7 +317,7 @@
                 <!-- Sidebar Navidation Menus--><span class="heading">Menú</span>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="index.html"> <i class="oi oi-home"></i>Inicio </a>
+                        <a href="index.php"> <i class="oi oi-home"></i>Inicio </a>
                     </li>
                     <li class="active">
                         <a href="Productos.php"> <i class="oi oi-list"></i>Productos </a>
@@ -370,7 +370,7 @@
                 <!-- Breadcrumb-->
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
                         <li class="breadcrumb-item active">Productos </li>
                     </ul>
                 </div>
@@ -383,23 +383,7 @@
                                     <div class=" container ">
                                         <div class="row justify-content-between">
                                         <div class="col-3"><h4><strong>Productos</strong></h4></div>
-                                            <form class="form-inline  was-validated col-auto" action="ProductosBusqueda.php" method="get">
-                                                <label class="sr-only" for="txtBusqueda">Busqueda</label>
-                                                <input type="text"  class="form-control mr-1 " id="txtBusqueda" name="txtBusqueda" placeholder="Busqueda" required>
-
-                                                <label class="sr-only" for="opciones">Opcion</label>
-                                                <select class="custom-select mr-1" name="cbOpciones" id="opciones" required>
-                                                    <option value="">Opción...</option>
-                                                    <option value="CODIGO">Codigo</option>
-                                                    <option value="CATEGORIA">Categoria</option>
-                                                    <option value="PROVEEDOR">Proveedor</option>
-                                                    <option value="NOMBRE">Nombre</option>
-                                                    <option value="PRECIO_VENTA">Precio Venta</option>
-                                                    <option value="PRECIO_NETO">Precio Neto</option>
-                                                </select>
-                                                <button type="submit" class="btn btn-btn-outline-success ">Buscar</button>
-
-                                            </form>
+                                            
                                         <div class=" col-1 "><a href='Agregar_Producto.php' id=''type='' value='' class='btn btn-primary '>Nuevo</a></div>
                                         </div>
                                     </div>

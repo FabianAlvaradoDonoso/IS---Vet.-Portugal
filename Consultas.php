@@ -18,7 +18,7 @@
                 <span class="heading">Menú</span>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="index.html"> <i class="oi oi-home"></i>Inicio </a>
+                        <a href="index.php"> <i class="oi oi-home"></i>Inicio </a>
                     </li>
                     <li>
                         <a href="Productos.php"> <i class="oi oi-list"></i>Productos </a>
