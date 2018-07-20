@@ -20,7 +20,7 @@
                   <!-- Search-->
                   <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>
                   <!-- Logout    -->
-                  <li class="nav-item"><a href="../logout.php" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
+                  <li class="nav-item"><a href="../../src/login/logout.php" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
                 </ul>
               </div>
             </div>
