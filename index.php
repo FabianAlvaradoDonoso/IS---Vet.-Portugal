@@ -336,13 +336,14 @@
                     <li>
                         <a href="login.php"> <i class="oi oi-person"></i>Pagina Inicio Sesion </a>
                     </li> -->
-                    <!-- <li>
-                        <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class"oi oi-home"></i>Ejemplo de Dropdown </a>
+                    <li>
+                        <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class"oi oi-home"></i>Agregar</a>
                         <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                            <li><a href="#">Pagina 1</a></li>
-                            <li><a href="#">Pagina 2</a></li>
+                            <li><a href="Agregar_Producto.php">Articulo</a></li>
+                            <li><a href="#">Procedimiento</a></li>
+                            <li><a href="#">Bla bla</a></li>
                         </ul>
-                    </li> -->
+                    </li>
                 <!-- </ul><span class="heading">Extras</span>
                 <ul class="list-unstyled">
                     <li>
@@ -468,7 +469,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <!-- Statistics -->
-                            <div class="statistics col-lg-3 col-12">
+                            <div class="statistics col-lg-3 col-12" id="jyfch">
                                 <div class="statistic d-flex align-items-center bg-white has-shadow">
                                     <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
                                     <div class="text"><strong>234</strong><br><small>Clinico</small></div>

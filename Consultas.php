@@ -89,7 +89,7 @@
                                                         <div class="container d-inline">
                                                             <div class='form-inline' id='datetimepicker6' >
                                                                 <label class="mr-2" for="">Ingrese código </label>
-                                                                <input type='text' class="form-control mb-1 mr-sm-2" id="codigo" placeholder="Código" onkeyup="busqueda()">
+                                                                <input type='text' class="form-control mb-1 mr-sm-2 click" id="codigo" placeholder="Código" onkeyup="busqueda()">
                                                                 <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormulario()">Limpiar busqueda</button>
                                                             </div>                                                           
                                                         </div>
@@ -271,33 +271,9 @@
                                                                     <div class="row justify-content-center">
                                                                         <button type="buttom" class="btn btn-primary mb-2 mr-3" onclick="enviarFechaRango()">Buscar por rango</button>
                                                                         <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormularioFecha1()">Limpiar busqueda</button>
-                                                                    </div>
-                                                                        
+                                                                    </div>  
                                                                 </div>
-                                                                <script>
-                                                                    $('.fad-Date').datepicker({
-                                                                        format: "dd/mm/yyyy",
-                                                                        weekStart: 1,
-                                                                        todayBtn: "linked",
-                                                                        language: "es",
-                                                                        todayHighlight: true    
-                                                                        clearBtn: true
-                                                                    });
-                                                                </script>   
-                                                                <script>
-                                                                    $('.fad-Date2').datepicker({
-                                                                        format: "yyyy/mm/dd",
-                                                                        weekStart: 1,
-                                                                        todayBtn: "linked",
-                                                                        language: "es",
-                                                                        todayHighlight: true
-                                                                        clearBtn: true
-                                                                    });
-                                                                </script> 
-
                                                             </div>
-
-                                                            
                                                         </div>
                                                     </div>
                                                 </div>

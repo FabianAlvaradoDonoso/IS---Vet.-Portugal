@@ -388,17 +388,43 @@
                                         <h5>Buscar</h5>    
                                     </div>
                                     <div class="card-body">
-                                        <form>
-                                            <div class="form-group">
-                                                <label for="txtCodigo">Ingrese código</label>
-                                                <input type="text" class="form-control" id="txtCodigo" aria-describedby="codigo" placeholder="Código"  onkeypress="pulsar(event)">
+                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="codigo-tab" data-toggle="tab" href="#codigo" role="tab" aria-controls="codigo" aria-selected="true">Codigo</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="nombre-tab" data-toggle="tab" href="#nombre" role="tab" aria-controls="nombre" aria-selected="false">Nombre</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="codigo" role="tabpanel" aria-labelledby="codigo-tab">
+                                                <form>
+                                                    <div class="form-group"><br>
+                                                        <label for="txtCodigo">Ingrese Código</label>
+                                                        <input type="text" class="form-control" id="txtCodigo" aria-describedby="codigo" placeholder="Código"  onkeypress="pulsar(event)">
+                                                    </div>
+                                                    <div class = "row justify-content-around">
+                                                        <button type="button" class="btn btn-primary" id="btnBusqueda" onclick="buscar()">Buscar</button>
+                                                        <button type="button" class="btn btn-danger" onclick="limpiarBusquedas()">Limpiar busqueda</button>
+                                                    </div>
+                                                    
+                                                </form>   
                                             </div>
-                                            <div class = "row justify-content-around">
-                                                <button type="button" class="btn btn-primary" id="btnBusqueda" onclick="buscar()">Buscar</button>
-                                                <button type="button" class="btn btn-danger" onclick="limpiarBusquedas()">Limpiar busqueda</button>
+                                            <div class="tab-pane fade" id="nombre" role="tabpanel" aria-labelledby="nombre-tab">
+                                                <form>
+                                                    <div class="form-group"><br>
+                                                        <label for="txtNombre">Ingrese Nombre</label>
+                                                        <input type="text" class="form-control" id="txtNombre" aria-describedby="nombre" placeholder="Nombre"  onkeypress="pulsar(event)">
+                                                    </div>
+                                                    <div class = "row justify-content-around">
+                                                        <button type="button" class="btn btn-primary" id="btnBusqueda" onclick="buscarNombre()">Buscar</button>
+                                                        <button type="button" class="btn btn-danger" onclick="limpiarBusquedas()">Limpiar busqueda</button>
+                                                    </div>
+                                                    
+                                                </form>   
                                             </div>
-                                            
-                                        </form>   
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -429,13 +455,15 @@
                                             <p><h5 class=" mt-2">Total: $</h5></p>
                                             <h5 class="mr-3 mt-2"><div id="precioTotal"></div></h5>
                                             <button type="button" class="btn btn-success mr-3" data-dismiss="modal" onclick="array()">Realizar Compra</button>
+                                            <div id="prueba"></div>
                                         </div>
                                         
                                     </div>
                                 </div>
+
+
                                 <div class='modal fade' id='modalError' role='dialog'>
                                     <div class='modal-dialog'>
-                            
                                         <!-- Modal content-->
                                         <div class='modal-content'>
                                             <div class='modal-header'>
@@ -444,7 +472,18 @@
                                             </div>
                                             <div class='modal-body'>
                                                 <p>No se puede continuar porque hay algunos productos que no tienen la cantidad suficiente de stock.</p>
-                                                <p>Son los siguientes productos en conflicto.</p>
+                                                <p>Los siguientes productos estan en conflicto:</p>
+                                                <div>
+                                                    <table id="tablaError" class='table table-striped table-hover table-sm'>
+                                                        <thead>
+                                                            <th>Codigo</th>
+                                                            <th>Nombre</th>
+                                                            <th>Stock bodega</th>
+                                                            <th>Cantidad Solicitada</th>
+                                                        </thead>
+                                                        <tbody id="tBodyError"></tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                             <div class='modal-footer'>      
                                                 <button type='button' id='cerrarError' class='btn btn-danger' data-dismiss='modal'>Close</button>
@@ -452,17 +491,33 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class='modal fade' id='modalExito' role='dialog'>
+                                    <div class='modal-dialog'>
+                            
+                                        <!-- Modal content-->
+                                        <div class='modal-content'>
+                                            <div class='modal-header'>
+                                                <h4 class='modal-title'>Exito</h4>
+                                                <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                                            </div>
+                                            <div class='modal-body'>
+                                                <p>Los productos fueron descontados correctamente del inventario.</p>
+                                            </div>
+                                            <div class='modal-footer'>      
+                                                <button type='button' id='cerrarExito' class='btn btn-danger' data-dismiss='modal' onclick=eliminarTrs()>Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            
-                            
+
+
+                            </div>
                         </div>
                         
                     </div>
                     
                 </section>
-                <div id="modalResultado"></div>
-                    
                 <!-- Page Footer-->
                 <footer class="main-footer">
                     <div class="container-fluid">

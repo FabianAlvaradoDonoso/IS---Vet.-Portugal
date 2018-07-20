@@ -207,6 +207,7 @@ function busqueda(){
         type: "POST",
         success: function(response){
             $("#datos").html(response);
+            pulsar(event);
         }
     });
 }
@@ -224,6 +225,12 @@ function busquedaNombre(){
             $("#datosNombre").html(response);
         }
     });
+}
+function pulsar(e) {
+    if (e.keyCode === 13 && !e.shiftKey) {
+        e.preventDefault();
+        busqueda();   
+    }
 }
 
 
