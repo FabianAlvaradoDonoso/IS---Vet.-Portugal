@@ -18,8 +18,7 @@
             weekStart: 1,
             todayBtn: "linked",
             language: "es",
-            todayHighlight: true
-            autoclose: true
+            todayHighlight: true,
             clearBtn: true
         });
     </script>
@@ -28,7 +27,7 @@
         weekStart: 1,
         todayBtn: "linked",
         language: "es",
-        todayHighlight: true
+        todayHighlight: true,
         clearBtn: true
     });
     </script>

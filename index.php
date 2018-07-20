@@ -309,7 +309,7 @@
                 <!-- Sidebar Navidation Menus--><span class="heading">Menú</span>
                 <ul class="list-unstyled">
                     <li class="active">
-                        <a href="index.html"> <i class="oi oi-home"></i>Inicio </a>
+                        <a href="index.php"> <i class="oi oi-home"></i>Inicio </a>
                     </li>
                     <li>
                         <a href="Productos.php"> <i class="oi oi-list"></i>Productos </a>
@@ -321,7 +321,7 @@
                         <a href="Ventas.php"> <i class="oi oi-dollar"></i>Ventas </a>
                     </li>
                     <li>
-                        <a href="Operacion.php"> <i class="oi oi-heart"></i>Operación </a>
+                        <a href="Paquetes.php"> <i class="oi oi-heart"></i>Paquetes </a>
                     </li>
                     <!-- <li>
                         <a href="tables.html"> <i class="oi oi-grid-three-up"></i>Tablas </a>

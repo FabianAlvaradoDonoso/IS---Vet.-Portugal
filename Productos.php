@@ -2,34 +2,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Productos - VetPortugal</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="robots" content="all,follow">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
-    <!-- Fontastic Custom icon font-->
-    <link rel="stylesheet" href="css/fontastic.css">
-    <!-- Google fonts - Poppins -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/custom.css">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha256-m/h/cUDAhf6/iBRixTbuc8+Rg2cIETQtPcH9D3p2Kg0=" crossorigin="anonymous" />
-    <!-- open-iconic-bootstrap (icon set for bootstrap) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
-    <!-- Tweaks for older IEs-->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <?php include_once 'php/head.php';?>
 </head>
 <style>
     nav.side-navbar {
@@ -329,7 +302,7 @@
                         <a href="Ventas.php"> <i class="oi oi-dollar"></i>Ventas </a>
                     </li>
                     <li>
-                        <a href="Operacion.php"> <i class="oi oi-heart"></i>Operación </a>
+                        <a href="Paquetes.php"> <i class="oi oi-heart"></i>Paquetes </a> 
                     </li>
                     <!-- <li>
                         <a href="tables.html"> <i class="icon-grid"></i>Tablas </a>
@@ -384,7 +357,7 @@
                                         <div class="row justify-content-between">
                                         <div class="col-3"><h4><strong>Productos</strong></h4></div>
                                             
-                                        <div class=" col-1 "><a href='Agregar_Producto.php' id=''type='' value='' class='btn btn-primary '>Nuevo</a></div>
+                                        <div class=" col-1 "><button type="button" class="btn btn-primary btn-sm" onclick="modalNuevo()">Nuevo</button></div>
                                         </div>
                                     </div>
                                 </div>
@@ -392,7 +365,7 @@
                                 <div class="card-body">
                                     <div class="table-responsive">
                                             
-                                        <table class="table table-striped table-hover table-sm table-bordered">
+                                        <table class='table table-striped table-hover table-sm'>
                                             <?php
                                                 try{
                                                     $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
@@ -414,7 +387,7 @@
                                                     $resultado = $base->prepare($sqlLimit);
                                                     $resultado->execute(array());
                                                     echo "<thead>
-                                                            <tr>
+                                                            <tr class='thead-light'>
                                                                 <th>CODIGO</th>
                                                                 <th>CATEGORIA</th>
                                                                 <th>PROVEEDOR</th>
@@ -433,6 +406,18 @@
                                                 
                                             
                                                     while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
+                                                        $codigo = $fila["CODIGO"];
+                                                        $categoria = $fila["CATEGORIA"];
+                                                        $proveedor = $fila["PROVEEDOR"];
+                                                        $nombre = $fila["NOMBRE"];
+                                                        $precioVenta = $fila["PRECIO_VENTA"];
+                                                        $precioNeto = $fila["PRECIO_NETO"];
+                                                        $fechaVenc = date_format(date_create($fila["FECHA_VENC"]), 'Y/m/d');
+                                                        $fechaAdq = date_format(date_create($fila["FECHA_ADQ"]), 'Y/m/d');
+                                                        $stockMin = $fila["STOCK_MIN"];
+                                                        $stockAct = $fila["STOCK_ACT"];
+                                                        $bodega = $fila["BODEGA"];
+
                                                         echo "<tr>";
                                                         echo "<td>" . $fila["CODIGO"] . "</td>";
                                                         echo "<td>" . $fila["CATEGORIA"] . "</td>";
@@ -445,8 +430,13 @@
                                                         echo "<td>" . $fila["STOCK_MIN"] . "</td>";
                                                         echo "<td>" . $fila["STOCK_ACT"] . "</td>";
                                                         echo "<td>" . $fila["BODEGA"] . "</td>";
-                                                        echo "<td align='center'><a href='Modificar_Producto.php?codigo=" . $fila["CODIGO"] . "' type='' value='' class='btn btn-outline-success btn-sm'><span class='oi oi-pencil'></span></a><a href='Eliminar_Producto.php?codigo=" . $fila["CODIGO"] . "' type='' value='' class='btn btn-outline-danger btn-sm'><span class='oi oi-trash'></span></a></td>";
+                                                        echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificar2(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\")'><span class='oi oi-pencil'></span></button>
+                                                                                 <button type='button' class='btn btn-outline-danger btn-sm' onclick='mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")'><span class='oi oi-trash'></span></button></td>";
+                                                        
                                                         echo "</tr>";
+
+                                                        //mostrarModalModificar(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\")
+                                                        //mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")
                                                     }
                                                     echo "</tbody>";
                                                     $resultado->closeCursor();
@@ -533,6 +523,593 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="modal fade bd-example-modal-lg" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Ingresar nuevo producto</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="needs-validation" novalidate action="" method="">
+                                        <div class="form-row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationCustom01">Codigo</label>
+                                                <input type="text" class="form-control" id="txtCodigoModalAgregar" name="Codigo" placeholder="Codigo" value="" required>
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationCustom02">Categoria</label>
+                                                    
+                                                <select id="cbCategoriaModalAgregar" class="form-control mb-2 mr-sm-2" onchange="">
+                                                
+                                                <?php
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                    $base->exec("SET CHARACTER SET utf8");
+                                                    
+                                                    $sql_total="SELECT * FROM categoria";
+                                                    $resultado = $base->prepare($sql_total);
+                                                    $resultado->execute(array());
+                                                    
+                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
+                                                        echo "<option value=".$fila["ID_CATEGORIA"].">".$fila["NOMBRE_CATEGORIA"]."</option>";
+                                                    }
+                                                ?>
+                                                </select>
+                                                            
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationCustom02">Proveedor</label>
+                                                
+                                                <select id="cbProveedorModalAgregar" class="form-control mb-2 mr-sm-2" onchange="">
+                                                    
+                                                <?php
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                    $base->exec("SET CHARACTER SET utf8");
+                                                    
+                                                    $sql_total="SELECT * FROM proveedor";
+                                                    $resultado = $base->prepare($sql_total);
+                                                    $resultado->execute(array());
+                                                    
+                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
+                                                        echo "<option value=".$fila["ID_PROVEEDOR"].">".$fila["NOMBRE_PROVEEDOR"]."</option>";
+                                                    }
+                                                ?>
+                                                </select>
+                                                
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="validationCustom03">Nombre</label>
+                                                <input type="text" class="form-control" id="txtNombreModalAgregar" name="Nombre" placeholder="Nombre" value="" required>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label class="" for="inlineFormInputGroup">Precio Venta</label>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">$</div>
+                                                    </div>
+                                                    <input type="number" class="form-control" align="right" style="text-align:right;" id="nudPrecioVentaModalAgregar" placeholder="Venta" value="" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label class="" for="inlineFormInputGroup">Precio Neto</label>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">$</div>
+                                                    </div>
+                                                    <input type="number" class="form-control" align="right" style="text-align:right;" id="nudPrecioNetoModalAgregar" placeholder="Neto" value="" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-3 mb-3">
+                                                <label class="mr-2 " for="">Fecha Vencimiento </label>
+                                                <div class='input-group date fad-Date2' id='' >
+                                                    <input type='text' class="form-control" id="dtpFechaVencModalAgregar" placeholder="Fecha" readonly value="" required>
+                                                    <span class="input-group-addon">
+                                                        <span class="oi oi-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label class="mr-2 " for="">Fecha Adquisición </label>
+                                                <div class='input-group date fad-Date2' id='' >
+                                                    <input type='text' class="form-control" id="dtpFechaAdqModalAgregar" placeholder="Fecha" readonly value="" required>
+                                                    <span class="input-group-addon">
+                                                        <span class="oi oi-calendar"></span>
+                                                    </span>
+                                                </div>  
+                                            <script>
+                                                $('.fad-Date2').datepicker({
+                                                    format: "yyyy/mm/dd",
+                                                    weekStart: 1,
+                                                    todayBtn: "linked",
+                                                    language: "es",
+                                                    todayHighlight: true
+                                                });
+                                            </script> 
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="validationCustom05">Stock Mínimo</label>
+                                                <input type="number" class="form-control" id="nudStockMinModalAgregar" name="nudStockMin" placeholder="Stock Minimo" value="" required>
+                                                <div class="invalid-feedback">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="validationCustom05">Stock Actual</label>
+                                                <input type="number" class="form-control" id="nudStockActModalAgregar" name="nudStockAct" placeholder="Stock Actual" value="" required>
+                                                <div class="invalid-feedback">
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="form-row justify-content-center">
+                                            <div class="col-md-5 mb-3">
+                                                <label for="validationCustom04">Bodega</label>
+                                                <select id="cbBodegaModalAgregar" class="form-control mb-2 mr-sm-2 custom-select" onchange="enviarOtro()" required>
+                                                    
+                                                <?php
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                    $base->exec("SET CHARACTER SET utf8");
+                                                    
+                                                    $sql_total="SELECT * FROM bodega";
+                                                    $resultado = $base->prepare($sql_total);
+                                                    $resultado->execute(array());
+                                                    
+                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
+                                                        echo "<option value=".$fila["ID_BODEGA"].">".$fila["NOMBRE_BODEGA"]."</option>";
+                                                    }
+                                                ?>
+                                                </select>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        
+                                            
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-success" onclick="agregar()">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade bd-example-modal-lg" id="modalModificar2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modificación</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="needs-validation" novalidate action="" method="">
+                                        <div class="form-row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationCustom01">Codigo</label>
+                                                <input readonly type="text" class="form-control" id="txtCodigoModal2" name="Codigo" placeholder="Codigo" value="" required>
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationCustom02">Categoria</label>
+                                                    
+                                                <select id="cbCategoriaModal2" class="form-control mb-2 mr-sm-2" onchange="">
+                                                
+                                                <?php
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                    $base->exec("SET CHARACTER SET utf8");
+                                                    
+                                                    $sql_total="SELECT * FROM categoria";
+                                                    $resultado = $base->prepare($sql_total);
+                                                    $resultado->execute(array());
+                                                    
+                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
+                                                        if($fila["NOMBRE_CATEGORIA"] == $consulta[1]){
+                                                            echo "<option value=".$fila["ID_CATEGORIA"]." selected>".$fila["NOMBRE_CATEGORIA"]."</option>";
+                                                        }else{
+                                                            echo "<option value=".$fila["ID_CATEGORIA"].">".$fila["NOMBRE_CATEGORIA"]."</option>";
+                                                        }
+                                                    }
+                                                ?>
+                                                </select>
+                                                            
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationCustom02">Proveedor</label>
+                                                
+                                                <select id="cbProveedorModal2" class="form-control mb-2 mr-sm-2" onchange="">
+                                                    
+                                                <?php
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                    $base->exec("SET CHARACTER SET utf8");
+                                                    
+                                                    $sql_total="SELECT * FROM proveedor";
+                                                    $resultado = $base->prepare($sql_total);
+                                                    $resultado->execute(array());
+                                                    
+                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
+                                                        if($fila["NOMBRE_PROVEEDOR"] == $consulta[2]){
+                                                            echo "<option value=".$fila["ID_PROVEEDOR"]." selected>".$fila["NOMBRE_PROVEEDOR"]."</option>";
+                                                        }else{
+                                                            echo "<option value=".$fila["ID_PROVEEDOR"].">".$fila["NOMBRE_PROVEEDOR"]."</option>";
+                                                        }
+                                                    }
+                                                ?>
+                                                </select>
+                                                
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="validationCustom03">Nombre</label>
+                                                <input type="text" class="form-control" id="txtNombreModal2" name="Nombre" placeholder="Nombre" value="" required>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label class="" for="inlineFormInputGroup">Precio Venta</label>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">$</div>
+                                                    </div>
+                                                    <input type="number" class="form-control" align="right" style="text-align:right;" id="nudPrecioVentaModal2" placeholder="Venta" value="" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label class="" for="inlineFormInputGroup">Precio Neto</label>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">$</div>
+                                                    </div>
+                                                    <input type="number" class="form-control" align="right" style="text-align:right;" id="nudPrecioNetoModal2" placeholder="Neto" value="" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-3 mb-3">
+                                                <label class="mr-2 " for="">Fecha Vencimiento </label>
+                                                <div class='input-group date fad-Date2' id='' >
+                                                    <input type='text' class="form-control" id="dtpFechaVencModal2" placeholder="Fecha" readonly value="" required>
+                                                    <span class="input-group-addon">
+                                                        <span class="oi oi-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label class="mr-2 " for="">Fecha Adquisición </label>
+                                                <div class='input-group date fad-Date2' id='' >
+                                                    <input type='text' class="form-control" id="dtpFechaAdqModal2" placeholder="Fecha" readonly value="" required>
+                                                    <span class="input-group-addon">
+                                                        <span class="oi oi-calendar"></span>
+                                                    </span>
+                                                </div>  
+                                            <script>
+                                                $('.fad-Date2').datepicker({
+                                                    format: "yyyy/mm/dd",
+                                                    weekStart: 1,
+                                                    todayBtn: "linked",
+                                                    language: "es",
+                                                    todayHighlight: true
+                                                });
+                                            </script> 
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="validationCustom05">Stock Mínimo</label>
+                                                <input type="number" class="form-control" id="nudStockMinModal2" name="nudStockMin" placeholder="Stock Minimo" value="" required>
+                                                <div class="invalid-feedback">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="validationCustom05">Stock Actual</label>
+                                                <input type="number" class="form-control" id="nudStockActModal2" name="nudStockAct" placeholder="Stock Actual" value="" required>
+                                                <div class="invalid-feedback">
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="form-row justify-content-center">
+                                            <div class="col-md-5 mb-3">
+                                                <label for="validationCustom04">Bodega</label>
+                                                <select id="cbBodegaModal2" class="form-control mb-2 mr-sm-2 custom-select" onchange="enviarOtro()" required>
+                                                    
+                                                <?php
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                    $base->exec("SET CHARACTER SET utf8");
+                                                    
+                                                    $sql_total="SELECT * FROM bodega";
+                                                    $resultado = $base->prepare($sql_total);
+                                                    $resultado->execute(array());
+                                                    
+                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
+                                                        if($fila["NOMBRE_BODEGA"] == $consulta[10]){
+                                                            echo "<option value=".$fila["ID_BODEGA"]." selected>".$fila["NOMBRE_BODEGA"]."</option>";
+                                                        }else{
+                                                            echo "<option value=".$fila["ID_BODEGA"].">".$fila["NOMBRE_BODEGA"]."</option>";
+                                                        }
+                                                    }
+                                                ?>
+                                                </select>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        
+                                            
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-success" onclick="modificar()">Modificar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade bd-example-modal-lg" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Eliminación</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="needs-validation" novalidate action="" method="">
+                                        <div class="form-row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationCustom01">Codigo</label>
+                                                <input readonly type="text" class="form-control" id="txtCodigoModalE" name="Codigo" placeholder="Codigo" value="" required>
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationCustom02">Categoria</label>
+                                                    
+                                                <select id="cbCategoriaModalE" class="form-control mb-2 mr-sm-2" onchange="" disabled>
+                                                
+                                                <?php
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                    $base->exec("SET CHARACTER SET utf8");
+                                                    
+                                                    $sql_total="SELECT * FROM categoria";
+                                                    $resultado = $base->prepare($sql_total);
+                                                    $resultado->execute(array());
+                                                    
+                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
+                                                        if($fila["NOMBRE_CATEGORIA"] == $consulta[1]){
+                                                            echo "<option value=".$fila["ID_CATEGORIA"]." selected>".$fila["NOMBRE_CATEGORIA"]."</option>";
+                                                        }else{
+                                                            echo "<option value=".$fila["ID_CATEGORIA"].">".$fila["NOMBRE_CATEGORIA"]."</option>";
+                                                        }
+                                                    }
+                                                ?>
+                                                </select>
+                                                            
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationCustom02">Proveedor</label>
+                                                
+                                                <select id="cbProveedorModalE" class="form-control mb-2 mr-sm-2" onchange="" disabled>
+                                                    
+                                                <?php
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                    $base->exec("SET CHARACTER SET utf8");
+                                                    
+                                                    $sql_total="SELECT * FROM proveedor";
+                                                    $resultado = $base->prepare($sql_total);
+                                                    $resultado->execute(array());
+                                                    
+                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
+                                                        if($fila["NOMBRE_PROVEEDOR"] == $consulta[2]){
+                                                            echo "<option value=".$fila["ID_PROVEEDOR"]." selected>".$fila["NOMBRE_PROVEEDOR"]."</option>";
+                                                        }else{
+                                                            echo "<option value=".$fila["ID_PROVEEDOR"].">".$fila["NOMBRE_PROVEEDOR"]."</option>";
+                                                        }
+                                                    }
+                                                ?>
+                                                </select>
+                                                
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="validationCustom03">Nombre</label>
+                                                <input type="text" class="form-control" id="txtNombreModalE" name="Nombre" placeholder="Nombre" value="" readonly required>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        
+                                            <div class="col-md-5 mb-3">
+                                                <label for="validationCustom04">Bodega</label>
+                                                <select id="cbBodegaModalE" class="form-control mb-2 mr-sm-2 custom-select" onchange="" disabled required>
+                                                    
+                                                <?php
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                    $base->exec("SET CHARACTER SET utf8");
+                                                    
+                                                    $sql_total="SELECT * FROM bodega";
+                                                    $resultado = $base->prepare($sql_total);
+                                                    $resultado->execute(array());
+                                                    
+                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
+                                                        if($fila["NOMBRE_BODEGA"] == $consulta[10]){
+                                                            echo "<option value=".$fila["ID_BODEGA"]." selected>".$fila["NOMBRE_BODEGA"]."</option>";
+                                                        }else{
+                                                            echo "<option value=".$fila["ID_BODEGA"].">".$fila["NOMBRE_BODEGA"]."</option>";
+                                                        }
+                                                    }
+                                                ?>
+                                                </select>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        
+                                            
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-danger" onclick="eliminar()">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalEliminarBien" role="dialog">
+                        <div class="modal-dialog">
+                        
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Eliminación Completa</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    
+                                </div>
+                                <div class="modal-body">
+                                    <p align="center">Los datos fueron eliminados satifactoriamente.</p>
+                                    <p align="center"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="cerrarBienE" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalBien" role="dialog">
+                        <div class="modal-dialog">
+                        
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Modificación Completa</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    
+                                </div>
+                                <div class="modal-body">
+                                    <p align="center">Los datos fueron modificados satifactoriamente.</p>
+                                    <p align="center"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="cerrarBien" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalError" role="dialog">
+                        <div class="modal-dialog">
+                        
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Error</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    
+                                </div>
+                                <div class="modal-body">
+                                    <p align="center">Algun valor modificado esta incorrecto.</p>
+                                    <p align="center">Intentelo nuevamente.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="cerrarError" class="btn btn-danger" data-dismiss="modal" onclick="">Close</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalBienAgregar" role="dialog">
+                        <div class="modal-dialog">
+                        
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Ingreso Completo</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    
+                                </div>
+                                <div class="modal-body">
+                                    <p align="center">Los datos fueron agregados satifactoriamente.</p>
+                                    <p align="center"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="cerrarBien" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalErrorAgregar" role="dialog">
+                        <div class="modal-dialog">
+                        
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Error</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    
+                                </div>
+                                <div class="modal-body">
+                                    <p align="center">Algun valor agregado esta incorrecto.</p>
+                                    <p align="center">Intentelo nuevamente.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="cerrarError" class="btn btn-danger" data-dismiss="modal" onclick="">Close</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalErrorAgregarCodigo" role="dialog">
+                        <div class="modal-dialog">
+                        
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Error</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    
+                                </div>
+                                <div class="modal-body">
+                                    <p align="center">Ya existe un articulo con el mismo codigo ingresado.</p>
+                                    <p align="center">Intentelo nuevamente.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="cerrarError" class="btn btn-danger" data-dismiss="modal" onclick="">Close</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+
 
                     
                 </section>

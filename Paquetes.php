@@ -320,7 +320,7 @@
                         <a href="Ventas.php"> <i class="oi oi-dollar"></i>Ventas </a>
                     </li>
                     <li class="active">
-                        <a href="Operacion.php"> <i class="oi oi-heart"></i>Operación </a>
+                        <a href="Paquetes.php"> <i class="oi oi-heart"></i>Paquetes </a>
                     </li>
                     <!-- <li>
                         <a href="tables.html"> <i class="icon-grid"></i>Tablas </a>
@@ -355,7 +355,7 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Operación</h2>
+                        <h2 class="no-margin-bottom">Paquetes</h2> 
                     </div>
                 </header>
                 <!-- Breadcrumb-->

@@ -30,7 +30,7 @@
                         <a href="Ventas.php"> <i class="oi oi-dollar"></i>Ventas </a>
                     </li>
                     <li>
-                        <a href="Operacion.php"> <i class="oi oi-heart"></i>Operación </a>
+                        <a href="Paquetes.php"> <i class="oi oi-heart"></i>Paquetes </a>
                     </li>
                         </ul>
             </nav>

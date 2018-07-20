@@ -171,3 +171,7 @@ function Descontar(cantidad, codigo){
         }
     });
 }
+
+
+//======================P R O D U C T O S==========================\\
+
