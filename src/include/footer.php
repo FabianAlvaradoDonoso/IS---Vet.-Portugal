@@ -1,5 +1,3 @@
-
-      <!-- Page Footer-->
       <footer class="main-footer">
             <div class="container-fluid">
                 <div class="row">
@@ -13,9 +11,5 @@
                 </div>
             </div>
         </footer>
-         <!-- JavaScript files
-            TRASLADADO A HEAD.PHP-->
+         
  
-    
-</body>
-</html>

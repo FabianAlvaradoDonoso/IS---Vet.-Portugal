@@ -1,13 +1,13 @@
 <?php
 
 session_start();
-$conexion = mysqli_connect("localhost", "root", "", "1329999");
+$conexion = mysqli_connect("localhost", "root", "", "vetportugal");
 
 
   if(isset($_POST["user"]) && isset($_POST["pass"])){
       $user = mysqli_real_escape_string($conexion, $_POST["user"]);
       $pass = mysqli_real_escape_string($conexion, $_POST["pass"]);
-      $sql="SELECT user, cargo FROM usuarios 
+      $sql="SELECT user, cargo, nombre FROM usuarios 
       WHERE user='$user' AND pass='$pass'";
       $result = mysqli_query($conexion,$sql);
       $num_row = mysqli_num_rows($result);
@@ -16,6 +16,7 @@ $conexion = mysqli_connect("localhost", "root", "", "1329999");
         $data = mysqli_fetch_array($result);
         $_SESSION["user"] = $data["user"];
         $_SESSION["cargo"] = $data["cargo"];
+        $_SESSION["nombre"] = $data["nombre"];
       }
       else {
           echo "error";

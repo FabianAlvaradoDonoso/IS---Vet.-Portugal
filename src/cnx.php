@@ -1,6 +1,6 @@
 <?php
 
-$conexion = mysqli_connect("localhost", "root", "", "1329999");
+$conexion = mysqli_connect("localhost", "root", "", "vetportugal");
 
 // Check connection
 if (mysqli_connect_errno())

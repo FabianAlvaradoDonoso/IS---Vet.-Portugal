@@ -10,29 +10,29 @@
   ?>
   </head> 
   <body>
+    <!--PAGINA-->
     <div class="page">
-
-      <div id="nav">
-      <?php  include 'src/include/navbar.php';  ?>
-      </div>
-
-      <div class="page-content d-flex align-items-stretch">
-        <div id="main">
-          <?php  include 'src/include/sidebar.php'; ?>
-        </div>
-      
-        <div id="content">
-          <h1 >  AQUÍ SE CARGARÁ PRINCIPAL.PHP</h1>
-          <h2>    Con cosas bonitas y mágicas</h2>
-        </div>
-
-      </div>
-      <footer>
-        <?php  include 'src/include/footer.php'; ?>
-      </footer>
-
-    </div>
-   
+     <!--NAVBAR--> 
+    <div class="header">
+    <?php  include 'src/include/navbar.php';  ?>
+    </div><!--navbar-->
     
+      <div class="page-content d-flex align-items-stretch">
+      
+      <!--SIDEBAR-->    
+      <?php  include 'src/include/sidebar.php'; ?>
+
+      <!--CONTENIDO-->
+      <div class="content-inner">
+        <h1 >  AQUÍ SE CARGARÁ PRINCIPAL.PHP</h1>
+        <h2>    TOOA LA MAGIA </h2>
+
+      <!--FOOTER-->      
+      <?php  include 'src/include/footer.php'; ?>
+      </div><!--class Content inner...-->
+        
+      </div><!--class Page content...-->
+     
+    </div><!-- class PAGE--> 
   </body>
 </html>

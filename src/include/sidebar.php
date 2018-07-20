@@ -1,5 +1,3 @@
-<!--div class="row clearfix"-->
-  <div class="col-md-12 column">
   <nav class="side-navbar">
           <!-- Sidebar Header-->
           <div class="sidebar-header d-flex align-items-center">
@@ -35,5 +33,3 @@
           </ul>
           
   </nav>
-  </div>
-<!--/div-->
