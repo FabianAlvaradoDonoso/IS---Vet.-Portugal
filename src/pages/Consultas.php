@@ -1,57 +1,30 @@
 <!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <?php include_once 'php/head.php';?>
-</head>
-<?php include_once 'php/style.php';?>
-<body>
+<html>
+  
+  <head>
+  <?php require_once '../../src/include/head.php';
+    session_start();
+    if(!isset($_SESSION["user"])){
+      header("location:../../src/login/login.php");
+    }
+  ?>
+  </head> 
+  <body>
+    <!--PAGINA-->
     <div class="page">
-        <!-- Main Navbar-->
-        <?php include_once 'php/headerMain.php';?>
-        <div class="page-content d-flex align-items-stretch">
-            <!-- Side Navbar -->
-            <nav class="side-navbar">
-                <!-- Sidebar Header-->
-                <?php include_once 'php/infoLogin.php'?>
-                <!-- Sidebar Navidation Menus-->
-                <span class="heading">Menú</span>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="index.php"> <i class="oi oi-home"></i>Inicio </a>
-                    </li>
-                    <li>
-                        <a href="Productos.php"> <i class="oi oi-list"></i>Productos </a>
-                    </li>
-                    <li class="active">
-                        <a href="Consultas.php"> <i class="oi oi-calculator"></i>Consultas </a>
-                    </li>
-                    <li>
-                        <a href="Ventas.php"> <i class="oi oi-dollar"></i>Ventas </a>
-                    </li>
-                    <li>
-                        <a href="Operacion.php"> <i class="oi oi-heart"></i>Operación </a>
-                    </li>
-                        </ul>
-            </nav>
-            <div class="content-inner">
-                <!-- Page Header-->
-                <header class="page-header">
-                    <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Consultas</h2>
-                    </div>
-                </header>
-                <!-- Breadcrumb-->
-                <!-- <div class="breadcrumb-holder container-fluid">
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                        <li class="breadcrumb-item active">Consultas </li>
-                    </ul>
-                </div> -->
-                <!-- Forms Section-->
+     <!--NAVBAR--> 
+    <div class="header">
+    <?php  include '../../src/include/navbar.php';  ?>
+    </div><!--navbar-->
+    
+      <div class="page-content d-flex align-items-stretch">
+      
+      <!--SIDEBAR-->    
+      <?php  include '../../src/include/sidebar.php'; ?>
 
-                
-                <section class="tables">
+      <!--CONTENIDO-->
+      <div class="content-inner">
+      <section class="tables">
 
                 
 
@@ -89,7 +62,7 @@
                                                         <div class="container d-inline">
                                                             <div class='form-inline' id='datetimepicker6' >
                                                                 <label class="mr-2" for="">Ingrese código </label>
-                                                                <input type='text' class="form-control mb-1 mr-sm-2" id="codigo" placeholder="Código" onkeyup="busqueda()">
+                                                                <input type='text' class="form-control mb-1 mr-sm-2 click" id="codigo" placeholder="Código" onkeyup="busqueda()">
                                                                 <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormulario()">Limpiar busqueda</button>
                                                             </div>                                                           
                                                         </div>
@@ -271,33 +244,9 @@
                                                                     <div class="row justify-content-center">
                                                                         <button type="buttom" class="btn btn-primary mb-2 mr-3" onclick="enviarFechaRango()">Buscar por rango</button>
                                                                         <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormularioFecha1()">Limpiar busqueda</button>
-                                                                    </div>
-                                                                        
+                                                                    </div>  
                                                                 </div>
-                                                                <script>
-                                                                    $('.fad-Date').datepicker({
-                                                                        format: "dd/mm/yyyy",
-                                                                        weekStart: 1,
-                                                                        todayBtn: "linked",
-                                                                        language: "es",
-                                                                        todayHighlight: true    
-                                                                        clearBtn: true
-                                                                    });
-                                                                </script>   
-                                                                <script>
-                                                                    $('.fad-Date2').datepicker({
-                                                                        format: "yyyy/mm/dd",
-                                                                        weekStart: 1,
-                                                                        todayBtn: "linked",
-                                                                        language: "es",
-                                                                        todayHighlight: true
-                                                                        clearBtn: true
-                                                                    });
-                                                                </script> 
-
                                                             </div>
-
-                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -720,25 +669,13 @@
                     </div>
                     
                 </section>
-                <!-- Page Footer-->
-                <footer class="main-footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <p>VetPortugal &copy; 2014-2018</p>
-                            </div>
-                            <div class="col-sm-6 text-right">
-                                <p>Diseñado por <a href="https://bootstrapious.com/admin-templates" class="external">G&B</a></p>
-                                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        </div>
-    </div>
-    <!-- JavaScript files-->
-    
-</body>
 
+      <!--FOOTER-->      
+      <?php  include '../../src/include/footer.php'; ?>
+      </div><!--class Content inner...-->
+        
+      </div><!--class Page content...-->
+     
+    </div><!-- class PAGE--> 
+  </body>
 </html>

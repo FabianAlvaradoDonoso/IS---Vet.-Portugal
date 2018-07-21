@@ -18,17 +18,12 @@
             </div>
           <!-- Sidebar Navidation Menus--><span class="heading">Menu</span>
           <ul class="list-unstyled">
-                    <li class="active"><a href="../../index.php"> <i class="icon-home"></i>HOME </a></li>
-                    <li><a href="#"> <i class="icon-grid"></i> Productos </a></li>
-                    <li><a href="#"> <i class="fa fa-bar-chart"></i>Proveedores</a></li>
-                    <li><a href="#"> <i class="icon-padnote"></i>Categorias </a></li>
-                    <li><a href="#"> <i class="icon-padnote"></i>Ventas </a></li>
-                    <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Paquetes </a>
-                      <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                        <li><a href="#">Artículos</a></li>
-                        <li><a href="#">Cirugias</a></li>
-                      </ul>
-                    </li>
+                    <li class="active"><a href="../../index.php"> <i class="icon-home"></i>Principal </a></li>
+                    <li><a href="../../src/pages/Productos.php"> <i class="icon-grid"></i> Productos </a></li>
+                    <li><a href="../../src/pages/Consultas.php"> <i class="fa fa-bar-chart"></i>Consultas</a></li>
+                    <li><a href="../../src/pages/Ventas.php"> <i class="icon-padnote"></i>Ventas </a></li>
+                    <li><a href="../../src/pages/Paquetes.php"> <i class="icon-padnote"></i>Paquetes </a></li>
+                    <li><a href="../../src/pages/Operaciones.php"> <i class="icon-padnote"></i>Operaciones </a></li>                 
                     <li><a href="../../src/login/logout.php"> <i class="icon-interface-windows"></i>SALIR</a></li>
           </ul>
           
