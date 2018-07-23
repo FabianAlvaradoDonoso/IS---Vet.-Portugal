@@ -414,7 +414,7 @@
                                                 <form>
                                                     <div class="form-group"><br>
                                                         <label for="txtNombre">Ingrese Nombre</label>
-                                                        <input type="text" class="form-control" id="txtNombre" aria-describedby="nombre" placeholder="Nombre"  onkeypress="pulsar(event)">
+                                                        <input type="text" class="form-control" id="txtNombre" aria-describedby="nombre" placeholder="Nombre"  onkeypress="pulsarNombre(event)">
                                                     </div>
                                                     <div class = "row justify-content-around">
                                                         <button type="button" class="btn btn-primary" id="btnBusqueda" onclick="buscarNombre()">Buscar</button>
@@ -434,18 +434,18 @@
                                         <div class=" container ">
                                             <div class="row justify-content-between">
                                                 <h5>Venta</h5>
-                                                <div class=" col-2 "><button type="button" class="btn btn-outline-danger btn-sm borrarTodo" data-dismiss="modal" onclick="eliminarTrs()">Borrar Todo</button></div>
+                                                <div class="  "><button type="button" class="btn btn-outline-danger btn-sm " data-dismiss="modal" onclick="eliminarTrs()">Borrar Todo</button></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-body" id="divTab">
                                         <table id="tablaVentas" class='table table-striped table-hover table-sm'>
                                             <thead>
-                                                <th align="center">Codigo</th>
-                                                <th align="center">Nombre</th>
-                                                <th>Precio</th>
-                                                <th>Cantidad</th>
-                                                <th>Opcion</th>
+                                                <th class='text-center'>Codigo</th>
+                                                <th class='text-center'>Nombre</th>
+                                                <th class='text-center'>Precio</th>
+                                                <th class='text-center'>Cantidad</th>
+                                                <th class='text-center'>Opcion</th>
                                             </thead>
                                             <tbody id="tBody"></tbody>
                                         </table>
@@ -453,7 +453,7 @@
                                     <div class="card-footer">
                                         <div class="row justify-content-end">
                                             <p><h5 class=" mt-2">Total: $</h5></p>
-                                            <h5 class="mr-3 mt-2"><div id="precioTotal"></div></h5>
+                                            <h5 class="mr-3 mt-2"><div id="precioTotal">0</div></h5>
                                             <button type="button" class="btn btn-success mr-3" data-dismiss="modal" onclick="array()">Realizar Compra</button>
                                             <div id="prueba"></div>
                                         </div>

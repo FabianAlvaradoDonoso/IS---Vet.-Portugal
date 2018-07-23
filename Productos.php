@@ -860,7 +860,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-success" onclick="modificar()">Modificar</button>
+                                    <button type="button" class="btn btn-success" onclick="modificar2()">Modificar</button>
                                 </div>
                             </div>
                         </div>

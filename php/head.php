@@ -12,7 +12,7 @@
     </script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
-    <script>
+    <!-- <script>
         $('.fad-Date').datepicker({
             format: "dd/mm/yyyy",
             weekStart: 1,
@@ -21,8 +21,7 @@
             todayHighlight: true,
             clearBtn: true
         });
-    </script>
-    <script>$('.fad-Date2').datepicker({
+        $('.fad-Date2').datepicker({
         format: "yyyy/mm/dd",
         weekStart: 1,
         todayBtn: "linked",
@@ -30,11 +29,10 @@
         todayHighlight: true,
         clearBtn: true
     });
-    </script>
+    </script> -->
     
     <!-- Main File-->
     <script src="js/front.js"></script>
-    <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <!-- Fontastic Custom icon font-->
@@ -59,3 +57,8 @@
     <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
     <script type="text/javascript" src="JavaScript/Funcion2.js"></script>
     <script type="text/javascript" src="JavaScript/Funcion1.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/solid.css" integrity="sha384-S2gVFTIn1tJ/Plf+40+RRAxBCiBU5oAMFUJxTXT3vOlxtXm7MGjVj62mDpbujs4C" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/regular.css" integrity="sha384-QNorH84/Id/CMkUkiFb5yTU3E/qqapnCVt6k5xh1PFIJ9hJ8VfovwwH/eMLQTjGS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/brands.css" integrity="sha384-SYNjKRRe+vDW0KSn/LrkhG++hqCLJg9ev1jIh8CHKuEA132pgAz+WofmKAhPpTR7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/fontawesome.css" integrity="sha384-0b7ERybvrT5RZyD80ojw6KNKz6nIAlgOKXIcJ0CV7A6Iia8yt2y1bBfLBOwoc9fQ" crossorigin="anonymous">

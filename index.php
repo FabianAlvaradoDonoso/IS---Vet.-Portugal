@@ -8,11 +8,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
     <!-- Fontastic Custom icon font-->
     <link rel="stylesheet" href="css/fontastic.css">
     <!-- Google fonts - Poppins -->
@@ -469,7 +467,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <!-- Statistics -->
-                            <div class="statistics col-lg-3 col-12" id="jyfch">
+                            <div class="statistics col-lg-3 col-12">
                                 <div class="statistic d-flex align-items-center bg-white has-shadow">
                                     <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
                                     <div class="text"><strong>234</strong><br><small>Clinico</small></div>

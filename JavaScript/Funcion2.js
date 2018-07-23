@@ -1,5 +1,11 @@
 //===========================M O D A L S====================================================
 
+function nuevoPaquete(){
+    borrarContenidoModal();
+    $("#modalAgregarPaquete").modal();
+    calcular();
+}
+
 function mostrarModal(codigo, categoria, proveedor, nombre, bodega){
     $("#modalEliminar").modal();
     document.getElementById("txtCodigoModalE").value=codigo;
@@ -141,6 +147,53 @@ function buscarSelect(select, buscar)
 }
 
 function modificar(){
+    var texto1 = document.getElementById("txtCodigoModal").value;
+    var texto2 = document.getElementById("cbCategoriaModal").value;
+    var texto3 = document.getElementById("cbProveedorModal").value;
+    var texto4 = document.getElementById("txtNombreModal").value;
+    var texto5 = document.getElementById("nudPrecioVentaModal").value;
+    var texto6 = document.getElementById("nudPrecioNetoModal").value;
+    var texto7 = document.getElementById("dtpFechaVencModal").value;
+    var texto8 = document.getElementById("dtpFechaAdqModal").value;
+    var texto9 = document.getElementById("nudStockMinModal").value;
+    var texto10 = document.getElementById("nudStockActModal").value;
+    var texto11 = document.getElementById("cbBodegaModal").value;
+
+
+    if(texto8 == '' || new Date(texto8).getTime() > new Date(texto7).getTime() ||texto5 < 0 || texto5 == '' || texto4 == '' || texto6 < 0 || texto6 == '' || texto9 <= 0 || texto9 == '' || texto10 < 0 || texto10 == '')
+    {
+        $("#modalError").modal();
+        document.getElementById("cerrarError").focus();
+    }
+    else
+    {
+
+        var parametros = {
+            "txtCodigoModal" : texto1,
+            "cbCategoriaModal" : texto2,
+            "cbProveedorModal" : texto3,
+            "txtNombreModal" : texto4,
+            "nudPrecioVentaModal" : texto5,
+            "nudPrecioNetoModal" : texto6,
+            "dtpFechaVencModal" : texto7,
+            "dtpFechaAdqModal" : texto8,
+            "nudStockMinModal" : texto9,
+            "nudStockActModal" : texto10,
+            "cbBodegaModal" : texto11
+        };
+        $.ajax({
+            data: parametros,
+            url: "AJAX/ModificaProductoAJAX.php",
+            type: "POST",
+            success: function(response){
+                $("#modalModificar1").modal("hide");
+                $("#modalBien").modal();
+                document.getElementById("cerrarBien").focus();
+            }
+        });
+    }
+}
+function modificar2(){
     var texto1 = document.getElementById("txtCodigoModal2").value;
     var texto2 = document.getElementById("cbCategoriaModal2").value;
     var texto3 = document.getElementById("cbProveedorModal2").value;
@@ -311,7 +364,7 @@ function busqueda(){
         type: "POST",
         success: function(response){
             $("#datos").html(response);
-            pulsar(event);
+            pulsar2(event);
         }
     });
 }
@@ -331,7 +384,7 @@ function busquedaNombre(){
         }
     });
 }
-function pulsar(e) {
+function pulsar2(e) {
     if (e.keyCode === 13 && !e.shiftKey) {
         e.preventDefault();
         busqueda();   
@@ -391,7 +444,7 @@ function limpiarFormularioFecha1() {
     document.getElementById("fechaRHasta").value = "";
     //document.getElementById("fechaEsp").focus();
     document.getElementById("datos1").innerHTML='';
-    limpiaTodo()
+    limpiarTodo()
 }
 function limpiarFormularioFecha2() {
     document.getElementById("fechaVEsp").value = "";
@@ -399,7 +452,7 @@ function limpiarFormularioFecha2() {
     document.getElementById("fechaVRHasta").value = "";
     //document.getElementById("fechaEsp").focus();
     document.getElementById("datos2").innerHTML='';
-    limpiaTodo()
+    limpiarTodo()
 }
 
 function limpiarFormulario() {
@@ -407,7 +460,7 @@ function limpiarFormulario() {
     //busqueda();
     document.getElementById("codigo").focus();
     document.getElementById("datos").innerHTML='';
-    limpiaTodo();
+    limpiarTodo();
 }
 function limpiarFormulario2() {
     $('#otroSelect option').prop('selected', function() {
@@ -426,11 +479,10 @@ function limpiarFormularioNombre() {
     busquedaNombre();
     document.getElementById("nombre1").focus();
     document.getElementById("datosNombre").innerHTML='';
-    limpiaTodo()
+    limpiarTodo()
 }
-function limpiaTodo(){
+function limpiarTodo(){
     document.getElementById("codigo").value="";
-    document.getElementById("nombre1").value="";
     document.getElementById("fechaVEsp").value="";
     document.getElementById("fechaVRDesde").value="";
     document.getElementById("fechaVRHasta").value="";
