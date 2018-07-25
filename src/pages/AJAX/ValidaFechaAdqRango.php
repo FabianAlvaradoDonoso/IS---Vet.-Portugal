@@ -1,19 +1,18 @@
 <?php
-    include '../src/cnx.php';
+    include '../../cnx.php';
     if(mysqli_connect_errno()){
 		echo "Error al conectar a la BBDD";
 		exit();
 	}
-
+    
 	mysqli_set_charset($conexion, "utf8");
 
     $tmp="";
     //$sql="SELECT * FROM `productos2`";
     
-    if($_POST["otroSelect"] != "" and $_POST["otro2Select"] != ""){
-        $seleccion2 = $_POST["otro2Select"] ;
-        $sql="SELECT p.CODIGO, c.NOMBRE_CATEGORIA AS CATEGORIA, r.NOMBRE_PROVEEDOR AS PROVEEDOR, p.NOMBRE, p.PRECIO_VENTA, p.PRECIO_NETO, p.FECHA_VENC, p.FECHA_ADQ, p.STOCK_MIN, p.STOCK_ACT, b.NOMBRE_BODEGA AS BODEGA FROM productos p INNER JOIN bodega b ON (p.ID_BODEGA = b.ID_BODEGA) INNER JOIN categoria c ON ( p.ID_CATEGORIA = c.ID_CATEGORIA ) INNER JOIN proveedor r ON ( p.ID_PROVEEDOR = r.ID_PROVEEDOR ) WHERE p.ID_".$_POST["otroSelect"]." = '$seleccion2'";
-        $tmp="<div class='table-responsive'><table class='table table-striped table-hover table-sm '>
+    if($_POST["fechaRDesde"] != "" and $_POST["fechaRHasta"] != ""){
+        $sql="SELECT p.CODIGO, c.NOMBRE_CATEGORIA AS CATEGORIA, r.NOMBRE_PROVEEDOR AS PROVEEDOR, p.NOMBRE, p.PRECIO_VENTA, p.PRECIO_NETO, p.FECHA_VENC, p.FECHA_ADQ, p.STOCK_MIN, p.STOCK_ACT, b.NOMBRE_BODEGA AS BODEGA FROM productos p INNER JOIN bodega b ON (p.ID_BODEGA = b.ID_BODEGA) INNER JOIN categoria c ON ( p.ID_CATEGORIA = c.ID_CATEGORIA ) INNER JOIN proveedor r ON ( p.ID_PROVEEDOR = r.ID_PROVEEDOR ) WHERE p.FECHA_ADQ BETWEEN '".$_POST["fechaRDesde"]."' and '".$_POST["fechaRHasta"]."'";
+        $tmp="<br><div class='table-responsive'><table class='table table-striped table-hover table-sm '>
         <thead align='center' class='thead-light'><tr>
         <th align='center'>CODIGO</th>
         <th align='center'>CATEGORIA</th>

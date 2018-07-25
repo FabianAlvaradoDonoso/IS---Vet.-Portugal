@@ -1,5 +1,5 @@
 <?php
-    include '../src/cnx.php';
+    include '../../cnx.php';
     if(mysqli_connect_errno()){
 		echo "Error al conectar a la BBDD";
 		exit();
@@ -9,7 +9,7 @@
 
     $tmp="";
     //$sql="SELECT * FROM productos2";
-    $sql="DELETE FROM productos WHERE CODIGO = '".$_POST["txtCodigoModalE"]."'";
+    $sql="DELETE FROM paquetito WHERE ID_PAQUETITO = '".$_POST["id"]."'";
     
     
     $res=mysqli_query($conexion,$sql);

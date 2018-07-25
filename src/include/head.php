@@ -13,25 +13,7 @@
     </script>
     <script src="../../vendor/chart.js/Chart.min.js"></script>
     <script src="../../vendor/jquery-validation/jquery.validate.min.js"></script>
-    <script>
-        $('.fad-Date').datepicker({
-            format: "dd/mm/yyyy",
-            weekStart: 1,
-            todayBtn: "linked",
-            language: "es",
-            todayHighlight: true,
-            clearBtn: true
-        });
-    </script>
-    <script>$('.fad-Date2').datepicker({
-        format: "yyyy/mm/dd",
-        weekStart: 1,
-        todayBtn: "linked",
-        language: "es",
-        todayHighlight: true,
-        clearBtn: true
-    });
-    </script>
+
     
     <!-- Main File-->
     <script src="../../public/js/front.js"></script>
@@ -60,5 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../public/css/daterangepicker.css" />
     <script type="text/javascript" src="../../JavaScript/Funcion2.js"></script>
     <script type="text/javascript" src="../../JavaScript/Funcion1.js"></script>
+    <script type="text/javascript" src="../../public/js/front.js"></script>
+    <script type="text/javascript" src="../../public/js/charts-home.js"></script>
   </head>
   

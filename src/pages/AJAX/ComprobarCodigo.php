@@ -1,5 +1,5 @@
 <?php
-    include '../src/cnx.php';
+    include '../../cnx.php';
     if(mysqli_connect_errno()){
 		echo "Error al conectar a la BBDD";
 		exit();

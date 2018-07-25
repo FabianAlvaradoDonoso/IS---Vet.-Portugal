@@ -24,8 +24,7 @@
 
       <!--CONTENIDO-->
       <div class="content-inner">
-        <h1 >  AQUÍ SE CARGARÁ PRINCIPAL.PHP</h1>
-        <h2>    TOOA LA MAGIA </h2>
+      <?php include 'src/pages/Principal.php'?>
 
       <!--FOOTER-->      
       <?php  include 'src/include/footer.php'; ?>

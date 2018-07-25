@@ -23,7 +23,7 @@
                     <li><a href="../../src/pages/Consultas.php"> <i class="fa fa-bar-chart"></i>Consultas</a></li>
                     <li><a href="../../src/pages/Ventas.php"> <i class="icon-padnote"></i>Ventas </a></li>
                     <li><a href="../../src/pages/Paquetes.php"> <i class="icon-padnote"></i>Paquetes </a></li>
-                    <li><a href="../../src/pages/Operaciones.php"> <i class="icon-padnote"></i>Operaciones </a></li>                 
+                    <li><a href="../../src/pages/Operaciones.php"> <i class="icon-padnote"></i>Configuraciones </a></li>                 
                     <li><a href="../../src/login/logout.php"> <i class="icon-interface-windows"></i>SALIR</a></li>
           </ul>
           
