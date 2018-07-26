@@ -24,6 +24,12 @@
 
       <!--CONTENIDO-->
       <div class="content-inner">
+          <!-- Page Header-->
+          <header class="page-header">
+            <div class="container-fluid">
+              <h2 class="no-margin-bottom">Ventas</h2>
+            </div>
+          </header>
       <section class="forms">
                     <div id="tabla" class="container-fluid">
                         <div class="row">

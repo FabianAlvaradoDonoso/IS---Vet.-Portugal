@@ -24,6 +24,12 @@
 
       <!--CONTENIDO-->
       <div class="content-inner">
+          <!-- Page Header-->
+          <header class="page-header">
+            <div class="container-fluid">
+              <h2 class="no-margin-bottom">Consultas</h2>
+            </div>
+          </header>
       <section class="tables">
 
                 
@@ -521,7 +527,7 @@
                                     <p align="center"></p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cerrarBien" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
+                                    <button type="button" id="cerrarBien" class="btn btn-success" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
                                 </div>
                             </div>
                         
@@ -661,7 +667,8 @@
                                     <p align="center"></p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cerrarBienE" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
+                                    <button type="button" id="cerrarBienE" class="btn btn-success
+                                    " data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
                                 </div>
                             </div>
                         

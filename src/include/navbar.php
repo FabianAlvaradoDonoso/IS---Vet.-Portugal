@@ -10,7 +10,7 @@
               <div class="navbar-holder d-flex align-items-center justify-content-between">
                 <!-- Navbar Header-->
                 <div class="navbar-header">
-                  <!-- Navbar Brand --><a href="index.php" class="navbar-brand d-none d-sm-inline-block">
+                  <!-- Navbar Brand --><a href="../../index.php" class="navbar-brand d-none d-sm-inline-block">
                     <div class="brand-text d-none d-lg-inline-block"><span>Veterinaria </span><strong> Portugal</strong></div>
                     <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>VP</strong></div></a>
                   <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
@@ -25,3 +25,4 @@
               </div>
             </div>
           </nav>
+          <script> <link rel="stylesheet" href="../../public/css/font-awesome.min.css"></script>

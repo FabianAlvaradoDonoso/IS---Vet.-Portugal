@@ -26,6 +26,12 @@
 
       <!--CONTENIDO-->
       <div class="content-inner">
+          <!-- Page Header-->
+          <header class="page-header">
+            <div class="container-fluid">
+              <h2 class="no-margin-bottom">Productos</h2>
+            </div>
+          </header>
       <section class="tables">
                     <div id="tabla" class="container-fluid">
                         <div class="row">
@@ -34,9 +40,8 @@
                                 <div class="card-header" style="border">
                                     <div class=" container ">
                                         <div class="row justify-content-between">
-                                        <div class="col-3"><h4><strong>Productos</strong></h4></div>
-                                            
-                                        <div class=" col-1 "><button type="button" class="btn btn-primary btn-sm" onclick="modalNuevo()">Nuevo</button></div>
+                                            <div class="col-3"><h4><strong>Items</strong></h4></div>                                            
+                                            <div class=" col-1 "><button type="button" class="btn btn-primary btn-sm" onclick="modalNuevo()">Nuevo</button></div>
                                         </div>
                                     </div>
                                 </div>

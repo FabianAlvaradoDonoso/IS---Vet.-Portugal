@@ -24,6 +24,12 @@
 
       <!--CONTENIDO-->
       <div class="content-inner">
+          <!-- Page Header-->
+          <header class="page-header">
+            <div class="container-fluid">
+              <h2 class="no-margin-bottom">Paquetes</h2>
+            </div>
+          </header>
       <section class="forms">
                     <div id="tabla" class="container-fluid">
                         <div class="row">
@@ -516,7 +522,7 @@
                                     <p>Se modificaron correctamente los datos.</p>
                                 </div>
                                 <div class='modal-footer'>      
-                                    <button type='button' id='cerrarExito' class='btn btn-danger' data-dismiss='modal' onclick=''>Cerrar</button>
+                                    <button type='button' id='cerrarExito' class='btn btn-success' data-dismiss='modal' onclick=''>Cerrar</button>
                                 </div>
                             </div>
                         </div>
@@ -559,7 +565,7 @@
                                 <div class='modal-footer'>    
                                     <div class="container">
                                         <div class="row justify-content-end">  
-                                            <button type='button' id='cerrarExito' class='btn btn-secondary' data-dismiss='modal' onclick='esconderModal()'>Cerrar</button>
+                                            <button type='button' id='cerrarExito' class='btn btn-success' data-dismiss='modal' onclick='esconderModal()'>Cerrar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -608,7 +614,7 @@
                                     <p>Los productos fueron descontados correctamente del inventario.</p>
                                 </div>
                                 <div class='modal-footer'>      
-                                    <button type='button' id='cerrarExito' class='btn btn-danger' data-dismiss='modal' onclick=eliminarTrs()>Close</button>
+                                    <button type='button' id='cerrarExito' class='btn btn-success' data-dismiss='modal' onclick=eliminarTrs()>Close</button>
                                 </div>
                             </div>
                         </div>

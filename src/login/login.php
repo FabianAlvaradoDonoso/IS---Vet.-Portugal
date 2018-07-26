@@ -10,6 +10,9 @@ header("location:../../index.php");
 }
 
 ?>
+<!--Estilo-->
+<link rel="stylesheet" href="../../public/css/style.sea.css" id="theme-stylesheet">
+
 <body>
     <div class="page login-page">
         <div class="container d-flex align-items-center">
@@ -20,9 +23,9 @@ header("location:../../index.php");
                         <div class="info d-flex align-items-center">
                             <div class="content">
                                 <div class="logo">
-                                    <h1>VetPortugal</h1>
+                                    <h1>Control de Inventario</h1>
                                 </div>
-                                <p>Centro veterinario integral.</p>
+                                <p>Centro veterinario.</p>
                             </div>
                         </div>
                     </div>
