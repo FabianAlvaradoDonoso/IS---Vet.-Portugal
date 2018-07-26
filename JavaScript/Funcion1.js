@@ -161,8 +161,8 @@ function crearPaquete(){
 
     if(nombre == '' || tipoPaquete == '' || precio == 0 || filas.length == 0)
     {
-        $("#modalAgregarPaquete").modal("hide");
         $("#modalPaqueteError").modal();
+        //$("#modalAgregarPaquete").modal("hide");
     }else{
         if(tipoPaquete == 'Cirugia'){
             tipoPaquete = true;
@@ -368,6 +368,9 @@ function Comprobar(cantidad, codigo){
             }
         }
     });
+    if(cantidad <= 0){
+        bienMal = null;
+    }
     return bienMal;
     
 }
@@ -596,22 +599,20 @@ function mandarProductosPaquete2(idPaquete){
 }
 
 function crearPaquete2(){
-    eliminarProductosPaquete(document.getElementById("txtCodigoPaqueteModificar").value);
-    eliminarPaquete(document.getElementById("txtCodigoPaqueteModificar").value);
     var nombre = document.getElementById("txtNombrePaqueteModificar").value.replace(/["']/g, "");
     var precio = document.getElementById("txtPrecioPaqueteModificar").value;
     var tipoPaquete = document.getElementById("cbPaqueteModificar").value;
     var favorito = document.getElementById("favoritoModificar").checked;
     var color;
     var filas = $('#tBodyModificar').find('tr');
-
-
+    
+    
     if(precio == ''){precio = document.getElementById("precioTotalModificar").innerHTML.replace('.', '')}
-
+    
     if(nombre == '' || tipoPaquete == '' || precio == 0 || filas.length == 0)
     {
-        $("#modalAgregarPaquete").modal("hide");
         $("#modalPaqueteError").modal();
+        //$("#modalAgregarPaquete").modal("hide");
     }else{
         if(tipoPaquete == 'Cirugia'){
             tipoPaquete = true;
@@ -622,6 +623,8 @@ function crearPaquete2(){
         }      
         
         if(!comprobarPaqueteExistente(nombre)){
+            eliminarProductosPaquete(document.getElementById("txtCodigoPaqueteModificar").value);
+            eliminarPaquete(document.getElementById("txtCodigoPaqueteModificar").value);
             var parametros = {
                 "nombre" : nombre,
                 "precio" : precio,

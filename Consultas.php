@@ -328,6 +328,7 @@
                                                     </div>
                                                 </div>
                                                 <div id="datosOtro"></div>
+                                                <div id="datosConsulta"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -434,16 +435,20 @@
                                             <div class="col-md-3 mb-3">
                                                 <label class="mr-2 " for="">Fecha Vencimiento </label>
                                                 <div class='input-group date fad-Date2' id='' >
-                                                    <input type='text' class="form-control" id="dtpFechaVencModal" placeholder="Fecha" readonly value="" required>
+                                                    <input readonly type='text' class="form-control" id="dtpFechaVencModal" placeholder="Fecha"  value="" required>
                                                     <span class="input-group-addon">
                                                         <span class="oi oi-calendar"></span>
                                                     </span>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value='' id="modFechaConsultas" onchange="" checked>
+                                                    <label class="form-check-label" for="defaultCheck1">Sin fecha Venc.</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 mb-3">
                                                 <label class="mr-2 " for="">Fecha Adquisición </label>
                                                 <div class='input-group date fad-Date2' id='' >
-                                                    <input type='text' class="form-control" id="dtpFechaAdqModal" placeholder="Fecha" readonly value="" required>
+                                                    <input readonly type='text' class="form-control" id="dtpFechaAdqModal" placeholder="Fecha"  value="" required>
                                                     <span class="input-group-addon">
                                                         <span class="oi oi-calendar"></span>
                                                     </span>

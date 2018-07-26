@@ -34,7 +34,6 @@
     $res=mysqli_query($conexion,$sql);
     while ($row=mysqli_fetch_array($res)){
         $tmp.= "<tr>
-                    <td width='100px'><button type='button' class='btn btn-primary btn-sm' >Clickeame >//////<</button></td>
                     <td>".$row["NOMBRE_PAQUETITO"]."</td>
                     <td width='150px'>$".number_format($row["PRECIO_PAQUETITO"], 0, ',', '.')."</td>
                     <td width='100px'>".$row["CANTIDAD"]."</td>

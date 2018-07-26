@@ -5,6 +5,122 @@
     <?php include_once 'php/head.php';?>
 </head>
 <style>
+    .switch {
+    font-size: 1rem;
+    position: relative;
+    }
+    .switch input {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    background: none;
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    padding: 0;
+    }
+    .switch input + label {
+    position: relative;
+    min-width: calc(calc(2.375rem * .8) * 2);
+    border-radius: calc(2.375rem * .8);
+    height: calc(2.375rem * .8);
+    line-height: calc(2.375rem * .8);
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    vertical-align: middle;
+    text-indent: calc(calc(calc(2.375rem * .8) * 2) + .5rem);
+    }
+    .switch input + label::before,
+    .switch input + label::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(calc(2.375rem * .8) * 2);
+    bottom: 0;
+    display: block;
+    }
+    .switch input + label::before {
+    right: 0;
+    background-color: #dee2e6;
+    border-radius: calc(2.375rem * .8);
+    transition: 0.2s all;
+    }
+    .switch input + label::after {
+    top: 2px;
+    left: 2px;
+    width: calc(calc(2.375rem * .8) - calc(2px * 2));
+    height: calc(calc(2.375rem * .8) - calc(2px * 2));
+    border-radius: 50%;
+    background-color: white;
+    transition: 0.2s all;
+    }
+    .switch input:checked + label::before {
+    background-color: #08d;
+    }
+    .switch input:checked + label::after {
+    margin-left: calc(2.375rem * .8);
+    }
+    .switch input:focus + label::before {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 136, 221, 0.25);
+    }
+    .switch input:disabled + label {
+    color: #868e96;
+    cursor: not-allowed;
+    }
+    .switch input:disabled + label::before {
+    background-color: #e9ecef;
+    }
+    .switch.switch-sm {
+    font-size: 0.875rem;
+    }
+    .switch.switch-sm input + label {
+    min-width: calc(calc(1.9375rem * .8) * 2);
+    height: calc(1.9375rem * .8);
+    line-height: calc(1.9375rem * .8);
+    text-indent: calc(calc(calc(1.9375rem * .8) * 2) + .5rem);
+    }
+    .switch.switch-sm input + label::before {
+    width: calc(calc(1.9375rem * .8) * 2);
+    }
+    .switch.switch-sm input + label::after {
+    width: calc(calc(1.9375rem * .8) - calc(2px * 2));
+    height: calc(calc(1.9375rem * .8) - calc(2px * 2));
+    }
+    .switch.switch-sm input:checked + label::after {
+    margin-left: calc(1.9375rem * .8);
+    }
+    .switch.switch-lg {
+    font-size: 1.25rem;
+    }
+    .switch.switch-lg input + label {
+    min-width: calc(calc(3rem * .8) * 2);
+    height: calc(3rem * .8);
+    line-height: calc(3rem * .8);
+    text-indent: calc(calc(calc(3rem * .8) * 2) + .5rem);
+    }
+    .switch.switch-lg input + label::before {
+    width: calc(calc(3rem * .8) * 2);
+    }
+    .switch.switch-lg input + label::after {
+    width: calc(calc(3rem * .8) - calc(2px * 2));
+    height: calc(calc(3rem * .8) - calc(2px * 2));
+    }
+    .switch.switch-lg input:checked + label::after {
+    margin-left: calc(3rem * .8);
+    }
+    .switch + .switch {
+    margin-left: 1rem;
+    }
+
+
+    .dropdown-menu {
+    margin-top: .75rem;
+    }
     nav.side-navbar {
         background: #fff;
         min-width: 250px;
@@ -362,7 +478,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="card-body">
+                                <div class="card-body" id="card1">
                                     <div class="table-responsive">
                                             
                                         <table class='table table-striped table-hover table-sm'>
@@ -375,15 +491,69 @@
                                                     $pagina = isset($_GET['pagina'])?$_GET['pagina']:1;;
                                                     
                                                     $empezarDesde = ($pagina - 1) * $tamanoPaginas;
-                                                    $sql_total="SELECT p.CODIGO, c.NOMBRE_CATEGORIA AS CATEGORIA, r.NOMBRE_PROVEEDOR AS PROVEEDOR, p.NOMBRE, p.PRECIO_VENTA, p.PRECIO_NETO, p.FECHA_VENC, p.FECHA_ADQ, p.STOCK_MIN, p.STOCK_ACT, b.NOMBRE_BODEGA AS BODEGA FROM productos p INNER JOIN bodega b ON (p.ID_BODEGA = b.ID_BODEGA) INNER JOIN categoria c ON ( p.ID_CATEGORIA = c.ID_CATEGORIA ) INNER JOIN proveedor r ON ( p.ID_PROVEEDOR = r.ID_PROVEEDOR )";
+                                                    $sql_total="SELECT
+                                                                p.CODIGO,
+                                                                c.NOMBRE_CATEGORIA AS CATEGORIA,
+                                                                r.NOMBRE_PROVEEDOR AS PROVEEDOR,
+                                                                p.NOMBRE,
+                                                                p.PRECIO_VENTA,
+                                                                p.PRECIO_NETO,
+                                                                p.FECHA_VENC,
+                                                                p.FECHA_ADQ,
+                                                                p.STOCK_MIN,
+                                                                p.STOCK_ACT,
+                                                                b.NOMBRE_BODEGA AS BODEGA,
+                                                                IF((p.FECHA_VENC BETWEEN CURDATE() AND ADDDATE(CURDATE(), INTERVAL 13 DAY)),'table-warning','') AS POR_VENCER,
+                                                                IF(p.FECHA_VENC < CURDATE(), 'table-danger', '') AS VENCIDO,
+                                                                IF(p.FECHA_VENC < CURDATE(), 'danger', 'danger') AS VENCIDO2 
+                                                            FROM
+                                                                productos p
+                                                            INNER JOIN bodega b ON
+                                                                (p.ID_BODEGA = b.ID_BODEGA)
+                                                            INNER JOIN categoria c ON
+                                                                (
+                                                                    p.ID_CATEGORIA = c.ID_CATEGORIA
+                                                                )
+                                                            INNER JOIN proveedor r ON
+                                                                (
+                                                                    p.ID_PROVEEDOR = r.ID_PROVEEDOR
+                                                                ) ";
+                                                                      
                                                     $resultado = $base->prepare($sql_total);
                                                     $resultado->execute(array());
                                                     $numFilas=$resultado->rowCount();
                                                     $totalPaginas = ceil($numFilas/$tamanoPaginas);
                                                 
                                                     $resultado->closeCursor();
-                                                    $sqlLimit="SELECT p.CODIGO, c.NOMBRE_CATEGORIA AS CATEGORIA, r.NOMBRE_PROVEEDOR AS PROVEEDOR, p.NOMBRE, p.PRECIO_VENTA, p.PRECIO_NETO, p.FECHA_VENC, p.FECHA_ADQ, p.STOCK_MIN, p.STOCK_ACT, b.NOMBRE_BODEGA AS BODEGA FROM productos p INNER JOIN bodega b ON (p.ID_BODEGA = b.ID_BODEGA) INNER JOIN categoria c ON ( p.ID_CATEGORIA = c.ID_CATEGORIA ) INNER JOIN proveedor r ON ( p.ID_PROVEEDOR = r.ID_PROVEEDOR ) LIMIT $empezarDesde,$tamanoPaginas";
-                                                    
+                                                    $sqlLimit="SELECT
+                                                                    p.CODIGO,
+                                                                    c.NOMBRE_CATEGORIA AS CATEGORIA,
+                                                                    r.NOMBRE_PROVEEDOR AS PROVEEDOR,
+                                                                    p.NOMBRE,
+                                                                    p.PRECIO_VENTA,
+                                                                    p.PRECIO_NETO,
+                                                                    p.FECHA_VENC,
+                                                                    p.FECHA_ADQ,
+                                                                    p.STOCK_MIN,
+                                                                    p.STOCK_ACT,
+                                                                    b.NOMBRE_BODEGA AS BODEGA,
+                                                                    IF((p.FECHA_VENC BETWEEN CURDATE() AND ADDDATE(CURDATE(), INTERVAL 13 DAY)),'table-warning','') AS POR_VENCER,
+                                                                    IF(p.FECHA_VENC < CURDATE(), 'table-danger', '') AS VENCIDO,
+                                                                    IF(p.FECHA_VENC < CURDATE(), 'danger', 'danger') AS VENCIDO2 
+                                                                FROM
+                                                                    productos p
+                                                                INNER JOIN bodega b ON
+                                                                    (p.ID_BODEGA = b.ID_BODEGA)
+                                                                INNER JOIN categoria c ON
+                                                                    (
+                                                                        p.ID_CATEGORIA = c.ID_CATEGORIA
+                                                                    )
+                                                                INNER JOIN proveedor r ON
+                                                                    (
+                                                                        p.ID_PROVEEDOR = r.ID_PROVEEDOR
+                                                                    )
+                                                                LIMIT $empezarDesde, $tamanoPaginas ";
+
                                                     $resultado = $base->prepare($sqlLimit);
                                                     $resultado->execute(array());
                                                     echo "<thead>
@@ -412,26 +582,39 @@
                                                         $nombre = $fila["NOMBRE"];
                                                         $precioVenta = $fila["PRECIO_VENTA"];
                                                         $precioNeto = $fila["PRECIO_NETO"];
-                                                        $fechaVenc = date_format(date_create($fila["FECHA_VENC"]), 'Y/m/d');
+                                                        $fechaVenc3;
+                                                        if($fila["FECHA_VENC"]== null){
+                                                            $fechaVenc = '-';
+                                                            $fechaVenc2 = '-';
+                                                            $fechaVenc3 = '1';
+                                                        }else{
+                                                            $fechaVenc = date_format(date_create($fila["FECHA_VENC"]), 'Y/m/d');
+                                                            $fechaVenc2 = date_format(date_create($fila["FECHA_VENC"]), 'Y / m / d');
+                                                            $fechaVenc3 = '0';
+                                                        } 
                                                         $fechaAdq = date_format(date_create($fila["FECHA_ADQ"]), 'Y/m/d');
                                                         $stockMin = $fila["STOCK_MIN"];
                                                         $stockAct = $fila["STOCK_ACT"];
                                                         $bodega = $fila["BODEGA"];
+                                                        $class = $fila["POR_VENCER"];
+                                                        if($class == ''){$class = $fila["VENCIDO"];}     
+                                                        $class2 = $fila["VENCIDO2"];
+                                                        setlocale(LC_MONETARY, 'en_US');
 
-                                                        echo "<tr>";
-                                                        echo "<td>" . $fila["CODIGO"] . "</td>";
-                                                        echo "<td>" . $fila["CATEGORIA"] . "</td>";
-                                                        echo "<td>" . $fila["PROVEEDOR"] . "</td>";
-                                                        echo "<td>" . $fila["NOMBRE"] . "</td>";
-                                                        echo "<td align='right'>$ " . $fila["PRECIO_VENTA"] . "</td>";
-                                                        echo "<td align='right'>$ " . $fila["PRECIO_NETO"] . "</td>";
-                                                        echo "<td>" . date_format(date_create($fila["FECHA_VENC"]), 'd-m-Y') . "</td>";
-                                                        echo "<td>" . date_format(date_create($fila["FECHA_ADQ"]), 'd-m-Y') . "</td>";
-                                                        echo "<td>" . $fila["STOCK_MIN"] . "</td>";
-                                                        echo "<td>" . $fila["STOCK_ACT"] . "</td>";
-                                                        echo "<td>" . $fila["BODEGA"] . "</td>";
-                                                        echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificar2(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\")'><span class='oi oi-pencil'></span></button>
-                                                                                 <button type='button' class='btn btn-outline-danger btn-sm' onclick='mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")'><span class='oi oi-trash'></span></button></td>";
+                                                        echo "<tr class='".$class."'>";
+                                                        echo "<td>" . $codigo . "</td>";
+                                                        echo "<td>" . $categoria . "</td>";
+                                                        echo "<td>" . $proveedor . "</td>";
+                                                        echo "<td>" . $nombre . "</td>";
+                                                        echo "<td align='right'>$ " . number_format($fila["PRECIO_VENTA"], 0, ',', '.') . "</td>";
+                                                        echo "<td align='right'>$ " . number_format($fila["PRECIO_VENTA"], 0, ',', '.') . "</td>";
+                                                        echo "<td>" . $fechaVenc2 . "</td>";
+                                                        echo "<td>" . date_format(date_create($fechaAdq), 'Y / m / d') . "</td>";
+                                                        echo "<td>" . $stockMin . "</td>";
+                                                        echo "<td>" . $stockAct . "</td>";
+                                                        echo "<td>" . $bodega . "</td>";
+                                                        echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificar2(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\", \"$fechaVenc3\")'><span class='oi oi-pencil'></span></button>
+                                                                                 <button type='button' class='btn btn-outline-".$class2." btn-sm' onclick='mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")'><span class='oi oi-trash'></span></button></td>";
                                                         
                                                         echo "</tr>";
 
@@ -615,10 +798,14 @@
                                             <div class="col-md-3 mb-3">
                                                 <label class="mr-2 " for="">Fecha Vencimiento </label>
                                                 <div class='input-group date fad-Date2' id='' >
-                                                    <input type='text' class="form-control" id="dtpFechaVencModalAgregar" placeholder="Fecha" readonly value="" required>
+                                                    <input  readonly type='text' class="form-control" id="dtpFechaVencModalAgregar" placeholder="Fecha"  value='' required>
                                                     <span class="input-group-addon">
                                                         <span class="oi oi-calendar"></span>
                                                     </span>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value='' id="modFechaAgregar" onchange="" checked>
+                                                    <label class="form-check-label" for="defaultCheck1">Sin fecha Venc.</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 mb-3">
@@ -701,9 +888,9 @@
                                 <div class="modal-body">
                                     <form class="needs-validation" novalidate action="" method="">
                                         <div class="form-row">
-                                            <div class="col-md-4 mb-3">
+                                            <div class="col-md-4 mb-1">
                                                 <label for="validationCustom01">Codigo</label>
-                                                <input readonly type="text" class="form-control" id="txtCodigoModal2" name="Codigo" placeholder="Codigo" value="" required>
+                                                <input  readonly type="text" class="form-control" id="txtCodigoModal2" name="Codigo" placeholder="Codigo" value="" required>
                                                 <div class="valid-feedback"></div>
                                             </div>
                                             <div class="col-md-4 mb-3">
@@ -788,10 +975,14 @@
                                             <div class="col-md-3 mb-3">
                                                 <label class="mr-2 " for="">Fecha Vencimiento </label>
                                                 <div class='input-group date fad-Date2' id='' >
-                                                    <input type='text' class="form-control" id="dtpFechaVencModal2" placeholder="Fecha" readonly value="" required>
+                                                    <input readonly type='text' class="form-control" id="dtpFechaVencModal2" placeholder="Fecha"  value="" required>
                                                     <span class="input-group-addon">
                                                         <span class="oi oi-calendar"></span>
                                                     </span>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value='' id="modFecha" onchange="" checked>
+                                                    <label class="form-check-label" for="defaultCheck1">Sin fecha Venc.</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 mb-3">

@@ -18,11 +18,15 @@
     $texto10 = $_POST[("nudStockActModalAgregar")];
     $texto11 = $_POST[("cbBodegaModalAgregar")];
 
-    $tmp="";
-    //$sql="SELECT * FROM productos2";
     $sql="INSERT INTO productos(CODIGO, ID_CATEGORIA, ID_PROVEEDOR, NOMBRE, PRECIO_VENTA, PRECIO_NETO, FECHA_VENC, FECHA_ADQ, STOCK_MIN, STOCK_ACT, ID_BODEGA) 
           VALUES ('".$texto1."','".$texto2."','".$texto3."','".$texto4."','".$texto5."','".$texto6."','".$texto7."','".$texto8."','".$texto9."','".$texto10."','".$texto11."')";
     
+    if($texto7 == 'null'){
+        $sql="INSERT INTO productos(CODIGO, ID_CATEGORIA, ID_PROVEEDOR, NOMBRE, PRECIO_VENTA, PRECIO_NETO, FECHA_VENC, FECHA_ADQ, STOCK_MIN, STOCK_ACT, ID_BODEGA) 
+          VALUES ('".$texto1."','".$texto2."','".$texto3."','".$texto4."','".$texto5."','".$texto6."',null,'".$texto8."','".$texto9."','".$texto10."','".$texto11."')";
+    
+    }
+
     $res=mysqli_query($conexion,$sql);
 
     
