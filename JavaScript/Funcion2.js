@@ -268,6 +268,7 @@ function eliminar(){
 }
 
 
+
 //===========================E N V I A R====================================================
 function enviarFechaEsp(){
     var texto = document.getElementById("fechaEsp").value;
@@ -497,4 +498,61 @@ function limpiarTodo(){
     document.getElementById("borrarOtro").onclick();
     
     
+}
+
+
+//===============ULTIMAS==============//
+
+function nuevoUsuario(){
+ 
+    var nombre= document.getElementById("txtUserNombre").value;
+    var user=document.getElementById("txtUserUser").value;
+    var pass=document.getElementById("txtUserPass").value;
+    var check=document.getElementById("switch-sm").checked;
+    var cargo;
+    if(check)
+    {
+        cargo='1';
+    }
+    else{ cargo='0';}
+
+
+    var parametros = {
+        "txtUserNombre": nombre,
+        "txtUserUser" : user,
+        "txtUserPass": pass,
+        "txtUserCargo": cargo
+    }
+    $.ajax({
+        async:false,
+        data: parametros,
+        url: "AJAX/CrearUser.php",
+        type: "POST",
+        success: function(response){
+           $("#modalAgregarUsuario").modal('hide');
+           $("#modalUserAgregadoExito").modal();
+        }
+    });   
+}
+function mostrarModalAgregarUsuario(){
+    $("#modalAgregarUsuario").modal();
+
+}
+function eliminarUsuario(id){
+    var parametros = {
+        "id" : id
+    };
+    $.ajax({
+        data: parametros,
+        url: "AJAX/EliminarUsuario.php",
+        type: "POST",
+        success: function(response){
+            
+        }
+    });
+}
+function eliminacionUsuario(id){
+    eliminarUsuario(id);
+    $("#modalUsuarioPreparacionEliminacion").modal("hide");
+    $("#modalUsuarioEliminado").modal();
 }

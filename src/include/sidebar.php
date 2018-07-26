@@ -23,16 +23,16 @@
             </div>
           <!-- Sidebar Navidation Menus--><span class="heading">Menu</span>
           <ul class="list-unstyled">
-                    <li class="active"><a href="../../index.php"> <i class="icon-home"></i>Principal </a></li>
-                    <li><a href="../../src/pages/Productos.php"> <i class="icon-grid"></i> Productos </a></li>
-                    <li><a href="../../src/pages/Consultas.php"> <i class="fa fa-bar-chart"></i>Consultas</a></li>
-                    <li><a href="../../src/pages/Ventas.php"> <i class="icon-padnote"></i>Ventas </a></li>
-                    <li><a href="../../src/pages/Paquetes.php"> <i class="icon-dropbox"></i>Paquetes </a></li>
+                    <li><a href="../../index.php"> <i class="fas fa-paw"></i>Principal </a></li>
+                    <li><a href="../../src/pages/Productos.php"> <i class="fas fa-barcode"></i>Productos </a></li>
+                    <li><a href="../../src/pages/Consultas.php"> <i class="fas fa-search"></i>Consultas</a></li>
+                    <li><a href="../../src/pages/Ventas.php"> <i class="fas fa-angle-double-down"></i> Descontar</a></li>
+                    <li><a href="../../src/pages/Paquetes.php"> <i class="fas fa-box"></i>Paquetes</a></li>
                     <?php if($cargo== "Administrador"){
-                      echo'   <li><a href="../../src/pages/Configuraciones.php"> <i class="icon-padnote"></i>Configuraciones </a></li>';
+                      echo'   <li><a href="../../src/pages/Configuraciones.php"> <i class="fas fa-cog"></i>Configuraciones </a></li>';
                     }
                     ?>
-                    <li><a href="../../src/login/logout.php"> <i class="icon-interface-windows"></i>SALIR</a></li>
+                    <li><a href="../../src/login/logout.php"> <i class="fas fa-sign-out-alt"></i>SALIR</a></li>
           </ul>
           
   </nav>

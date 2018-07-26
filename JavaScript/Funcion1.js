@@ -713,20 +713,3 @@ function casoError2(cantidad, codigo){
 
 //------------------CONFIG--------------------//
 
-function cargarUsuarios(nombre,user,pass,cargo){
-
-    var parametros = {
-        'nombre': nombre,
-        'user': user,
-        'pass': pass,
-        'cargo': cargo
-    };
-    $ajax({
-        data : parametros,
-        url: "AJAX/ObtenerUsuarios.php",
-        type: "POST",
-        success: function(response){
-            $('#ULista').html(response);
-        }
-    })
-}
