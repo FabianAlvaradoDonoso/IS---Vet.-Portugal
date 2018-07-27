@@ -32,8 +32,9 @@
               <h2 class="no-margin-bottom">Productos</h2>
             </div>
           </header>
-          <section class="tables">
-                    <div id="tabla" class="container-fluid">
+          <div id="recargar">
+            <section class="tables">
+                    <div   name"contenido" class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
                             <div class="card">
@@ -43,6 +44,7 @@
                                         <div class="col-3"><h4><strong>Productos</strong></h4></div>
                                             
                                         <div class=" col-1 "><button type="button" class="btn btn-primary btn-sm" onclick="modalNuevo()">Nuevo</button></div>
+                                        <div class=" col-1 "><button type="button" class="btn btn-primary btn-sm" onclick="updateDiv()">Recargar</button></div>
                                         </div>
                                     </div>
                                 </div>
@@ -755,7 +757,7 @@
                                     <p align="center"></p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cerrarBienE" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
+                                    <button type="button" id="cerrarBienE" class="btn btn-danger" data-dismiss="modal" onclick="updateDiv()">Cerrar</button>
                                 </div>
                             </div>
                         
@@ -777,7 +779,7 @@
                                     <p align="center"></p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cerrarBien" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
+                                    <button type="button" id="cerrarBien" class="btn btn-danger" data-dismiss="modal" onclick="updateDiv()">Cerrar</button>
                                 </div>
                             </div>
                         
@@ -873,6 +875,7 @@
 
                     
                 </section>
+            </div>  
       <!--FOOTER-->      
       <?php  include '../../src/include/footer.php'; ?>
       </div><!--class Content inner...-->

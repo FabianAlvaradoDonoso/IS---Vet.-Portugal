@@ -440,7 +440,7 @@
                                                         <div class="card-body" id="divTab">
                                                             <form id="formPaqP">
                                                                 <div class="form-group">
-                                                                    <label for="txtCodigo">Precio del Paquete <small>(en caso de no querer el de los productos por separado)</small></label>
+                                                                    <label for="txtCodigo">Precio del Paquete <small>(en caso de no querer el precio original)</small></label>
                                                                     <input type="number" class="form-control" id="txtPrecioPaqueteModificar" aria-describedby="precio" placeholder="Precio Paquete"  onkeypress="">
                                                                 </div>
                                                             </form>

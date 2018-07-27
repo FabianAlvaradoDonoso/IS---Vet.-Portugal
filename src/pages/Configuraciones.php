@@ -2,18 +2,16 @@
 <html>
   
   <head>
-  <?php require_once '../include/head.php';
+  <?php require_once '../../src/include/head.php';
     session_start();
     if(!isset($_SESSION["user"])){
-      header("location:../login/login.php");
+      header("location:../../src/login/login.php");
     }
-
-    if($_SESSION["cargo"]!='1'){
-      header("location:../../index.php");
-    }
+    
   ?>
-  </head> 
-    <style>
+  
+  </head>
+  <style>
     .switch {
   font-size: 1rem;
   position: relative;
@@ -131,196 +129,199 @@
 .dropdown-menu {
   margin-top: .75rem;
 }
-    </style>
+    </style> 
   <body>
     <!--PAGINA-->
     <div class="page">
      <!--NAVBAR--> 
     <div class="header">
-    <?php  include '../include/navbar.php';  ?>
+    <?php  include '../../src/include/navbar.php';  ?>
     </div><!--navbar-->
     
       <div class="page-content d-flex align-items-stretch">
       
       <!--SIDEBAR-->    
-      <?php  include '../include/sidebar.php'; ?>
+      <?php  include '../../src/include/sidebar.php'; ?>
 
-      <!--CONTENIDO-->   
+      <!--CONTENIDO-->
       <div class="content-inner">
-      <header class="page-header">
-            <div class="container-fluid">
-              <h2 class="no-margin-bottom">Configuraciones</h2>
+            <header class="page-header">
+              <div class="container-fluid">
+                 <h2 class="no-margin-bottom">Configuraciones</h2>
             </div>
-          </header>
-        <section class="tables">      
-        <div id="tablauser"class="container-fluid">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card">
-                <div class="card-header" style="border">
-                    <div class=" container ">
-                      <div class="row justify-content-between">
-                        <div class="col-3"><h4><strong>Usuarios</strong></h4></div>                            
-                        <div class=" col-1 "><button type="button" class="btn btn-primary btn-sm" onclick="mostrarModalAgregarUsuario()">Nuevo</button></div>
+           </header>
+          <div id="recargar">
+          <section class="tables">      
+              <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="card">
+                      <div class="card-header" style="border">
+                          <div class=" container ">
+                            <div class="row justify-content-between">
+                              <div class="col-7"><h4><strong>Usuarios</strong></h4></div>                            
+                              <div class=" col-3 "><button type="button" class="btn btn-primary btn-sm mr-3" onclick="mostrarModalAgregarUsuario()">Nuevo</button></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-striped table-hover table-sm">
+                          <?php
+                                  
+                            include '../cnx.php';
+                            if(mysqli_connect_errno()){
+                              echo "Error al conectar a la BBDD";
+                            exit();
+                              }
+
+                              mysqli_set_charset($conexion, "utf8");
+
+                              $tmp="";
+                              $sql="SELECT * FROM usuarios";
+                              $res=mysqli_query($conexion,$sql);
+
+                              echo    
+                              '<thead>
+                            <tr class="thead-light">
+                              <th class="text-center">Tipo Cuenta</th>
+                              <th class="text-center">Nombre</th>
+                              <th class="text-center">Usuario</th>
+                              <th class="text-center">Contraseña</th>                      
+                              <th class="text-center">Acciones</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>';
+                  
+                              while ($row=mysqli_fetch_array($res)){
+
+                                $nombre = $row["nombre"];
+                                $user = $row["user"];
+                                $pass = $row["pass"];
+                                $tipocuenta = $row["cargo"];
+                                if($tipocuenta=='1'){
+                                  $cargo = 'Administrador';
+                                }
+                                else{
+                                  $cargo = 'estandar';
+                                }
+                                
+                                echo  '<tr>
+                                
+                                      <td class="text-center">' . $cargo . '</td>
+                                      <td class="text-center">' . $row["nombre"] . '</td>
+                                      <td class="text-center">' . $row["user"] . '</td>
+                                      <td class="text-center">' . $row["pass"] . '</td>
+                                      <td align="center"><button type="button" class="btn btn-outline-success btn-sm" onclick=""><span class="oi oi-pencil"></span></button>
+                                                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="previoEliminacion('.$row['id'].')"><span class="oi oi-trash"></span></button></td>
+                                                        </tr>';
+
+                              }
+                              echo "</tbody>";
+
+                          ?>
+                        
+                        </table>
+                        </div>
                       </div>
+                      </div>                                         
                     </div>
-                  </div>
-                  <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table table-striped table-hover table-sm">
-                    <?php
-                             
-                      include '../cnx.php';
-                      if(mysqli_connect_errno()){
-                        echo "Error al conectar a la BBDD";
-                      exit();
-                        }
-
-                        mysqli_set_charset($conexion, "utf8");
-
-                        $tmp="";
-                        $sql="SELECT * FROM usuarios";
-                        $res=mysqli_query($conexion,$sql);
-
-                        echo    
-                        '<thead>
-                      <tr class="thead-light">
-                        <th class="text-center">Tipo Cuenta</th>
-                        <th class="text-center">Nombre</th>
-                        <th class="text-center">Usuario</th>
-                        <th class="text-center">Contraseña</th>                      
-                        <th class="text-center">Acciones</th>
-
-                      </tr>
-                     </thead>
-                     <tbody>';
-            
-            while ($row=mysqli_fetch_array($res)){
-
-              $nombre = $row["nombre"];
-              $user = $row["user"];
-              $pass = $row["pass"];
-              $tipocuenta = $row["cargo"];
-              if($tipocuenta=='1'){
-                $cargo = 'Administrador';
-              }
-              else{
-                $cargo = 'estandar';
-              }
-              
-              echo  '<tr>
-              
-                    <td class="text-center">' . $cargo . '</td>
-                    <td class="text-center">' . $row["nombre"] . '</td>
-                    <td class="text-center">' . $row["user"] . '</td>
-                    <td class="text-center">' . $row["pass"] . '</td>
-                    <td align="center"><button type="button" class="btn btn-outline-success btn-sm" onclick=""><span class="oi oi-pencil"></span></button>
-                                       <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminacionUsuario('.$row['id'].')"><span class="oi oi-trash"></span></button></td>
-                                       </tr>';
-
-            }
-            echo "</tbody>";
-
-        ?>
-                   
-                   </table>
                   </div>
                 </div>
-                </div>                                         
+                <div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalAgregarUsuario">
+                              <div class="modal-dialog ">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h4 class="modal-title">Nueva cuenta</h4>
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button> 
+                                      </div>
+                                      <div class="modal-body">
+                                      <form id="formPaqN">
+                                          <div class="form-group">
+                                              <label for="txtCodigo">Nombre del usuario</label>
+                                              <input type="text" class="form-control" id="txtUserNombre" aria-describedby="nombre" placeholder="Nombre"  onkeypress="">
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="txtCodigo">Usuario para ingresar</label>
+                                              <input type="text" class="form-control" id="txtUserUser" aria-describedby="nombre" placeholder="Por ejemplo User1"  onkeypress="">
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="txtCodigo"class="label-material">Contraseña</label>
+                                              <input type="password" class="form-control" id="txtUserPass" aria-describedby="nombre" placeholder=""  onkeypress="">
+                                          </div>
+                                          <div class="form-group">  
+                                          <span class="switch switch-sm">
+                                              <input type="checkbox" class="switch" id="switch-sm">
+                                              <label for="switch-sm">Administrador</label>
+                                          </span>
+                                          </div>
+                                                                    
+                                      </form>                                    
+                                      </div>
+                                      <div class="modal-footer">
+                                          <button type="button" id="cerrarBienE" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cancelar</button>
+                                          <button type="button" class="btn btn-success mr-3" onclick="nuevoUsuario()">Agregar cuenta</button>
+                                      </div>
+                                  </div>                        
+                  </div>
               </div>
-            </div>
-          </div>
-          <div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalAgregarUsuario">
-                        <div class="modal-dialog ">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Nueva cuenta</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button> 
-                                </div>
-                                <div class="modal-body">
-                                <form id="formPaqN">
-                                    <div class="form-group">
-                                        <label for="txtCodigo">Nombre del usuario</label>
-                                        <input type="text" class="form-control" id="txtUserNombre" aria-describedby="nombre" placeholder="Nombre"  onkeypress="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtCodigo">Usuario para ingresar</label>
-                                        <input type="text" class="form-control" id="txtUserUser" aria-describedby="nombre" placeholder="Por ejemplo User1"  onkeypress="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtCodigo"class="label-material">Contraseña</label>
-                                        <input type="password" class="form-control" id="txtUserPass" aria-describedby="nombre" placeholder=""  onkeypress="">
-                                    </div>
-                                    <div class="form-group">  
-                                    <span class="switch switch-sm">
-                                        <input type="checkbox" class="switch" id="switch-sm">
-                                        <label for="switch-sm">Administrador</label>
-                                    </span>
-                                    </div>
-                                                              
-                                </form>                                    
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" id="cerrarBienE" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cancelar</button>
-                                    <button type="button" class="btn btn-success mr-3" onclick="nuevoUsuario()">Agregar cuenta</button>
-                                </div>
-                            </div>                        
-            </div>
+              <div class='modal fade' id='modalPreparacionEliminacion' role='dialog'>
+                  <div class='modal-dialog'>
+          
+                      <!-- Modal content-->
+                      <div class='modal-content'>
+                          <div class='modal-header'>
+                              <h4 class='modal-title'>Confirmación</h4>
+                              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                          </div>
+                          <div class='modal-body'>
+                              <p>¿Está seguro de eliminar este elemento?.</p>
+                          </div>
+                          <div class='modal-footer'>    
+                              <div class="container">
+                                  <div class="row justify-content-between">  
+                                  <input type="hidden" id="idUser"></input>
+                                      <button type='button' id='cerrarExito' class='btn btn-secondary' data-dismiss='modal' onclick=''>Cancelar</button>
+                                      <button type='button' id='cerrarExito' class='btn btn-outline-danger' onclick='borrar()'>Eliminar</button>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <div class='modal fade' id='modalExito' role='dialog'>
+                  <div class='modal-dialog'>
+          
+                      <!-- Modal content-->
+                      <div class='modal-content'>
+                          <div class='modal-header'>
+                              <h4 class='modal-title'>Listo</h4>
+                              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                          </div>
+                          <div class='modal-body'>
+                              <p>Accion realizada con éxito.</p>
+                          </div>
+                          <div class='modal-footer'>    
+                              <div class="container">
+                                  <div class="row justify-content-end">  
+                                      <button type='button' id='cerrarExito' class='btn btn-success' data-dismiss='modal' onclick='updateDiv()'>Cerrar</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
         </div>
-        <div class='modal fade' id='modalUsuarioPreparacionEliminacion' role='dialog'>
-                        <div class='modal-dialog'>
-                
-                            <!-- Modal content-->
-                            <div class='modal-content'>
-                                <div class='modal-header'>
-                                    <h4 class='modal-title'>Eliminación de Usuario</h4>
-                                    <button type='button' class='close' data-dismiss='modal'>&times;</button>
-                                </div>
-                                <div class='modal-body'>
-                                    <p>¿Está seguro de eliminar este usuario?.</p>
-                                </div>
-                                <div class='modal-footer'>    
-                                    <div class="container">
-                                        <div class="row justify-content-between">  
-                                            <button type='button' id='cerrarExito' class='btn btn-secondary' data-dismiss='modal' onclick=''>Cancelar</button>
-                                            <button type='button' id='cerrarExito' class='btn btn-outline-danger' onclick='eliminacionUsuario()'>Eliminar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='modal fade' id='modalUsuarioEliminado' role='dialog'>
-                        <div class='modal-dialog'>
-                
-                            <!-- Modal content-->
-                            <div class='modal-content'>
-                                <div class='modal-header'>
-                                    <h4 class='modal-title'>Eliminación de Usuario</h4>
-                                    <button type='button' class='close' data-dismiss='modal'>&times;</button>
-                                </div>
-                                <div class='modal-body'>
-                                    <p>Usuario eliminado.</p>
-                                </div>
-                                <div class='modal-footer'>    
-                                    <div class="container">
-                                        <div class="row justify-content-end">  
-                                            <button type='button' id='cerrarExito' class='btn btn-success' data-dismiss='modal' onclick='esconderModal()'>Cerrar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-        </section>
-
+     
       <!--FOOTER-->      
-      <?php  include '../include/footer.php'; ?>
+      <?php  include '../../src/include/footer.php'; ?>
       </div><!--class Content inner...-->
         
       </div><!--class Page content...-->
      
     </div><!-- class PAGE--> 
-    
   </body>
 </html>

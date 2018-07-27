@@ -422,7 +422,6 @@ function enviarFechaVRango(){
 }
 function busqueda(){
     var texto = document.getElementById("codigo").value;
-    
     var parametros = {
         "texto" : texto
     };
@@ -439,7 +438,6 @@ function busqueda(){
 }
 function busquedaNombre(){
     var texto = document.getElementById("nombre1").value;
-
     var parametros = {
         "nombre1" : texto
     };
@@ -568,4 +566,129 @@ function limpiarTodo(){
     document.getElementById("borrarOtro").onclick();
     
     
+}
+
+function solicitudVerificar(){
+    alert("entró en solicitud");
+    $("#modalPASS").modal();
+}
+function verificar(pass){
+    var password = document.getElementById("txtAdminPass").value="";
+    var permiso;
+    if(pass==password){
+        permiso=true;
+    }
+    else{ permiso=false;}
+    $("#modalPASS").modal('hide');
+    return permiso;
+}
+//=================Configs======================//
+
+function nuevoUsuario(){
+ 
+    var nombre= document.getElementById("txtUserNombre").value;
+    var user=document.getElementById("txtUserUser").value;
+    var pass=document.getElementById("txtUserPass").value;
+    var check=document.getElementById("switch-sm").checked;
+    var cargo;
+    if(check)
+    {
+        cargo='1';
+    }
+    else{ cargo='0';}
+
+
+    var parametros = {
+        "txtUserNombre": nombre,
+        "txtUserUser" : user,
+        "txtUserPass": pass,
+        "txtUserCargo": cargo
+    }
+    $.ajax({
+        async:false,
+        data: parametros,
+        url: "AJAX/CrearUser.php",
+        type: "POST",
+        success: function(){
+           
+           $("#modalAgregarUsuario").modal('hide');
+           $("#modalExito").modal();
+        }
+    });   
+}
+function mostrarModalAgregarUsuario(){
+    $("#modalAgregarUsuario").modal();
+
+}
+
+function updateDiv(){
+    $( "#recargar" ).load(window.location.href + " #recargar" );
+    // $("#modalExito").modal('hide');
+}
+
+function borrar(){
+    var id = document.getElementById("idUser").value;
+    var parametros = {
+        "id" : id
+    };
+    $.ajax({
+        async: false,
+        data: parametros,
+        url: "AJAX/EliminarUsuario.php",
+        type: "POST",
+        
+        success: function(){
+            $("#modalPreparacionEliminacion").modal('hide');
+            $("#modalExito").modal(); 
+        }
+    }); 
+}
+function previoEliminacion(id){
+    document.getElementById("idUser").value=id;
+    $("#modalPreparacionEliminacion").modal(); 
+   
+}
+function mostrarModalAgregarElemento(){
+    $("#modalAgregarElemento").modal();
+}
+function nuevoElemento(){
+    var nombre= document.getElementById("txtElementoNombre").value;
+    var parametros = {
+        "txtElementoNombre": nombre
+    }
+    $.ajax({
+        async:false,
+        data: parametros,
+        url: "AJAX/CrearCategoria.php",
+        type: "POST",
+        success: function(){
+           $("#modalAgregarElemento").modal('hide');
+           $("#modalExito").modal();
+        }
+    });   
+}
+
+function mostrarModificarCategoria(){
+    $("#modalModificarCategoria").modal();
+}
+function modificarCategoria(id){
+    var nombre = document.getElementById("txtModificarNombre").value;
+    var parametros = {
+        "txtModificarNombre": nombre,
+        "ID": id
+    }
+    $.ajax({
+        async:false,
+        data: parametros,
+        url: "AJAX/ModificarCategoria.php",
+        type: "POST",
+        success: function(){
+            document.getElementById("txtModificarNombre").value = "";
+           $("#modalModificarCategoria").modal('hide');
+           $("#modalExito").modal();
+        },
+        error: function(){
+            alert("error");
+        }
+    });  
 }

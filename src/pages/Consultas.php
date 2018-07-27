@@ -74,7 +74,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div id="datos"></div>
+                                                    <div id="datosConsulta"></div>
                                                 </div>  
                                             </div>
 
@@ -91,7 +91,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div id="datosNombre"></div>
+                                                    <div id="datosConsulta"></div>
                                                 </div>  
                                             </div>
                                                 
@@ -166,7 +166,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div id="datos2"></div>
+                                                <div id="datosConsulta"></div>
                                                 <div class="modal fade" id="myModal" role="dialog">
                                                     <div class="modal-dialog">
                                                         
@@ -256,7 +256,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div id="datos1"></div>
+                                                <div id="datosConsulta"></div>
                                                 <div class="modal fade" id="myModal2" role="dialog">
                                                     <div class="modal-dialog">
                                                     
@@ -306,7 +306,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div id="datosOtro"></div>
+                                                <div id="datosConsulta"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -523,7 +523,7 @@
                                     
                                 </div>
                                 <div class="modal-body">
-                                    <p align="center">Los datos fueron modificados satifactoriamente.</p>
+                                    <p align="center">Los datosConsulta fueron modificados satifactoriamente.</p>
                                     <p align="center"></p>
                                 </div>
                                 <div class="modal-footer">
@@ -663,7 +663,7 @@
                                     
                                 </div>
                                 <div class="modal-body">
-                                    <p align="center">Los datos fueron eliminados satifactoriamente.</p>
+                                    <p align="center">Los datosConsulta fueron eliminados satifactoriamente.</p>
                                     <p align="center"></p>
                                 </div>
                                 <div class="modal-footer">
