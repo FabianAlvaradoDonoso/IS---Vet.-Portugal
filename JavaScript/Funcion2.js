@@ -14,7 +14,7 @@ function mostrarModal(codigo, categoria, proveedor, nombre, bodega){
     document.getElementById("txtNombreModalE").value=nombre;
     buscarSelect(document.getElementById("cbBodegaModalE"), bodega);
 }
-function mostrarModalModificar(codigo,categoria, proveedor, nombre, precioVenta, precioNeto, fechaVenc, fechaAdq, stockMin, stockAct, bodega){
+function mostrarModalModificar(codigo,categoria, proveedor, nombre, precioVenta, precioNeto, fechaVenc, fechaAdq, stockMin, stockAct, bodega, isChecked){
     $("#modalModificar").modal();
     document.getElementById("txtCodigoModal").value=codigo;
     buscarSelect(document.getElementById("cbCategoriaModal"), categoria);
@@ -27,9 +27,12 @@ function mostrarModalModificar(codigo,categoria, proveedor, nombre, precioVenta,
     document.getElementById("nudStockMinModal").value=stockMin;
     document.getElementById("nudStockActModal").value=stockAct;
     buscarSelect(document.getElementById("cbBodegaModal"), bodega);
+    estaChecked2(isChecked);
 }
-function mostrarModalModificar2(codigo,categoria, proveedor, nombre, precioVenta, precioNeto, fechaVenc, fechaAdq, stockMin, stockAct, bodega){
+function mostrarModalModificar2(codigo,categoria, proveedor, nombre, precioVenta, precioNeto, fechaVenc, fechaAdq, stockMin, stockAct, bodega, isChecked){
     $("#modalModificar2").modal();
+    
+   
     document.getElementById("txtCodigoModal2").value=codigo;
     buscarSelect(document.getElementById("cbCategoriaModal2"), categoria);
     buscarSelect(document.getElementById("cbProveedorModal2"), proveedor);
@@ -41,6 +44,22 @@ function mostrarModalModificar2(codigo,categoria, proveedor, nombre, precioVenta
     document.getElementById("nudStockMinModal2").value=stockMin;
     document.getElementById("nudStockActModal2").value=stockAct;
     buscarSelect(document.getElementById("cbBodegaModal2"), bodega);
+    estaChecked(isChecked);
+}
+
+function estaChecked(condicion){
+    if(condicion == '1'){
+        document.getElementById('modFecha').checked = true;
+    }else{
+            document.getElementById('modFecha').checked = false;    
+    }
+}
+function estaChecked2(condicion){
+    if(condicion == '1'){
+        document.getElementById('modFechaConsultas').checked = true;
+    }else{
+            document.getElementById('modFechaConsultas').checked = false;    
+    }
 }
 
 function agregar(){
@@ -56,11 +75,15 @@ function agregar(){
     var texto10 = document.getElementById("nudStockActModalAgregar").value;
     var texto11 = document.getElementById("cbBodegaModalAgregar").value;
 
+    if(document.getElementById("modFechaAgregar").checked == true){
+        texto7 = 'null';
+    }
     if(texto1 == '' || texto2 == '' || texto3 == '' || texto4 == '' || texto5 == '' || texto6 == '' || texto8 == '' || texto9 == '' || texto10 == '' || texto11 == '' || (texto7 != '' && new Date(texto8).getTime() > new Date(texto7).getTime()))
     {
         $("#modalErrorAgregar").modal();
         document.getElementById("cerrarError").focus();
     }
+    if(texto7 == ''){texto7 = 'null'}
     else
     {
         if(comprobarCodigo(texto1) != false){
@@ -78,14 +101,20 @@ function agregar(){
                 "cbBodegaModalAgregar" : texto11
             };
             $.ajax({
+                async: false,
                 data: parametros,
                 url: "AJAX/AgregarProducto.php",
                 type: "POST",
                 success: function(response){
-                    $("#modalAgr egar").modal("hide");
+                    $("#modalAgregar").modal("hide");
                     $("#modalBienAgregar").modal();
                     document.getElementById("cerrarBien").focus();
                     limpiarAgregar();
+                    var div =   $("#card1").html();
+                    document.getElementById("card1").load(div);
+                },
+                error: function(){
+                    alert("error");
                 }
             });
         }
@@ -146,6 +175,7 @@ function buscarSelect(select, buscar)
 	}
 }
 
+
 function modificar(){
     var texto1 = document.getElementById("txtCodigoModal").value;
     var texto2 = document.getElementById("cbCategoriaModal").value;
@@ -159,11 +189,14 @@ function modificar(){
     var texto10 = document.getElementById("nudStockActModal").value;
     var texto11 = document.getElementById("cbBodegaModal").value;
 
-
-    if(texto8 == '' || new Date(texto8).getTime() > new Date(texto7).getTime() ||texto5 < 0 || texto5 == '' || texto4 == '' || texto6 < 0 || texto6 == '' || texto9 <= 0 || texto9 == '' || texto10 < 0 || texto10 == '')
+    if(document.getElementById("modFechaConsultas").checked == true){
+        texto7 = 'null';
+    }
+    if(texto1 == '' || texto2 == '' || texto3 == '' || texto4 == '' || texto5 == '' || texto6 == '' || texto5 < 0 || texto6 < 0 || texto8 == '' || texto9 == '' || texto10 == '' || texto11 == '' || ((texto7 != '' || texto7 != 'null') && new Date(texto8).getTime() > new Date(texto7).getTime()))
     {
-        $("#modalError").modal();
+        $("#modalError").modal('show');
         document.getElementById("cerrarError").focus();
+        $("#modalModificar").modal().focus();
     }
     else
     {
@@ -182,17 +215,47 @@ function modificar(){
             "cbBodegaModal" : texto11
         };
         $.ajax({
+            async: false,
             data: parametros,
             url: "AJAX/ModificaProductoAJAX.php",
             type: "POST",
             success: function(response){
-                $("#modalModificar1").modal("hide");
+                $("#modalModificar").modal("hide");
                 $("#modalBien").modal();
                 document.getElementById("cerrarBien").focus();
+                limpiarTodo();
             }
         });
     }
 }
+function ponerReadOnly(id)
+{
+    // Ponemos el atributo de solo lectura
+    $("#"+id).attr("readonly","readonly");
+    // Ponemos una clase para cambiar el color del texto y mostrar que
+    // esta deshabilitado
+    $("#"+id).addClass("readOnly");
+}
+ 
+function quitarReadOnly(id)
+{
+    // Eliminamos el atributo de solo lectura
+    $("#"+id).removeAttr("readonly");
+    // Eliminamos la clase que hace que cambie el color
+    $("#"+id).removeClass("readOnly");
+}
+function cambiarChecked(id){
+    if(document.getElementById(id).checked == true){
+        if(id == 'modFecha'){
+            ponerReadOnly('dtpFechaVencModal2');
+        }
+    }else{
+        if(id == 'modFecha'){
+            quitarReadOnly('dtpFechaVencModal2');
+        }
+    }
+}
+
 function modificar2(){
     var texto1 = document.getElementById("txtCodigoModal2").value;
     var texto2 = document.getElementById("cbCategoriaModal2").value;
@@ -205,16 +268,16 @@ function modificar2(){
     var texto9 = document.getElementById("nudStockMinModal2").value;
     var texto10 = document.getElementById("nudStockActModal2").value;
     var texto11 = document.getElementById("cbBodegaModal2").value;
-
-
-    if(texto8 == '' || new Date(texto8).getTime() > new Date(texto7).getTime() ||texto5 < 0 || texto5 == '' || texto4 == '' || texto6 < 0 || texto6 == '' || texto9 <= 0 || texto9 == '' || texto10 < 0 || texto10 == '')
+    
+    if(document.getElementById("modFecha").checked == true){
+        texto7 = 'null';
+    }
+    if(texto1 == '' || texto2 == '' || texto3 == '' || texto4 == '' || texto5 == '' || texto6 == '' || texto5 < 0 || texto6 < 0 || texto8 == '' || texto9 == '' || texto10 == '' || texto11 == '' || ((texto7 != '' || texto7 != 'null') && new Date(texto8).getTime() > new Date(texto7).getTime()))
     {
         $("#modalError").modal();
         document.getElementById("cerrarError").focus();
     }
-    else
-    {
-
+    else{
         var parametros = {
             "txtCodigoModal" : texto1,
             "cbCategoriaModal" : texto2,
@@ -229,6 +292,7 @@ function modificar2(){
             "cbBodegaModal" : texto11
         };
         $.ajax({
+            async: false,
             data: parametros,
             url: "AJAX/ModificaProductoAJAX.php",
             type: "POST",
@@ -236,6 +300,9 @@ function modificar2(){
                 $("#modalModificar2").modal("hide");
                 $("#modalBien").modal();
                 document.getElementById("cerrarBien").focus();
+            },
+            error: function(response){
+                alert("Error");
             }
         });
     }
@@ -255,6 +322,7 @@ function eliminar(){
             "txtCodigoModalE" : texto1
         };
         $.ajax({
+            async: false,
             data: parametros,
             url: "AJAX/EliminarProductoAJAX.php",
             type: "POST",
@@ -262,11 +330,11 @@ function eliminar(){
                 $("#modalEliminar").modal("hide");
                 $("#modalEliminarBien").modal();
                 document.getElementById("cerrarBienE").focus();
+                limpiarTodo();
             }
         });
     }
 }
-
 
 
 //===========================E N V I A R====================================================
@@ -282,7 +350,7 @@ function enviarFechaEsp(){
         url: "AJAX/ValidaFechaAdqEsp.php",
         type: "POST",
         success: function(response){
-            $("#datos1").html(response);
+            $("#datosConsulta").html(response);
         }
     });
 }
@@ -306,7 +374,7 @@ function enviarFechaRango(){
             url: "AJAX/ValidaFechaAdqRango.php",
             type: "POST",
             success: function(response){
-                $("#datos1").html(response);
+                $("#datosConsulta").html(response);
             }
         });
     }
@@ -323,7 +391,7 @@ function enviarFechaVEsp(){
         url: "AJAX/ValidaFechaVencEsp.php",
         type: "POST",
         success: function(response){
-            $("#datos2").html(response);
+            $("#datosConsulta").html(response);
         }
     });
 }
@@ -347,7 +415,7 @@ function enviarFechaVRango(){
             url: "AJAX/ValidaFechaVencRango.php",
             type: "POST",
             success: function(response){
-                $("#datos2").html(response);
+                $("#datosConsulta").html(response);
             }
         });
     }
@@ -364,7 +432,7 @@ function busqueda(){
         url: "AJAX/ValidaCodigo.php",
         type: "POST",
         success: function(response){
-            $("#datos").html(response);
+            $("#datosConsulta").html(response);
             pulsar2(event);
         }
     });
@@ -381,7 +449,7 @@ function busquedaNombre(){
         url: "AJAX/ValidaNombre.php",
         type: "POST",
         success: function(response){
-            $("#datosNombre").html(response);
+            $("#datosConsulta").html(response);
         }
     });
 }
@@ -425,7 +493,7 @@ function enviarOtro2(){
         url: "AJAX/ValidaOtro2.php",
         type: "POST",
         success: function(response){
-            $("#datosOtro").html(response);
+            $("#datosConsulta").html(response);
         }
     });
 }
@@ -444,7 +512,7 @@ function limpiarFormularioFecha1() {
     document.getElementById("fechaRDesde").value = "";
     document.getElementById("fechaRHasta").value = "";
     //document.getElementById("fechaEsp").focus();
-    document.getElementById("datos1").innerHTML='';
+    document.getElementById("datosConsulta").innerHTML='';
     limpiarTodo()
 }
 function limpiarFormularioFecha2() {
@@ -452,7 +520,7 @@ function limpiarFormularioFecha2() {
     document.getElementById("fechaVRDesde").value = "";
     document.getElementById("fechaVRHasta").value = "";
     //document.getElementById("fechaEsp").focus();
-    document.getElementById("datos2").innerHTML='';
+    document.getElementById("datosConsulta").innerHTML='';
     limpiarTodo()
 }
 
@@ -460,7 +528,7 @@ function limpiarFormulario() {
     document.getElementById("codigo").value = "";
     //busqueda();
     document.getElementById("codigo").focus();
-    document.getElementById("datos").innerHTML='';
+    document.getElementById("datosConsulta").innerHTML='';
     limpiarTodo();
 }
 function limpiarFormulario2() {
@@ -472,87 +540,32 @@ function limpiarFormulario2() {
     {
         document.getElementById("otro2Select").remove(i);
     }
-    document.getElementById("datosOtro").innerHTML='';
+    document.getElementById("datosConsulta").innerHTML='';
    
 }
 function limpiarFormularioNombre() {
     document.getElementById("nombre1").value = "";
     busquedaNombre();
     document.getElementById("nombre1").focus();
-    document.getElementById("datosNombre").innerHTML='';
+    document.getElementById("datosConsulta").innerHTML='';
     limpiarTodo()
 }
 function limpiarTodo(){
     document.getElementById("codigo").value="";
+    document.getElementById("nombre1").value = "";
     document.getElementById("fechaVEsp").value="";
     document.getElementById("fechaVRDesde").value="";
     document.getElementById("fechaVRHasta").value="";
     document.getElementById("fechaEsp").value="";
     document.getElementById("fechaRDesde").value="";
     document.getElementById("fechaRHasta").value="";
-    document.getElementById("datos").innerHTML='';
-    document.getElementById("datosNombre").innerHTML='';
-    document.getElementById("datos2").innerHTML='';
-    document.getElementById("datos1").innerHTML='';
-    document.getElementById("datosOtro").innerHTML='';
+    document.getElementById("datosConsulta").innerHTML='';
+    // document.getElementById("datosNombre").innerHTML='';
+    // document.getElementById("datos2").innerHTML='';
+    // document.getElementById("datos1").innerHTML='';
+    // document.getElementById("datostodo").innerHTML='';
+    // document.getElementById("datosOtro").innerHTML='';
     document.getElementById("borrarOtro").onclick();
     
     
-}
-
-
-//===============ULTIMAS==============//
-
-function nuevoUsuario(){
- 
-    var nombre= document.getElementById("txtUserNombre").value;
-    var user=document.getElementById("txtUserUser").value;
-    var pass=document.getElementById("txtUserPass").value;
-    var check=document.getElementById("switch-sm").checked;
-    var cargo;
-    if(check)
-    {
-        cargo='1';
-    }
-    else{ cargo='0';}
-
-
-    var parametros = {
-        "txtUserNombre": nombre,
-        "txtUserUser" : user,
-        "txtUserPass": pass,
-        "txtUserCargo": cargo
-    }
-    $.ajax({
-        async:false,
-        data: parametros,
-        url: "AJAX/CrearUser.php",
-        type: "POST",
-        success: function(response){
-           $("#modalAgregarUsuario").modal('hide');
-           $("#modalUserAgregadoExito").modal();
-        }
-    });   
-}
-function mostrarModalAgregarUsuario(){
-    $("#modalAgregarUsuario").modal();
-
-}
-function eliminarUsuario(id){
-    var parametros = {
-        "id" : id
-    };
-    $.ajax({
-        data: parametros,
-        url: "AJAX/EliminarUsuario.php",
-        type: "POST",
-        success: function(response){
-            
-        }
-    });
-}
-function eliminacionUsuario(id){
-    eliminarUsuario(id);
-    $("#modalUsuarioPreparacionEliminacion").modal("hide");
-    $("#modalUsuarioEliminado").modal();
 }

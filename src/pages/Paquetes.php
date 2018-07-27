@@ -30,7 +30,7 @@
               <h2 class="no-margin-bottom">Paquetes</h2>
             </div>
           </header>
-      <section class="forms">
+          <section class="forms">
                     <div id="tabla" class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
@@ -138,7 +138,6 @@
                                                             <table class='table table-striped table-hover table-sm'>
                                                                 <thead>
                                                                     <tr class="thead-light">
-                                                                        <th class="text-center">Seleccionar</th>
                                                                         <th class="text-center">Nombre</th>
                                                                         <th class="text-center">Precio</th>
                                                                         <th class="text-center">N° Productos</th>
@@ -161,13 +160,13 @@
                     </div>  
                 
                     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalAgregarPaquete">
-                        <div class="modal-dialog modal-lg">
+                        <div class="modal-dialog modal-lg modal-dialog1">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">Paquete Nuevo</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button> 
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body modal-body1">
                                     <div id="tabla" class="container-fluid">
                                         <div class="row">
                                             <div class="col-4">
@@ -301,7 +300,6 @@
                         </div>
                     </div>
 
-
                     <div class='modal fade' id='modalAgregadoExito' role='dialog'>
                         <div class='modal-dialog'>
                 
@@ -321,55 +319,14 @@
                         </div>
                     </div>
 
-
-                    <div class='modal fade' id='modalPaqueteExiste' role='dialog'>
-                        <div class='modal-dialog'>
-                
-                            <!-- Modal content-->
-                            <div class='modal-content'>
-                                <div class='modal-header'>
-                                    <h4 class='modal-title'>Error</h4>
-                                    <button type='button' class='close' data-dismiss='modal'>&times;</button>
-                                </div>
-                                <div class='modal-body'>
-                                    <p>Ya existe un paquete con ese nombre, intente con otro.</p>
-                                </div>
-                                <div class='modal-footer'>      
-                                    <button type='button' id='cerrarExito' class='btn btn-danger' data-dismiss='modal' onclick=reabrirModal()>Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class='modal fade' id='modalPaqueteError' role='dialog'>
-                        <div class='modal-dialog'>
-                
-                            <!-- Modal content-->
-                            <div class='modal-content'>
-                                <div class='modal-header'>
-                                    <h4 class='modal-title'>Error</h4>
-                                    <button type='button' class='close' data-dismiss='modal'>&times;</button>
-                                </div>
-                                <div class='modal-body'>
-                                    <p>Surgio un error!, revise que se rellenaron los campos de PRODUCTOS, la OPCION de artículo o cirugia y el NOMBRE del producto.</p>
-                                </div>
-                                <div class='modal-footer'>      
-                                    <button type='button' id='cerrarExito' class='btn btn-danger' data-dismiss='modal' onclick=reabrirModal()>Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalModificarPaquete">
-                        <div class="modal-dialog modal-lg">
+                    <div class="modal fade bd-example-modal-lg " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalModificarPaquete">
+                        <div class="modal-dialog modal-lg modal-dialog1">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">Modificar Paquete</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button> 
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body modal-body1">
                                     <div id="tabla" class="container-fluid">
                                         <div class="row">
                                             <div class="col-4">
@@ -509,6 +466,26 @@
                         
                         </div>
                     </div>
+
+                    <div class='modal fade' id='modalPaqueteError' role='dialog'>
+                        <div class='modal-dialog'>
+                
+                            <!-- Modal content-->
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <h4 class='modal-title'>Error</h4>
+                                    <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                                </div>
+                                <div class='modal-body'>
+                                    <p>Surgio un error!, revise que se rellenaron los campos de PRODUCTOS, la OPCION de artículo o cirugia y el NOMBRE del producto.</p>
+                                </div>
+                                <div class='modal-footer'>      
+                                    <button type='button' id='cerrarExito' class='btn btn-danger' data-dismiss='modal' onclick=''>Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class='modal fade' id='modalPaqueteModificacion' role='dialog'>
                         <div class='modal-dialog'>
                 
@@ -522,11 +499,12 @@
                                     <p>Se modificaron correctamente los datos.</p>
                                 </div>
                                 <div class='modal-footer'>      
-                                    <button type='button' id='cerrarExito' class='btn btn-success' data-dismiss='modal' onclick=''>Cerrar</button>
+                                    <button type='button' id='cerrarExito' class='btn btn-danger' data-dismiss='modal' onclick=''>Cerrar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class='modal fade' id='modalPaquetePreparacionEliminacion' role='dialog'>
                         <div class='modal-dialog'>
                 
@@ -550,6 +528,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class='modal fade' id='modalPaqueteEliminado' role='dialog'>
                         <div class='modal-dialog'>
                 
@@ -565,13 +544,14 @@
                                 <div class='modal-footer'>    
                                     <div class="container">
                                         <div class="row justify-content-end">  
-                                            <button type='button' id='cerrarExito' class='btn btn-success' data-dismiss='modal' onclick='esconderModal()'>Cerrar</button>
+                                            <button type='button' id='cerrarExito' class='btn btn-secondary' data-dismiss='modal' onclick='esconderModal()'>Cerrar</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class='modal fade' id='modalErrorP' role='dialog'>
                         <div class='modal-dialog'>
                             <!-- Modal content-->
@@ -601,6 +581,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class='modal fade' id='modalExito2' role='dialog'>
                         <div class='modal-dialog'>
                 
@@ -614,14 +595,33 @@
                                     <p>Los productos fueron descontados correctamente del inventario.</p>
                                 </div>
                                 <div class='modal-footer'>      
-                                    <button type='button' id='cerrarExito' class='btn btn-success' data-dismiss='modal' onclick=eliminarTrs()>Close</button>
+                                    <button type='button' id='cerrarExito' class='btn btn-danger' data-dismiss='modal' onclick=eliminarTrs()>Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='modal fade' id='modalPaqueteExiste' role='dialog'>
+                        <div class='modal-dialog'>
+                
+                            <!-- Modal content-->
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <h4 class='modal-title'>Error</h4>
+                                    <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                                </div>
+                                <div class='modal-body'>
+                                    <p>Ya existe un paquete con ese nombre, intente con otro.</p>
+                                </div>
+                                <div class='modal-footer'>      
+                                    <button type='button' id='cerrarExito' class='btn btn-danger' data-dismiss='modal'>Cerrar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
 
-                </section>
+                </section>     
 
       <!--FOOTER-->      
       <?php  include '../include/footer.php'; ?>

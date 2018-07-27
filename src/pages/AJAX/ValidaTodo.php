@@ -11,7 +11,7 @@
     $palabra="hola";
     //$sql="SELECT * FROM `productos2`";
     
-    if($_POST["texto"] != ""){
+    if(true){
         $sql="SELECT
         p.CODIGO,
         c.NOMBRE_CATEGORIA AS CATEGORIA,
@@ -24,7 +24,7 @@
         p.STOCK_MIN,
         p.STOCK_ACT,
         b.NOMBRE_BODEGA AS BODEGA,
-        IF((p.FECHA_VENC BETWEEN CURDATE() AND ADDDATE(CURDATE(), INTERVAL 2 MONTH)),'table-warning','') AS POR_VENCER,
+        IF((p.FECHA_VENC BETWEEN CURDATE() AND(CURDATE() + 7)),'table-warning','') AS POR_VENCER,
         IF(p.FECHA_VENC < CURDATE(), 'table-danger', '') AS VENCIDO,
         IF(p.FECHA_VENC < CURDATE(), 'danger', 'danger') AS VENCIDO2 
         
@@ -39,9 +39,7 @@
         INNER JOIN proveedor r ON
             (
                 p.ID_PROVEEDOR = r.ID_PROVEEDOR
-            )
-        WHERE
-            p.CODIGO LIKE '%".$_POST["texto"]."%' ";
+            )";
         $tmp="<div class='table-responsive'><table class='table table-striped table-hover table-sm'>
             <thead align='center' class='thead-light'><tr>
                 <th align='center'>CODIGO</th>
@@ -65,38 +63,29 @@
         $proveedor = $row["PROVEEDOR"];
         $nombre = $row["NOMBRE"];
         $precioVenta = $row["PRECIO_VENTA"];
-        $precioNeto = $row["PRECIO_NETO"]; 
-        $fechaVenc3;
-        if($row["FECHA_VENC"]== null){
-            $fechaVenc = '-';
-            $fechaVenc2 = '-';
-            $fechaVenc3 = '1';
-        }else{
-            $fechaVenc = date_format(date_create($row["FECHA_VENC"]), 'Y/m/d');
-            $fechaVenc2 = date_format(date_create($row["FECHA_VENC"]), 'Y / m / d');
-            $fechaVenc3 = '0';
-        } 
+        $precioNeto = $row["PRECIO_NETO"];
+        $fechaVenc = date_format(date_create($row["FECHA_VENC"]), 'Y/m/d');
         $fechaAdq = date_format(date_create($row["FECHA_ADQ"]), 'Y/m/d');
         $stockMin = $row["STOCK_MIN"];
         $stockAct = $row["STOCK_ACT"];
         $bodega = $row["BODEGA"];
         $class = $row["POR_VENCER"];
         if($class == ''){$class = $row["VENCIDO"];}
-        setlocale(LC_MONETARY, 'en_US');
+
 
         $tmp.= "<tr class='".$class."'>
                     <td>" . $row["CODIGO"] . "</td>
                     <td>" . $row["CATEGORIA"] . "</td>
                     <td>" . $row["PROVEEDOR"] . "</td>
                     <td>" . $row["NOMBRE"] . "</td>
-                    <td align='right'>$ " . number_format($row["PRECIO_VENTA"], 0, ',', '.') . "</td>
-                    <td align='right'>$ " . number_format($row["PRECIO_NETO"], 0, ',', '.') . "</td>
-                    <td>" . $fechaVenc2 . "</td>
+                    <td align='right'>$ " . $row["PRECIO_VENTA"] . "</td>
+                    <td align='right'>$ " . $row["PRECIO_NETO"] . "</td>
+                    <td>" . date_format(date_create($row["FECHA_VENC"]), 'Y / m / d') . "</td>
                     <td>" . date_format(date_create($row["FECHA_ADQ"]), 'Y / m / d') . "</td>
                     <td>" . $row["STOCK_MIN"] . "</td>
                     <td>" . $row["STOCK_ACT"] . "</td>
                     <td>" . $row["BODEGA"] . "</td>
-                    <td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificar(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\", \"$fechaVenc3\")'><span class='oi oi-pencil'></span></button>
+                    <td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificar(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\")'><span class='oi oi-pencil'></span></button>
                     <button type='button' class='btn btn-outline-".$row["VENCIDO2"]." btn-sm' onclick='mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")'><span class='oi oi-trash'></span></button></td>
                 </tr>";
     }
