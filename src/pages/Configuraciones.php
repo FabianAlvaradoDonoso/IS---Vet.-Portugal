@@ -141,20 +141,24 @@
       <div class="page-content d-flex align-items-stretch">
       
       <!--SIDEBAR-->    
-      <?php  include '../../src/include/sidebar.php'; ?>
+      <?php  include '../../src/include/sidebar.php'; 
+         $nombre=""; $tabla=""; $campo=""; $campoID=""; $id="";
+        ?>
 
       <!--CONTENIDO-->
       <div class="content-inner">
             <header class="page-header">
               <div class="container-fluid">
                  <h2 class="no-margin-bottom">Configuraciones</h2>
+                
             </div>
            </header>
           <div id="recargar">
-          <section class="tables">      
+          <section class="tables"> 
+              <!-- TABLA USUARIOS-->     
               <div class="container-fluid">
                   <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                       <div class="card">
                       <div class="card-header" style="border">
                           <div class=" container ">
@@ -177,9 +181,11 @@
 
                               mysqli_set_charset($conexion, "utf8");
 
-                              $tmp="";
+                            
                               $sql="SELECT * FROM usuarios";
                               $res=mysqli_query($conexion,$sql);
+                              $tabla="usuarios";
+                              $campoID="id";
 
                               echo    
                               '<thead>
@@ -197,6 +203,7 @@
                               while ($row=mysqli_fetch_array($res)){
 
                                 $nombre = $row["nombre"];
+                                $id=$row["id"];
                                 $user = $row["user"];
                                 $pass = $row["pass"];
                                 $tipocuenta = $row["cargo"];
@@ -206,16 +213,21 @@
                                 else{
                                   $cargo = 'estandar';
                                 }
-                                
-                                echo  '<tr>
-                                
+                                echo '<tr>';
+                                if($user != 'admin')
+                                {
+                                  echo  '
                                       <td class="text-center">' . $cargo . '</td>
-                                      <td class="text-center">' . $row["nombre"] . '</td>
-                                      <td class="text-center">' . $row["user"] . '</td>
-                                      <td class="text-center">' . $row["pass"] . '</td>
-                                      <td align="center"><button type="button" class="btn btn-outline-success btn-sm" onclick=""><span class="oi oi-pencil"></span></button>
-                                                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="previoEliminacion('.$row['id'].')"><span class="oi oi-trash"></span></button></td>
-                                                        </tr>';
+                                      <td class="text-center">' . $nombre . '</td>
+                                      <td class="text-center">' . $user . '</td>
+                                      <td class="text-center">' . $pass . '</td>';
+                                
+                                                             
+                               
+                                echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarUsuario(\"$id\",\"$nombre\",\"$pass\",\"$user\")'><span class='oi oi-pencil'></span></button>";
+                                echo "<button type=button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='oi oi-trash'></span></button></td>";
+                                }
+                                echo "  </tr>";
 
                               }
                               echo "</tbody>";
@@ -229,6 +241,8 @@
                     </div>
                   </div>
                 </div>
+                
+                            <!--MODAL AGREGAR USUARIO-->
                 <div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalAgregarUsuario">
                               <div class="modal-dialog ">
                                   <div class="modal-content">
@@ -237,7 +251,7 @@
                                           <button type="button" class="close" data-dismiss="modal">&times;</button> 
                                       </div>
                                       <div class="modal-body">
-                                      <form id="formPaqN">
+                                      <form >
                                           <div class="form-group">
                                               <label for="txtCodigo">Nombre del usuario</label>
                                               <input type="text" class="form-control" id="txtUserNombre" aria-describedby="nombre" placeholder="Nombre"  onkeypress="">
@@ -266,7 +280,254 @@
                                   </div>                        
                   </div>
               </div>
-              <div class='modal fade' id='modalPreparacionEliminacion' role='dialog'>
+
+                        <!--MODAL AGREGAR USUARIO-->
+                        <div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalModificarUsuario">
+                              <div class="modal-dialog ">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h4 class="modal-title">Modificación</h4>
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button> 
+                                      </div>
+                                      <div class="modal-body">
+                                      <form >
+                                          <input type="hidden" id="idUserM"></input>
+                                      <div class="form-group">
+                                        <label for="validationCustom01">Nombre </label>
+                                                <input type="text" class="form-control" id="txtNombreUserM" name="Nombre" placeholder="Nombre" value="" required>
+                                                <div class="valid-feedback"></div>                                          
+                                        </div> 
+                                        <div class="form-group">
+                                            <label for="validationCustom01">Usuario</label>
+                                                    <input type="text" class="form-control" id="txtUsuarioUserM" name="Nombre" placeholder="user1" value="" required>
+                                                    <div class="valid-feedback"></div>                                          
+                                            </div> 
+                                          <div class="form-group">
+                                              <label for="txtCodigo"class="label-material">Contraseña</label>
+                                              <input type="password" class="form-control" id="txtUserPassM" aria-describedby="nombre" placeholder=""  onkeypress="">
+                                          </div>
+                                          <div class="form-group">  
+                                          <span class="switch switch-sm">
+                                              <input type="checkbox" class="switch" id="switch-smM">
+                                              <label for="switch-sm">Administrador</label>
+                                          </span>
+                                          </div>
+                                                                    
+                                      </form>                                    
+                                      </div>
+                                      <div class="modal-footer">
+                                          <button type="button" id="cerrarBienE" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cancelar</button>
+                                          <button type="button" class="btn btn-success mr-3" onclick="modificarCuenta()">Modificar cuenta</button>
+                                      </div>
+                                  </div>                        
+                  </div>
+              </div>
+                            <!--TABLA PROVEEDORES-->     
+
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="card">
+                                <div class="card-header" style="border">
+                                    <div class=" container ">
+                                    <div class="row justify-content-between">
+                                        <div class="col-7"><h4><strong>Proveedores</strong></h4></div>                            
+                                        <?php  $tabla="proveedor";
+                                                $campo="NOMBRE_PROVEEDOR";                                         
+                                        echo"<div class=' col-3 '><button type='button' class='btn btn-primary btn-sm mr-3' 
+                                        onclick='mostrarModalAgregarElemento(\"$tabla\",\"$campo\")'>Nuevo</button></div>";
+                                        ?>
+                                    </div>
+                                    </div>
+                                </div>
+                              <div class="card-body">
+                                  <div class="table-resposive">
+                                  <table class="table table-striped table-hover table-sm">
+                                                <?php
+                                                        
+                                                include '../cnx.php';
+                                                if(mysqli_connect_errno()){
+                                                    echo "Error al conectar a la BBDD";
+                                                exit();
+                                                    }
+
+                                                    mysqli_set_charset($conexion, "utf8");
+
+                                                    
+                                                    $campoID="ID_PROVEEDOR";                                                   
+                                                    $sql="SELECT * FROM proveedor";
+                                                    $res=mysqli_query($conexion,$sql);
+                                                    echo    
+                                                    '<thead>
+                                                <tr class="thead-light">
+                                                    <th class="text-center"></th>                     
+                                                    <th class="text-center">Acciones</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>';
+                                        
+                                                while ($row=mysqli_fetch_array($res)){
+
+                                                $nombre = $row["NOMBRE_PROVEEDOR"];
+                                                $id  = $row["ID_PROVEEDOR"];
+                                                echo  "<tr>
+                                                        <td class='text-center'>" . $nombre. "</td>";
+                                                    echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarElemento(\"$id\",\"$nombre\",\"$campo\",\"$campoID\",\"$tabla\")'><span class='oi oi-pencil'></span></button>
+                                                    <button type='button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='oi oi-trash'></span></button></td>";
+                            
+                                                echo "</tr>";
+                                                }
+                                                echo "</tbody>";
+
+                                            ?>
+                   
+                                        </table>                                      
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                      <!--TABLA CATEGORIAS-->
+
+  <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-md-4">
+                          <div class="card">
+                                <div class="card-header" style="border">
+                                    <div class=" container ">
+                                    <div class="row justify-content-between">
+                                        <div class="col-9"><h4><strong>Categorias</strong></h4></div>                            
+                                        <?php  $tabla="categoria";
+                                                $campo="NOMBRE_CATEGORIA";
+                                                echo"<div class=' col-3 '><button type='button' class='btn btn-primary btn-sm mr-3' 
+                                        onclick='mostrarModalAgregarElemento(\"$tabla\",\"$campo\")'>Nuevo</button></div>";
+                                        ?>
+                                    </div>
+                                    </div>
+                                </div>
+                              <div class="card-body">
+                                  <div class="table-resposive">
+                                  <table class="table table-striped table-hover table-sm">
+                                                <?php
+                                                        
+                                                include '../cnx.php';
+                                                if(mysqli_connect_errno()){
+                                                    echo "Error al conectar a la BBDD";
+                                                exit();
+                                                    }
+
+                                                    mysqli_set_charset($conexion, "utf8");
+
+                                                    
+                                                    $campoID="ID_CATEGORIA";                                                    
+                                                    $sql="SELECT * FROM categoria";
+                                                    $res=mysqli_query($conexion,$sql);
+                                                    echo    
+                                                    '<thead>
+                                                <tr class="thead-light">
+                                                    <th class="text-center"></th>                     
+                                                    <th class="text-center">Acciones</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>';
+                                        
+                                                while ($row=mysqli_fetch_array($res)){
+
+                                                $nombre = $row["NOMBRE_CATEGORIA"];
+                                                $id  = $row["ID_CATEGORIA"];
+                                                echo  "<tr>
+                                                        <td class='text-center'>" . $nombre. "</td>";
+                                                    echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarElemento(\"$id\",\"$nombre\",\"$campo\",\"$campoID\",\"$tabla\")'><span class='oi oi-pencil'></span></button>
+                                                    <button type='button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='oi oi-trash'></span></button></td>";
+                            
+                                                echo "</tr>";
+                                                }
+                                                echo "</tbody>";
+
+                                            ?>
+                   
+                                        </table>                                      
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+
+                <!--TABLA BODEGA-->
+           
+                   <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-md-4">
+                          <div class="card">
+                                <div class="card-header" style="border">
+                                    <div class=" container ">
+                                    <div class="row justify-content-between">
+                                        <div class="col-7"><h4><strong>Bodegas</strong></h4></div>                            
+                                        <?php  $tabla="bodega";
+                                                $campo="NOMBRE_BODEGA";
+                                                echo"<div class=' col-3 '><button type='button' class='btn btn-primary btn-sm mr-3' 
+                                        onclick='mostrarModalAgregarElemento(\"$tabla\",\"$campo\")'>Nuevo</button></div>";
+                                        ?>
+                                    </div>
+                                    </div>
+                                </div>
+                              <div class="card-body">
+                                  <div class="table-resposive">
+                                  <table class="table table-striped table-hover table-sm">
+                                                <?php
+                                                        
+                                                include '../cnx.php';
+                                                if(mysqli_connect_errno()){
+                                                    echo "Error al conectar a la BBDD";
+                                                exit();
+                                                    }
+
+                                                    mysqli_set_charset($conexion, "utf8");
+
+                                                    $campoID="ID_BODEGA";                                                  
+                                                    $sql="SELECT * FROM bodega";
+                                                    $res=mysqli_query($conexion,$sql);
+                                                    echo    
+                                                    '<thead>
+                                                <tr class="thead-light">
+                                                    <th class="text-center"></th>                     
+                                                    <th class="text-center">Acciones</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>';
+                                        
+                                                while ($row=mysqli_fetch_array($res)){
+
+                                                $nombre = $row["NOMBRE_BODEGA"];
+                                                $id  = $row["ID_BODEGA"];
+                                                echo  "<tr>
+                                                        <td class='text-center'>" . $nombre. "</td>";
+                                                    echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarElemento(\"$id\",\"$nombre\",\"$campo\",\"$campoID\",\"$tabla\")'><span class='oi oi-pencil'></span></button>
+                                                    <button type='button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='oi oi-trash'></span></button></td>";
+                            
+                                                echo "</tr>";
+                                                }
+                                                echo "</tbody>";
+
+                                            ?>
+                   
+                                        </table>                                      
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                                                
+                            <!--MODAL CONFIRMAR ELIMINACION-->
+          
+              
+                            <div class='modal fade' id='modalPreparacionEliminacion' role='dialog'>
                   <div class='modal-dialog'>
           
                       <!-- Modal content-->
@@ -281,17 +542,22 @@
                           <div class='modal-footer'>    
                               <div class="container">
                                   <div class="row justify-content-between">  
-                                  <input type="hidden" id="idUser"></input>
+                                      <input type="hidden" id="idE"></input>
+                                      <input type="hidden" id="tablaE"></input>
+                                      <input type="hidden" id="campoIDE"></input>
                                       <button type='button' id='cerrarExito' class='btn btn-secondary' data-dismiss='modal' onclick=''>Cancelar</button>
-                                      <button type='button' id='cerrarExito' class='btn btn-outline-danger' onclick='borrar()'>Eliminar</button>
+                                      <button type='button' id='cerrarExito' class='btn btn-outline-danger' onclick='borrarElemento()'>Eliminar</button>
                                   </div>
                               </div>
                           </div>
                         </div>
                       </div>
                   </div>
-              </div>
-              <div class='modal fade' id='modalExito' role='dialog'>
+               </div>
+              
+                            <!--MODAL EXITO-->
+              
+               <div class='modal fade' id='modalExito' role='dialog'>
                   <div class='modal-dialog'>
           
                       <!-- Modal content-->
@@ -307,19 +573,76 @@
                               <div class="container">
                                   <div class="row justify-content-end">  
                                       <button type='button' id='cerrarExito' class='btn btn-success' data-dismiss='modal' onclick='updateDiv()'>Cerrar</button>
+                                      <!--?php $nombre=""; $tabla=""; $campo=""; $campoID=""; $id="";?-->
                                   </div>
                               </div>
                           </div>
                       </div>
                   </div>
               </div>
+
+                <div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalAgregarElemento">
+                  <div class="modal-dialog ">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h4 class="modal-title">Nuevo Elemento</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button> 
+                          </div>
+                            <div class="modal-body">
+                                <form >
+                                    <div class="form-group">
+                                        
+                                        <input type="hidden" id="campoA"></input>
+                                        <input type="hidden" id="tablaA"></input>
+                                        <label for="txtCodigo">Nombre </label>
+                                        <input type="text" class="form-control" id="txtNombreElementoA" aria-describedby="nombre" placeholder="Nombre"  onkeypress="">
+                                    </div>                                         
+                                                                                                        
+                                </form>                                    
+                            </div>
+                          <div class="modal-footer">    
+                              <button type="button" id="cerrarBienE" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cancelar</button>
+                              <button type="button" class="btn btn-success mr-3" onclick="nuevoElemento()">Agregar</button>
+                          </div>
+                      </div>                        
+                  </div>
+                </div>
+                <div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalModificarElemento">
+                  <div class="modal-dialog ">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h4 class="modal-title">Modificación</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button> 
+                          </div>
+                          <div class="modal-body">
+                          <form >
+                              <div class="form-group">
+                              <input type="hidden" id="idM"></input>
+                              <input type="hidden" id="campoM"></input>
+                              <input type="hidden" id="tablaM"></input>
+                              <input type="hidden" id="campoIDM"></input>
+                              <div class="form-group">
+                              <label for="validationCustom01">Nuevo nombre</label>
+                                    <input type="text" class="form-control" id="txtNombreElementoM" name="Nombre" placeholder="Nombre" value="" required>
+                                    <div class="valid-feedback"></div>                                          
+                              </div>                                         
+                                                                                                
+                          </form>                                    
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" id="cerrarBienE" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cancelar</button>
+                              <button type="button" class="btn btn-success mr-3" onclick="modificarElemento()">Modificar</button>
+                          </div>
+                      </div>                        
+                  </div>
+              </div>
+       
           </section>
-        </div>
-     
+          </div>
       <!--FOOTER-->      
       <?php  include '../../src/include/footer.php'; ?>
       </div><!--class Content inner...-->
-        
+    
       </div><!--class Page content...-->
      
     </div><!-- class PAGE--> 

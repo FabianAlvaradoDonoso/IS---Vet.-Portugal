@@ -8,7 +8,7 @@
 	mysqli_set_charset($conexion, "utf8");
 
        
-    $sql="DELETE FROM usuarios WHERE id = '".$_POST["id"]."'";
+    $sql="DELETE FROM ".$_POST["tabla"]." WHERE ".$_POST["campoID"]." = '".$_POST["id"]."'";
     
     
     $res=mysqli_query($conexion,$sql);

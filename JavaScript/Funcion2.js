@@ -586,8 +586,8 @@ function verificar(pass){
 
 function nuevoUsuario(){
  
-    var nombre= document.getElementById("txtUserNombre").value;
-    var user=document.getElementById("txtUserUser").value;
+    var user= document.getElementById("txtUserNombre").value;
+    var nombre=document.getElementById("txtUserUser").value;
     var pass=document.getElementById("txtUserPass").value;
     var check=document.getElementById("switch-sm").checked;
     var cargo;
@@ -610,7 +610,9 @@ function nuevoUsuario(){
         url: "AJAX/CrearUser.php",
         type: "POST",
         success: function(){
-           
+            document.getElementById("txtUserNombre").value="";
+            document.getElementById("txtUserUser").value="";
+            document.getElementById("txtUserPass").value="";
            $("#modalAgregarUsuario").modal('hide');
            $("#modalExito").modal();
         }
@@ -618,23 +620,30 @@ function nuevoUsuario(){
 }
 function mostrarModalAgregarUsuario(){
     $("#modalAgregarUsuario").modal();
-
 }
 
 function updateDiv(){
+    
+     $("#modalExito").modal('hide');
     $( "#recargar" ).load(window.location.href + " #recargar" );
-    // $("#modalExito").modal('hide');
 }
 
-function borrar(){
-    var id = document.getElementById("idUser").value;
+
+function borrarElemento(){
+    
+    var id = document.getElementById("idE").value;
+    var tabla = document.getElementById("tablaE").value;
+    var campoID = document.getElementById("campoIDE").value;
+
     var parametros = {
-        "id" : id
+        "id" : id,
+        "tabla": tabla,
+        "campoID": campoID
     };
     $.ajax({
         async: false,
         data: parametros,
-        url: "AJAX/EliminarUsuario.php",
+        url: "AJAX/EliminarElemento.php",
         type: "POST",
         
         success: function(){
@@ -643,48 +652,132 @@ function borrar(){
         }
     }); 
 }
-function previoEliminacion(id){
-    document.getElementById("idUser").value=id;
+
+function previoEliminacionElemento(id,tabla,campoID){
+    document.getElementById("idE").value=id;
+    document.getElementById("tablaE").value=tabla;
+    document.getElementById("campoIDE").value=campoID;
     $("#modalPreparacionEliminacion").modal(); 
    
 }
-function mostrarModalAgregarElemento(){
+
+function mostrarModalAgregarElemento(tabla,campo){
+    document.getElementById("tablaA").value=tabla;
+    document.getElementById("campoA").value=campo;
     $("#modalAgregarElemento").modal();
 }
 function nuevoElemento(){
-    var nombre= document.getElementById("txtElementoNombre").value;
+    var nombre= document.getElementById("txtNombreElementoA").value;
+    var campo= document.getElementById("campoA").value;
+    var tabla= document.getElementById("tablaA").value;
+
     var parametros = {
-        "txtElementoNombre": nombre
+        "txtNombreElemento": nombre,
+        "campo": campo,
+        "tabla": tabla
     }
+    alert(" "+nombre+"  "+campo+" "+tabla);
     $.ajax({
         async:false,
         data: parametros,
-        url: "AJAX/CrearCategoria.php",
+        url: "AJAX/CrearElemento.php",
         type: "POST",
         success: function(){
+            document.getElementById("txtNombreElementoA").value="";
            $("#modalAgregarElemento").modal('hide');
            $("#modalExito").modal();
         }
     });   
 }
 
-function mostrarModificarCategoria(){
-    $("#modalModificarCategoria").modal();
+function mostrarModalModificarElemento(id,nombre,campo,campoID,tabla){
+    document.getElementById("idM").value=id;
+    document.getElementById("txtNombreElementoM").value=nombre;
+    document.getElementById("campoM").value=campo;
+    document.getElementById("tablaM").value=tabla;
+    document.getElementById("campoIDM").value=campoID;
+    $("#modalModificarElemento").modal();
 }
-function modificarCategoria(id){
-    var nombre = document.getElementById("txtModificarNombre").value;
-    var parametros = {
-        "txtModificarNombre": nombre,
-        "ID": id
+function mostrarModalModificarUsuario(id,nombreUser,pass,user){
+    document.getElementById("txtNombreUserM").value=nombreUser;
+    document.getElementById("txtUsuarioUserM").value=user;
+    document.getElementById("txtUserPassM").value=pass;
+    document.getElementById("idUserM").value=id;
+    document.getElementById("switch-smM").value="";
+    $("#modalModificarUsuario").modal();
+}
+function modificarCuenta(){
+    var id= document.getElementById("idUserM").value;
+    var nombreUser= document.getElementById("txtNombreUserM").value;
+    var pass= document.getElementById("txtUserPassM").value;
+    var user= document.getElementById("txtUsuarioUserM").value;
+    var check=document.getElementById("switch-smM").checked;
+    var cargo;
+    if(check)
+    {
+        cargo='1';
     }
+    else{ cargo='0';}
+    var parametros = {
+        "id": id,
+        "nombre": nombreUser,
+        "pass": pass,
+        "user": user,
+        "cargo": cargo
+    }
+    alert(id+" "+nombreUser+" "+pass+" "+user+" "+cargo);
     $.ajax({
         async:false,
         data: parametros,
-        url: "AJAX/ModificarCategoria.php",
+        url: "AJAX/ModificarCuenta.php",
         type: "POST",
         success: function(){
-            document.getElementById("txtModificarNombre").value = "";
-           $("#modalModificarCategoria").modal('hide');
+            document.getElementById("txtNombreUserM").value = "";
+            document.getElementById("idM").value = "";
+            document.getElementById("txtUsuarioUserM").value = "";
+            document.getElementById("txtUserPassM").value = "";
+
+           $("#modalModificarUsuario").modal('hide');
+           $("#modalExito").modal();
+        },
+        error: function(){
+            alert("error");
+        }
+        
+    })
+
+
+}
+
+function modificarElemento(){
+    var id = document.getElementById("idM").value;
+    var nombre = document.getElementById("txtNombreElementoM").value;
+    var campo = document.getElementById("campoM").value;
+    var tabla = document.getElementById("tablaM").value;
+    var campoID = document.getElementById("campoIDM").value;
+    alert(" "+nombre+" "+id+" "+campo+" "+tabla+" "+campoID);
+    var parametros = {
+        "txtNombreElemento": nombre,
+        "id": id,
+        "campo": campo,
+        "tabla": tabla,
+        "campoID":campoID
+    }
+    //alert(" "+nombre+" "+id+" "+campo+" "+tabla+" "+campoID);
+
+    $.ajax({
+        async:false,
+        data: parametros,
+        url: "AJAX/ModificarElemento.php",
+        type: "POST",
+        success: function(){
+            document.getElementById("txtNombreElementoM").value = "";
+            document.getElementById("idM").value = "";
+            document.getElementById("campoM").value = "";
+            document.getElementById("tablaM").value = "";
+            document.getElementById("campoIDM").value = "";
+
+           $("#modalModificarElemento").modal('hide');
            $("#modalExito").modal();
         },
         error: function(){

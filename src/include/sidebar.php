@@ -6,6 +6,8 @@
   ?>
   <link rel="stylesheet" href="../../public/css/fontastic.css">
   <script type="text/javascript" src="../../JavaScript/Funcion2.js"></script>
+  <link rel="stylesheet" href="../../public/css/style.sea.css" id="theme-stylesheet">
+
   <nav class="side-navbar">
           <!-- Sidebar Header-->
           
@@ -36,8 +38,7 @@
                     
                     }
                     ?>
-                    <li><a href="../../src/pages/Categorias.php"> <i class="fas fa-box"></i>Categorias</a></li>
-
+                  
                     <li><a href="../../src/login/logout.php"> <i class="fas fa-sign-out-alt"></i>SALIR</a></li>
                     
           </ul>

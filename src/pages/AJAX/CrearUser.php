@@ -11,8 +11,6 @@
     $pass = $_POST[("txtUserPass")];
     $cargo = $_POST[("txtUserCargo")];  
 
-
-    $tmp="";
     
     $sql="INSERT INTO usuarios(user,nombre,pass,cargo) 
           VALUES ('".$nombre."','".$user."','".$pass."','".$cargo."')";
