@@ -50,40 +50,10 @@
                                     <div class="icon bg-green"><i class="icon-padnote"></i></div>
                                     <div class="title"><span>Productos<br>Totales</span>
                                         <div class="progress">
-                                            <?php
-                                               
-                                                mysqli_set_charset($conexion, "utf8");
-                                            
-                                                $tmp="";
-                                                $total; 
-                                                $consulta;
-                                                $vencidos;
-                                                $Vencidos2;
-                                                $sql="SELECT COUNT(*) as CANTIDADT FROM `productos`";
-                                                $res=mysqli_query($conexion,$sql);
-                                                while ($row=mysqli_fetch_array($res, MYSQL_ASSOC)){                                     
-                                                    $total=$row["CANTIDADT"];
-                                                }
-                                                $sql="SELECT COUNT(*) as CANTIDAD FROM `productos` WHERE FECHA_VENC BETWEEN curdate() and (curdate() + 7)";
-                                                $res=mysqli_query($conexion,$sql);
-                                                while ($row=mysqli_fetch_array($res, MYSQL_ASSOC)){                                     
-                                                    $consulta=$row["CANTIDAD"];
-                                                }
-                                                $sql="SELECT COUNT(*) as CANTIDADV from productos where FECHA_VENC < curdate()";
-                                                $res=mysqli_query($conexion,$sql);
-                                                while ($row=mysqli_fetch_array($res, MYSQL_ASSOC)){                                     
-                                                    $Vencidos2=$row["CANTIDADV"];
-                                                }
-
-                                                $resta = (($consulta * 100)/($total));
-                                                $resta2 = (($Vencidos2 * 100)/($total));
                                                 
-                                                echo "<div role='progressbar' style='width: ".$total."%; height: 4px;' aria-valuenow='15' aria-valuemin='0' aria-valuemax='100' class='progress-bar bg-green'></div>"
-                                            
-                                            ?>    
                                         </div>
                                     </div>
-                                    <?php           
+                                    <?php            
                                         echo "<div class='number'><strong>". $total ."</strong></div>";
                                     ?>
                                 </div>

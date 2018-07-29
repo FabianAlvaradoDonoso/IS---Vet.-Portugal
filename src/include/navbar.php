@@ -1,3 +1,48 @@
+
+<?php
+                $conexion = mysqli_connect("Localhost", "root", "", "vetportugal");
+                if(mysqli_connect_errno()){
+                    echo "Error al conectar a la BBDD";
+                    exit();
+                }
+            
+                mysqli_set_charset($conexion, "utf8");
+            
+                $tmp="";
+                $total; 
+                $consulta; $resta=0 ; $resta2=0;
+                $vencidos;
+                $Vencidos2;
+                $sql="SELECT COUNT(*) as CANTIDADT FROM `productos`";
+                $res=mysqli_query($conexion,$sql);
+                while ($row=mysqli_fetch_array($res, MYSQL_ASSOC)){                                     
+                    $total=$row["CANTIDADT"];
+                }
+                $sql="SELECT COUNT(*) as CANTIDAD FROM `productos` WHERE FECHA_VENC BETWEEN curdate() and ADDDATE(CURDATE(), INTERVAL 2 MONTH)";
+                $res=mysqli_query($conexion,$sql);
+                while ($row=mysqli_fetch_array($res, MYSQL_ASSOC)){                                     
+                    $consulta=$row["CANTIDAD"];
+                }
+                $sql="SELECT COUNT(*) as CANTIDADV from productos where FECHA_VENC < curdate()";
+                $res=mysqli_query($conexion,$sql);
+                while ($row=mysqli_fetch_array($res, MYSQL_ASSOC)){                                     
+                    $Vencidos2=$row["CANTIDADV"];
+                }
+                if($total != 0 && $consulta != 0){
+                    $resta = (($consulta * 100)/($total));
+                }
+                if($total != 0 && $Vencidos2 != 0){
+                    $resta2 = (($Vencidos2 * 100)/($total));
+                }
+                
+                $badge ='';
+                if($consulta != 0 || $Vencidos2 != 0){
+                    $cantidadAlerts = '';
+                    if($consulta != 0){$cantidadAlerts += 1;}
+                    if($Vencidos2 != 0){$cantidadAlerts += 1;}
+                    $badge = '<span class="badge bg-red badge-corner">'.$cantidadAlerts.'</span>';
+                }
+            ?>
 <link rel="stylesheet" href="../../public/css/style.sea.css" id="theme-stylesheet">
 <link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
 
@@ -15,8 +60,30 @@
                 </div>
                 <!-- Navbar Menu -->
                 <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                  <!-- Search-->
-                  <!--li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li-->
+                 <!-- Notifications-->
+                 <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fas fa-bell"></i><?php echo $badge; ?></a>
+                        <ul aria-labelledby="notifications" class="dropdown-menu">
+                            <?php
+                                if($consulta != 0){
+                                    echo '<li><a rel="nofollow" href="../../src/pages/PorVencer.php" class="dropdown-item"> 
+                                        <div class="notification">
+                                        <div class="notification-content"><i class="fas fa-exclamation-triangle bg-orange"></i>Hay '.$consulta.' productos por vencer</div>
+                                        <div class="notification-time"><small>Haga click para mas info.</small></div>
+                                        </div></a></li>';
+                                }
+                                if($Vencidos2 != 0){
+                                    echo '<li><a rel="nofollow" href="../../src/pages/Vencidos.php" class="dropdown-item"> 
+                                        <div class="notification">
+                                        <div class="notification-content"><i class="fas fa-exclamation-circle bg-red"></i>Hay '.$Vencidos2.' productos vencidos</div>
+                                        <div class="notification-time"><small>Haga click para mas info.</small></div>
+                                        </div></a></li>';
+                                }
+                                if($Vencidos2 == 0 && $consulta == 0){
+                                    echo '<li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Sin notificaciones</strong></a></li>';
+                                }
+                            ?>
+                        </ul>
+                    </li>
                   <!-- Logout    -->
                   <li class="nav-item"><a href="../../src/login/logout.php" class="nav-link logout"> <span class="d-none d-sm-inline">SALIR</span><i class="fa fa-sign-out"></i></a></li>
                 </ul>

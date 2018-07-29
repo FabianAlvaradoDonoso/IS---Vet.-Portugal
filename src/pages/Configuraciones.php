@@ -157,7 +157,11 @@
               <div class="container-fluid">
                  <h2 class="no-margin-bottom">Configuraciones</h2> 
             </div>
-            <nav class="navbar position-fixed">
+            
+           </header>
+          <div id="recargar">
+          <section class="tables"> 
+          <nav class="navbar position-fixed">
                 <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
                     <div id="list-example" class="list-group d-flex flex-md-col">
                             <a class="nav-link active align-items-center" href="#page"><i class="fas fa-cog"></i></a>
@@ -168,10 +172,7 @@
                     </div>
          
                     </ul> 
-                 </nav>
-           </header>
-          <div id="recargar">
-          <section class="tables"> 
+                 </nav>  
               <!-- TABLA USUARIOS-->     
               <div id="U" class="container-fluid ml-5">
                   <div class="row">

@@ -64,15 +64,15 @@
                                                                     </div>
                                                                     <div class="form-row">
                                                                         <div class='col-md-12'>
-                                                                            <input type='text' class="form-control mb-1 form-control-" id="nombreArticulo" placeholder="Nombre paquete artículos" onkeyup="">
+                                                                            <input type='text' class="form-control mb-1 form-control-" id="nombreArticulo" placeholder="Nombre paquete artículos" onkeyup="buscarFavNoFav('Articulo', 'nombreArticulo')">
                                                                         </div>
                                                                     </div>
                                                                     
                                                                     <div class="row">
                                                                         <div class="container">
                                                                             <div class='form-inline' id='' >
-                                                                                <button type="buttom" class="btn btn-success mr-5 ml-1" onclick="">Buscar</button>
-                                                                                <button type="buttom" class="btn btn-danger ml-5 mr-1" onclick="">Limpiar busqueda</button>
+                                                                                <button type="buttom" class="btn btn-success mr-5 ml-1" id="btnBuscarArticulo" onclick="buscarFavNoFav('Articulo', 'nombreArticulo')">Buscar</button>
+                                                                                <button type="buttom" class="btn btn-danger ml-5 mr-1" onclick="limpiarPaquete('nombreArticulo', 'Articulo')">Limpiar busqueda</button>
                                                                             </div>                                                           
                                                                         </div>
                                                                     </div>
@@ -89,15 +89,15 @@
                                                                     </div>
                                                                     <div class="form-row">
                                                                         <div class='col-md-12'>
-                                                                            <input type='text' class="form-control mb-1 form-control-" id="nombreOperacion" placeholder="Nombre paquete cirugía" onkeyup="">
+                                                                            <input type='text' class="form-control mb-1 form-control-" id="nombreOperacion" placeholder="Nombre paquete cirugía" onkeyup="buscarFavNoFav('Cirugia', 'nombreOperacion')">
                                                                         </div>
                                                                     </div>
                                                                     
                                                                     <div class="row">
                                                                         <div class="container">
                                                                             <div class='form-inline' id='datetimepicker6' >
-                                                                                <button type="buttom" class="btn btn-success ml-1 mr-5" onclick="">Buscar</button>
-                                                                                <button type="buttom" class="btn btn-danger ml-5 mr-1" onclick="">Limpiar busqueda</button>
+                                                                                <button type="buttom" class="btn btn-success ml-1 mr-5" id="btnBuscarCirugia" onclick="buscarFavNoFav('Cirugia', 'nombreOperacion')">Buscar</button>
+                                                                                <button type="buttom" class="btn btn-danger ml-5 mr-1" onclick="limpiarPaquete('nombreOperacion', 'Cirugia')">Limpiar busqueda</button>
                                                                             </div>                                                           
                                                                         </div>
                                                                     </div>
@@ -440,7 +440,7 @@
                                                         <div class="card-body" id="divTab">
                                                             <form id="formPaqP">
                                                                 <div class="form-group">
-                                                                    <label for="txtCodigo">Precio del Paquete <small>(en caso de no querer el precio original)</small></label>
+                                                                    <label for="txtCodigo">Precio del Paquete <small>(en caso de no querer el de los productos por separado)</small></label>
                                                                     <input type="number" class="form-control" id="txtPrecioPaqueteModificar" aria-describedby="precio" placeholder="Precio Paquete"  onkeypress="">
                                                                 </div>
                                                             </form>
@@ -621,7 +621,7 @@
                     </div>
 
 
-                </section>     
+                </section>   
 
       <!--FOOTER-->      
       <?php  include '../include/footer.php'; ?>

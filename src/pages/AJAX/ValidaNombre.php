@@ -98,7 +98,7 @@
                     <button type='button' class='btn btn-outline-".$row["VENCIDO2"]." btn-sm' onclick='mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")'><span class='oi oi-trash'></span></button></td>
                 </tr>";
     }
-    echo "</tbody></table></div>";
+    $tmp.= "</tbody></table></div>";
     echo $tmp;
     }
 

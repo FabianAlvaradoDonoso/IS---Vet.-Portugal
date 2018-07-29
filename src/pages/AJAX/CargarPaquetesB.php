@@ -27,10 +27,10 @@
         FROM
             paquetito
         WHERE
-            IS_FAV = TRUE AND IS_OPERACION = ".$_POST["tipo"]."";
+            IS_FAV = TRUE AND IS_OPERACION = ".$_POST["tipo"]." AND NOMBRE_PAQUETITO LIKE '%".$_POST["nombre"]."%'";
 
 
-    setlocale(LC_MONETARY, 'en_US'); 
+    setlocale(LC_MONETARY, 'en_US');
     $res=mysqli_query($conexion,$sql);
     while ($row=mysqli_fetch_array($res)){
         $nombre = $row["NOMBRE_PAQUETITO"];

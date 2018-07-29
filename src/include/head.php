@@ -41,7 +41,6 @@
     <script type="text/javascript" src="../../public/js/daterangepicker.min.js"></script>
     <script type="text/javascript" src="../../public/js/moment.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../public/css/daterangepicker.css" />
-    <script type="text/javascript" src="../../JavaScript/Funcion2.js"></script>
     <script type="text/javascript" src="../../JavaScript/Funcion1.js"></script>
     <script type="text/javascript" src="../../public/js/front.js"></script>
     <!--script type="text/javascript" src="../../public/js/charts-home.js"></script-->

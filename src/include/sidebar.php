@@ -5,7 +5,7 @@
             else{        $cargo = "Estandar";          }
   ?>
   <link rel="stylesheet" href="../../public/css/fontastic.css">
-  <script type="text/javascript" src="../../JavaScript/Funcion2.js"></script>
+  <script type="text/javascript" src="../../JavaScript/Funcion1.js"></script>
   <link rel="stylesheet" href="../../public/css/style.sea.css" id="theme-stylesheet">
 
   <nav class="side-navbar">
