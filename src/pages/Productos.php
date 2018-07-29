@@ -43,8 +43,7 @@
                                         <div class="row justify-content-between">
                                         <div class="col-3"><h4><strong>Productos</strong></h4></div>
                                             
-                                        <div class=" col-1 "><button type="button" class="btn btn-primary btn-sm" onclick="modalNuevo()">Nuevo</button></div>
-                                        <div class=" col-1 "><button type="button" class="btn btn-primary btn-sm" onclick="updateDiv()">Recargar</button></div>
+                                        <div class=" col-2 "><button type="button" class="btn btn-primary btn-sm" onclick="modalNuevo()">Nuevo</button></div>
                                         </div>
                                     </div>
                                 </div>
@@ -127,9 +126,9 @@
 
                                                     $resultado = $base->prepare($sqlLimit);
                                                     $resultado->execute(array());
+                                                    // <th>CODIGO</th>
                                                     echo "<thead>
                                                             <tr class='thead-light'>
-                                                                <th>CODIGO</th>
                                                                 <th>CATEGORIA</th>
                                                                 <th>PROVEEDOR</th>
                                                                 <th>NOMBRE</th>
@@ -173,7 +172,7 @@
                                                         setlocale(LC_MONETARY, 'en_US');
 
                                                         echo "<tr class='".$class."'>";
-                                                        echo "<td>" . $codigo . "</td>";
+                                                        //echo "<td>" . $codigo . "</td>";
                                                         echo "<td>" . $categoria . "</td>";
                                                         echo "<td>" . $proveedor . "</td>";
                                                         echo "<td>" . $nombre . "</td>";
@@ -822,7 +821,7 @@
                                     <p align="center"></p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cerrarBien" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
+                                    <button type="button" id="cerrarBien" class="btn btn-success" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
                                 </div>
                             </div>
                         

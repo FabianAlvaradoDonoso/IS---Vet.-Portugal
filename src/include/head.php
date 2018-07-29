@@ -17,7 +17,7 @@
     
     <!-- Main File-->
     <script src="../../public/js/front.js"></script>
-    <link rel="stylesheet" href="../../public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../vendor/font-awesome/css/font-awesome.min.css">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
     <!-- Fontastic Custom icon font-->
@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
     <link rel="stylesheet" href="../../public/css/style.sea.css" id="theme-stylesheet">
 
-    <script src="../../vendor/bootstrap-datepicker/js/bootstrap-datepicker.min" charset="utf-8"></script>
+    <script src="../../vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="../../vendor/bootstrap-datepicker/css/bootstrap-datepicker.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="../../public/js/daterangepicker.min.js"></script>
@@ -44,7 +44,7 @@
     <script type="text/javascript" src="../../JavaScript/Funcion2.js"></script>
     <script type="text/javascript" src="../../JavaScript/Funcion1.js"></script>
     <script type="text/javascript" src="../../public/js/front.js"></script>
-    <script type="text/javascript" src="../../public/js/charts-home.js"></script>
+    <!--script type="text/javascript" src="../../public/js/charts-home.js"></script-->
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/solid.css" integrity="sha384-S2gVFTIn1tJ/Plf+40+RRAxBCiBU5oAMFUJxTXT3vOlxtXm7MGjVj62mDpbujs4C" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/regular.css" integrity="sha384-QNorH84/Id/CMkUkiFb5yTU3E/qqapnCVt6k5xh1PFIJ9hJ8VfovwwH/eMLQTjGS" crossorigin="anonymous">

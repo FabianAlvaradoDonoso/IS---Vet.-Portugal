@@ -523,7 +523,7 @@
                                     
                                 </div>
                                 <div class="modal-body">
-                                    <p align="center">Los datosConsulta fueron modificados satifactoriamente.</p>
+                                    <p align="center">Los datos fueron modificados satifactoriamente.</p>
                                     <p align="center"></p>
                                 </div>
                                 <div class="modal-footer">
@@ -663,7 +663,7 @@
                                     
                                 </div>
                                 <div class="modal-body">
-                                    <p align="center">Los datosConsulta fueron eliminados satifactoriamente.</p>
+                                    <p align="center">Producto eliminado satifactoriamente.</p>
                                     <p align="center"></p>
                                 </div>
                                 <div class="modal-footer">

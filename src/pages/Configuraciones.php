@@ -7,6 +7,10 @@
     if(!isset($_SESSION["user"])){
       header("location:../../src/login/login.php");
     }
+    if($_SESSION["cargo"]=='0')
+    {
+        header("location:../../src/login/login.php");
+    }
     
   ?>
   
@@ -125,14 +129,13 @@
 }
 
 
-
 .dropdown-menu {
   margin-top: .75rem;
 }
     </style> 
   <body>
     <!--PAGINA-->
-    <div class="page">
+    <div id="page" class="page">
      <!--NAVBAR--> 
     <div class="header">
     <?php  include '../../src/include/navbar.php';  ?>
@@ -146,22 +149,36 @@
         ?>
 
       <!--CONTENIDO-->
+      
       <div class="content-inner">
+                
+     
             <header class="page-header">
               <div class="container-fluid">
-                 <h2 class="no-margin-bottom">Configuraciones</h2>
-                
+                 <h2 class="no-margin-bottom">Configuraciones</h2> 
             </div>
+            <nav class="navbar position-fixed">
+                <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                    <div id="list-example" class="list-group d-flex flex-md-col">
+                            <a class="nav-link active align-items-center" href="#page"><i class="fas fa-cog"></i></a>
+                            <a class="nav-link active" href="#U">User </a>
+                            <a class="nav-link active" href="#P">Pro</a>         
+                            <a class="nav-link active" href="#C">Cat</a>         
+                            <a class="nav-link active" href="#B">Bod</a> 
+                    </div>
+         
+                    </ul> 
+                 </nav>
            </header>
           <div id="recargar">
           <section class="tables"> 
               <!-- TABLA USUARIOS-->     
-              <div class="container-fluid">
+              <div id="U" class="container-fluid ml-5">
                   <div class="row">
                     <div class="col-lg-8">
                       <div class="card">
                       <div class="card-header" style="border">
-                          <div class=" container ">
+                          <div class=" container ">                              
                             <div class="row justify-content-between">
                               <div class="col-7"><h4><strong>Usuarios</strong></h4></div>                            
                               <div class=" col-3 "><button type="button" class="btn btn-primary btn-sm mr-3" onclick="mostrarModalAgregarUsuario()">Nuevo</button></div>
@@ -192,8 +209,7 @@
                             <tr class="thead-light">
                               <th class="text-center">Tipo Cuenta</th>
                               <th class="text-center">Nombre</th>
-                              <th class="text-center">Usuario</th>
-                              <th class="text-center">Contraseña</th>                      
+                              <th class="text-center">Usuario</th>                  
                               <th class="text-center">Acciones</th>
 
                             </tr>
@@ -219,8 +235,7 @@
                                   echo  '
                                       <td class="text-center">' . $cargo . '</td>
                                       <td class="text-center">' . $nombre . '</td>
-                                      <td class="text-center">' . $user . '</td>
-                                      <td class="text-center">' . $pass . '</td>';
+                                      <td class="text-center">' . $user . '</td>';
                                 
                                                              
                                
@@ -281,7 +296,7 @@
                   </div>
               </div>
 
-                        <!--MODAL AGREGAR USUARIO-->
+                        <!--MODAL MODIFICAR USUARIO-->
                         <div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalModificarUsuario">
                               <div class="modal-dialog ">
                                   <div class="modal-content">
@@ -307,7 +322,7 @@
                                               <input type="password" class="form-control" id="txtUserPassM" aria-describedby="nombre" placeholder=""  onkeypress="">
                                           </div>
                                           <div class="form-group">  
-                                          <span class="switch switch-sm">
+                                          <span class="switch-lg">
                                               <input type="checkbox" class="switch" id="switch-smM">
                                               <label for="switch-sm">Administrador</label>
                                           </span>
@@ -324,12 +339,13 @@
               </div>
                             <!--TABLA PROVEEDORES-->     
 
-              <div class="container-fluid">
+              <div id="P"class="container-fluid ml-5">
                   <div class="row">
                       <div class="col-md-6">
                           <div class="card">
                                 <div class="card-header" style="border">
                                     <div class=" container ">
+                                        
                                     <div class="row justify-content-between">
                                         <div class="col-7"><h4><strong>Proveedores</strong></h4></div>                            
                                         <?php  $tabla="proveedor";
@@ -391,14 +407,14 @@
                 </div>
                       <!--TABLA CATEGORIAS-->
 
-  <div class="container-fluid">
+    <div id="C"class="container-fluid ml-5">
                   <div class="row">
-                      <div class="col-md-4">
+                      <div class="col-md-6">
                           <div class="card">
                                 <div class="card-header" style="border">
                                     <div class=" container ">
                                     <div class="row justify-content-between">
-                                        <div class="col-9"><h4><strong>Categorias</strong></h4></div>                            
+                                        <div class="col-7"><h4><strong>Categorias</strong></h4></div>                            
                                         <?php  $tabla="categoria";
                                                 $campo="NOMBRE_CATEGORIA";
                                                 echo"<div class=' col-3 '><button type='button' class='btn btn-primary btn-sm mr-3' 
@@ -459,9 +475,9 @@
 
                 <!--TABLA BODEGA-->
            
-                   <div class="container-fluid">
+                   <div id="B"class="container-fluid ml-5">
                   <div class="row">
-                      <div class="col-md-4">
+                      <div class="col-md-6">
                           <div class="card">
                                 <div class="card-header" style="border">
                                     <div class=" container ">
@@ -580,7 +596,30 @@
                       </div>
                   </div>
               </div>
-
+                                        <!-- MODAL ERROR  -->
+                <div class='modal fade' id='modalERROR' role='dialog'>
+                  <div class='modal-dialog'>
+          
+                      <!-- Modal content-->
+                      <div class='modal-content'>
+                          <div class='modal-header'>
+                              <h4 class='modal-title'>Error</h4>
+                              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                          </div>
+                          <div class='modal-body'>
+                              <p>Hay campos vacios o incorrectos.</p>
+                          </div>
+                          <div class='modal-footer'>    
+                              <div class="container">
+                                  <div class="row justify-content-end">  
+                                      <button type='button' id='cerrarExito' class='btn btn-danger' data-dismiss='modal' onclick=''>Cerrar</button>
+                                     
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
                 <div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalAgregarElemento">
                   <div class="modal-dialog ">
                       <div class="modal-content">

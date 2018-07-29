@@ -23,4 +23,5 @@
               </div>
             </div>
           </nav>
-          <script> <link rel="stylesheet" href="../../public/css/font-awesome.min.css"></script>
+          <link rel="stylesheet" href="../../vendor/font-awesome/css/font-awesome.min.css">
+         

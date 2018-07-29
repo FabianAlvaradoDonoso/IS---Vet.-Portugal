@@ -56,7 +56,7 @@ function estaChecked(condicion){
 }
 function estaChecked2(condicion){
     if(condicion == '1'){
-        document.getElementById('modFechaConsultas').checked = true;
+        document.getElementById('modFechaConsultas').checked = "1";
     }else{
             document.getElementById('modFechaConsultas').checked = false;    
     }
@@ -591,6 +591,13 @@ function nuevoUsuario(){
     var pass=document.getElementById("txtUserPass").value;
     var check=document.getElementById("switch-sm").checked;
     var cargo;
+    if( nombre == null || nombre.length == 0 || /^\s+$/.test(nombre)
+    || user == null || user.length == 0 || /^\s+$/.test(user) || pass == null || pass.length==0 ||
+    /^\s+$/.test(pass)){
+        $("#modalAgregarUsuario").modal("hide");
+  $("#modalERROR").modal();
+}
+else{
     if(check)
     {
         cargo='1';
@@ -617,6 +624,9 @@ function nuevoUsuario(){
            $("#modalExito").modal();
         }
     });   
+}
+    
+    
 }
 function mostrarModalAgregarUsuario(){
     $("#modalAgregarUsuario").modal();
@@ -670,13 +680,16 @@ function nuevoElemento(){
     var nombre= document.getElementById("txtNombreElementoA").value;
     var campo= document.getElementById("campoA").value;
     var tabla= document.getElementById("tablaA").value;
-
+    if( nombre == null || nombre.length == 0 || /^\s+$/.test(nombre)) {
+        $("#modalAgregarElemento").modal("hide");
+  $("#modalERROR").modal();
+}
+else{
     var parametros = {
         "txtNombreElemento": nombre,
         "campo": campo,
         "tabla": tabla
     }
-    alert(" "+nombre+"  "+campo+" "+tabla);
     $.ajax({
         async:false,
         data: parametros,
@@ -689,6 +702,8 @@ function nuevoElemento(){
         }
     });   
 }
+   
+}
 
 function mostrarModalModificarElemento(id,nombre,campo,campoID,tabla){
     document.getElementById("idM").value=id;
@@ -699,11 +714,11 @@ function mostrarModalModificarElemento(id,nombre,campo,campoID,tabla){
     $("#modalModificarElemento").modal();
 }
 function mostrarModalModificarUsuario(id,nombreUser,pass,user){
+  
     document.getElementById("txtNombreUserM").value=nombreUser;
     document.getElementById("txtUsuarioUserM").value=user;
     document.getElementById("txtUserPassM").value=pass;
     document.getElementById("idUserM").value=id;
-    document.getElementById("switch-smM").value="";
     $("#modalModificarUsuario").modal();
 }
 function modificarCuenta(){
@@ -713,6 +728,13 @@ function modificarCuenta(){
     var user= document.getElementById("txtUsuarioUserM").value;
     var check=document.getElementById("switch-smM").checked;
     var cargo;
+if(nombreUser == null || nombreUser.length == 0 || /^\s+$/.test(nombreUser) ||
+user == null || user.length == 0 || /^\s+$/.test(user) ||
+pass == null || pass.length == 0 || /^\s+$/.test(pass)) {
+        $("#modalModificarUsuario").modal("hide");
+  $("#modalERROR").modal();
+}
+else{
     if(check)
     {
         cargo='1';
@@ -725,17 +747,18 @@ function modificarCuenta(){
         "user": user,
         "cargo": cargo
     }
-    alert(id+" "+nombreUser+" "+pass+" "+user+" "+cargo);
     $.ajax({
         async:false,
         data: parametros,
         url: "AJAX/ModificarCuenta.php",
         type: "POST",
         success: function(){
+        
             document.getElementById("txtNombreUserM").value = "";
             document.getElementById("idM").value = "";
             document.getElementById("txtUsuarioUserM").value = "";
             document.getElementById("txtUserPassM").value = "";
+            document.getElementById("switch-smM").checked =false;
 
            $("#modalModificarUsuario").modal('hide');
            $("#modalExito").modal();
@@ -744,8 +767,10 @@ function modificarCuenta(){
             alert("error");
         }
         
-    })
+    });
 
+}
+    
 
 }
 
@@ -755,7 +780,12 @@ function modificarElemento(){
     var campo = document.getElementById("campoM").value;
     var tabla = document.getElementById("tablaM").value;
     var campoID = document.getElementById("campoIDM").value;
-    alert(" "+nombre+" "+id+" "+campo+" "+tabla+" "+campoID);
+
+    if( nombre == null || nombre.length == 0 || /^\s+$/.test(nombre)) {
+        $("#modalModificarElemento").modal("hide");
+  $("#modalERROR").modal();
+}
+else{
     var parametros = {
         "txtNombreElemento": nombre,
         "id": id,
@@ -785,3 +815,7 @@ function modificarElemento(){
         }
     });  
 }
+    
+    
+}
+
