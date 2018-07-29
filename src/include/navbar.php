@@ -45,6 +45,10 @@
             ?>
 <link rel="stylesheet" href="../../public/css/style.sea.css" id="theme-stylesheet">
 <link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha256-m/h/cUDAhf6/iBRixTbuc8+Rg2cIETQtPcH9D3p2Kg0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="../../vendor/font-awesome/css/font-awesome.min.css">
+<script src="../../public/js/front.js"></script>
+
 
               <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
             <!-- Search Box-->
@@ -56,7 +60,7 @@
                   <!-- Navbar Brand --><a href="../../index.php" class="navbar-brand d-none d-sm-inline-block">
                     <div class="brand-text d-none d-lg-inline-block"><span>Veterinaria </span><strong> Portugal</strong></div>
                     <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>VP</strong></div></a>
-                <!-- Toggle Button--><a id="toggle-btn"  class="menu-btn active"><span></span><span></span><span></span></a>
+                <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
                 </div>
                 <!-- Navbar Menu -->
                 <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
@@ -90,5 +94,4 @@
               </div>
             </div>
           </nav>
-          <link rel="stylesheet" href="../../vendor/font-awesome/css/font-awesome.min.css">
          

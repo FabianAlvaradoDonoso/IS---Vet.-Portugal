@@ -27,7 +27,7 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Categorias</h2>
+              <h2 class="no-margin-bottom">About</h2>
             </div>
           </header>
           <section class="dashboard-counts no-padding-bottom">
@@ -41,7 +41,7 @@
                       </div>
                     </div>
                     <div class="card-body text-center">
-                      <div class="client-avatar"><img src="img/avatar-2.jpg" alt="..." class="img-fluid rounded-circle">
+                      <div class="client-avatar"><img src="../../public/img/boss.jpg" alt="..." class="img-fluid rounded-circle">
                         <div class="status bg-green"></div>
                       </div>
                       <div class="client-title">

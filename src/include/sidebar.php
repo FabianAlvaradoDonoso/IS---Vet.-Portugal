@@ -14,10 +14,10 @@
             <div class="sidebar-header d-flex align-items-center">
             <?php
             if($cargo=="Administrador"){
-              echo '<div class="avatar"><img src="../../public/img/Avatar-1(Administrador).jpg" 
+              echo '<div class="avatar"><img src="../../public/img/admin.png" 
               alt="..." class="img-fluid rounded-circle"></div>';}
               else{
-                echo '<div class="avatar"><img src="../../public/img/Avatar-2(Usuario).jpg" 
+                echo '<div class="avatar"><img src="../../public/img/user.png" 
               alt="..." class="img-fluid rounded-circle"></div>';               
               }?>
                         

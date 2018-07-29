@@ -16,7 +16,7 @@
 
     
     <!-- Main File-->
-    <script src="../../public/js/front.js"></script>
+   <script src="../../public/js/front.js"></script>
     <link rel="stylesheet" href="../../vendor/font-awesome/css/font-awesome.min.css">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">

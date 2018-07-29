@@ -1968,9 +1968,9 @@ function limpiarPaquete(nombre, tipo){
 
 function nuevoUsuario(){
  
-    var user= document.getElementById("txtUserNombre").value;
-    var nombre=document.getElementById("txtUserUser").value;
-    var pass=document.getElementById("txtUserPass").value;
+    var user= document.getElementById("txtUserNombre").value.replace(/["']/g, "");
+    var nombre=document.getElementById("txtUserUser").value.replace(/["']/g, "");
+    var pass=document.getElementById("txtUserPass").value.replace(/["']/g, "");
     var check=document.getElementById("switch-sm").checked;
     var cargo;
     if( nombre == null || nombre.length == 0 || /^\s+$/.test(nombre)
@@ -2059,7 +2059,7 @@ function mostrarModalAgregarElemento(tabla,campo){
     $("#modalAgregarElemento").modal();
 }
 function nuevoElemento(){
-    var nombre= document.getElementById("txtNombreElementoA").value;
+    var nombre= document.getElementById("txtNombreElementoA").value.replace(/["']/g, "");
     var campo= document.getElementById("campoA").value;
     var tabla= document.getElementById("tablaA").value;
     if( nombre == null || nombre.length == 0 || /^\s+$/.test(nombre)) {
@@ -2105,9 +2105,9 @@ function mostrarModalModificarUsuario(id,nombreUser,pass,user){
 }
 function modificarCuenta(){
     var id= document.getElementById("idUserM").value;
-    var nombreUser= document.getElementById("txtNombreUserM").value;
-    var pass= document.getElementById("txtUserPassM").value;
-    var user= document.getElementById("txtUsuarioUserM").value;
+    var nombreUser= document.getElementById("txtNombreUserM").value.replace(/["']/g, "");
+    var pass= document.getElementById("txtUserPassM").value.replace(/["']/g, "");
+    var user= document.getElementById("txtUsuarioUserM").value.replace(/["']/g, "");
     var check=document.getElementById("switch-smM").checked;
     var cargo;
 if(nombreUser == null || nombreUser.length == 0 || /^\s+$/.test(nombreUser) ||
@@ -2158,7 +2158,7 @@ else{
 
 function modificarElemento(){
     var id = document.getElementById("idM").value;
-    var nombre = document.getElementById("txtNombreElementoM").value;
+    var nombre = document.getElementById("txtNombreElementoM").value.replace(/["']/g, "");
     var campo = document.getElementById("campoM").value;
     var tabla = document.getElementById("tablaM").value;
     var campoID = document.getElementById("campoIDM").value;
