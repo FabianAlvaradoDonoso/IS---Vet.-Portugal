@@ -12,15 +12,8 @@
           <!-- Sidebar Header-->
           
             <div class="sidebar-header d-flex align-items-center">
-            <?php
-            if($cargo=="Administrador"){
-              echo '<div class="avatar"><img src="../../public/img/admin.png" 
-              alt="..." class="img-fluid rounded-circle"></div>';}
-              else{
-                echo '<div class="avatar"><img src="../../public/img/user.png" 
-              alt="..." class="img-fluid rounded-circle"></div>';               
-              }?>
-                        
+            <div class="avatar"><img src="../../public/img/user.png" 
+              alt="..." class="img-fluid rounded-circle"></div>  
               <div class="title">
               <h1><?php echo $_SESSION["nombre"] ;?></h1>
                <p><?php echo $cargo;?></p>

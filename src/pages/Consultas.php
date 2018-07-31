@@ -30,7 +30,7 @@
               <h2 class="no-margin-bottom">Consultas</h2>
             </div>
           </header>
-          <section class="tables">
+          <section class="tables" id="recargar">
 
                 
 

@@ -1350,68 +1350,6 @@ function estaChecked2(condicion){
     }
 }
 
-function agregar(){
-    var texto1 = document.getElementById("txtCodigoModalAgregar").value;
-    var texto2 = document.getElementById("cbCategoriaModalAgregar").value;
-    var texto3 = document.getElementById("cbProveedorModalAgregar").value;
-    var texto4 = document.getElementById("txtNombreModalAgregar").value;
-    var texto5 = document.getElementById("nudPrecioVentaModalAgregar").value;
-    var texto6 = document.getElementById("nudPrecioNetoModalAgregar").value;
-    var texto7 = document.getElementById("dtpFechaVencModalAgregar").value;
-    var texto8 = document.getElementById("dtpFechaAdqModalAgregar").value;
-    var texto9 = document.getElementById("nudStockMinModalAgregar").value;
-    var texto10 = document.getElementById("nudStockActModalAgregar").value;
-    var texto11 = document.getElementById("cbBodegaModalAgregar").value;
-
-    if(document.getElementById("modFechaAgregar").checked == true){
-        texto7 = 'null';
-    }
-    if(texto1 == '' || texto2 == '' || texto3 == '' || texto4 == '' || texto5 == '' || texto6 == '' || texto8 == '' || texto9 == '' || texto10 == '' || texto11 == '' || (texto7 != '' && new Date(texto8).getTime() > new Date(texto7).getTime()))
-    {
-        $("#modalErrorAgregar").modal();
-        document.getElementById("cerrarError").focus();
-    }
-    if(texto7 == ''){texto7 = 'null'}
-    else
-    {
-        if(comprobarCodigo(texto1) != false){
-            var parametros = {
-                "txtCodigoModalAgregar" : texto1,
-                "cbCategoriaModalAgregar" : texto2,
-                "cbProveedorModalAgregar" : texto3,
-                "txtNombreModalAgregar" : texto4,
-                "nudPrecioVentaModalAgregar" : texto5,
-                "nudPrecioNetoModalAgregar" : texto6,
-                "dtpFechaVencModalAgregar" : texto7,
-                "dtpFechaAdqModalAgregar" : texto8,
-                "nudStockMinModalAgregar" : texto9,
-                "nudStockActModalAgregar" : texto10,
-                "cbBodegaModalAgregar" : texto11
-            };
-            $.ajax({
-                async: false,
-                data: parametros,
-                url: "AJAX/AgregarProducto.php",
-                type: "POST",
-                success: function(response){
-                    $("#modalAgregar").modal("hide");
-                    $("#modalBienAgregar").modal();
-                    document.getElementById("cerrarBien").focus();
-                    limpiarAgregar();
-                    var div =   $("#card1").html();
-                    document.getElementById("card1").load(div);
-                },
-                error: function(){
-                    alert("error");
-                }
-            });
-        }
-        else{
-            $("#modalErrorAgregarCodigo").modal();
-        }
-        
-    }
-}
 
 function limpiarAgregar(){
     document.getElementById("txtCodigoModalAgregar").value = '';

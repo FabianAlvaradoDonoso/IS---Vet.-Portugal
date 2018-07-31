@@ -54,7 +54,7 @@
                                         <table class='table table-striped table-hover table-sm'>
                                             <?php
                                                 try{
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     $tamanoPaginas=40;
@@ -129,6 +129,7 @@
                                                     // <th>CODIGO</th>
                                                     echo "<thead>
                                                             <tr class='thead-light'>
+                                                                <th>CODIGO</th>
                                                                 <th>CATEGORIA</th>
                                                                 <th>PROVEEDOR</th>
                                                                 <th>NOMBRE</th>
@@ -172,7 +173,7 @@
                                                         setlocale(LC_MONETARY, 'en_US');
 
                                                         echo "<tr class='".$class."'>";
-                                                        //echo "<td>" . $codigo . "</td>";
+                                                        echo "<td>" . $codigo . "</td>";
                                                         echo "<td>" . $categoria . "</td>";
                                                         echo "<td>" . $proveedor . "</td>";
                                                         echo "<td>" . $nombre . "</td>";
@@ -300,7 +301,7 @@
                                                 <select id="cbCategoriaModalAgregar" class="form-control mb-2 mr-sm-2" onchange="">
                                                 
                                                 <?php
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
@@ -322,7 +323,7 @@
                                                 <select id="cbProveedorModalAgregar" class="form-control mb-2 mr-sm-2" onchange="">
                                                     
                                                 <?php
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
@@ -418,7 +419,7 @@
                                                 <select id="cbBodegaModalAgregar" class="form-control mb-2 mr-sm-2 custom-select" onchange="enviarOtro()" required>
                                                     
                                                 <?php
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
@@ -469,7 +470,7 @@
                                                 <select id="cbCategoriaModal2" class="form-control mb-2 mr-sm-2" onchange="">
                                                 
                                                 <?php
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
@@ -495,7 +496,7 @@
                                                 <select id="cbProveedorModal2" class="form-control mb-2 mr-sm-2" onchange="">
                                                     
                                                 <?php
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
@@ -595,7 +596,7 @@
                                                 <select id="cbBodegaModal2" class="form-control mb-2 mr-sm-2 custom-select" onchange="enviarOtro()" required>
                                                     
                                                 <?php
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
@@ -650,7 +651,7 @@
                                                 <select id="cbCategoriaModalE" class="form-control mb-2 mr-sm-2" onchange="" disabled>
                                                 
                                                 <?php
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
@@ -676,7 +677,7 @@
                                                 <select id="cbProveedorModalE" class="form-control mb-2 mr-sm-2" onchange="" disabled>
                                                     
                                                 <?php
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
@@ -709,7 +710,7 @@
                                                 <select id="cbBodegaModalE" class="form-control mb-2 mr-sm-2 custom-select" onchange="" disabled required>
                                                     
                                                 <?php
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
@@ -756,7 +757,7 @@
                                     <p align="center"></p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cerrarBienE" class="btn btn-danger" data-dismiss="modal" onclick="updateDiv()">Cerrar</button>
+                                    <button type="button" id="cerrarBienE" class="btn btn-success" data-dismiss="modal" onclick="updateDiv()">Cerrar</button>
                                 </div>
                             </div>
                         
@@ -778,7 +779,7 @@
                                     <p align="center"></p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cerrarBien" class="btn btn-danger" data-dismiss="modal" onclick="updateDiv()">Cerrar</button>
+                                    <button type="button" id="cerrarBien" class="btn btn-success" data-dismiss="modal" onclick="updateDiv()">Cerrar</button>
                                 </div>
                             </div>
                         

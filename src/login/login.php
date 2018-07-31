@@ -23,9 +23,9 @@ header("location:../../index.php");
                         <div class="info d-flex align-items-center">
                             <div class="content">
                                 <div class="logo">
-                                    <h1>Control de Inventario</h1>
+                                    <h1>Vet<strong>Portugal</strong></h1>
                                 </div>
-                                <p>Centro veterinario.</p>
+                                <p>Control de Inventario.</p>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@ header("location:../../index.php");
             </div>
         </div>
         <div class="copyrights text-center">
-            <p>Diseñado por <a href="register.html" class="external">B&D</a> y <a href="https://bootstrapious.com" class="external">Bootstrap</a>
+            <p>Diseñado por <a href="register.html" class="external">B&D</a> y <a href="https://bootstrapious.com" class="external">Bootstrap      </a>Beta v1.2.0       
                 <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
             </p>
         </div>
