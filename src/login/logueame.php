@@ -1,7 +1,8 @@
 <?php
 
 session_start();
-$conexion = mysqli_connect("localhost", "root", "", "vetportugal");
+
+$conexion = mysqli_connect("localhost", 'vetportu_inventa', 'vetportugal2018', 'vetportu_vetportugalInv');
 
 
   if(isset($_POST["user"]) && isset($_POST["pass"])){

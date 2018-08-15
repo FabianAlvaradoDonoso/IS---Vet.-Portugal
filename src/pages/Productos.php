@@ -54,9 +54,8 @@
                                         <table class='table table-striped table-hover table-sm'>
                                             <?php
                                                 try{
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
-
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");                                                 
+                                                    //$base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     $tamanoPaginas=40;
@@ -186,8 +185,8 @@
                                                         echo "<td>" . $stockMin . "</td>";
                                                         echo "<td>" . $stockAct . "</td>";
                                                         echo "<td>" . $bodega . "</td>";
-                                                        echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificar2(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\", \"$fechaVenc3\")'><span class='oi oi-pencil'></span></button>
-                                                                                 <button type='button' class='btn btn-outline-".$class2." btn-sm' onclick='mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")'><span class='oi oi-trash'></span></button></td>";
+                                                        echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificar2(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\", \"$fechaVenc3\")'><span class='fas fa-edit'</span></button>
+                                                                                 <button type='button' class='btn btn-outline-".$class2." btn-sm' onclick='mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")'><span class='fas fa-trash-alt'></span></button></td>";
                                                         
                                                         echo "</tr>";
 
@@ -326,7 +325,6 @@
                                                     
                                                 <?php
                                                     $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
-                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
                                                     $sql_total="SELECT * FROM proveedor";
@@ -422,7 +420,7 @@
                                                     
                                                 <?php
                                                     $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
-                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
                                                     $sql_total="SELECT * FROM bodega";
@@ -473,7 +471,6 @@
                                                 
                                                 <?php
                                                     $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
-                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
                                                     $sql_total="SELECT * FROM categoria";
@@ -499,7 +496,6 @@
                                                     
                                                 <?php
                                                     $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
-                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
                                                     $sql_total="SELECT * FROM proveedor";
@@ -599,7 +595,6 @@
                                                     
                                                 <?php
                                                     $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
-                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
                                                     $sql_total="SELECT * FROM bodega";
@@ -680,7 +675,6 @@
                                                     
                                                 <?php
                                                     $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
-                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
                                                     $sql_total="SELECT * FROM proveedor";
@@ -713,7 +707,6 @@
                                                     
                                                 <?php
                                                     $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
-                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     
                                                     $sql_total="SELECT * FROM bodega";
@@ -803,7 +796,27 @@
                                     <p align="center">Intentelo nuevamente.</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cerrarError" class="btn btn-danger" data-dismiss="modal" onclick="">Close</button>
+                                    <button type="button" id="cerrarError" class="btn btn-warning" data-dismiss="modal" onclick="">Close</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalErrorFV" role="dialog">
+                        <div class="modal-dialog">
+                        
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Error</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    
+                                </div>
+                                <div class="modal-body">
+                                    <p align="center">Si no tiene fecha de vencimiento, marque la opción.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="cerrarError" class="btn btn-warning" data-dismiss="modal" onclick="">Aceptar</button>
                                 </div>
                             </div>
                         
@@ -852,6 +865,32 @@
                         
                         </div>
                     </div>
+                      <!--MODAL EXITO-->
+              
+               <div class='modal fade' id='modalExito' role='dialog'>
+                  <div class='modal-dialog'>
+          
+                      <!-- Modal content-->
+                      <div class='modal-content'>
+                          <div class='modal-header'>
+                              <h4 class='modal-title'>Listo</h4>
+                              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                          </div>
+                          <div class='modal-body'>
+                              <p>Accion realizada con éxito.</p>
+                          </div>
+                          <div class='modal-footer'>    
+                              <div class="container">
+                                  <div class="row justify-content-end">  
+                                      <button type='button' id='cerrarExito' class='btn btn-success' data-dismiss='modal' onclick='updateDiv()'>Cerrar</button>
+                                      <!--?php $nombre=""; $tabla=""; $campo=""; $campoID=""; $id="";?-->
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+                            
                     <div class="modal fade" id="modalErrorAgregarCodigo" role="dialog">
                         <div class="modal-dialog">
                         
@@ -867,7 +906,7 @@
                                     <p align="center">Intentelo nuevamente.</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cerrarError" class="btn btn-danger" data-dismiss="modal" onclick="">Close</button>
+                                    <button type="button" id="cerrarError" class="btn btn-warning" data-dismiss="modal" onclick="">Close</button>
                                 </div>
                             </div>
                         

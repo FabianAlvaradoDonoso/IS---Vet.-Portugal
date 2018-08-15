@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
-  
-  <head>
+<html lang="es">
+
+<head>
   <?php require_once '../../src/include/head.php';
     session_start();
     if(!isset($_SESSION["user"])){
@@ -29,13 +29,12 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-                <h2>Productos Por vencer</h2>
+                <h2>Productos con Bajo Stock</h2>
             </div>
             
           </header>
           <div id="recargar">
           <section class="tables">
-                
                     <div id="tabla" class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
@@ -45,7 +44,7 @@
                                         <div class="card-header">
                                             <div class=" container ">
                                                 <div class="row justify-content-between">
-                                                    <div class="col-6"><h5>Lista de productos Por Vencer</h5></div>
+                                                    <div class="col-6"><h5>Lista de productos con Bajo Stock</h5></div>
                                                     
                                                     <div class=" col-1 "><button type="button" class="btn btn-outline-primary btn-sm" onclick="recargar()">Recargar</button></div>
                                                 </div>
@@ -60,7 +59,8 @@
                                                             <th class="text-center">Codigo</th>
                                                             <th class="text-center">Nombre</th>
                                                             <th class="text-center" width='150px'>Fecha Venc.</th>
-                                                            <th class="text-center" width='70px'>Stock</th>
+                                                            <th class="text-center" width='70px'>Stock Mínimo</th>
+                                                            <th class="text-center" width='70px'>Stock Actual</th>
                                                             <th class="text-center" width='70px'>Opciones</th>
                                                         </tr>
                                                     </thead>
@@ -80,20 +80,21 @@
                                                             $consulta;
                                                             $vencidos;
                                                             $Vencidos2;
-                                                            $sql="SELECT CODIGO, NOMBRE, FECHA_VENC, FECHA_ADQ,STOCK_ACT FROM productos WHERE FECHA_VENC BETWEEN curdate() and ADDDATE(CURDATE(), INTERVAL 2 MONTH)  and STOCK_ACT > 0";
+                                                            $sql="SELECT CODIGO, NOMBRE, FECHA_VENC, STOCK_MIN,STOCK_ACT FROM productos WHERE STOCK_ACT <= STOCK_MIN";
                                                             $res=mysqli_query($conexion,$sql);
                                                             while ($row=mysqli_fetch_array($res, MYSQL_ASSOC)){     
                                                                 $codigo = $row['CODIGO'];
                                                                 $nombre = $row['NOMBRE'];
                                                                 $fecha = date_format(date_create($row["FECHA_VENC"]), 'Y/m/d');
-                                                                $fecha2 = date_format(date_create($row["FECHA_ADQ"]), 'Y/m/d');
-                                                                $stock = $row['STOCK_ACT'];                                
+                                                                $stockMin = $row["STOCK_MIN"];
+                                                                $stockAct = $row['STOCK_ACT'];                                
                                                                 echo "  <tr>
                                                                             <td>".$row['CODIGO']."</td>
                                                                             <td>".$row['NOMBRE']."</td>
                                                                             <td>".date_format(date_create($row["FECHA_VENC"]), 'Y / m / d')."</td>
-                                                                            <td>".$row['STOCK_ACT']."</td>
-                                                                            <td><button class='btn btn-success btn-sm' onclick='mostrarModalModificarV(\"$codigo\",\"$nombre\",\"$fecha\",\"$fecha2\",\"$stock\")'><span class='fas fa-edit'</span></button></td>
+                                                                            <td>".$row['STOCK_MIN']."</td> 
+                                                                            <td>".$row['STOCK_ACT']."</td> 
+                                                                            <td><button class='btn btn-success btn-sm' onclick='mostrarModalModificarS(\"$codigo\",\"$nombre\",\"$fecha\",\"$stockMin\",\"$stockAct\")'><span class='fas fa-edit'</span></button></td>
                                                                         </tr>";
                                                             }
                                                         ?>
@@ -124,33 +125,29 @@
                                         <div class="form-row">
                                             <div class="col-md-4 mb-3">
                                                 <label for="validationCustom01">Codigo</label>
-                                                <input readonly type="text" class="form-control" id="txtCodigoModificarV" name="Codigo" placeholder="Codigo" value="" required>
+                                                <input readonly type="text" class="form-control" id="txtCodigoModificarS" name="Codigo" placeholder="Codigo" value="" required>
                                                 <div class="valid-feedback"></div>
                                             </div>
                                             <div class="col-md-8 mb-3">
                                                 <label for="validationCustom03">Nombre</label>
-                                                <input readonly type="text" class="form-control" id="txtNombreModificarV" name="Nombre" placeholder="Nombre" value="" required>
+                                                <input readonly type="text" class="form-control" id="txtNombreModificarS" name="Nombre" placeholder="Nombre" value="" required>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="col-md-4 mb-3">
+                                            <div class="col-md-6 mb-3">
                                                 <label class="mr-2 " for="">Fecha Vencimiento </label>
                                                 <div class='input-group date fad-Date2' id='' >
-                                                    <input readonly type='text' class="form-control" id="dtpFechaVencModificarV" placeholder="Fecha"  value="" required>
+                                                    <input readonly type='text' class="form-control" id="dtpFechaVencModificarS" placeholder="Fecha"  value="" required>
                                                     <span class="input-group-addon">
                                                         <span class="oi oi-calendar"></span>
                                                     </span>
                                                 </div>  
                                             </div>
-                                            <div class="col-md-4 mb-3">
-                                                <label class="mr-2 " for="">Fecha Adquisición </label>
-                                                <div class='input-group date fad-Date2' id='' >
-                                                    <input readonly type='text' class="form-control" id="dtpFechaAdqModificarV" placeholder="Fecha"  value="" required>
-                                                    <span class="input-group-addon">
-                                                        <span class="oi oi-calendar"></span>
-                                                    </span>
-                                                </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="validationCustom05">Stock Mínimo</label>
+                                                <input type="number" class="form-control" id="nudStockMinModificarS" name="nudStockAct" placeholder="Stock Actual" value="" required>
+                                                <div class="invalid-feedback"></div>
                                                 <script>  
                                                     $('.fad-Date2').datepicker({
                                                         format: "yyyy/mm/dd",
@@ -162,9 +159,9 @@
                                                 </script> 
                                             
                                             </div>
-                                            <div class="col-md-4 mb-3">
+                                            <div class="col-md-3 mb-3">
                                                 <label for="validationCustom05">Stock Actual</label>
-                                                <input type="number" class="form-control" id="nudStockActModificarV" name="nudStockAct" placeholder="Stock Actual" value="" required>
+                                                <input type="number" class="form-control" id="nudStockActModificarS" name="nudStockAct" placeholder="Stock Actual" value="" required>
                                                 <div class="invalid-feedback">
                                                 </div>
                                             </div>
@@ -173,7 +170,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-success" onclick="modificarXVenc()">Modificar</button>
+                                    <button type="button" class="btn btn-success" onclick="modificarBajoStock()">Modificar</button>
                                 </div>
                             </div>
                         </div>
@@ -227,13 +224,14 @@
 
 
                 </section>
-       
-      <!--FOOTER-->      
-      <?php  include '../../src/include/footer.php'; ?>
-      </div><!--class Content inner...-->
-        
-      </div><!--class Page content...-->
-     
-    </div><!-- class PAGE--> 
-  </body>
+                </div>
+                <!-- Page Footer-->
+                <?php  include '../../src/include/footer.php'; ?>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScript files-->
+    
+</body>
+
 </html>

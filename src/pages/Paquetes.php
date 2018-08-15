@@ -49,7 +49,7 @@
                                                         <div class="col-3">
                                                             <div class="list-group" id="list-tab" role="tablist">
                                                                 <a class="list-group-item list-group-item-action " id="list-articulos-list" data-toggle="list" href="#list-articulos" role="tab" aria-controls="articulos" onclick="mostrarPacks('Articulo')">Tienda</a>
-                                                                <a class="list-group-item list-group-item-action" id="list-operaciones-list" data-toggle="list" href="#list-operaciones" role="tab" aria-controls="operaciones" onclick="mostrarPacks('cirugia')">Clínico Quirurgico</a>
+                                                                <a class="list-group-item list-group-item-action" id="list-operaciones-list" data-toggle="list" href="#list-operaciones" role="tab" aria-controls="operaciones" onclick="mostrarPacks('cirugia')">Clínico/Quirurgico</a>
                                                             </div>
                                                         </div>
                                                         <div class="tab-content col-6 d-flex justify-content-center" id="nav-tabContent">

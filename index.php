@@ -24,77 +24,83 @@
 
       <!--CONTENIDO-->
       <div class="content-inner">
-      <header class="page-header">
+        <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Principal</h2>
+                <h2 class="no-margin-bottom">Principal</h2>
             </div>
-          </header>      
-      <section class="dashboard-counts no-padding-bottom">
-                    <div class="container-fluid">
-                        <div class="row bg-white has-shadow">
-                            <!-- Item -->
-                            <!-- <div class="col-xl-3 col-sm-6">
-                                <div class="item d-flex align-items-center">
-                                    <div class="icon bg-violet"><i class="icon-user"></i></div>
-                                    <div class="title"><span>Nuevos<br>Productos</span>
-                                        <div class="progress">
-                                            <div role="progressbar" style="width: 10%; height: 4px;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
-                                        </div>
-                                    </div>
-                                    <div class="number"><strong>10</strong></div>
-                                </div>
-                            </div> -->
-                            <!-- Item -->
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="item d-flex align-items-center">
-                                    <div class="icon bg-green"><i class="icon-padnote"></i></div>
-                                    <div class="title"><span>Productos<br>Totales</span>
-                                        <div class="progress">
-                                                
-                                        </div>
-                                    </div>
-                                    <?php            
-                                        echo "<div class='number'><strong>". $total ."</strong></div>";
-                                    ?>
+        </header>      
+        <section class="dashboard-counts no-padding-bottom">
+            <div class="container-fluid">
+                <div class="row bg-white has-shadow">
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="item d-flex align-items-center">
+                            <div class="icon bg-green"><i class="icon-padnote"></i></div>
+                            <div class="title"><span>Productos<br>Totales</span>
+                                <div class="progress">
+                                        
                                 </div>
                             </div>
-                            <!-- Item -->
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="item d-flex align-items-center">
-                                    <div class="icon bg-orange"><i class="icon-bill"></i></div>
-                                    <div class="title"><span>Productos<br>Por vencer</span>
-                                        <div class="progress">
-                                            <?php
-                                                echo "<div role='progressbar' style='width: ".$resta."%; height: 4px;' aria-valuenow='15' aria-valuemin='0' aria-valuemax='100' class='progress-bar bg-orange'></div>"
-                                            ?>
-                                            
-                                        </div>
-                                    </div>
-                                    <?php           
-                                        echo "<div class='number'><strong>". $consulta ."</strong></div>";
+                            <?php            
+                                echo "<div class='number'><strong>". $total ."</strong></div>";
+                            ?>
+                        </div>
+                        <button class="btn btn-sm btn-outline-success ml-5" onclick= "irProductos()">&nbsp;Ir a Productos&nbsp;</button>
+                    </div>
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="item d-flex align-items-center">
+                            <div class="icon bg-orange"><i class="icon-bill"></i></div>
+                            <div class="title"><span>Productos<br>Por vencer</span>
+                                <div class="progress">
+                                    <?php
+                                        echo "<div role='progressbar' style='width: ".$resta."%; height: 4px;' aria-valuenow='15' aria-valuemin='0' aria-valuemax='100' class='progress-bar bg-orange'></div>"
                                     ?>
                                     
                                 </div>
                             </div>
-                            <!-- Item -->
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="item d-flex align-items-center">
-                                    <div class="icon bg-red"><i class="icon-check"></i></div>
-                                    <div class="title"><span>Productos<br>Vencidos</span>
-                                        <div class="progress">
-                                            <?php
-                                                echo "<div role='progressbar' style='width: ".$resta2."%; height: 4px;' aria-valuenow='15' aria-valuemin='0' aria-valuemax='100' class='progress-bar bg-red'></div>"
-                                            ?>
-                                        </div>
-                                    </div>
-                                    <?php           
-                                        echo "<div class='number'><strong>". $Vencidos2 ."</strong></div>";
+                            <?php           
+                                echo "<div class='number'><strong>". $consulta ."</strong></div>";
+                            ?>
+                        </div>
+                        <button class="btn btn-sm btn-outline-warning ml-5" onclick= "irXVenc()">&nbsp;Ir a Por Vencer&nbsp;</button>
+                    </div>
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="item d-flex align-items-center">
+                            <div class="icon bg-red"><i class="icon-check"></i></div>
+                            <div class="title"><span>Productos<br>Vencidos</span>
+                                <div class="progress">
+                                    <?php
+                                        echo "<div role='progressbar' style='width: ".$resta2."%; height: 4px;' aria-valuenow='15' aria-valuemin='0' aria-valuemax='100' class='progress-bar bg-red'></div>"
                                     ?>
                                 </div>
                             </div>
+                            <?php           
+                                echo "<div class='number'><strong>". $Vencidos2 ."</strong></div>";
+                            ?>
                         </div>
+                        <button class="btn btn-sm btn-outline-danger ml-5" onclick= "irVenc()">&nbsp;Ir a Vencidos&nbsp;</button>
                     </div>
-                </section>
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="item d-flex align-items-center">
+                            <div class="icon bg-blue"><i class="fas fa-archive"></i></div>
+                            <div class="title"><span>Productos<br>Bajo Stock</span>
+                                <div class="progress">
+                                    <?php
+                                        echo "<div role='progressbar' style='width: ".$resta3."%; height: 4px;' aria-valuenow='15' aria-valuemin='0' aria-valuemax='100' class='progress-bar bg-blue'></div>"
+                                    ?>
+                                </div>
+                            </div>
+                            <?php           
+                                echo "<div class='number'><strong>". $Stock ."</strong></div>";
+                            ?>
+                        </div>
+                            <button class="btn btn-sm btn-outline-primary ml-5" onclick= "irBajoStock()">&nbsp;Ir a Bajo Stock&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
 

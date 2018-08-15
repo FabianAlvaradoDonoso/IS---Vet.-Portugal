@@ -29,7 +29,7 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-     
+                <h2>Productos Vencidos</h2>
             </div>
             
           </header>
@@ -66,7 +66,8 @@
                                                 </thead>
                                                 <tbody id="BLista">
                                                     <?php
-                                                        $conexion = mysqli_connect("Localhost", "root", "", "vetportugal");
+                                                        $conexion = mysqli_connect("localhost", 'vetportu_inventa', 'vetportugal2018', 'vetportu_vetportugalInv');
+
                                                         if(mysqli_connect_errno()){
                                                             echo "Error al conectar a la BBDD";
                                                             exit();
@@ -79,7 +80,7 @@
                                                         $consulta;
                                                         $vencidos;
                                                         $Vencidos2;
-                                                        $sql="SELECT CODIGO, NOMBRE, FECHA_VENC, FECHA_ADQ,STOCK_ACT FROM productos WHERE FECHA_VENC < curdate()";
+                                                        $sql="SELECT CODIGO, NOMBRE, FECHA_VENC, FECHA_ADQ,STOCK_ACT FROM productos WHERE FECHA_VENC < curdate()  and STOCK_ACT > 0";
                                                         $res=mysqli_query($conexion,$sql);
                                                         while ($row=mysqli_fetch_array($res, MYSQL_ASSOC)){     
                                                             $codigo = $row['CODIGO'];
@@ -92,7 +93,7 @@
                                                                         <td>".$row['NOMBRE']."</td>
                                                                         <td>".date_format(date_create($row["FECHA_VENC"]), 'Y / m / d')."</td>
                                                                         <td>".$row['STOCK_ACT']."</td>
-                                                                        <td><button class='btn btn-success btn-sm' onclick='mostrarModalModificarV(\"$codigo\",\"$nombre\",\"$fecha\",\"$fecha2\",\"$stock\")'><span class='oi oi-pencil'></span></button></td>
+                                                                        <td><button class='btn btn-success btn-sm' onclick='mostrarModalModificarV(\"$codigo\",\"$nombre\",\"$fecha\",\"$fecha2\",\"$stock\")'><span class='fas fa-edit'</span></button></td>
                                                                     </tr>";
                                                         }
                                                     ?>

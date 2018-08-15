@@ -43,18 +43,18 @@
             p.ID_".$_POST["otroSelect"]." = '".$_POST["otro2Select"]."' ";
     $tmp="<div class='table-responsive'><table class='table table-striped table-hover table-sm '>
         <thead align='center' class='thead-light'><tr>
-        <th align='center'>CODIGO</th>
-        <th align='center'>CATEGORIA</th>
-        <th align='center'>PROVEEDOR</th>
-        <th align='center'>NOMBRE</th>
-        <th align='center'>PRECIO VENTA</th>
-        <th align='center'>PRECIO NETO</th>
-        <th align='center'>FECHA VENC</th>
-        <th align='center'>FECHA ADQ</th>
-        <th align='center'>STOCK MIN</th>
-        <th align='center'>STOCK ACT</th>
-        <th align='center'>Bodega</th>
-        <th align='center'>ACCIONES</th>
+        <th class='text-center' >CODIGO</th>
+        <th class='text-center' >CATEGORIA</th>
+        <th class='text-center' >PROVEEDOR</th>
+        <th class='text-center' >NOMBRE</th>
+        <th class='text-center' >PRECIO VENTA</th>
+        <th class='text-center' >PRECIO NETO</th>
+        <th class='text-center' >FECHA VENC</th>
+        <th class='text-center' >FECHA ADQ</th>
+        <th class='text-center' >STOCK MIN</th>
+        <th class='text-center' >STOCK ACT</th>
+        <th class='text-center' width='75px'>Bodega</th>
+        <th class='text-center' >ACCIONES</th>
             <tr></thead><tbody>";
     
     $res=mysqli_query($conexion,$sql);
@@ -95,8 +95,8 @@
                     <td>" . $row["STOCK_MIN"] . "</td>
                     <td>" . $row["STOCK_ACT"] . "</td>
                     <td>" . $row["BODEGA"] . "</td>
-                    <td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificar(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\", \"$fechaVenc3\")'><span class='oi oi-pencil'></span></button>
-                    <button type='button' class='btn btn-outline-".$row["VENCIDO2"]." btn-sm' onclick='mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")'><span class='oi oi-trash'></span></button></td>
+                    <td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificar(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\", \"$fechaVenc3\")'><span class='fas fa-edit'</span></button>
+                    <button type='button' class='btn btn-outline-".$row["VENCIDO2"]." btn-sm' onclick='mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")'><span class='fas fa-trash-alt'></span></button></td>
                 </tr>";
     }
     echo "</tbody></table></div>";

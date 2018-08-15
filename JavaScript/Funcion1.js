@@ -55,7 +55,7 @@ function buscar(){
             var cantidad = document.getElementById(codigo).value;
             document.getElementById(codigo).value = parseInt(cantidad) + 1;
             existe = true;
-            limpiarBusquedas();
+            document.getElementById("txtCodigo").value= '';
             document.getElementById("txtCodigo").focus();
             calcular();
         }
@@ -71,7 +71,7 @@ function buscar(){
             type: "POST",
             success: function(response){
                 $("#tBody").append(response);
-                limpiarBusquedas();
+                document.getElementById("txtCodigo").value= '';
                 document.getElementById("txtCodigo").focus();
                 calcular();
             }
@@ -90,8 +90,8 @@ function buscarNombre(){
             var cantidad = document.getElementById(codigo).value;
             document.getElementById(codigo).value = parseInt(cantidad) + 1;
             existe = true;
-            limpiarBusquedas();
-            document.getElementById("txtCodigo").focus();
+            document.getElementById("txtNombre").value = '';
+            document.getElementById("txtNombre").focus();
             calcular();
         }
     }
@@ -106,7 +106,7 @@ function buscarNombre(){
             type: "POST",
             success: function(response){
                 $("#tBody").append(response);
-                limpiarBusquedas();
+                document.getElementById("txtNombre").value = '';
                 document.getElementById("txtNombre").focus();
                 calcular();
             }
@@ -510,18 +510,6 @@ function buscar2(){
         });
     }
 }
-
-function c2Buscar(){
-    var codigo= document.getElementById("c2Codigo").value;
-    var nombre= document.getElementById("c2Nombre").value;
-    var categoria= document.getElementById("c2Categoria").value;
-    var proveedor= document.getElementById("c2Proveedor").value;
-    var bodega= document.getElementById("c2Bodega").value;
-    alert(codigo+nombre+categoria+proveedor+bodega);
-
-  
-}
-
 function buscarNombre2(){   
     var filas = $('#tBodyModificar').find('tr');
     var texto = document.getElementById("txtNombreModificar").value;
@@ -685,7 +673,7 @@ function array2M(){
         Descontar(stock, codigo);
     }
     $("#modalModificarPaquete").modal("hide");
-    $("#modalExito2").modal();
+    $("#modalExito").modal();
 }
 function arrayM(){
     $("#tablaErrorP").find("tr:gt(0)").remove();
@@ -802,49 +790,58 @@ function agregar(){
     var texto9 = document.getElementById("nudStockMinModalAgregar").value;
     var texto10 = document.getElementById("nudStockActModalAgregar").value;
     var texto11 = document.getElementById("cbBodegaModalAgregar").value;
+    var if1 = false;
 
     if(document.getElementById("modFechaAgregar").checked == true){
         texto7 = 'null';
     }
+    if(texto7 =='' && document.getElementById("modFechaAgregar").checked==false)
+    {
+        $("#modalErrorFV").modal();
+    }
     if(texto1 == '' || texto2 == '' || texto3 == '' || texto4 == '' || texto5 == '' || texto6 == '' || texto8 == '' || texto9 == '' || texto10 == '' || texto11 == '' || (texto7 != '' && new Date(texto8).getTime() > new Date(texto7).getTime()))
     {
         $("#modalErrorAgregar").modal();
-        document.getElementById("cerrarError").focus();
+        if1 = true;
     }
+    alert(if1);
     if(texto7 == ''){texto7 = 'null'}
+
     else
     {
         if(comprobarCodigo(texto1) != false){
-            var parametros = {
-                "txtCodigoModalAgregar" : texto1,
-                "cbCategoriaModalAgregar" : texto2,
-                "cbProveedorModalAgregar" : texto3,
-                "txtNombreModalAgregar" : texto4,
-                "nudPrecioVentaModalAgregar" : texto5,
-                "nudPrecioNetoModalAgregar" : texto6,
-                "dtpFechaVencModalAgregar" : texto7,
-                "dtpFechaAdqModalAgregar" : texto8,
-                "nudStockMinModalAgregar" : texto9,
-                "nudStockActModalAgregar" : texto10,
-                "cbBodegaModalAgregar" : texto11
-            };
-            $.ajax({
-                async: false,
-                data: parametros,
-                url: "AJAX/AgregarProducto.php",
-                type: "POST",
-                success: function(response){
-                    $("#modalAgregar").modal("hide");
-                    $("#modalBienAgregar").modal();
-                    document.getElementById("cerrarBien").focus();
-                    limpiarAgregar();
-                    var div =   $("#card1").html();
-                    document.getElementById("card1").load(div);
-                },
-                error: function(){
-                    alert("error");
-                }
-            });
+            if(!if1){
+                var parametros = {
+                    "txtCodigoModalAgregar" : texto1,
+                    "cbCategoriaModalAgregar" : texto2,
+                    "cbProveedorModalAgregar" : texto3,
+                    "txtNombreModalAgregar" : texto4,
+                    "nudPrecioVentaModalAgregar" : texto5,
+                    "nudPrecioNetoModalAgregar" : texto6,
+                    "dtpFechaVencModalAgregar" : texto7,
+                    "dtpFechaAdqModalAgregar" : texto8,
+                    "nudStockMinModalAgregar" : texto9,
+                    "nudStockActModalAgregar" : texto10,
+                    "cbBodegaModalAgregar" : texto11
+                };
+                $.ajax({
+                    async: false,
+                    data: parametros,
+                    url: "AJAX/AgregarProducto.php",
+                    type: "POST",
+                    success: function(response){
+                        $("#modalAgregar").modal("hide");
+                        $("#modalExito").modal();
+                        //document.getElementById("cerrarBien").focus();
+                        limpiarAgregar();
+                        var div =   $("#card1").html();
+                        document.getElementById("card1").load(div);
+                    },
+                    error: function(){
+                        alert("error");
+                    }
+                });
+            }
         }
         else{
             $("#modalErrorAgregarCodigo").modal();
@@ -920,6 +917,10 @@ function modificar(){
     if(document.getElementById("modFechaConsultas").checked == true){
         texto7 = 'null';
     }
+    if(texto7 =='' && document.getElementById("modFechaConsultas").checked==false)
+    {
+        $("#modalErrorFV").modal();
+    }
     if(texto1 == '' || texto2 == '' || texto3 == '' || texto4 == '' || texto5 == '' || texto6 == '' || texto5 < 0 || texto6 < 0 || texto8 == '' || texto9 == '' || texto10 == '' || texto11 == '' || ((texto7 != '' || texto7 != 'null') && new Date(texto8).getTime() > new Date(texto7).getTime()))
     {
         $("#modalError").modal('show');
@@ -949,9 +950,9 @@ function modificar(){
             type: "POST",
             success: function(response){
                 $("#modalModificar").modal("hide");
-                $("#modalBien").modal();
-                document.getElementById("cerrarBien").focus();
-                limpiarTodo();
+                $("#modalExito").modal();
+                //document.getElementById("cerrarBien").focus();
+                //limpiarTodo();
             }
         });
     }
@@ -1000,6 +1001,10 @@ function modificar2(){
     if(document.getElementById("modFecha").checked == true){
         texto7 = 'null';
     }
+    if(document.getElementById("modFecha").checked == false && texto7 == '')
+    {
+        $("#modalErrorFV").modal();
+    }
     if(texto1 == '' || texto2 == '' || texto3 == '' || texto4 == '' || texto5 == '' || texto6 == '' || texto5 < 0 || texto6 < 0 || texto8 == '' || texto9 == '' || texto10 == '' || texto11 == '' || ((texto7 != '' || texto7 != 'null') && new Date(texto8).getTime() > new Date(texto7).getTime()))
     {
         $("#modalError").modal();
@@ -1026,8 +1031,8 @@ function modificar2(){
             type: "POST",
             success: function(response){
                 $("#modalModificar2").modal("hide");
-                $("#modalBien").modal();
-                document.getElementById("cerrarBien").focus();
+                $("#modalExito").modal();
+                //document.getElementById("cerrarBien").focus();
             },
             error: function(response){
                 alert("Error");
@@ -1056,9 +1061,9 @@ function eliminar(){
             type: "POST",
             success: function(response){
                 $("#modalEliminar").modal("hide");
-                $("#modalEliminarBien").modal();
-                document.getElementById("cerrarBienE").focus();
-                limpiarTodo();
+                $("#modalExito").modal();
+                //document.getElementById("cerrarBienE").focus();
+                //limpiarTodo();
             }
         });
     }
@@ -1459,9 +1464,9 @@ function modificar(){
             type: "POST",
             success: function(response){
                 $("#modalModificar").modal("hide");
-                $("#modalBien").modal();
-                document.getElementById("cerrarBien").focus();
-                limpiarTodo();
+                $("#modalExito").modal();
+                //document.getElementById("cerrarBien").focus();
+                //limpiarTodo();
             }
         });
     }
@@ -1536,8 +1541,8 @@ function modificar2(){
             type: "POST",
             success: function(response){
                 $("#modalModificar2").modal("hide");
-                $("#modalBien").modal();
-                document.getElementById("cerrarBien").focus();
+                $("#modalExito").modal();
+                //document.getElementById("cerrarBien").focus();
             },
             error: function(response){
                 alert("Error");
@@ -1566,8 +1571,8 @@ function eliminar(){
             type: "POST",
             success: function(response){
                 $("#modalEliminar").modal("hide");
-                $("#modalEliminarBien").modal();
-                document.getElementById("cerrarBienE").focus();
+                $("#modalExito").modal();
+                //document.getElementById("cerrarBienE").focus();
                 limpiarTodo();
             }
         });
@@ -1846,7 +1851,7 @@ function modificarXVenc(){
             type: "POST",
             success: function(response){
                 $("#modalModificarV").modal('hide');
-                $('#modalBien').modal();
+                $('#modalExito').modal();
             }
         });
     }
@@ -1857,13 +1862,13 @@ function recargar(){
 }
 
 function irProductos(){
-    location.href = "Productos.php";
+    location.href = "../src/pages/Productos.php";
 }
 function irXVenc(){
-    location.href = "PorVencer.php";
+    location.href = "../src/pages/PorVencer.php";
 }
 function irVenc(){
-    location.href = "Vencidos.php";
+    location.href = "../src/pages/Vencidos.php";
 }
 function buscarFavNoFav(tipo, nombre){
     buscarPaqueteFav(tipo, nombre);
@@ -1967,6 +1972,9 @@ function mostrarModalAgregarUsuario(){
 function updateDiv(){
     
      $("#modalExito").modal('hide');
+    $( "#recargar" ).load(window.location.href + " #recargar" );
+}
+function updateDiv2(){
     $( "#recargar" ).load(window.location.href + " #recargar" );
 }
 
@@ -2151,3 +2159,75 @@ else{
     
 }
 
+
+function mostrarModalModificarS(codigo, nombre, fecha, stockMin, stockAct){
+    $("#modalModificarV").modal();
+
+    document.getElementById("txtCodigoModificarS").value = codigo;
+    document.getElementById("txtNombreModificarS").value = nombre;
+    document.getElementById("dtpFechaVencModificarS").value = fecha;
+    document.getElementById("nudStockMinModificarS").value = stockMin;
+    document.getElementById("nudStockActModificarS").value = stockAct;
+}
+function modificarBajoStock(){
+    var codigo = document.getElementById("txtCodigoModificarS").value;
+    var stockMin = document.getElementById("nudStockMinModificarS").value;
+    var stockAct = document.getElementById("nudStockActModificarS").value;
+    
+    if(stockMin <= 0 || stockMin == '' || stockAct == '' || stockAct <= 0 || (stockMin > stockAct)){
+        $("#modalError").modal();
+    }
+    else{
+        var parametros = {
+            "codigo" : codigo,
+            "stockMin" : stockMin,
+            "stockAct" : stockAct,
+        };
+        $.ajax({
+            async: false,
+            data: parametros,
+            url: "AJAX/ModificarBajoStock.php",
+            type: "POST",
+            success: function(response){
+                $("#modalModificarV").modal('hide');
+                $('#modalExito').modal();
+            }
+        });
+    }
+}
+function irBajoStock(){
+    location.href = "../src/pages/StockBajo.php";
+}
+
+function superBusqueda(){
+    codigo = document.getElementById("txtCodigoConsulta").value;
+    proveedor = document.getElementById("cbProveedorConsulta").value;
+    categoria = document.getElementById("cbCategoriaConsulta").value;
+    fechaVenc = document.getElementById("dtpFechaVencConsulta").value;
+    fechaAdq = document.getElementById("dtpFechaAdqConsulta").value;
+    bodega = document.getElementById("cbBodegaConsulta").value;
+
+
+    var parametros = {
+        "codigo" : codigo,
+        "proveedor" : proveedor,
+        "categoria" : categoria,
+        "fechaVenc": fechaVenc,
+        "fechaAdq": fechaAdq,
+        "bodega": bodega
+    };
+    $.ajax({
+        async: false,
+        data: parametros,
+        url: "AJAX/SuperConsulta.php",
+        type: "POST",
+        success: function(response){
+            $("#resultados").html(response);
+        }
+    });
+
+}
+
+function cerrarModal(){
+    $("modalExito").modal("hide");
+}

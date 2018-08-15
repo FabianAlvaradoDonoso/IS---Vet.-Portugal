@@ -81,8 +81,8 @@
                                                 $id  = $row["ID_PROVEEDOR"];
                                                 echo  "<tr>
                                                         <td class='text-center'>" . $nombre. "</td>";
-                                                    echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarElemento(\"$id\",\"$nombre\",\"$campo\",\"$campoID\",\"$tabla\")'><span class='oi oi-pencil'></span></button>
-                                                    <button type='button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='oi oi-trash'></span></button></td>";
+                                                    echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarElemento(\"$id\",\"$nombre\",\"$campo\",\"$campoID\",\"$tabla\")'><span class='fas fa-edit'</span></button>
+                                                    <button type='button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='fas fa-trash-alt'></span></button></td>";
                             
                                                 echo "</tr>";
                                                 }

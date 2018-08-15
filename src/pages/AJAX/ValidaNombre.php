@@ -94,8 +94,8 @@
                     <td>" . $row["STOCK_MIN"] . "</td>
                     <td>" . $row["STOCK_ACT"] . "</td>
                     <td>" . $row["BODEGA"] . "</td>
-                    <td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificar(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\", \"$fechaVenc3\")'><span class='oi oi-pencil'></span></button>
-                    <button type='button' class='btn btn-outline-".$row["VENCIDO2"]." btn-sm' onclick='mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")'><span class='oi oi-trash'></span></button></td>
+                    <td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificar(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\", \"$fechaVenc3\")'><span class='fas fa-edit'</span></button>
+                    <button type='button' class='btn btn-outline-".$row["VENCIDO2"]." btn-sm' onclick='mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")'><span class='fas fa-trash-alt'></span></button></td>
                 </tr>";
     }
     $tmp.= "</tbody></table></div>";

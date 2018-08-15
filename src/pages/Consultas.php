@@ -29,8 +29,9 @@
             <div class="container-fluid">
               <h2 class="no-margin-bottom">Consultas</h2>
             </div>
-          </header>
-          <section class="tables" id="recargar">
+          </header> 
+         <div class="div" id="recargar">
+         <section class="tables">
 
                 
 
@@ -338,8 +339,7 @@
                             <select id="cbCategoriaModal" class="form-control mb-2 mr-sm-2" onchange="">
                             
                             <?php
-                                $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
-                                //$base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
+                                $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                 $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                 $base->exec("SET CHARACTER SET utf8");
                                 
@@ -365,7 +365,7 @@
                             <select id="cbProveedorModal" class="form-control mb-2 mr-sm-2" onchange="">
                                 
                             <?php
-                                $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                 $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                 $base->exec("SET CHARACTER SET utf8");
                                 
@@ -465,7 +465,7 @@
                             <select id="cbBodegaModal" class="form-control mb-2 mr-sm-2 custom-select" onchange="enviarOtro()" required>
                                 
                             <?php
-                                $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                 $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                 $base->exec("SET CHARACTER SET utf8");
                                 
@@ -533,7 +533,7 @@
                 <p align="center"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" id="cerrarBien" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
+                <button type="button" id="cerrarBien" class="btn btn-success" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
             </div>
         </div>
     
@@ -565,7 +565,7 @@
                             <select id="cbCategoriaModalE" class="form-control mb-2 mr-sm-2" onchange="" disabled>
                             
                             <?php
-                                $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                 $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                 $base->exec("SET CHARACTER SET utf8");
                                 
@@ -591,7 +591,7 @@
                             <select id="cbProveedorModalE" class="form-control mb-2 mr-sm-2" onchange="" disabled>
                                 
                             <?php
-                                $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                 $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                 $base->exec("SET CHARACTER SET utf8");
                                 
@@ -624,7 +624,7 @@
                             <select id="cbBodegaModalE" class="form-control mb-2 mr-sm-2 custom-select" onchange="" disabled required>
                                 
                             <?php
-                                $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                 $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                 $base->exec("SET CHARACTER SET utf8");
                                 
@@ -656,7 +656,32 @@
     </div>
 </div>
 
-
+   <!--MODAL EXITO-->
+              
+   <div class='modal fade' id='modalExito' role='dialog'>
+                  <div class='modal-dialog'>
+          
+                      <!-- Modal content-->
+                      <div class='modal-content'>
+                          <div class='modal-header'>
+                              <h4 class='modal-title'>Listo</h4>
+                              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                          </div>
+                          <div class='modal-body'>
+                              <p>Accion realizada con éxito.</p>
+                          </div>
+                          <div class='modal-footer'>    
+                              <div class="container">
+                                  <div class="row justify-content-end">  
+                                      <button type='button' id='cerrarExito' class='btn btn-success' data-dismiss='modal' onclick='updateDiv()'>Cerrar</button>
+                                      <!--?php $nombre=""; $tabla=""; $campo=""; $campoID=""; $id="";?-->
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+                         
 
 <div class="modal fade" id="modalEliminarBien" role="dialog">
     <div class="modal-dialog">
@@ -673,7 +698,7 @@
                 <p align="center"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" id="cerrarBienE" class="btn btn-danger" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
+                <button type="button" id="cerrarBienE" class="btn btn-success" data-dismiss="modal" onclick="limpiaTodo()">Cerrar</button>
             </div>
         </div>
     
@@ -681,6 +706,7 @@
 </div>
 
 </section>
+         </div>
 
       <!--FOOTER-->      
       <?php  include '../../src/include/footer.php'; ?>

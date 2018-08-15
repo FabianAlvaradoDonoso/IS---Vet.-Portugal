@@ -37,7 +37,7 @@
                     <td>" . $row["NOMBRE"] . "</td>
                     <td>$" . number_format($row["PRECIO_VENTA"], 0, ',', '.') . "</td>
                     <td><input type='number' class='form-control form-control-sm'  id=".$row["CODIGO"]." value='".$row["CANTIDAD"]."' onchange='calcular()'></td>
-                    <td class='text-center'><button type='button' class='btn btn-outline-danger btn-sm borrar' onclick=''><span class='oi oi-trash'></span></button></td>
+                    <td class='text-center'><button type='button' class='btn btn-outline-danger btn-sm borrar' onclick=''><span class='fas fa-trash-alt'></span></button></td>
                 </tr>";
     }
 

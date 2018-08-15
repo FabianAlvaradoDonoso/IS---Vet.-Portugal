@@ -27,7 +27,7 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Ventas</h2>
+              <h2 class="no-margin-bottom">Descontar</h2>
             </div>
           </header>
           <section class="forms">
@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body" id="divTab">
-                                        <table id="tablaVentas" class='table table-striped table-hover table-sm'>
+                                        <table id="tablaVentas" class='table table-striped table-hover table-sm' onchange="calcular()">
                                             <thead>
                                                 <th class='text-center'>Codigo</th>
                                                 <th class='text-center'>Nombre</th>

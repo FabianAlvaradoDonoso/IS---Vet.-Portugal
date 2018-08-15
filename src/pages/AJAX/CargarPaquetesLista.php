@@ -37,7 +37,7 @@
                     <td>".$row["NOMBRE_PAQUETITO"]."</td>
                     <td width='150px'>$".number_format($row["PRECIO_PAQUETITO"], 0, ',', '.')."</td>
                     <td width='100px'>".$row["CANTIDAD"]."</td>
-                    <td width='150px'><button type='button' class='btn btn-success btn-sm mostrar' id='".$row["ID_PAQUETITO"]."'><span class='oi oi-pencil'></span></button></td>
+                    <td width='150px'><button type='button' class='btn btn-success btn-sm mostrar' id='".$row["ID_PAQUETITO"]."'><span class='fas fa-edit'</span></button></td>
                 </tr>";
        
         
