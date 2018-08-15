@@ -54,7 +54,9 @@
                                         <table class='table table-striped table-hover table-sm'>
                                             <?php
                                                 try{
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                                    $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+
                                                     $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     $base->exec("SET CHARACTER SET utf8");
                                                     $tamanoPaginas=40;

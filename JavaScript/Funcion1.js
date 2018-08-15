@@ -510,6 +510,18 @@ function buscar2(){
         });
     }
 }
+
+function c2Buscar(){
+    var codigo= document.getElementById("c2Codigo").value;
+    var nombre= document.getElementById("c2Nombre").value;
+    var categoria= document.getElementById("c2Categoria").value;
+    var proveedor= document.getElementById("c2Proveedor").value;
+    var bodega= document.getElementById("c2Bodega").value;
+    alert(codigo+nombre+categoria+proveedor+bodega);
+
+  
+}
+
 function buscarNombre2(){   
     var filas = $('#tBodyModificar').find('tr');
     var texto = document.getElementById("txtNombreModificar").value;

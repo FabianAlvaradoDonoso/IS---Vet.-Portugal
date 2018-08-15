@@ -339,6 +339,7 @@
                             
                             <?php
                                 $base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                //$base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
                                 $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                 $base->exec("SET CHARACTER SET utf8");
                                 
