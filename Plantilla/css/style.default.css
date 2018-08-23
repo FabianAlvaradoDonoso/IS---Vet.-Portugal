@@ -2122,6 +2122,15 @@ STYLE SWITCHER FOR DEMO
 .btn:not([disabled]):not(.disabled):active, .btn:not([disabled]):not(.disabled).active {
   background-image: none;
 }
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
 
 .btn-primary {
   color: color-yiq(#796AEE);

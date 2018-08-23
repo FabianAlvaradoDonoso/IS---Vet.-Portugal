@@ -804,7 +804,6 @@ function agregar(){
         $("#modalErrorAgregar").modal();
         if1 = true;
     }
-    alert(if1);
     if(texto7 == ''){texto7 = 'null'}
 
     else
@@ -834,8 +833,8 @@ function agregar(){
                         $("#modalExito").modal();
                         //document.getElementById("cerrarBien").focus();
                         limpiarAgregar();
-                        var div =   $("#card1").html();
-                        document.getElementById("card1").load(div);
+                        //var div =   $("#card1").html();
+                        //document.getElementById("card1").load(div);
                     },
                     error: function(){
                         alert("error");
@@ -950,7 +949,8 @@ function modificar(){
             type: "POST",
             success: function(response){
                 $("#modalModificar").modal("hide");
-                $("#modalExito").modal();
+                updateDiv2();
+                $("#modalBien").modal();
                 //document.getElementById("cerrarBien").focus();
                 //limpiarTodo();
             }
@@ -1060,7 +1060,7 @@ function eliminar(){
             url: "AJAX/EliminarProductoAJAX.php",
             type: "POST",
             success: function(response){
-                $("#modalEliminar").modal("hide");
+                $("#modalEliminar").modal('hide');
                 $("#modalExito").modal();
                 //document.getElementById("cerrarBienE").focus();
                 //limpiarTodo();
@@ -1263,6 +1263,11 @@ function limpiarFormulario() {
     document.getElementById("codigo").focus();
     document.getElementById("datosConsulta").innerHTML='';
     limpiarTodo();
+}
+function limpiarFormularioCodigoConsultas() {
+    document.getElementById("txtCodigoConsulta").value = "";
+    //busqueda();
+    document.getElementById("txtCodigoConsulta").focus();
 }
 function limpiarFormulario2() {
     $('#otroSelect option').prop('selected', function() {
@@ -1971,13 +1976,16 @@ function mostrarModalAgregarUsuario(){
 
 function updateDiv(){
     
-     $("#modalExito").modal('hide');
+    $("#modalExito").modal('hide');
     $( "#recargar" ).load(window.location.href + " #recargar" );
 }
 function updateDiv2(){
     $( "#recargar" ).load(window.location.href + " #recargar" );
 }
-
+function updateResultados(){
+    $("#modalExito").modal('hide');
+    $( "#resultados" ).load(window.location.href + " #resultados" );
+}
 
 function borrarElemento(){
     
