@@ -61,7 +61,7 @@
 <script src="../../public/js/front.js"></script>
 
 
-              <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+              <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" id='navbar'>
             <!-- Search Box-->
          
             <div class="container-fluid">

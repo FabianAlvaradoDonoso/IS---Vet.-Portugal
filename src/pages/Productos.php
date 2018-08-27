@@ -371,7 +371,7 @@
                                                 <div class='input-group date fad-Date2' id='' >
                                                     <input  readonly type='text' class="form-control" id="dtpFechaVencModalAgregar" placeholder="Fecha"  value='' required>
                                                     <span class="input-group-addon">
-                                                        <span class="oi oi-calendar"></span>
+                                                        <span class="fas fa-calendar-alt"></span>
                                                     </span>
                                                 </div>
                                                 <div class="form-check">
@@ -384,7 +384,7 @@
                                                 <div class='input-group date fad-Date2' id='' >
                                                     <input type='text' class="form-control" id="dtpFechaAdqModalAgregar" placeholder="Fecha" readonly value="" required>
                                                     <span class="input-group-addon">
-                                                        <span class="oi oi-calendar"></span>
+                                                        <span class="fas fa-calendar-alt"></span>
                                                     </span>
                                                 </div>  
                                             <script>
@@ -546,7 +546,7 @@
                                                 <div class='input-group date fad-Date2' id='' >
                                                     <input readonly type='text' class="form-control" id="dtpFechaVencModal2" placeholder="Fecha"  value="" required>
                                                     <span class="input-group-addon">
-                                                        <span class="oi oi-calendar"></span>
+                                                        <span class="fas fa-calendar-alt"></span>
                                                     </span>
                                                 </div>
                                                 <div class="form-check">
@@ -559,7 +559,7 @@
                                                 <div class='input-group date fad-Date2' id='' >
                                                     <input type='text' class="form-control" id="dtpFechaAdqModal2" placeholder="Fecha" readonly value="" required>
                                                     <span class="input-group-addon">
-                                                        <span class="oi oi-calendar"></span>
+                                                        <span class="fas fa-calendar-alt"></span>
                                                     </span>
                                                 </div>  
                                             <script>

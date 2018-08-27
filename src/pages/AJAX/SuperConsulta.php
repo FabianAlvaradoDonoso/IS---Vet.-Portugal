@@ -49,7 +49,7 @@
     WHERE
         (p.CODIGO LIKE '%".$_POST["codigo"]."%' OR p.NOMBRE LIKE '%".$_POST["codigo"]."%') AND 
         {$bode} AND {$prov} AND {$cate} AND
-        (p.FECHA_VENC LIKE '%".$_POST["fechaVenc"]."%' OR p.FECHA_VENC IS NULL) AND p.FECHA_ADQ LIKE '%".$_POST["fechaAdq"]."%'";
+        (DATE_FORMAT(p.FECHA_VENC, '%Y/%m/%d') LIKE '%".$_POST["fechaVenc"]."%' OR p.FECHA_VENC IS NULL) AND DATE_FORMAT(p.FECHA_ADQ, '%Y/%m/%d') LIKE '%".$_POST["fechaAdq"]."%'";
     
     
     

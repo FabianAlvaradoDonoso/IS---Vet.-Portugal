@@ -119,7 +119,7 @@
                                                         <label class="mr-2" for="">Ingrese Fecha </label>
                                                         <input type='text' class="form-control" id="fechaVEsp" placeholder="Fecha" readonly>
                                                         <span class="input-group-addon">
-                                                            <span class="oi oi-calendar"></span>
+                                                            <span class="fas fa-calendar-alt"></span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -143,14 +143,14 @@
                                                         <label class="mr-2" for="">Desde </label>
                                                         <input type='text' class="form-control" id="fechaVRDesde" placeholder="Desde" readonly>
                                                         <span class="input-group-addon">
-                                                            <span class="oi oi-chevron-left"></span>
+                                                            <span class="fas fa-chevron-left"></span>
                                                         </span>
                                                     </div>
                                                     <div class='input-group date fad-Date2' id='datetimepicker7'>
                                                         <label class="ml-2 mr-2" for="">Hasta </label>
                                                         <input type='text' class="form-control" id="fechaVRHasta" placeholder="Hasta" readonly>
                                                         <span class="input-group-addon">
-                                                            <span class="oi oi-chevron-right"></span>
+                                                            <span class="fas fa-chevron-right"></span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -213,7 +213,7 @@
                                                         <label class="mr-2" for="">Ingrese Fecha </label>
                                                         <input type='text' class="form-control" id="fechaEsp" placeholder="Fecha" readonly>
                                                         <span class="input-group-addon">
-                                                            <span class="oi oi-calendar"></span>
+                                                            <span class="fas fa-calendar-alt"></span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -237,14 +237,14 @@
                                                         <label class="mr-2" for="">Desde </label>
                                                         <input type='text' class="form-control" id="fechaRDesde" placeholder="Desde" readonly>
                                                         <span class="input-group-addon">
-                                                            <span class="oi oi-chevron-left"></span>
+                                                            <span class="fas fa-chevron-left"></span>
                                                         </span>
                                                     </div>
                                                     <div class='input-group date fad-Date2' id='datetimepicker7'>
                                                         <label class="ml-2 mr-2" for="">Hasta </label>
                                                         <input type='text' class="form-control" id="fechaRHasta" placeholder="Hasta" readonly>
                                                         <span class="input-group-addon">
-                                                            <span class="oi oi-chevron-right"></span>
+                                                            <span class="fas fa-chevron-right"></span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -417,7 +417,7 @@
                             <div class='input-group date fad-Date2' id='' >
                                 <input readonly type='text' class="form-control" id="dtpFechaVencModal" placeholder="Fecha"  value="" required>
                                 <span class="input-group-addon">
-                                    <span class="oi oi-calendar"></span>
+                                    <span class="fas fa-calendar-alt"></span>
                                 </span>
                             </div>
                             <div class="form-check">
@@ -430,7 +430,7 @@
                             <div class='input-group date fad-Date2' id='' >
                                 <input readonly type='text' class="form-control" id="dtpFechaAdqModal" placeholder="Fecha"  value="" required>
                                 <span class="input-group-addon">
-                                    <span class="oi oi-calendar"></span>
+                                    <span class="fas fa-calendar-alt"></span>
                                 </span>
                             </div>  
                         <script>

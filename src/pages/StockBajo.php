@@ -44,9 +44,10 @@
                                         <div class="card-header">
                                             <div class=" container ">
                                                 <div class="row justify-content-between">
-                                                    <div class="col-6"><h5>Lista de productos con Bajo Stock</h5></div>
+                                                    <div class=""><h5>Lista de productos con Bajo Stock</h5></div>
                                                     
-                                                    <div class=" col-1 "><button type="button" class="btn btn-outline-primary btn-sm" onclick="recargar()">Recargar</button></div>
+                                                    <div class=""><button type="button" class="btn btn-outline-primary btn-sm" onclick="recargar()">Recargar</button></div>
+                                                    <div class=""><a href="/src/pages/Excel/BSExc.php" class="btn btn-outline-success btn-sm ">Descargar como Excel</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -140,7 +141,7 @@
                                                 <div class='input-group date fad-Date2' id='' >
                                                     <input readonly type='text' class="form-control" id="dtpFechaVencModificarS" placeholder="Fecha"  value="" required>
                                                     <span class="input-group-addon">
-                                                        <span class="oi oi-calendar"></span>
+                                                        <span class="fas fa-calendar-alt"></span>
                                                     </span>
                                                 </div>  
                                             </div>

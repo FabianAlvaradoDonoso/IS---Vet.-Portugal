@@ -132,6 +132,24 @@
 .dropdown-menu {
   margin-top: .75rem;
 }
+
+.botonF1{
+  width:60px;
+  height:60px;
+  border-radius:100%;
+  background:#F44336;
+  right:0;
+  bottom:50px;
+  position:fixed;
+  margin-right:16px;
+  margin-bottom:16px;
+  border:none;
+  outline:none;
+  color:#FFF;
+  font-size:36px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition:.3s;  
+}
     </style> 
   <body>
     <!--PAGINA-->
@@ -161,101 +179,135 @@
            </header>
           <div id="recargar">
           <section class="tables"> 
-          <nav class="navbar position-fixed">
-                <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                    <div id="list-example" class="list-group d-flex flex-md-col">
-                            <a class="nav-link active align-items-center" href="#page"><i class="fas fa-cog"></i></a>
-                            <a class="nav-link active" href="#U">User </a>
-                            <a class="nav-link active" href="#P">Pro</a>         
-                            <a class="nav-link active" href="#C">Cat</a>         
-                            <a class="nav-link active" href="#B">Bod</a> 
-                    </div>
-         
+                <nav class="navbar position-fixed ml-2 mr-2">
+                    <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                        <div id="list-example" class="list-group d-flex flex-md-col">
+                            <button id="pages" class="nav-link active align-items-center btn btn-link"><i class="fas fa-cog"></i></button>
+                            <button id="user" class="nav-link active btn btn-link"><span>User</span></button>
+                            <button id="pro" class="nav-link active btn btn-link">Pro</button>         
+                            <button id="cat" class="nav-link active btn btn-link">Cat</button>         
+                            <button id="bod" class="nav-link active btn btn-link">Bod</button> 
+                        </div>         
                     </ul> 
-                 </nav>  
+                </nav>
+                <script>
+                    $('#pages').click(function () {
+                        $('html,body').animate({
+                            scrollTop: $('#page').offset().top
+                        }, 1000);
+                    }); 
+                </script>
+                <script>
+                    $('#user').click(function () {
+                        $('html,body').animate({
+                            scrollTop: $('#U').offset().top
+                        }, 1000);
+                    }); 
+                </script>
+                <script>
+                    $('#pro').click(function () {
+                        $('html,body').animate({
+                            scrollTop: $('#P').offset().top
+                        }, 1000);
+                    }); 
+                </script>
+                <script>
+                    $('#cat').click(function () {
+                        $('html,body').animate({
+                            scrollTop: $('#C').offset().top
+                        }, 1000);
+                    }); 
+                </script>
+                <script>
+                    $('#bod').click(function () {
+                        $('html,body').animate({
+                            scrollTop: $('#B').offset().top
+                        }, 1000);
+                    }); 
+                </script>
               <!-- TABLA USUARIOS-->     
-              <div id="U" class="container-fluid ml-5">
-                  <div class="row">
-                    <div class="col-lg-8">
-                      <div class="card">
-                      <div class="card-header" style="border">
-                          <div class=" container ">                              
-                            <div class="row justify-content-between">
-                              <div class="col-7"><h4><strong>Usuarios</strong></h4></div>                            
-                              <div class=" col-3 "><button type="button" class="btn btn-primary btn-sm mr-3" onclick="mostrarModalAgregarUsuario()">Nuevo</button></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-striped table-hover table-sm">
-                          <?php
-                                  
-                            include '../cnx.php';
-                            if(mysqli_connect_errno()){
-                              echo "Error al conectar a la BBDD";
-                            exit();
-                              }
+                <div id="U" class="container-fluid ml-5">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <div class=" container ">                              
+                                            <div class="row justify-content-between">
+                                                <div class="col-7"><h4><strong>Usuarios</strong></h4></div>                            
+                                                <div class=" col-3 "><button type="button" class="btn btn-primary btn-sm mr-3" onclick="mostrarModalAgregarUsuario()">Nuevo</button></div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                              mysqli_set_charset($conexion, "utf8");
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover table-sm">
+                                                <?php
+                                                
+                                                    include '../cnx.php';
+                                                    if(mysqli_connect_errno()){
+                                                        echo "Error al conectar a la BBDD";
+                                                        exit();
+                                                    }
 
-                            
-                              $sql="SELECT * FROM usuarios";
-                              $res=mysqli_query($conexion,$sql);
-                              $tabla="usuarios";
-                              $campoID="id";
+                                                    mysqli_set_charset($conexion, "utf8");
 
-                              echo    
-                              '<thead>
-                            <tr class="thead-light">
-                              <th class="text-center">Tipo Cuenta</th>
-                              <th class="text-center">Nombre</th>
-                              <th class="text-center">Usuario</th>                  
-                              <th class="text-center">Acciones</th>
+                                            
+                                                    $sql="SELECT * FROM usuarios";
+                                                    $res=mysqli_query($conexion,$sql);
+                                                    $tabla="usuarios";
+                                                    $campoID="id";
 
-                            </tr>
-                          </thead>
-                          <tbody>';
-                  
-                              while ($row=mysqli_fetch_array($res)){
-
-                                $nombre = $row["nombre"];
-                                $id=$row["id"];
-                                $user = $row["user"];
-                                $pass = $row["pass"];
-                                $tipocuenta = $row["cargo"];
-                                if($tipocuenta=='1'){
-                                  $cargo = 'Administrador';
-                                }
-                                else{
-                                  $cargo = 'estandar';
-                                }
-                                echo '<tr>';
-                                if($user != 'admin')
-                                {
-                                  echo  '
-                                      <td class="text-center">' . $cargo . '</td>
-                                      <td class="text-center">' . $nombre . '</td>
-                                      <td class="text-center">' . $user . '</td>';
+                                                    echo    
+                                                        '<thead>
+                                                            <tr class="thead-light">
+                                                                <th class="text-center">Tipo Cuenta</th>
+                                                                <th class="text-center">Nombre</th>
+                                                                <th class="text-center">Usuario</th>                  
+                                                                <th class="text-center">Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>';
                                 
-                                                             
-                               
-                                echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarUsuario(\"$id\",\"$nombre\",\"$pass\",\"$user\")'><span class='fas fa-edit'</span></button>";
-                                echo "<button type=button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='fas fa-trash-alt'></span></button></td>";
-                                }
-                                echo "  </tr>";
+                                                    while ($row=mysqli_fetch_array($res)){
 
-                              }
-                              echo "</tbody>";
+                                                        $nombre = $row["nombre"];
+                                                        $id=$row["id"];
+                                                        $user = $row["user"];
+                                                        $pass = $row["pass"];
+                                                        $tipocuenta = $row["cargo"];
+                                                        if($tipocuenta=='1'){
+                                                            $cargo = 'Administrador';
+                                                        }
+                                                        else{
+                                                            $cargo = 'estandar';
+                                                        }
+                                                        echo '<tr>';
+                                                        if($user != 'admin')
+                                                        {
+                                                            echo  '
+                                                                    <td class="text-center">' . $cargo . '</td>
+                                                                    <td class="text-center">' . $nombre . '</td>
+                                                                    <td class="text-center">' . $user . '</td>';                                           
+                                                            echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarUsuario(\"$id\",\"$nombre\",\"$pass\",\"$user\")'><span class='fas fa-edit'</span></button>";
+                                                            echo "<button type=button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='fas fa-trash-alt'></span></button></td>";
+                                                        }
+                                                        echo "  </tr>";
+                                                    }
+                                                    echo "</tbody>";
 
-                          ?>
-                        
-                        </table>
+                                                ?>
+                                        
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      </div>                                         
-                    </div>
-                  </div>
+                    </div>                                         
                 </div>
                 
                             <!--MODAL AGREGAR USUARIO-->
@@ -295,10 +347,10 @@
                                       </div>
                                   </div>                        
                   </div>
-              </div>
+                </div>
 
                         <!--MODAL MODIFICAR USUARIO-->
-                        <div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalModificarUsuario">
+                <div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalModificarUsuario">
                               <div class="modal-dialog ">
                                   <div class="modal-content">
                                       <div class="modal-header">
@@ -337,209 +389,218 @@
                                       </div>
                                   </div>                        
                   </div>
-              </div>
+                </div>
                             <!--TABLA PROVEEDORES-->     
 
-              <div id="P"class="container-fluid ml-5">
-                  <div class="row">
-                      <div class="col-md-6">
-                          <div class="card">
-                                <div class="card-header" style="border">
-                                    <div class=" container ">
-                                        
-                                    <div class="row justify-content-between">
-                                        <div class="col-7"><h4><strong>Proveedores</strong></h4></div>                            
-                                        <?php  $tabla="proveedor";
-                                                $campo="NOMBRE_PROVEEDOR";                                         
-                                        echo"<div class=' col-3 '><button type='button' class='btn btn-primary btn-sm mr-3' 
-                                        onclick='mostrarModalAgregarElemento(\"$tabla\",\"$campo\")'>Nuevo</button></div>";
-                                        ?>
+                <div id="P"class="container-fluid ml-5">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="accordion1">
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                        <div class=" container ">                              
+                                            <div class="row justify-content-between">
+                                                <div class="col-7"><h4><strong>Proveedores</strong></h4></div>                            
+                                                <?php  
+                                                    $tabla="proveedor";
+                                                    $campo="NOMBRE_PROVEEDOR";                                         
+                                                    echo"<div class=' col-3 '><button type='button' class='btn btn-primary btn-sm mr-3' 
+                                                    onclick='mostrarModalAgregarElemento(\"$tabla\",\"$campo\")'>Nuevo</button></div>";
+                                                ?> 
+                                            </div>
+                                        </div>
                                     </div>
-                                    </div>
-                                </div>
-                              <div class="card-body">
-                                  <div class="table-resposive">
-                                  <table class="table table-striped table-hover table-sm">
+
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion1">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover table-sm">
                                                 <?php
-                                                        
-                                                include '../cnx.php';
-                                                if(mysqli_connect_errno()){
-                                                    echo "Error al conectar a la BBDD";
-                                                exit();
+                                                    include '../cnx.php';
+                                                    if(mysqli_connect_errno()){
+                                                        echo "Error al conectar a la BBDD";
+                                                        exit();
                                                     }
-
+    
                                                     mysqli_set_charset($conexion, "utf8");
-
-                                                    
+    
+                                                        
                                                     $campoID="ID_PROVEEDOR";                                                   
                                                     $sql="SELECT * FROM proveedor";
                                                     $res=mysqli_query($conexion,$sql);
                                                     echo    
-                                                    '<thead>
-                                                <tr class="thead-light">
-                                                    <th class="text-center"></th>                     
-                                                    <th class="text-center">Acciones</th>
-
-                                                </tr>
-                                                </thead>
-                                                <tbody>';
+                                                        '<thead>
+                                                            <tr class="thead-light">
+                                                                <th class="text-center"></th>                     
+                                                                <th class="text-center">Acciones</th>    
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>';
+                                            
+                                                    while ($row=mysqli_fetch_array($res)){
+    
+                                                        $nombre = $row["NOMBRE_PROVEEDOR"];
+                                                        $id  = $row["ID_PROVEEDOR"];
+                                                        echo  "<tr>
+                                                                <td class='text-center'>" . $nombre. "</td>";
+                                                        echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarElemento(\"$id\",\"$nombre\",\"$campo\",\"$campoID\",\"$tabla\")'><span class='fas fa-edit'</span></button>
+                                                            <button type='button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='fas fa-trash-alt'></span></button></td>";
+                                                        echo "</tr>";
+                                                    }
+                                                    echo "</tbody>";
+                                                ?>
                                         
-                                                while ($row=mysqli_fetch_array($res)){
-
-                                                $nombre = $row["NOMBRE_PROVEEDOR"];
-                                                $id  = $row["ID_PROVEEDOR"];
-                                                echo  "<tr>
-                                                        <td class='text-center'>" . $nombre. "</td>";
-                                                    echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarElemento(\"$id\",\"$nombre\",\"$campo\",\"$campoID\",\"$tabla\")'><span class='fas fa-edit'</span></button>
-                                                    <button type='button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='fas fa-trash-alt'></span></button></td>";
-                            
-                                                echo "</tr>";
-                                                }
-                                                echo "</tbody>";
-
-                                            ?>
-                   
-                                        </table>                                      
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-                      <!--TABLA CATEGORIAS-->
-
-    <div id="C"class="container-fluid ml-5">
-                  <div class="row">
-                      <div class="col-md-6">
-                          <div class="card">
-                                <div class="card-header" style="border">
-                                    <div class=" container ">
-                                    <div class="row justify-content-between">
-                                        <div class="col-7"><h4><strong>Categorias</strong></h4></div>                            
-                                        <?php  $tabla="categoria";
-                                                $campo="NOMBRE_CATEGORIA";
-                                                echo"<div class=' col-3 '><button type='button' class='btn btn-primary btn-sm mr-3' 
-                                        onclick='mostrarModalAgregarElemento(\"$tabla\",\"$campo\")'>Nuevo</button></div>";
-                                        ?>
-                                    </div>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                              <div class="card-body">
-                                  <div class="table-resposive">
-                                  <table class="table table-striped table-hover table-sm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+              <!--TABLA CATEGORIAS-->
+
+                <div id="C"class="container-fluid ml-5">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="accordion2">
+                                <div class="card">
+                                    <div class="card-header" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                        <div class=" container ">                              
+                                            <div class="row justify-content-between">
+                                                <div class="col-7"><h4><strong>Categorias</strong></h4></div>                            
+                                                <?php  
+                                                    $tabla="categoria";
+                                                    $campo="NOMBRE_CATEGORIA";
+                                                    echo"<div class=' col-3 '><button type='button' class='btn btn-primary btn-sm mr-3' 
+                                                        onclick='mostrarModalAgregarElemento(\"$tabla\",\"$campo\")'>Nuevo</button></div>";
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion2">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover table-sm">
                                                 <?php
-                                                        
-                                                include '../cnx.php';
-                                                if(mysqli_connect_errno()){
-                                                    echo "Error al conectar a la BBDD";
-                                                exit();
+                                                    include '../cnx.php';
+                                                    if(mysqli_connect_errno()){
+                                                        echo "Error al conectar a la BBDD";
+                                                        exit();
                                                     }
-
+    
                                                     mysqli_set_charset($conexion, "utf8");
-
-                                                    
+    
+                                                        
                                                     $campoID="ID_CATEGORIA";                                                    
                                                     $sql="SELECT * FROM categoria";
                                                     $res=mysqli_query($conexion,$sql);
                                                     echo    
-                                                    '<thead>
-                                                <tr class="thead-light">
-                                                    <th class="text-center"></th>                     
-                                                    <th class="text-center">Acciones</th>
-
-                                                </tr>
-                                                </thead>
-                                                <tbody>';
+                                                        '<thead>
+                                                            <tr class="thead-light">
+                                                                <th class="text-center"></th>                     
+                                                                <th class="text-center">Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>';
+                                            
+                                                    while ($row=mysqli_fetch_array($res)){
+    
+                                                        $nombre = $row["NOMBRE_CATEGORIA"];
+                                                        $id  = $row["ID_CATEGORIA"];
+                                                        echo  "<tr>
+                                                                <td class='text-center'>" . $nombre. "</td>";
+                                                        echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarElemento(\"$id\",\"$nombre\",\"$campo\",\"$campoID\",\"$tabla\")'><span class='fas fa-edit'</span></button>
+                                                                <button type='button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='fas fa-trash-alt'></span></button></td>";
+                                                        echo "</tr>";
+                                                    }
+                                                    echo "</tbody>";
+    
+                                                ?>
                                         
-                                                while ($row=mysqli_fetch_array($res)){
-
-                                                $nombre = $row["NOMBRE_CATEGORIA"];
-                                                $id  = $row["ID_CATEGORIA"];
-                                                echo  "<tr>
-                                                        <td class='text-center'>" . $nombre. "</td>";
-                                                    echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarElemento(\"$id\",\"$nombre\",\"$campo\",\"$campoID\",\"$tabla\")'><span class='fas fa-edit'</span></button>
-                                                    <button type='button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='fas fa-trash-alt'></span></button></td>";
-                            
-                                                echo "</tr>";
-                                                }
-                                                echo "</tbody>";
-
-                                            ?>
-                   
-                                        </table>                                      
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-
-                <!--TABLA BODEGA-->
-           
-                   <div id="B"class="container-fluid ml-5">
-                  <div class="row">
-                      <div class="col-md-6">
-                          <div class="card">
-                                <div class="card-header" style="border">
-                                    <div class=" container ">
-                                    <div class="row justify-content-between">
-                                        <div class="col-7"><h4><strong>Bodegas</strong></h4></div>                            
-                                        <?php  $tabla="bodega";
-                                                $campo="NOMBRE_BODEGA";
-                                                echo"<div class=' col-3 '><button type='button' class='btn btn-primary btn-sm mr-3' 
-                                        onclick='mostrarModalAgregarElemento(\"$tabla\",\"$campo\")'>Nuevo</button></div>";
-                                        ?>
-                                    </div>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                              <div class="card-body">
-                                  <div class="table-resposive">
-                                  <table class="table table-striped table-hover table-sm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--TABLA BODEGA-->
+           
+                <div id="B"class="container-fluid ml-5">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="accordion3">
+                                <div class="card">
+                                    <div class="card-header" id="headingFour" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                        <div class=" container ">                              
+                                            <div class="row justify-content-between">
+                                                <div class="col-7"><h4><strong>Bodegas</strong></h4></div>                            
+                                                    <?php  
+                                                        $tabla="bodega";
+                                                        $campo="NOMBRE_BODEGA";
+                                                        echo"<div class=' col-3 '><button type='button' class='btn btn-primary btn-sm mr-3' 
+                                                            onclick='mostrarModalAgregarElemento(\"$tabla\",\"$campo\")'>Nuevo</button></div>";
+                                                    ?>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion3">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover table-sm">
                                                 <?php
-                                                        
-                                                include '../cnx.php';
-                                                if(mysqli_connect_errno()){
-                                                    echo "Error al conectar a la BBDD";
-                                                exit();
+                                                    include '../cnx.php';
+                                                    if(mysqli_connect_errno()){
+                                                        echo "Error al conectar a la BBDD";
+                                                        exit();
                                                     }
-
+    
                                                     mysqli_set_charset($conexion, "utf8");
-
+    
                                                     $campoID="ID_BODEGA";                                                  
                                                     $sql="SELECT * FROM bodega";
                                                     $res=mysqli_query($conexion,$sql);
                                                     echo    
-                                                    '<thead>
-                                                <tr class="thead-light">
-                                                    <th class="text-center"></th>                     
-                                                    <th class="text-center">Acciones</th>
-
-                                                </tr>
-                                                </thead>
-                                                <tbody>';
+                                                        '<thead>
+                                                            <tr class="thead-light">
+                                                                <th class="text-center"></th>                     
+                                                                <th class="text-center">Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>';
+                                            
+                                                    while ($row=mysqli_fetch_array($res)){
+    
+                                                        $nombre = $row["NOMBRE_BODEGA"];
+                                                        $id  = $row["ID_BODEGA"];
+                                                        echo  "<tr>
+                                                                <td class='text-center'>" . $nombre. "</td>";
+                                                        echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarElemento(\"$id\",\"$nombre\",\"$campo\",\"$campoID\",\"$tabla\")'><span class='fas fa-edit'</span></button>
+                                                            <button type='button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='fas fa-trash-alt'></span></button></td>";
+                                                        echo "</tr>";
+                                                    }
+                                                    echo "</tbody>";
+                                                ?>
                                         
-                                                while ($row=mysqli_fetch_array($res)){
-
-                                                $nombre = $row["NOMBRE_BODEGA"];
-                                                $id  = $row["ID_BODEGA"];
-                                                echo  "<tr>
-                                                        <td class='text-center'>" . $nombre. "</td>";
-                                                    echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificarElemento(\"$id\",\"$nombre\",\"$campo\",\"$campoID\",\"$tabla\")'><span class='fas fa-edit'</span></button>
-                                                    <button type='button' class='btn btn-outline-danger btn-sm' onclick='previoEliminacionElemento(\"$id\",\"$tabla\",\"$campoID\")'><span class='fas fa-trash-alt'></span></button></td>";
-                            
-                                                echo "</tr>";
-                                                }
-                                                echo "</tbody>";
-
-                                            ?>
-                   
-                                        </table>                                      
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                
                                                 
                             <!--MODAL CONFIRMAR ELIMINACION-->
           
@@ -676,6 +737,7 @@
                       </div>                        
                   </div>
               </div>
+              
        
           </section>
           </div>

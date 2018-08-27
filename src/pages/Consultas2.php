@@ -9,9 +9,58 @@
     }
   ?>
   </head> 
+  <style>
+        .btn-circle {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            padding: 1px 0;
+            font-size: 5px;
+            line-height: 1.65;
+            border-radius: 30px !important;
+        }
+        .botonF1{
+            width: 35px;
+            height: 35px;
+            border-radius: 100%;
+            background: #F44336;
+            right: -15px;
+            bottom: 50px;
+            position: fixed;
+            margin-right: 16px;
+            margin-bottom: 16px;
+            border: none;
+            outline: none;
+            color: #FFF;
+            font-size: 20px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            transition: .3s;
+            z-index: 1;
+        }       
+        .botonF2{
+            display: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 100%;
+            background: #F44336;
+            right: -15px;
+            top: 75px;
+            position: fixed;
+            margin-right: 16px;
+            margin-bottom: 16px;
+            border: none;
+            outline: none;
+            color: #FFF;
+            font-size: 20px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            transition: .3s;
+            z-index: 10;
+        }       
+
+  </style>
   <body>
     <!--PAGINA-->
-    <div class="page">
+    <div class="page" >
      <!--NAVBAR--> 
     <div class="header">
     <?php  include '../../src/include/navbar.php';  ?>
@@ -27,7 +76,7 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Consultas Beta</h2>
+              <h2 class="no-margin-bottom">Consultas y Productos</h2>
             </div>
           </header> 
          <div class="div" id="recargar">
@@ -35,34 +84,36 @@
 
                 
 
-<div id="tabla" class="container-fluid">
+<div id='fin' class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
         <div id="accordion">
-        <div class="alert alert-info">
-            <strong>Nuevo!</strong> Sistema de busqueda en marcha blanca.
-        </div>
+        
 
             <div class="card text-center">
                 <div class="card-header">
                     <div class=" container ">
                         <div class="row justify-content-between">
-                            <div class="col-3"><h4><strong>Filtro</strong></h4></div>
-                            <div class=" col-1 "><button type="button" class="btn btn-outline-primary btn-sm" onclick="updateDiv2()">Recargar</button></div>
-                            <button type="buttom" class="btn btn-danger mb-2 ml-3" onclick="limpiarFormularioCodigoConsultas()">Limpiar busqueda</button>
-
-                            <div class=" col-1 "><button type="button" class="btn btn-success btn-circle-sm" onclick="modalNuevo()"><i class="fas fa-plus"></i></button></div>
+                            <div class="col-md-3 col-sm-1 col-xs-1"><h2><strong>Filtro</strong></h2></div>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <div class="contaniner">
+                                    <div class="row justify-content-end">
+                                        <button type="buttom" class="btn btn-danger btn-sm mb-2 ml-3" onclick="limpiarFormularioCodigoConsultas()">Limpiar busqueda</button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm mb-2 ml-3" onclick="updateDiv2()">Recargar</button>
+                                        <button type="button" class="btn btn-success btn-circle mb-2 ml-3" onclick="modalNuevo()"><span class="fas fa-plus"></span></button></div>
+                                    </div>
+                                </div>
 
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="form-row">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 col-sm-6 mb-3">
                             <input type="text" class="form-control" id="txtCodigoConsulta" name="Codigo" placeholder="Codigo / Nombre" value="" onkeyup="superBusqueda()" required>
                             <div class="valid-feedback"></div>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-4 mb-3">
                                 
                             <select id="cbCategoriaConsulta" class="form-control mb-2 mr-sm-2" onchange="superBusqueda()">
                             <option value="" selected>Categoria...</option>;
@@ -83,7 +134,7 @@
                                         
                             <div class="valid-feedback"></div>
                         </div>
-                        <div class="col-md-2 mb-3">
+                        <div class="col-md-4 mb-3">
                             
                             <select id="cbProveedorConsulta" class="form-control mb-2 mr-sm-2" onchange="superBusqueda()">
                             <option value="" selected>Proveedor...</option>;
@@ -112,17 +163,17 @@
                     
                         <div class="col-md-4 mb-3">
                             <div class='input-group date fad-Date2' id='' >
-                                <input readonly type='text' class="form-control" id="dtpFechaVencConsulta" placeholder="Fecha Vencimiento"  value="" onclick="superBusqueda()" required>
+                                <input readonly type='text' class="form-control" id="dtpFechaVencConsulta" placeholder="Fecha Vencimiento"  value="" onchange="superBusqueda()" required>
                                 <span class="input-group-addon">
-                                    <span class="oi oi-calendar"></span>
+                                    <span class="fas fa-calendar-alt"></span>
                                 </span>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class='input-group date fad-Date2' id='' >
-                                <input readonly type='text' class="form-control" id="dtpFechaAdqConsulta" placeholder="Fecha Adquisición" onclick="superBusqueda()" value="" required>
+                                <input readonly type='text' class="form-control" id="dtpFechaAdqConsulta" placeholder="Fecha Adquisición" onchange="superBusqueda()" value="" required>
                                 <span class="input-group-addon">
-                                    <span class="oi oi-calendar"></span>
+                                    <span class="fas fa-calendar-alt"></span>
                                 </span>
                             </div>  
                         <script>
@@ -136,7 +187,7 @@
                         </script> 
                         </div>
                         <div class="col-md-4 mb-3">
-                            <select id="cbBodegaConsulta" class="form-control mb-2 mr-sm-2 custom-select" onchange="enviarOtro()" onclick="superBusqueda()" required>
+                            <select id="cbBodegaConsulta" class="form-control mb-2 mr-sm-2 custom-select" onchange="" onclick="superBusqueda()" required>
                             <option value="" selected>Bodega...</option>;
                             <?php
                                 $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");
@@ -167,7 +218,295 @@
                     <div id="resultados"></div>
 
                 </div>
-            </div>                            
+            </div>     
+
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <div class=" container ">
+                            <div class="row justify-content-between">
+                                <h5>Productos</h5>
+                                <div class="  "><a href="/src/pages/Excel/ProductosExc.php" class="btn btn-outline-success btn-sm ">Descargar como Excel</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="table-responsive">                
+                                <table class='table table-striped table-hover table-sm'>
+                                    <?php
+                                        try{
+                                            $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");                                                 
+                                            //$base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
+                                            $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                            $base->exec("SET CHARACTER SET utf8");
+                                            $tamanoPaginas=40;
+                                            $pagina = isset($_GET['pagina'])?$_GET['pagina']:1;;
+                                            
+                                            $empezarDesde = ($pagina - 1) * $tamanoPaginas;
+                                            $sql_total="SELECT
+                                                            p.CODIGO,
+                                                            c.NOMBRE_CATEGORIA AS CATEGORIA,
+                                                            r.NOMBRE_PROVEEDOR AS PROVEEDOR,
+                                                            p.NOMBRE,
+                                                            p.PRECIO_VENTA,
+                                                            p.PRECIO_NETO,
+                                                            p.FECHA_VENC,
+                                                            p.FECHA_ADQ,
+                                                            p.STOCK_MIN,
+                                                            p.STOCK_ACT,
+                                                            b.NOMBRE_BODEGA AS BODEGA,
+                                                            IF((p.FECHA_VENC BETWEEN CURDATE() AND ADDDATE(CURDATE(), INTERVAL 13 DAY)),'table-warning','') AS POR_VENCER,
+                                                            IF(p.FECHA_VENC < CURDATE(), 'table-danger', '') AS VENCIDO,
+                                                            IF(p.FECHA_VENC < CURDATE(), 'danger', 'danger') AS VENCIDO2 
+                                                        FROM
+                                                            productos p
+                                                        INNER JOIN bodega b ON
+                                                            (p.ID_BODEGA = b.ID_BODEGA)
+                                                        INNER JOIN categoria c ON
+                                                            (
+                                                                p.ID_CATEGORIA = c.ID_CATEGORIA
+                                                            )
+                                                        INNER JOIN proveedor r ON
+                                                            (
+                                                                p.ID_PROVEEDOR = r.ID_PROVEEDOR
+                                                            ) ";
+                                                                          
+                                            $resultado = $base->prepare($sql_total);
+                                            $resultado->execute(array());
+                                            $numFilas=$resultado->rowCount();
+                                            $totalPaginas = ceil($numFilas/$tamanoPaginas);
+                                                    
+                                            $resultado->closeCursor();
+                                            $sqlLimit="SELECT
+                                                            p.CODIGO,
+                                                            c.NOMBRE_CATEGORIA AS CATEGORIA,
+                                                            r.NOMBRE_PROVEEDOR AS PROVEEDOR,
+                                                            p.NOMBRE,
+                                                            p.PRECIO_VENTA,
+                                                            p.PRECIO_NETO,
+                                                            p.FECHA_VENC,
+                                                            p.FECHA_ADQ,
+                                                            p.STOCK_MIN,
+                                                            p.STOCK_ACT,
+                                                            b.NOMBRE_BODEGA AS BODEGA,
+                                                            IF((p.FECHA_VENC BETWEEN CURDATE() AND ADDDATE(CURDATE(), INTERVAL 13 DAY)),'table-warning','') AS POR_VENCER,
+                                                            IF(p.FECHA_VENC < CURDATE(), 'table-danger', '') AS VENCIDO,
+                                                            IF(p.FECHA_VENC < CURDATE(), 'danger', 'danger') AS VENCIDO2 
+                                                        FROM
+                                                            productos p
+                                                        INNER JOIN bodega b ON
+                                                            (p.ID_BODEGA = b.ID_BODEGA)
+                                                        INNER JOIN categoria c ON
+                                                            (
+                                                                p.ID_CATEGORIA = c.ID_CATEGORIA
+                                                            )
+                                                        INNER JOIN proveedor r ON
+                                                            (
+                                                                p.ID_PROVEEDOR = r.ID_PROVEEDOR
+                                                            )
+                                                        LIMIT $empezarDesde, $tamanoPaginas ";
+    
+                                            $resultado = $base->prepare($sqlLimit);
+                                            $resultado->execute(array());
+                                            // <th>CODIGO</th>
+                                            echo "<thead>
+                                                    <tr class='thead-light'>
+                                                        <th>CODIGO</th>
+                                                        <th>CATEGORIA</th>
+                                                        <th>PROVEEDOR</th>
+                                                        <th>NOMBRE</th>
+                                                        <th>PRECIO VENTA</th>
+                                                        <th>PRECIO NETO</th>
+                                                        <th>FECHA VENC</th>
+                                                        <th>FECHA ADQ</th>
+                                                        <th>STOCK MIN</th>
+                                                        <th>STOCK ACT</th>
+                                                        <th>Bodega</th>
+                                                        <th align='center'>ACCIONES</th>
+                                                    <tr>
+                                                </thead>
+                                                <tbody>";
+                                                    
+                                                
+                                            while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
+                                                $codigo = $fila["CODIGO"];
+                                                $categoria = $fila["CATEGORIA"];
+                                                $proveedor = $fila["PROVEEDOR"];
+                                                $nombre = $fila["NOMBRE"];
+                                                $precioVenta = $fila["PRECIO_VENTA"];
+                                                $precioNeto = $fila["PRECIO_NETO"];
+                                                $fechaVenc3;
+                                                if($fila["FECHA_VENC"]== null){
+                                                    $fechaVenc = '-';
+                                                    $fechaVenc2 = '-';
+                                                    $fechaVenc3 = '1';
+                                                }else{
+                                                    $fechaVenc = date_format(date_create($fila["FECHA_VENC"]), 'Y/m/d');
+                                                    $fechaVenc2 = date_format(date_create($fila["FECHA_VENC"]), 'Y / m / d');
+                                                    $fechaVenc3 = '0';
+                                                } 
+                                                $fechaAdq = date_format(date_create($fila["FECHA_ADQ"]), 'Y/m/d');
+                                                $stockMin = $fila["STOCK_MIN"];
+                                                $stockAct = $fila["STOCK_ACT"];
+                                                $bodega = $fila["BODEGA"];
+                                                $class = $fila["POR_VENCER"];
+                                                if($class == ''){$class = $fila["VENCIDO"];}     
+                                                $class2 = $fila["VENCIDO2"];
+                                                setlocale(LC_MONETARY, 'en_US');
+
+                                                echo "<tr class='".$class."'>";
+                                                echo "<td>" . $codigo . "</td>";
+                                                echo "<td>" . $categoria . "</td>";
+                                                echo "<td>" . $proveedor . "</td>";
+                                                echo "<td>" . $nombre . "</td>";
+                                                echo "<td align='right'>$ " . number_format($fila["PRECIO_VENTA"], 0, ',', '.') . "</td>";
+                                                echo "<td align='right'>$ " . number_format($fila["PRECIO_VENTA"], 0, ',', '.') . "</td>";
+                                                echo "<td>" . $fechaVenc2 . "</td>";
+                                                echo "<td>" . date_format(date_create($fechaAdq), 'Y / m / d') . "</td>";
+                                                echo "<td>" . $stockMin . "</td>";
+                                                echo "<td>" . $stockAct . "</td>";
+                                                echo "<td>" . $bodega . "</td>";
+                                                echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificar2(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\", \"$fechaVenc3\")'><span class='fas fa-edit'</span></button>
+                                                                        <button type='button' class='btn btn-outline-".$class2." btn-sm' onclick='mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")'><span class='fas fa-trash-alt'></span></button></td>";
+                                                            
+                                                echo "</tr>";
+    
+                                                            //mostrarModalModificar(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\")
+                                                            //mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")
+                                            }
+                                            echo "</tbody>";
+                                            $resultado->closeCursor();
+                                        }
+                                        catch(Exception $e){
+                                        }
+                                                
+                                    ?>
+                                                
+                                </table>
+                                <?php 
+                                    $anterior=($pagina-1);
+                                    $siguiente=($pagina+1);
+                                
+                                    if(isset($_GET['Busqueda'])){
+                                        $pagAnterior= "?pagina=$anterior&Busqueda={$_GET['Busqueda']}";
+                                        $pagSiguiente= "?pagina=$siguiente&Busqueda={$_GET['Busqueda']}";
+                                    }
+                                    else{
+                                        $pagAnterior= "?pagina=$anterior";
+                                        $pagSiguiente= "?pagina=$siguiente";
+                                    }
+                                ?>
+                                                
+                                <nav class="nav justify-content-center" aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <?php if(($pagina==1)){ ?>
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">Anterior</span>
+                                                </a>
+                                            </li>
+                                        <?php }else{?>
+                                            <li class="page-item">
+                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">Anterior</span>
+                                                </a>
+                                            </li>
+                                        <?php }?>
+    
+                                                    
+                                        <?php
+                                            if(isset($_GET['Busqueda'])){
+                                                if($totalPaginas>=1){
+                                                    for($x=1;$x<=$totalPaginas;$x++){
+                                                        echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>":
+                                                            "<li class='page-item'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>";
+                                                    }
+                                                }	
+                                            }
+                                            else{
+                                                if($totalPaginas>=1){
+                                                    for($x=1;$x<=$totalPaginas;$x++){
+                                                        echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>":
+                                                            "<li class='page-item'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>";
+                                                    }
+                                                }	
+                                            }	  
+                                                    
+                                                    
+                                        ?>
+                                        <?php if(($pagina>=$totalPaginas)){?>
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Siguiente</span>
+                                                </a>
+                                            </li>
+                                        <?php }else{?>
+                                            <li class="page-item">
+                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Siguiente</span>
+                                                </a>
+                                            </li>
+                                        <?php }?>
+                                    </ul>
+                                </nav>
+                            </div>
+                                    
+                        </div>
+                    </div>
+                </div>
+            </div>   
+
+            <button class="botonF1" id="abajo">
+                    <i class="fas fa-arrow-down"></i>
+            </button>
+            <button class="botonF2" id="arriba">
+                    <i class="fas fa-arrow-up"></i>
+            </button>
+                <script>
+                $(document).ready(function(){
+                    $('#abajo').click(function () {
+                        $('html,body').animate({
+                            scrollTop: $('#footer').offset().top
+                        }, 1000);
+                    });
+                    $('#arriba').click(function () {
+                        $('html,body').animate({
+                            scrollTop: $('#navbar').offset().top
+                        }, 1000);
+                    });
+                    $(window).scroll(function(){
+                        if($(this).scrollTop()>250){
+                            $("#arriba").fadeIn('fast', 'linear');
+                        }else{
+                            $("#arriba").fadeOut('fast', 'linear');
+                        }
+                    });
+                    $(window).on("scroll", function() {
+                        var scrollHeight = $(document).height();
+                        var scrollPosition = $(window).height() + $(window).scrollTop();
+                        if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+                            $("#abajo").fadeOut('fast', 'linear');
+                        }else{
+                            $("#abajo").fadeIn('fast', 'linear');
+                        }
+                    });
+                    window.onscroll = function() {myFunction()};
+
+                    function myFunction() {
+                        if ($("#accordion").scrollTop()>0){
+                            alert("asd");
+                        }
+                    }
+
+                });
+                     
+                </script>                
     </div>
 </div>
 
@@ -185,7 +524,8 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom01">Codigo</label>
-                            <input readonly type="text" class="form-control" id="txtCodigoModal" name="Codigo" placeholder="Codigo" value="" required>
+                            <input type="text" class="form-control" id="txtCodigoModal" name="Codigo" placeholder="Codigo" value="" required>
+                            <input readonly type="hidden" class="form-control" id="txtCodigoOriginalModal" name="Codigo" placeholder="Codigo" value="" required>
                             <div class="valid-feedback"></div>
                         </div>
                         <div class="col-md-4 mb-3">
@@ -272,7 +612,7 @@
                             <div class='input-group date fad-Date2' id='' >
                                 <input readonly type='text' class="form-control" id="dtpFechaVencModal" placeholder="Fecha"  value="" required>
                                 <span class="input-group-addon">
-                                    <span class="oi oi-calendar"></span>
+                                    <span class="fas fa-calendar-alt"></span>
                                 </span>
                             </div>
                             <div class="form-check">
@@ -285,7 +625,7 @@
                             <div class='input-group date fad-Date2' id='' >
                                 <input readonly type='text' class="form-control" id="dtpFechaAdqModal" placeholder="Fecha"  value="" required>
                                 <span class="input-group-addon">
-                                    <span class="oi oi-calendar"></span>
+                                    <span class="fas fa-calendar-alt"></span>
                                 </span>
                             </div>  
                         <script>
@@ -603,7 +943,7 @@
                                                 <div class='input-group date fad-Date2' id='' >
                                                     <input  readonly type='text' class="form-control" id="dtpFechaVencModalAgregar" placeholder="Fecha"  value='' required>
                                                     <span class="input-group-addon">
-                                                        <span class="oi oi-calendar"></span>
+                                                        <span class="fas fa-calendar-alt"></span>
                                                     </span>
                                                 </div>
                                                 <div class="form-check">
@@ -616,7 +956,7 @@
                                                 <div class='input-group date fad-Date2' id='' >
                                                     <input type='text' class="form-control" id="dtpFechaAdqModalAgregar" placeholder="Fecha" readonly value="" required>
                                                     <span class="input-group-addon">
-                                                        <span class="oi oi-calendar"></span>
+                                                        <span class="fas fa-calendar-alt"></span>
                                                     </span>
                                                 </div>  
                                             <script>
@@ -679,233 +1019,6 @@
                         </div>
                     </div>
    
-   <!--CARD1-->
-   <div class="card-body" id="card1">
-                                    <div class="table-responsive">
-                                            
-                                        <table class='table table-striped table-hover table-sm'>
-                                            <?php
-                                                try{
-                                                    $base = new PDO("mysql:host=localhost; dbname=vetportu_vetportugalInv", "vetportu_inventa", "vetportugal2018");                                                 
-                                                    //$base = new PDO("mysql:host=localhost; dbname=vetportugal", "root", "");
-                                                    $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                                    $base->exec("SET CHARACTER SET utf8");
-                                                    $tamanoPaginas=40;
-                                                    $pagina = isset($_GET['pagina'])?$_GET['pagina']:1;;
-                                                    
-                                                    $empezarDesde = ($pagina - 1) * $tamanoPaginas;
-                                                    $sql_total="SELECT
-                                                                p.CODIGO,
-                                                                c.NOMBRE_CATEGORIA AS CATEGORIA,
-                                                                r.NOMBRE_PROVEEDOR AS PROVEEDOR,
-                                                                p.NOMBRE,
-                                                                p.PRECIO_VENTA,
-                                                                p.PRECIO_NETO,
-                                                                p.FECHA_VENC,
-                                                                p.FECHA_ADQ,
-                                                                p.STOCK_MIN,
-                                                                p.STOCK_ACT,
-                                                                b.NOMBRE_BODEGA AS BODEGA,
-                                                                IF((p.FECHA_VENC BETWEEN CURDATE() AND ADDDATE(CURDATE(), INTERVAL 13 DAY)),'table-warning','') AS POR_VENCER,
-                                                                IF(p.FECHA_VENC < CURDATE(), 'table-danger', '') AS VENCIDO,
-                                                                IF(p.FECHA_VENC < CURDATE(), 'danger', 'danger') AS VENCIDO2 
-                                                            FROM
-                                                                productos p
-                                                            INNER JOIN bodega b ON
-                                                                (p.ID_BODEGA = b.ID_BODEGA)
-                                                            INNER JOIN categoria c ON
-                                                                (
-                                                                    p.ID_CATEGORIA = c.ID_CATEGORIA
-                                                                )
-                                                            INNER JOIN proveedor r ON
-                                                                (
-                                                                    p.ID_PROVEEDOR = r.ID_PROVEEDOR
-                                                                ) ";
-                                                                      
-                                                    $resultado = $base->prepare($sql_total);
-                                                    $resultado->execute(array());
-                                                    $numFilas=$resultado->rowCount();
-                                                    $totalPaginas = ceil($numFilas/$tamanoPaginas);
-                                                
-                                                    $resultado->closeCursor();
-                                                    $sqlLimit="SELECT
-                                                                    p.CODIGO,
-                                                                    c.NOMBRE_CATEGORIA AS CATEGORIA,
-                                                                    r.NOMBRE_PROVEEDOR AS PROVEEDOR,
-                                                                    p.NOMBRE,
-                                                                    p.PRECIO_VENTA,
-                                                                    p.PRECIO_NETO,
-                                                                    p.FECHA_VENC,
-                                                                    p.FECHA_ADQ,
-                                                                    p.STOCK_MIN,
-                                                                    p.STOCK_ACT,
-                                                                    b.NOMBRE_BODEGA AS BODEGA,
-                                                                    IF((p.FECHA_VENC BETWEEN CURDATE() AND ADDDATE(CURDATE(), INTERVAL 13 DAY)),'table-warning','') AS POR_VENCER,
-                                                                    IF(p.FECHA_VENC < CURDATE(), 'table-danger', '') AS VENCIDO,
-                                                                    IF(p.FECHA_VENC < CURDATE(), 'danger', 'danger') AS VENCIDO2 
-                                                                FROM
-                                                                    productos p
-                                                                INNER JOIN bodega b ON
-                                                                    (p.ID_BODEGA = b.ID_BODEGA)
-                                                                INNER JOIN categoria c ON
-                                                                    (
-                                                                        p.ID_CATEGORIA = c.ID_CATEGORIA
-                                                                    )
-                                                                INNER JOIN proveedor r ON
-                                                                    (
-                                                                        p.ID_PROVEEDOR = r.ID_PROVEEDOR
-                                                                    )
-                                                                LIMIT $empezarDesde, $tamanoPaginas ";
-
-                                                    $resultado = $base->prepare($sqlLimit);
-                                                    $resultado->execute(array());
-                                                    // <th>CODIGO</th>
-                                                    echo "<thead>
-                                                            <tr class='thead-light'>
-                                                                <th>CODIGO</th>
-                                                                <th>CATEGORIA</th>
-                                                                <th>PROVEEDOR</th>
-                                                                <th>NOMBRE</th>
-                                                                <th>PRECIO VENTA</th>
-                                                                <th>PRECIO NETO</th>
-                                                                <th>FECHA VENC</th>
-                                                                <th>FECHA ADQ</th>
-                                                                <th>STOCK MIN</th>
-                                                                <th>STOCK ACT</th>
-                                                                <th>Bodega</th>
-                                                                <th align='center'>ACCIONES</th>
-                                                            <tr>
-                                                        </thead>
-                                                        <tbody>";
-                                                
-                                            
-                                                    while($fila=$resultado->fetch(PDO::FETCH_ASSOC)){
-                                                        $codigo = $fila["CODIGO"];
-                                                        $categoria = $fila["CATEGORIA"];
-                                                        $proveedor = $fila["PROVEEDOR"];
-                                                        $nombre = $fila["NOMBRE"];
-                                                        $precioVenta = $fila["PRECIO_VENTA"];
-                                                        $precioNeto = $fila["PRECIO_NETO"];
-                                                        $fechaVenc3;
-                                                        if($fila["FECHA_VENC"]== null){
-                                                            $fechaVenc = '-';
-                                                            $fechaVenc2 = '-';
-                                                            $fechaVenc3 = '1';
-                                                        }else{
-                                                            $fechaVenc = date_format(date_create($fila["FECHA_VENC"]), 'Y/m/d');
-                                                            $fechaVenc2 = date_format(date_create($fila["FECHA_VENC"]), 'Y / m / d');
-                                                            $fechaVenc3 = '0';
-                                                        } 
-                                                        $fechaAdq = date_format(date_create($fila["FECHA_ADQ"]), 'Y/m/d');
-                                                        $stockMin = $fila["STOCK_MIN"];
-                                                        $stockAct = $fila["STOCK_ACT"];
-                                                        $bodega = $fila["BODEGA"];
-                                                        $class = $fila["POR_VENCER"];
-                                                        if($class == ''){$class = $fila["VENCIDO"];}     
-                                                        $class2 = $fila["VENCIDO2"];
-                                                        setlocale(LC_MONETARY, 'en_US');
-
-                                                        echo "<tr class='".$class."'>";
-                                                        echo "<td>" . $codigo . "</td>";
-                                                        echo "<td>" . $categoria . "</td>";
-                                                        echo "<td>" . $proveedor . "</td>";
-                                                        echo "<td>" . $nombre . "</td>";
-                                                        echo "<td align='right'>$ " . number_format($fila["PRECIO_VENTA"], 0, ',', '.') . "</td>";
-                                                        echo "<td align='right'>$ " . number_format($fila["PRECIO_VENTA"], 0, ',', '.') . "</td>";
-                                                        echo "<td>" . $fechaVenc2 . "</td>";
-                                                        echo "<td>" . date_format(date_create($fechaAdq), 'Y / m / d') . "</td>";
-                                                        echo "<td>" . $stockMin . "</td>";
-                                                        echo "<td>" . $stockAct . "</td>";
-                                                        echo "<td>" . $bodega . "</td>";
-                                                        echo "<td align='center'><button type='button' class='btn btn-outline-success btn-sm' onclick='mostrarModalModificar2(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\", \"$fechaVenc3\")'><span class='fas fa-edit'</span></button>
-                                                                                 <button type='button' class='btn btn-outline-".$class2." btn-sm' onclick='mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")'><span class='fas fa-trash-alt'></span></button></td>";
-                                                        
-                                                        echo "</tr>";
-
-                                                        //mostrarModalModificar(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$precioVenta\",\"$precioNeto\",\"$fechaVenc\",\"$fechaAdq\",\"$stockMin\",\"$stockAct\",\"$bodega\")
-                                                        //mostrarModal(\"$codigo\",\"$categoria\",\"$proveedor\",\"$nombre\",\"$bodega\")
-                                                    }
-                                                    echo "</tbody>";
-                                                    $resultado->closeCursor();
-                                                }
-                                                catch(Exception $e){
-                                                }
-                                            
-                                            ?>
-                                            
-                                        </table>
-                                        <?php 
-                                            $anterior=($pagina-1);
-                                            $siguiente=($pagina+1);
-                                            
-                                            if(isset($_GET['Busqueda'])){
-                                                $pagAnterior= "?pagina=$anterior&Busqueda={$_GET['Busqueda']}";
-                                                $pagSiguiente= "?pagina=$siguiente&Busqueda={$_GET['Busqueda']}";
-                                            }
-                                            else{
-                                                $pagAnterior= "?pagina=$anterior";
-                                                $pagSiguiente= "?pagina=$siguiente";
-                                            }
-                                            ?>
-                                            
-                                            <nav class="nav justify-content-center" aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                            <?php if(($pagina==1)){ ?>
-                                                <li class="page-item disabled">
-                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Anterior</span>
-                                                </a>
-                                                </li>
-                                            <?php }else{?>
-                                                <li class="page-item">
-                                                <a class="page-link" href='<?php echo "$pagAnterior"?>#tabla' aria-label="Anterior">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Anterior</span>
-                                                </a>
-                                                </li>
-                                            <?php }?>
-
-                                                
-                                                <?php
-                                                if(isset($_GET['Busqueda'])){
-                                                    if($totalPaginas>=1){
-                                                        for($x=1;$x<=$totalPaginas;$x++){
-                                                            echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>":
-                                                            "<li class='page-item'><a class='page-link' href='?pagina=$x&Busqueda={$_GET['Busqueda']}#tabla'>$x</a></li>";
-                                                        }
-                                                    }	
-                                                }
-                                                else{
-                                                    if($totalPaginas>=1){
-                                                    for($x=1;$x<=$totalPaginas;$x++){
-                                                        echo($x==$pagina)?"<li class='page-item active'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>":
-                                                        "<li class='page-item'><a class='page-link' href='?pagina=$x#tabla'>$x</a></li>";
-                                                    }
-                                                }	
-                                                }	  
-                                                
-                                                
-                                                ?>
-                                                <?php if(($pagina>=$totalPaginas)){?>
-                                                <li class="page-item disabled">
-                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Siguiente</span>
-                                                </a>
-                                                </li>
-                                                <?php }else{?>
-                                                    <li class="page-item">
-                                                <a class="page-link" href='<?php echo "$pagSiguiente"?>#tabla' aria-label="Siguiente">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Siguiente</span>
-                                                </a>
-                                                </li>
-                                                <?php }?>
-                                            </ul>
-                                            </nav>
-                                    </div>
-                                </div>
    
    <!--MODAL ERROR AL AGREGAR-->
    <div class="modal fade" id="modalErrorAgregarCodigo" role="dialog">
@@ -978,6 +1091,46 @@
     
     </div>
 </div>
+<div class="modal fade" id="modalErrorFV" role="dialog">
+    <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Error</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
+            </div>
+            <div class="modal-body">
+                <p align="center">Si no tiene fecha de vencimiento, marque la opción.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cerrarError" class="btn btn-warning" data-dismiss="modal" onclick="">Aceptar</button>
+            </div>
+        </div>
+    
+    </div>
+</div>
+<div class="modal fade" id="modalErrorFA" role="dialog">
+    <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Error</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
+            </div>
+            <div class="modal-body">
+                <p align="center">Seleccione una fecha de Adquisición.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cerrarError" class="btn btn-warning" data-dismiss="modal" onclick="">Aceptar</button>
+            </div>
+        </div>
+    
+    </div>
+</div>
 
 </section>
          </div>
@@ -989,5 +1142,6 @@
       </div><!--class Page content...-->
      
     </div><!-- class PAGE--> 
+    
   </body>
 </html>

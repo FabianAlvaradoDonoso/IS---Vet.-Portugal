@@ -22,9 +22,9 @@
           <!-- Sidebar Navidation Menus--><span class="heading">Menu</span>
           <ul class="list-unstyled">
                     <li><a href="../../index.php"> <i class="fas fa-paw"></i>Principal </a></li>
-                    <li><a href="../../src/pages/Productos.php"> <i class="fas fa-barcode"></i>Productos </a></li>
-                    <li><a href="../../src/pages/Consultas.php"> <i class="fas fa-search"></i>Consultas</a></li>
-                    <li><a href="../../src/pages/Consultas2.php"> <i class="fab fa-searchengin"></i>Consultas Beta 1.0</a></li>
+                    <!-- <li><a href="../../src/pages/Productos.php"> <i class="fas fa-barcode"></i>Productos </a></li>
+                    <li><a href="../../src/pages/Consultas.php"> <i class="fas fa-search"></i>Consultas</a></li> -->
+                    <li><a href="../../src/pages/Consultas2.php"> <i class="fab fa-searchengin"></i>Consultas y Productos</a></li>
                     <li><a href="../../src/pages/Ventas.php"> <i class="fas fa-angle-double-down"></i> Descontar</a></li>
                     <li><a href="../../src/pages/Paquetes.php"> <i class="fas fa-box"></i>Paquetes</a></li>
                     <?php if($cargo== "Administrador"){

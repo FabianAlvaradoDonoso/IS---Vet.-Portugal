@@ -12,7 +12,7 @@
     $cargo = $_POST[("txtUserCargo")];  
 
     
-    $sql="INSERT INTO usuarios(user,nombre,pass,cargo) 
+    $sql="INSERT INTO usuarios(nombre, user, pass, cargo) 
           VALUES ('".$nombre."','".$user."','".$pass."','".$cargo."')";
     
     $res=mysqli_query($conexion,$sql);

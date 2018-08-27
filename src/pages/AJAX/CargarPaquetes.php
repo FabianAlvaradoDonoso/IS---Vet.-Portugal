@@ -40,14 +40,14 @@
         $image = $row["COLOR"];
         if($image == 'blue'){
             $tmp.= "<div class='statistics col-lg-4 col-12 mt-3 mostrar' id='".$row["ID_PAQUETITO"]."'>
-                    <div class='statistic d-flex align-items-center bg-white has-shadow'>
+                    <div class='statistic d-flex align-items-center bg-light has-shadow'>
                         <div class='icon bg-".$row["COLOR"]."'><i class='fas fa-syringe'></i></div>
                         <div class='text'><strong>".$nombre."</strong><br><small><h6>$".number_format($row["PRECIO_PAQUETITO"], 0, ',', '.')." -- Items: ".$cantidad."</h6></small></div>
                     </div> 
                 </div>";
         }else{
             $tmp.= "<div class='statistics col-lg-4 col-12 mt-3 mostrar' id='".$row["ID_PAQUETITO"]."'>
-                    <div class='statistic d-flex align-items-center bg-white has-shadow'>
+                    <div class='statistic d-flex align-items-center bg-light has-shadow'>
                         <div class='icon bg-".$row["COLOR"]."'><i class='fas fa-cubes'></i></div>
                         <div class='text'><strong>".$nombre."</strong><br><small><h6>$".number_format($row["PRECIO_PAQUETITO"], 0, ',', '.')." -- Items: ".$cantidad."</h6></small></div>
                     </div> 

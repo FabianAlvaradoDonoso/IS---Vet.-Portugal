@@ -105,7 +105,7 @@
                                                             </div>      
                                                         </div>
                                                         <div class='col-3 '>
-                                                            <button type="buttom" class="btn btn-primary mt-4" onclick="nuevoPaquete()"><span class="oi oi-plus"></span> Nuevo Paquete</button>
+                                                            <button type="buttom" class="btn btn-primary mt-4" onclick="nuevoPaquete()"><span class="fas fa-plus"></span> Nuevo Paquete</button>
                                                         </div>
                                                     </div>
                                                 </div>

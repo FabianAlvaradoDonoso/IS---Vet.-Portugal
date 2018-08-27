@@ -730,21 +730,7 @@ function mostrarModal(codigo, categoria, proveedor, nombre, bodega){
     document.getElementById("txtNombreModalE").value=nombre;
     buscarSelect(document.getElementById("cbBodegaModalE"), bodega);
 }
-function mostrarModalModificar(codigo,categoria, proveedor, nombre, precioVenta, precioNeto, fechaVenc, fechaAdq, stockMin, stockAct, bodega, isChecked){
-    $("#modalModificar").modal();
-    document.getElementById("txtCodigoModal").value=codigo;
-    buscarSelect(document.getElementById("cbCategoriaModal"), categoria);
-    buscarSelect(document.getElementById("cbProveedorModal"), proveedor);
-    document.getElementById("txtNombreModal").value=nombre;
-    document.getElementById("nudPrecioVentaModal").value=precioVenta;
-    document.getElementById("nudPrecioNetoModal").value=precioNeto;
-    document.getElementById("dtpFechaVencModal").value=fechaVenc;
-    document.getElementById("dtpFechaAdqModal").value=fechaAdq;
-    document.getElementById("nudStockMinModal").value=stockMin;
-    document.getElementById("nudStockActModal").value=stockAct;
-    buscarSelect(document.getElementById("cbBodegaModal"), bodega);
-    estaChecked2(isChecked);
-}
+
 function mostrarModalModificar2(codigo,categoria, proveedor, nombre, precioVenta, precioNeto, fechaVenc, fechaAdq, stockMin, stockAct, bodega, isChecked){
     $("#modalModificar2").modal();
     
@@ -799,7 +785,11 @@ function agregar(){
     {
         $("#modalErrorFV").modal();
     }
-    if(texto1 == '' || texto2 == '' || texto3 == '' || texto4 == '' || texto5 == '' || texto6 == '' || texto8 == '' || texto9 == '' || texto10 == '' || texto11 == '' || (texto7 != '' && new Date(texto8).getTime() > new Date(texto7).getTime()))
+    if(texto8 =='' || texto8 == null)
+    {
+        $("#modalErrorFA").modal();
+    }
+    if(texto1 == '' || texto2 == '' || texto3 == '' || texto4 == '' || texto5 == '' || texto6 == '' || texto8 == '' || texto8 == null || texto9 == '' || texto10 == '' || texto11 == '' || (texto7 != '' && new Date(texto8).getTime() > new Date(texto7).getTime()))
     {
         $("#modalErrorAgregar").modal();
         if1 = true;
@@ -900,63 +890,63 @@ function buscarSelect(select, buscar)
 }
 
 
-function modificar(){
-    var texto1 = document.getElementById("txtCodigoModal").value;
-    var texto2 = document.getElementById("cbCategoriaModal").value;
-    var texto3 = document.getElementById("cbProveedorModal").value;
-    var texto4 = document.getElementById("txtNombreModal").value;
-    var texto5 = document.getElementById("nudPrecioVentaModal").value;
-    var texto6 = document.getElementById("nudPrecioNetoModal").value;
-    var texto7 = document.getElementById("dtpFechaVencModal").value;
-    var texto8 = document.getElementById("dtpFechaAdqModal").value;
-    var texto9 = document.getElementById("nudStockMinModal").value;
-    var texto10 = document.getElementById("nudStockActModal").value;
-    var texto11 = document.getElementById("cbBodegaModal").value;
+// function modificar(){
+//     var texto1 = document.getElementById("txtCodigoModal").value;
+//     var texto2 = document.getElementById("cbCategoriaModal").value;
+//     var texto3 = document.getElementById("cbProveedorModal").value;
+//     var texto4 = document.getElementById("txtNombreModal").value;
+//     var texto5 = document.getElementById("nudPrecioVentaModal").value;
+//     var texto6 = document.getElementById("nudPrecioNetoModal").value;
+//     var texto7 = document.getElementById("dtpFechaVencModal").value;
+//     var texto8 = document.getElementById("dtpFechaAdqModal").value;
+//     var texto9 = document.getElementById("nudStockMinModal").value;
+//     var texto10 = document.getElementById("nudStockActModal").value;
+//     var texto11 = document.getElementById("cbBodegaModal").value;
 
-    if(document.getElementById("modFechaConsultas").checked == true){
-        texto7 = 'null';
-    }
-    if(texto7 =='' && document.getElementById("modFechaConsultas").checked==false)
-    {
-        $("#modalErrorFV").modal();
-    }
-    if(texto1 == '' || texto2 == '' || texto3 == '' || texto4 == '' || texto5 == '' || texto6 == '' || texto5 < 0 || texto6 < 0 || texto8 == '' || texto9 == '' || texto10 == '' || texto11 == '' || ((texto7 != '' || texto7 != 'null') && new Date(texto8).getTime() > new Date(texto7).getTime()))
-    {
-        $("#modalError").modal('show');
-        document.getElementById("cerrarError").focus();
-        $("#modalModificar").modal().focus();
-    }
-    else
-    {
+//     if(document.getElementById("modFechaConsultas").checked == true){
+//         texto7 = 'null';
+//     }
+//     if(texto7 =='' && document.getElementById("modFechaConsultas").checked==false)
+//     {
+//         $("#modalErrorFV").modal();
+//     }
+//     if(texto1 == '' || texto2 == '' || texto3 == '' || texto4 == '' || texto5 == '' || texto6 == '' || texto5 < 0 || texto6 < 0 || texto8 == '' || texto9 == '' || texto10 == '' || texto11 == '' || ((texto7 != '' || texto7 != 'null') && new Date(texto8).getTime() > new Date(texto7).getTime()))
+//     {
+//         $("#modalError").modal('show');
+//         document.getElementById("cerrarError").focus();
+//         $("#modalModificar").modal().focus();
+//     }
+//     else
+//     {
 
-        var parametros = {
-            "txtCodigoModal" : texto1,
-            "cbCategoriaModal" : texto2,
-            "cbProveedorModal" : texto3,
-            "txtNombreModal" : texto4,
-            "nudPrecioVentaModal" : texto5,
-            "nudPrecioNetoModal" : texto6,
-            "dtpFechaVencModal" : texto7,
-            "dtpFechaAdqModal" : texto8,
-            "nudStockMinModal" : texto9,
-            "nudStockActModal" : texto10,
-            "cbBodegaModal" : texto11
-        };
-        $.ajax({
-            async: false,
-            data: parametros,
-            url: "AJAX/ModificaProductoAJAX.php",
-            type: "POST",
-            success: function(response){
-                $("#modalModificar").modal("hide");
-                updateDiv2();
-                $("#modalBien").modal();
-                //document.getElementById("cerrarBien").focus();
-                //limpiarTodo();
-            }
-        });
-    }
-}
+//         var parametros = {
+//             "txtCodigoModal" : texto1,
+//             "cbCategoriaModal" : texto2,
+//             "cbProveedorModal" : texto3,
+//             "txtNombreModal" : texto4,
+//             "nudPrecioVentaModal" : texto5,
+//             "nudPrecioNetoModal" : texto6,
+//             "dtpFechaVencModal" : texto7,
+//             "dtpFechaAdqModal" : texto8,
+//             "nudStockMinModal" : texto9,
+//             "nudStockActModal" : texto10,
+//             "cbBodegaModal" : texto11
+//         };
+//         $.ajax({
+//             async: false,
+//             data: parametros,
+//             url: "AJAX/ModificaProductoAJAX.php",
+//             type: "POST",
+//             success: function(response){
+//                 $("#modalModificar").modal("hide");
+//                 updateDiv2();
+//                 $("#modalBien").modal();
+//                 //document.getElementById("cerrarBien").focus();
+//                 //limpiarTodo();
+//             }
+//         });
+//     }
+// }
 function ponerReadOnly(id)
 {
     // Ponemos el atributo de solo lectura
@@ -1041,33 +1031,34 @@ function modificar2(){
     }
 }
 
-function eliminar(){
-    var texto1 = document.getElementById("txtCodigoModalE").value;
+// function eliminar(){
+//     var texto1 = document.getElementById("txtCodigoModalE").value;
 
-    if(texto1 == '')
-    {
-        $("#modalError").modal();
-        document.getElementById("cerrarError").focus();
-    }
-    else{
+//     if(texto1 == '')
+//     {
+//         $("#modalError").modal();
+//         document.getElementById("cerrarError").focus();
+//     }
+//     else{
 
-        var parametros = {
-            "txtCodigoModalE" : texto1
-        };
-        $.ajax({
-            async: false,
-            data: parametros,
-            url: "AJAX/EliminarProductoAJAX.php",
-            type: "POST",
-            success: function(response){
-                $("#modalEliminar").modal('hide');
-                $("#modalExito").modal();
-                //document.getElementById("cerrarBienE").focus();
-                //limpiarTodo();
-            }
-        });
-    }
-}
+//         var parametros = {
+//             "txtCodigoModalE" : texto1
+//         };
+//         $.ajax({
+//             async: false,
+//             data: parametros,
+//             url: "AJAX/EliminarProductoAJAX.php",
+//             type: "POST",
+//             success: function(response){
+//                 $("#modalEliminar").modal('hide');
+//                 updateDiv2();
+//                 $("#modalExito").modal();
+//                 //document.getElementById("cerrarBienE").focus();
+//                 //limpiarTodo();
+//             }
+//         });
+//     }
+// }
 
 
 //===========================E N V I A R====================================================
@@ -1266,8 +1257,13 @@ function limpiarFormulario() {
 }
 function limpiarFormularioCodigoConsultas() {
     document.getElementById("txtCodigoConsulta").value = "";
-    //busqueda();
     document.getElementById("txtCodigoConsulta").focus();
+    document.getElementById("cbCategoriaConsulta").value = "";
+    document.getElementById("cbProveedorConsulta").value = "";
+    document.getElementById("dtpFechaVencConsulta").value = "";
+    document.getElementById("dtpFechaAdqConsulta").value = "";
+    document.getElementById("cbBodegaConsulta").value = "";
+    superBusqueda();
 }
 function limpiarFormulario2() {
     $('#otroSelect option').prop('selected', function() {
@@ -1327,6 +1323,7 @@ function mostrarModal(codigo, categoria, proveedor, nombre, bodega){
 function mostrarModalModificar(codigo,categoria, proveedor, nombre, precioVenta, precioNeto, fechaVenc, fechaAdq, stockMin, stockAct, bodega, isChecked){
     $("#modalModificar").modal();
     document.getElementById("txtCodigoModal").value=codigo;
+    document.getElementById("txtCodigoOriginalModal").value=codigo;
     buscarSelect(document.getElementById("cbCategoriaModal"), categoria);
     buscarSelect(document.getElementById("cbProveedorModal"), proveedor);
     document.getElementById("txtNombreModal").value=nombre;
@@ -1422,10 +1419,25 @@ function buscarSelect(select, buscar)
 		}
 	}
 }
+function cambiaCodigo(codNuevo, codOriginal){
+    if(codNuevo == codOriginal){
+        return true;
+    }
+    else{
+        if(comprobarCodigo(codNuevo) == true){
+            return true;
+        }
+        else{
+            if(comprobarCodigo(codNuevo) == false){
+                return false;
+            }
+        }
+    }
+}
 
-
-function modificar(){
+function modificar(){//yes
     var texto1 = document.getElementById("txtCodigoModal").value;
+    var codOri = document.getElementById("txtCodigoOriginalModal").value;
     var texto2 = document.getElementById("cbCategoriaModal").value;
     var texto3 = document.getElementById("cbProveedorModal").value;
     var texto4 = document.getElementById("txtNombreModal").value;
@@ -1448,32 +1460,38 @@ function modificar(){
     }
     else
     {
-
-        var parametros = {
-            "txtCodigoModal" : texto1,
-            "cbCategoriaModal" : texto2,
-            "cbProveedorModal" : texto3,
-            "txtNombreModal" : texto4,
-            "nudPrecioVentaModal" : texto5,
-            "nudPrecioNetoModal" : texto6,
-            "dtpFechaVencModal" : texto7,
-            "dtpFechaAdqModal" : texto8,
-            "nudStockMinModal" : texto9,
-            "nudStockActModal" : texto10,
-            "cbBodegaModal" : texto11
-        };
-        $.ajax({
-            async: false,
-            data: parametros,
-            url: "AJAX/ModificaProductoAJAX.php",
-            type: "POST",
-            success: function(response){
-                $("#modalModificar").modal("hide");
-                $("#modalExito").modal();
-                //document.getElementById("cerrarBien").focus();
-                //limpiarTodo();
-            }
-        });
+        if(comprobarCodigo(texto1) == true || texto1 == codOri){
+            var parametros = {
+                "txtCodigoModal" : texto1,
+                "txtCodigoOriginalModal" : codOri,
+                "cbCategoriaModal" : texto2,
+                "cbProveedorModal" : texto3,
+                "txtNombreModal" : texto4,
+                "nudPrecioVentaModal" : texto5,
+                "nudPrecioNetoModal" : texto6,
+                "dtpFechaVencModal" : texto7,
+                "dtpFechaAdqModal" : texto8,
+                "nudStockMinModal" : texto9,
+                "nudStockActModal" : texto10,
+                "cbBodegaModal" : texto11
+            };
+            $.ajax({
+                async: false,
+                data: parametros,
+                url: "AJAX/ModificaProductoAJAX.php",
+                type: "POST",
+                success: function(response){
+                    $("#modalModificar").modal("hide");
+                    $("#modalExito").modal();
+                    superBusqueda();
+                    //document.getElementById("cerrarBien").focus();
+                    //limpiarTodo();
+                }
+            });
+        }
+        else{
+            $("#modalErrorAgregarCodigo").modal();
+        }
     }
 }
 function ponerReadOnly(id)
@@ -1577,8 +1595,7 @@ function eliminar(){
             success: function(response){
                 $("#modalEliminar").modal("hide");
                 $("#modalExito").modal();
-                //document.getElementById("cerrarBienE").focus();
-                limpiarTodo();
+                superBusqueda();
             }
         });
     }
@@ -1867,7 +1884,7 @@ function recargar(){
 }
 
 function irProductos(){
-    location.href = "../src/pages/Productos.php";
+    location.href = "../src/pages/Consultas2.php";
 }
 function irXVenc(){
     location.href = "../src/pages/PorVencer.php";
@@ -1925,6 +1942,13 @@ function limpiarPaquete(nombre, tipo){
 }
 
 //=================Configs======================//
+function scroll(){
+    $('#pages').click(function () {
+        $('html,body').animate({
+            scrollTop: $('#page').offset().top
+        }, 1000);
+    });
+}
 
 function nuevoUsuario(){
  
@@ -1933,43 +1957,39 @@ function nuevoUsuario(){
     var pass=document.getElementById("txtUserPass").value.replace(/["']/g, "");
     var check=document.getElementById("switch-sm").checked;
     var cargo;
-    if( nombre == null || nombre.length == 0 || /^\s+$/.test(nombre)
-    || user == null || user.length == 0 || /^\s+$/.test(user) || pass == null || pass.length==0 ||
-    /^\s+$/.test(pass)){
+    if( nombre == null || nombre.length == 0 || /^\s+$/.test(nombre) || user == null || user.length == 0 || /^\s+$/.test(user) || pass == null || pass.length==0 || /^\s+$/.test(pass)){
         $("#modalAgregarUsuario").modal("hide");
-  $("#modalERROR").modal();
-}
-else{
-    if(check)
-    {
-        cargo='1';
+        $("#modalERROR").modal();
     }
-    else{ cargo='0';}
-
-
-    var parametros = {
-        "txtUserNombre": nombre,
-        "txtUserUser" : user,
-        "txtUserPass": pass,
-        "txtUserCargo": cargo
-    }
-    $.ajax({
-        async:false,
-        data: parametros,
-        url: "AJAX/CrearUser.php",
-        type: "POST",
-        success: function(){
-            document.getElementById("txtUserNombre").value="";
-            document.getElementById("txtUserUser").value="";
-            document.getElementById("txtUserPass").value="";
-           $("#modalAgregarUsuario").modal('hide');
-           $("#modalExito").modal();
+    else{
+        if(check)
+        {
+            cargo='1';
         }
-    });   
+        else{ cargo='0';}
+
+        var parametros = {
+            "txtUserNombre": nombre,
+            "txtUserUser" : user,
+            "txtUserPass": pass,
+            "txtUserCargo": cargo
+        }
+        $.ajax({
+            async:false,
+            data: parametros,
+            url: "AJAX/CrearUser.php",
+            type: "POST",
+            success: function(){
+                document.getElementById("txtUserNombre").value="";
+                document.getElementById("txtUserUser").value="";
+                document.getElementById("txtUserPass").value="";
+                $("#modalAgregarUsuario").modal('hide');
+                $("#modalExito").modal();
+            }
+        });   
+    }
 }
-    
-    
-}
+
 function mostrarModalAgregarUsuario(){
     $("#modalAgregarUsuario").modal();
 }
@@ -2208,6 +2228,7 @@ function irBajoStock(){
 }
 
 function superBusqueda(){
+    $("#collapseOne").removeClass().addClass("collapse");
     codigo = document.getElementById("txtCodigoConsulta").value;
     proveedor = document.getElementById("cbProveedorConsulta").value;
     categoria = document.getElementById("cbCategoriaConsulta").value;
@@ -2215,24 +2236,30 @@ function superBusqueda(){
     fechaAdq = document.getElementById("dtpFechaAdqConsulta").value;
     bodega = document.getElementById("cbBodegaConsulta").value;
 
+    if(codigo == '' && proveedor == '' && categoria == '' && fechaVenc == '' && fechaAdq == '' && bodega == ''){
+        $("#resultados").html("");
+        $("#collapseOne").removeClass().addClass("collapse show");
+    }
+    else{
+        var parametros = {
+            "codigo" : codigo,
+            "proveedor" : proveedor,
+            "categoria" : categoria,
+            "fechaVenc": fechaVenc,
+            "fechaAdq": fechaAdq,
+            "bodega": bodega
+        };
+        $.ajax({
+            async: false,
+            data: parametros,
+            url: "AJAX/SuperConsulta.php",
+            type: "POST",
+            success: function(response){
+                $("#resultados").html(response);
+            }
+        });
 
-    var parametros = {
-        "codigo" : codigo,
-        "proveedor" : proveedor,
-        "categoria" : categoria,
-        "fechaVenc": fechaVenc,
-        "fechaAdq": fechaAdq,
-        "bodega": bodega
-    };
-    $.ajax({
-        async: false,
-        data: parametros,
-        url: "AJAX/SuperConsulta.php",
-        type: "POST",
-        success: function(response){
-            $("#resultados").html(response);
-        }
-    });
+    }
 
 }
 

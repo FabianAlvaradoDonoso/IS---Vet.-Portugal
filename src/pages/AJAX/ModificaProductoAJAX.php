@@ -8,6 +8,7 @@
     mysqli_set_charset($conexion, "utf8");
     
     $texto1 = $_POST[("txtCodigoModal")];
+    $codOri = $_POST[("txtCodigoOriginalModal")];
     $texto2 = $_POST[("cbCategoriaModal")];
     $texto3 = $_POST[("cbProveedorModal")];
     $texto4 = $_POST[("txtNombreModal")];
@@ -22,6 +23,7 @@
     $sql="UPDATE
                 productos
             SET
+                CODIGO = '".$texto1."',
                 ID_CATEGORIA = '".$texto2."',
                 ID_PROVEEDOR = '".$texto3."',
                 NOMBRE = '".$texto4."',
@@ -33,12 +35,13 @@
                 STOCK_ACT = '".$texto10."',
                 ID_BODEGA = '".$texto11."'
             WHERE
-                CODIGO = '".$texto1."' ";
+                CODIGO = '".$codOri."' ";
     
     if($texto7 == 'null'){
         $sql="UPDATE
                     productos
                 SET
+                    CODIGO = '".$texto1."',
                     ID_CATEGORIA = '".$texto2."',
                     ID_PROVEEDOR = '".$texto3."',
                     NOMBRE = '".$texto4."',
@@ -50,7 +53,7 @@
                     STOCK_ACT = '".$texto10."',
                     ID_BODEGA = '".$texto11."'
                 WHERE
-                    CODIGO = '".$texto1."' ";
+                    CODIGO = '".$codOri."' ";
     }
     
     $res=mysqli_query($conexion,$sql);
